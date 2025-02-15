@@ -1,0 +1,89 @@
+<!-- stats.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Website Analytics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .stats-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        .page-stat {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        .date {
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <script src="tracker.js"></script>
+
+    <h1>Website Analytics</h1>
+    <div class="stats-card">
+        <p class="date">Date: <span id="currentDate">-</span></p>
+        <h2>Today's Statistics</h2>
+        <p>Total Visits: <span id="totalVisits" class="stat-number">-</span></p>
+    </div>
+    
+    <div class="stats-card">
+        <h2>Page Views</h2>
+        <div id="pageStats"></div>
+    </div>
+
+    <script src="tracker.js"></script>
+    <script>
+        function updateDashboard() {
+            const stats = tracker.getTodayStats();
+            
+            // Update date
+            document.getElementById('currentDate').textContent = stats.date;
+            
+            // Update total visits
+            document.getElementById('totalVisits').textContent = stats.totalVisits;
+            
+            // Update page statistics
+            const pageStats = document.getElementById('pageStats');
+            pageStats.innerHTML = '';
+            
+            Object.entries(stats.pageVisits).forEach(([page, count]) => {
+                const div = document.createElement('div');
+                div.className = 'page-stat';
+                div.innerHTML = `
+                    <span>${page || 'Homepage'}</span>
+                    <span>${count} visits</span>
+                `;
+                pageStats.appendChild(div);
+            });
+        }
+
+        // Update stats when page loads
+        updateDashboard();
+
+        // Update every minute
+        setInterval(updateDashboard, 60000);
+    </script>
+</body>
+</html>
