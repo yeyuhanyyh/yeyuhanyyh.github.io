@@ -4,23 +4,89 @@
 <head>
 <meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<link rel="stylesheet" href="jemdoc.css" type="text/css" />
 <title>Yuhan Ye 叶宇涵</title>
 
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+
+
 <style>
-  /* 增加页面两边留白，让内容居中且不太宽 */
+  body {
+  margin: 0;
+  padding: 0;
+  font-family: 'EB Garamond', serif;
+  font-size: 20px;
+  background-image: url('paper-texture.png');
+  background-repeat: no-repeat;
+  background-size: cover;              /* 背景充满屏幕 */
+  background-attachment: scroll;       /* 背景滚动 */
+  background-position: center center;  /* 居中对齐 */
+  color: #2e2b27;
+  line-height: 1.6;
+}
   #layout-content {
-    max-width: 880px;       /* 最大宽度，你可以根据屏幕调 */
-    margin: 0 auto;         /* 居中 */
-    padding-left: 40px;     /* 左侧留白 */
-    padding-right: 40px;    /* 右侧留白 */
+    max-width: 1080px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 60px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    border-top: 1px solid #3d4934; /* 深绿色细线分隔 */
+    border-bottom: 1px solid #3d4934;
+  }
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 700;
+  font-size: 2.2em;
+  color: #7b3f1d;
+  text-align: center;
+  border-bottom: 3px solid #7b3f1d;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+
+  h2 {
+    font-size: 26px;
+    color: #3d4934;
+    border-bottom: 1px solid #3d4934; /* 与小标题颜色一致的分隔线 */
+    margin-top: 40px;
+    margin-bottom: 15px;
+  }
+
+  a {
+    color: #7b3f1d;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  p, li {
+    font-size: 21px;
+  }
+
+  .imgtable img {
+    border: 2px solid #ccc;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+  }
+
+  ul {
+    padding-left: 20px;
+  }
+
+  #footer {
+    text-align: center;
+    font-size: 13px;
+    color: #777;
+    margin-top: 60px;
+    font-style: italic;
   }
 </style>
 
 </head>
 <body>
-<script src="tracker.js"></script>
-
 <div id="layout-content">
   <div id="toptitle">
     <h1>Yuhan Ye 叶宇涵</h1>
@@ -31,35 +97,24 @@
       <td style="width: 400px;">
         <img src="ME.jpg" alt="me" align="left" width="400" />
       </td>
-<td align="left" style="vertical-align: top; padding-left: 20px;">
-  <h2>About Me</h2>
-   <br />
-  <p>
-    I am a final-year undergraduate student majoring in <strong>applied and computational mathematics</strong> at the School of Mathematical Sciences, Peking University.
-  </p>
-  <p>
-    I am an incoming PhD student at MIT <a href="https://ccse.mit.edu/">CCSE</a>.  </p>       
-</td>
-
+      <td align="left" style="vertical-align: top; padding-left: 20px;">
+        <h2>About Me</h2>       
+        <p>I am an incoming PhD student at MIT <a href="https://ccse.mit.edu/">CCSE</a>.</p>
+        <p>I received my B.S. degree from the School of Mathematical Sciences, Peking University in 2025, with a major in <strong>applied and computational mathematics</strong>.</p>
+      </td>
     </tr>
   </table>
 
   <h2>Research</h2>
-  <p>
-          My research interests broadly cover <strong>optimization</strong> and <strong>theory of computation</strong>.
-        </p>
-        <p>
-          During my undergraduate studies, I was fortunate to learn from excellent mentors in various fields, including Professor <a href="https://sites.google.com/site/optyingcui/home?authuser=0">Ying Cui</a>, <a href="http://faculty.bicmr.pku.edu.cn/~wenzw/index.html">Zaiwen Wen</a>, and <a href="http://scholar.pku.edu.cn/ssh">Sihong Shao</a>, who helped me shape and clarify my research interests in computation theory.
-        </p>
+  <p>My research interests broadly cover <strong>optimization</strong> and <strong>theory of computation</strong>.</p>
+  <p>During my undergraduate studies, I was fortunate to learn from excellent mentors in various fields, including Professor <a href="https://sites.google.com/site/optyingcui/home?authuser=0">Ying Cui</a>, <a href="http://faculty.bicmr.pku.edu.cn/~wenzw/index.html">Zaiwen Wen</a>, and <a href="http://scholar.pku.edu.cn/ssh">Sihong Shao</a>, who helped me shape and clarify my research interests in computation theory.</p>
 
   <h2>Publications</h2>
   <ul>
     <li>
-      <div>
-        <p><strong>An Online Adaptive Sampling Algorithm for Stochastic Difference-of-convex Optimization with Time-varying Distributions</strong></p>
-        <p><em><strong>Yuhan Ye</strong>, Ying Cui, Jingyi Wang</em></p>
-        <p>ICML 2025, <strong>oral</strong>. [<a href="https://yeyuhanyyh.github.io/Online_Sampling_DC.pdf">pdf</a>]</p>
-      </div>
+      <p><strong>An Online Adaptive Sampling Algorithm for Stochastic Difference-of-convex Optimization with Time-varying Distributions</strong></p>
+      <p><em><strong>Yuhan Ye</strong>, Ying Cui, Jingyi Wang</em></p>
+      <p>ICML 2025, <strong>oral</strong>. [<a href="https://yeyuhanyyh.github.io/Online_Sampling_DC.pdf">pdf</a>]</p>
     </li>
   </ul>
 
@@ -70,15 +125,14 @@
     <li>Wechat: rtrt_rtrt</li>
   </ul>
 
-
   <h2>Miscellaneous</h2>
-  <p>
-  I like playing chess, while I am struggling to improve my ELO on <a href="https://chess.com">chess.com</a>. I also play other strategy games. 
-  </p>
+  <p>I like playing chess, while I am struggling to improve my ELO on <a href="https://chess.com">chess.com</a>. I also play other strategy games.</p>
 
   <p>I've been listening to <a href="https://www.paulsimon.com" target="_blank">Paul Simon</a> a lot lately — for some reason.</p>
-</div>
 
-<script src="tracker.js"></script>
+  <div id="footer">
+    &copy; 2025 Yuhan Ye. All rights reserved.
+  </div>
+</div>
 </body>
 </html>
