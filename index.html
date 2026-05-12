@@ -69,6 +69,34 @@ h1 {
   font-weight: bold;
 }
 
+.coauthor-link {
+  font-weight: 600;
+}
+
+.coauthor-link strong {
+  color: inherit;
+}
+
+.coauthor-asu {
+  color: #7a4c9e;
+}
+
+.coauthor-saurabh {
+  color: #2c6f73;
+}
+
+.coauthor-ying {
+  color: #4f7d3b;
+}
+
+.coauthor-jingyi {
+  color: #a85634;
+}
+
+.coauthor-omar {
+  color: #2868a8;
+}
+
   p, li {
     font-size: 21px;
   }
@@ -154,13 +182,13 @@ h1 {
         <h2>About Me</h2>       
         <p>I am a first year PhD student at the <a href="https://ccse.mit.edu/" target="_blank"><strong>MIT Center for Computational Science and Engineering (CCSE)</strong></a>.</p>
         <p>I received my B.S. degree from the School of Mathematical Sciences, Peking University in 2025, with a major in <strong>applied and computational mathematics</strong>.</p>
-        <p>I am fortunate to work with Professors <a href="https://asu.mit.edu/" target="_blank"><strong>Asu Ozdaglar</strong></a> and <a href="https://cee.mit.edu/people_individual/saurabh-amin/" target="_blank"><strong>Saurabh Amin</strong></a>.</p>
+        <p>I am fortunate to work with Professors <a class="coauthor-link coauthor-asu" href="https://asu.mit.edu/" target="_blank"><strong>Asu Ozdaglar</strong></a> and <a class="coauthor-link coauthor-saurabh" href="https://cee.mit.edu/people_individual/saurabh-amin/" target="_blank"><strong>Saurabh Amin</strong></a>.</p>
       </td>
     </tr>
   </table>
 
   <h2>Research</h2>
-<p>My research interests lie somewhere at the intersection of <strong>optimization</strong>, <strong>learning</strong>, and <strong>complexity</strong>—currently, mostly on what one might call the theory side.</p>
+<p>My research interests lie somewhere at the intersection of <strong>optimization</strong>, <strong>learning</strong>, and <strong>complexity</strong>—currently, mostly on what one might call the theory side. I also enjoy designing efficient algorithms for structured optimization problems, especially when they come with clean guarantees.</p>
 
 <h2 id="publications">Publications</h2>
 <div class="pub-tabs" role="tablist" aria-label="Publication views">
@@ -176,12 +204,12 @@ h1 {
     </li>
     <li id="paper-decision-sufficient">
       <p><strong>Learning Decision-Sufficient Representations for Linear Optimization</strong></p>
-      <p><em><strong>Yuhan Ye</strong>, Saurabh Amin, Asuman Ozdaglar</em></p>
+      <p><em><strong>Yuhan Ye</strong>, <a class="coauthor-link coauthor-saurabh" href="https://cee.mit.edu/people_individual/saurabh-amin/" target="_blank">Saurabh Amin</a>, <a class="coauthor-link coauthor-asu" href="https://asu.mit.edu/" target="_blank">Asuman Ozdaglar</a></em></p>
       <p>COLT 2026. [<a href="https://arxiv.org/abs/2603.18551">arxiv</a>] [<a href="https://learningtheory.org/colt2026/accepted.html#:~:text=Learning%20Decision-Sufficient%20Representations%20for%20Linear%20Optimization">conference</a>]</p>
     </li>
     <li id="paper-dc-sampling">
       <p><strong>An Online Adaptive Sampling Algorithm for Stochastic Difference-of-convex Optimization with Time-varying Distributions</strong></p>
-      <p><em><strong>Yuhan Ye</strong>, Ying Cui, Jingyi Wang</em></p>
+      <p><em><strong>Yuhan Ye</strong>, <a class="coauthor-link coauthor-ying" href="https://sites.google.com/site/optyingcui/" target="_blank">Ying Cui</a>, <a class="coauthor-link coauthor-jingyi" href="https://people.llnl.gov/wang125" target="_blank">Jingyi Wang</a></em></p>
       <p>ICML 2025, <strong>oral</strong>. [<a href="https://icml.cc/virtual/2025/poster/45324">conference</a>]</p>
     </li>
   </ul>
@@ -192,7 +220,7 @@ h1 {
     <ul class="pub-list topic-list">
       <li>
         <p><strong>An Online Adaptive Sampling Algorithm for Stochastic Difference-of-convex Optimization with Time-varying Distributions</strong></p>
-        <p><em><strong>Yuhan Ye</strong>, Ying Cui, Jingyi Wang</em></p>
+        <p><em><strong>Yuhan Ye</strong>, <a class="coauthor-link coauthor-ying" href="https://sites.google.com/site/optyingcui/" target="_blank">Ying Cui</a>, <a class="coauthor-link coauthor-jingyi" href="https://people.llnl.gov/wang125" target="_blank">Jingyi Wang</a></em></p>
         <p>ICML 2025, <strong>oral</strong>. [<a href="https://icml.cc/virtual/2025/poster/45324">conference</a>]</p>
       </li>
       <li>
@@ -207,12 +235,12 @@ h1 {
     <ul class="pub-list topic-list">
       <li>
         <p><strong>Learning Decision-Sufficient Representations for Linear Optimization</strong></p>
-        <p><em><strong>Yuhan Ye</strong>, Saurabh Amin, Asuman Ozdaglar</em></p>
+        <p><em><strong>Yuhan Ye</strong>, <a class="coauthor-link coauthor-saurabh" href="https://cee.mit.edu/people_individual/saurabh-amin/" target="_blank">Saurabh Amin</a>, <a class="coauthor-link coauthor-asu" href="https://asu.mit.edu/" target="_blank">Asuman Ozdaglar</a></em></p>
         <p>COLT 2026. [<a href="https://arxiv.org/abs/2603.18551">arxiv</a>] [<a href="https://learningtheory.org/colt2026/accepted.html#:~:text=Learning%20Decision-Sufficient%20Representations%20for%20Linear%20Optimization">conference</a>]</p>
       </li>
       <li>
-        <p><strong>The Geometry of Mixed-Integer Linear Program Compression: An Exact Characterization and Learning Algorithm</strong></p>
-        <p><em><strong>Yuhan Ye</strong>, Omar Bennouna</em></p>
+        <p><strong>The Geometry of (Mixed-Integer) Linear Program Compression: An Exact Characterization and Learning Algorithm</strong></p>
+        <p><em><strong>Yuhan Ye</strong>, <a class="coauthor-link coauthor-omar" href="https://omarben.com/" target="_blank">Omar Bennouna</a></em></p>
         <p>Working paper.</p>
       </li>
     </ul>
