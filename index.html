@@ -47,6 +47,12 @@ h1 {
   transition: all 0.3s ease;
 }
 
+#toptitle h1 {
+  line-height: 1.05;
+  padding-bottom: 6px;
+  margin-bottom: 18px;
+}
+
   h2 {
     font-size: 26px;
     color: #3d4934;
@@ -156,11 +162,17 @@ h1 {
 }
 
 .imgtable img {
-  border: 6px solid rgba(123, 63, 29, 0.4); /* 透明度为 0.4 的棕色 */
+  border: none;
   border-radius: 8px;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2); /* 阴影也稍微淡一点 */
   background: rgba(255, 245, 235, 0.3); /* 柔和背景衬托 */
   transform: rotate(-1deg);
+}
+
+.imgtable h2 {
+  line-height: 1.05;
+  margin-top: 0;
+  margin-bottom: 10px;
 }
 
   ul {
