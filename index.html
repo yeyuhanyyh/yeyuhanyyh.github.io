@@ -25,10 +25,10 @@
   line-height: 1;
 }
   #layout-content {
-    max-width: 1300px;
+    max-width: 1380px;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.68);
-    padding: 60px;
+    padding: 60px 50px;
     box-shadow: 0 0 12px rgba(0,0,0,0.1);
     border-top: 1px solid #3d4934; /* 深绿色细线分隔 */
     border-bottom: 1px solid #3d4934;
@@ -110,6 +110,16 @@ h1 {
   p, li {
     font-size: 21px;
   }
+
+.research-interest {
+  white-space: nowrap;
+}
+
+@media (max-width: 1180px) {
+  .research-interest {
+    white-space: normal;
+  }
+}
 
 .pub-list li p {
   margin: 0.15em 0;
@@ -202,7 +212,7 @@ h1 {
   </table>
 
   <h2>Research</h2>
-<p>My research interests lie somewhere at the intersection of <strong>optimization</strong>, <strong>learning</strong>, and <strong>complexity</strong>—currently, mostly on what one might call the theory side.</p>
+<p class="research-interest">My research interests lie somewhere at the intersection of <strong>optimization</strong>, <strong>learning</strong>, <strong>game</strong>, and <strong>complexity</strong>—currently, mostly on what one might call the theory side.</p>
 <p>I also enjoy designing efficient algorithms.</p>
 
 <h2 id="publications">Publications</h2>
