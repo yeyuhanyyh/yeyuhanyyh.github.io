@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="250" viewBox="0 0 1400 250" role="img" aria-labelledby="title desc">
+  <title id="title">Progress on lower bounds for gradient descent</title>
+  <desc id="desc">A schematic rate diagram with markers n to the powers minus 2, minus 1.932, minus 1.733, minus 1.6342, minus 1.271, and minus 1. The colored blocks name the corresponding lower- and upper-bound results.</desc>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2e2b27"/>
+    </marker>
+    <style>
+      .rate { font-family: Georgia, "Times New Roman", serif; font-size: 34px; font-style: italic; fill: #2e2b27; }
+      .exponent { font-size: 20px; font-style: normal; }
+      .guide { stroke: #3d4934; stroke-width: 2; stroke-dasharray: 7 7; }
+      .block { font-family: Georgia, "Times New Roman", serif; font-size: 18px; font-weight: 700; text-anchor: middle; }
+      .lower { fill: #7a3518; }
+      .ours { fill: #4b2500; font-weight: 800; }
+      .upper { fill: #285421; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="250" fill="#fffdf8"/>
+
+  <text class="rate" x="260" y="105" text-anchor="middle">n<tspan class="exponent" dy="-14">−2</tspan></text>
+  <text class="rate" x="380" y="52" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.932</tspan></text>
+  <text class="rate" x="560" y="105" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.733</tspan></text>
+  <text class="rate" x="730" y="52" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.6342</tspan></text>
+  <text class="rate" x="970" y="105" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.271</tspan></text>
+  <text class="rate" x="1190" y="105" text-anchor="middle">n<tspan class="exponent" dy="-14">−1</tspan></text>
+
+  <line class="guide" x1="260" y1="116" x2="260" y2="158"/>
+  <line class="guide" x1="380" y1="64" x2="380" y2="158"/>
+  <line class="guide" x1="560" y1="116" x2="560" y2="158"/>
+  <line class="guide" x1="730" y1="64" x2="730" y2="158"/>
+  <line class="guide" x1="970" y1="116" x2="970" y2="158"/>
+  <line class="guide" x1="1190" y1="116" x2="1190" y2="158"/>
+
+  <rect x="40" y="158" width="220" height="66" fill="#e7ac8a"/>
+  <rect x="260" y="158" width="120" height="66" fill="#eec8b1"/>
+  <rect x="380" y="158" width="180" height="66" fill="#f8d786"/>
+  <rect x="560" y="158" width="170" height="66" fill="#f4c453"/>
+  <rect x="730" y="158" width="240" height="66" fill="#fffdf8"/>
+  <rect x="970" y="158" width="220" height="66" fill="#ddefd3"/>
+  <rect x="1190" y="158" width="180" height="66" fill="#bde3a7"/>
+
+  <text class="block lower" x="150" y="185"><tspan x="150">Nemirovsky &amp; Yudin</tspan><tspan x="150" dy="24">(1983)</tspan></text>
+  <text class="block lower" x="320" y="185"><tspan x="320">Ma &amp; Chen</tspan><tspan x="320" dy="24">(2026)</tspan></text>
+  <text class="block lower" x="470" y="185"><tspan x="470">Tsai</tspan><tspan x="470" dy="24">(2026)</tspan></text>
+  <text class="block ours" x="645" y="199">This work</text>
+  <text class="block upper" x="1080" y="185"><tspan x="1080">Altschuler &amp; Parrilo</tspan><tspan x="1080" dy="24">(2024)</tspan></text>
+  <text class="block upper" x="1280" y="185"><tspan x="1280">Levitin &amp; Polyak</tspan><tspan x="1280" dy="24">(1966)</tspan></text>
+
+  <line x1="40" y1="224" x2="1385" y2="224" stroke="#2e2b27" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>

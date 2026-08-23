@@ -1,0 +1,1121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An Omega(n^-1.6342) lower bound for non-anytime gradient descent under predetermined stepsize schedules.">
+  <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
+  <meta property="og:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
+  <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
+  <meta property="og:image" content="https://yeyuhanyyh.github.io/gd-lower-bound/assets/social-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="627">
+  <meta property="og:image:alt" content="A rate diagram highlighting the Omega(n^-1.6342) lower bound for gradient descent.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
+  <meta name="twitter:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
+  <meta name="twitter:image" content="https://yeyuhanyyh.github.io/gd-lower-bound/assets/social-cover.png">
+  <title>An Omega(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --link: #7b3f1d;
+      --ink: #2e2b27;
+      --muted: #6d655d;
+      --slate: #3d4934;
+      --wash: #f7f1e4;
+      --paper: #fffdf8;
+      --measure: 920px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Open Sans", "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+    .page { max-width: 1080px; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+    article { max-width: var(--measure); margin: 0 auto; }
+    h1, h2, h3, h4 { font-weight: 600; line-height: 1.12; }
+    h1 { margin: 0 0 0.75rem; color: var(--link); font-size: 2.25rem; letter-spacing: -0.02em; }
+    h2, h3, h4 { color: var(--slate); }
+    h2 { margin: 3.5rem 0 1.6rem; font-size: 1.875rem; letter-spacing: -0.01em; }
+    h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      margin: 2.4rem 0 1.35rem;
+      font-size: 1.35rem;
+    }
+    h3::after { content: ""; flex: 1; border-top: 2px solid var(--slate); }
+    h4 { margin: 2rem 0 1rem; font-size: 1.08rem; }
+    p { margin: 0 0 1.4rem; }
+    ul, ol { margin: 0 0 1.4rem 1.2rem; padding-left: 1.2rem; }
+    li + li { margin-top: 0.4rem; }
+    a { color: var(--link); font-weight: 500; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .theme-emphasis { color: var(--link); font-weight: 500; }
+    .theorem {
+      margin: 1.7rem 0;
+      padding: 1.2rem 1.45rem;
+      border: 1px solid var(--slate);
+      border-radius: 4px;
+      scroll-margin-top: 2rem;
+    }
+    .article-byline { margin: 0 0 2.6rem; color: var(--ink); }
+    .article-author { display: block; font-size: 1.16rem; }
+    .author-name { font-size: inherit; font-weight: 600; }
+    .affiliation-mark { margin-left: 0.08em; color: var(--link); font-size: 0.7em; }
+    .article-meta-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 0.25rem;
+    }
+    .article-affiliation { color: var(--muted); font-size: 0.92rem; }
+    .article-updated { margin-left: auto; text-align: right; }
+    .theorem > :last-child { margin-bottom: 0; }
+    .theorem-label { font-weight: 700; }
+    .theorem .statement { display: inline; margin: 0; font-style: italic; }
+    .sequence-box .statement { display: inline; margin: 0; font-style: normal; }
+    .property-list { display: block !important; margin-top: 1rem !important; }
+    .property-list .property { display: block; margin: 0 0 1rem; }
+    .property-list .property:last-child { margin-bottom: 0; }
+    details.proof { margin: 1.15rem 0 2rem; }
+    details.proof summary {
+      width: fit-content;
+      color: var(--link);
+      cursor: pointer;
+      font-style: italic;
+      font-weight: 500;
+    }
+    .proof-body {
+      margin-top: 1rem;
+      padding: 0.25rem 0 0.25rem 1rem;
+      border-left: 2px solid var(--slate);
+    }
+    .proof-body::after {
+      content: "□";
+      display: block;
+      text-align: right;
+      font-size: 1.35rem;
+    }
+    .footnote { color: var(--muted); font-size: 0.92rem; }
+    .rate-figure {
+      width: min(1120px, calc(100vw - 2rem));
+      margin: 2.2rem 0 3rem 50%;
+      transform: translateX(-50%);
+    }
+    .rate-figure-scroll {
+      width: 100%;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+    }
+    .rate-figure-canvas {
+      position: relative;
+      width: 100%;
+      min-width: 1050px;
+    }
+    .rate-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .rate-block-link {
+      position: absolute;
+      top: 63.2%;
+      height: 26.4%;
+      z-index: 1;
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    .rate-block-link:hover {
+      box-shadow: inset 0 -3px 0 rgba(46, 43, 39, 0.55);
+    }
+    .rate-block-link:focus-visible {
+      outline: 3px solid var(--link);
+      outline-offset: -3px;
+    }
+    .rate-figure figcaption {
+      margin-top: 0.8rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .matching-figure {
+      width: min(820px, 100%);
+      margin: 1.5rem auto 1.8rem;
+    }
+    .matching-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .matching-figure figcaption {
+      margin-top: 0.55rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+    mjx-container[display="true"] {
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: 100%;
+      margin: 1.2rem 0 !important;
+      padding: 0.15rem 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+    }
+    [id] { scroll-margin-top: 2rem; }
+    @media (min-width: 980px) {
+      h1 {
+        position: relative;
+        left: 50%;
+        width: min(1100px, calc(100vw - 3rem));
+        transform: translateX(-50%);
+        font-size: clamp(1.9rem, 2.85vw, 2.25rem);
+        white-space: nowrap;
+      }
+    }
+    @media (max-width: 700px) {
+      .page { padding: 2.7rem 1rem 4rem; }
+      h1 { font-size: 1.9rem; }
+      h2 { font-size: 1.6rem; }
+      h3 { font-size: 1.25rem; }
+      .theorem { padding: 1rem; }
+      .article-meta-row { display: block; }
+      .article-updated { display: block; margin-top: 0.2rem; }
+    }
+    @media print {
+      .page { padding: 0; }
+      details.proof > :not(summary) { display: block !important; }
+      details.proof summary { display: none; }
+      article { max-width: none; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']],
+        tags: 'ams',
+        packages: {'[+]': ['ams']}
+      },
+      chtml: { scale: 1 }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <main class="page">
+    <article>
+      <h1>An \(\Omega(n^{-1.6342})\) Lower Bound for (Non-Anytime) Gradient Descent</h1>
+      <p class="article-byline">
+        <span class="article-author"><a class="author-name" href="https://yeyuhanyyh.github.io/">Yuhan Ye</a><sup class="affiliation-mark">1</sup>.
+        Based on discussions with <a class="author-name" href="https://drzfct.github.io/">Kaizhao Liu</a><sup class="affiliation-mark">1</sup>.</span>
+        <span class="article-meta-row">
+          <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
+          <span class="article-updated">Last update: August 23, 2026 10:24 (GMT-4).</span>
+        </span>
+      </p>
+
+      <h2 id="introduction">Introduction</h2>
+      <p>
+        Last week, <a href="https://arxiv.org/abs/2608.10418">Ma and Chen</a> proved an
+        \(\Omega(n^{-1.932})\) lower bound for gradient descent (GD) under arbitrary
+        non-adaptive stepsize schedules in smooth convex optimization, and Tsai further
+        improved it to \(\Omega(n^{-\sqrt3})\approx\Omega(n^{-1.7321})\)
+        (see his <a href="https://chungentsai.github.io/gd-lower-bounds.html">well-written blog post</a>).
+        After multiple
+        rounds of interaction with ChatGPT-5.6 Sol, we obtained the lower bound
+        \(\Omega(n^{-1.6342})\).
+      </p>
+      <p>
+        In the proof, we use the same hard-function family introduced by Ma and Chen.
+        <a href="https://chungentsai.github.io/gd-lower-bounds.html#construction">Tsai's
+        blog post gives a beautiful geometric explanation of this construction</a>. Our
+        improvement begins after that construction. We estimate the resulting sequence
+        inequality more precisely through term-by-term control, rearrangement, and rescaling
+        of the full chronological sequence of selected long steps instead of compressing those
+        steps into a harmonic mean
+        (cf. <a href="https://chungentsai.github.io/gd-lower-bounds.html#harmonic-mean">Tsai's
+        Lemma 7</a>).
+      </p>
+      <p>
+        <strong>AI Disclosure.</strong> This improvement was developed through multiple
+        rounds of interaction with ChatGPT-5.6 Sol. The author directed the mathematical
+        exploration and rewrote the presentation.
+      </p>
+
+      <h3 id="problem-setup"><span>Problem Setup</span></h3>
+      <p>
+        Let \(\mathcal F_1(\mathbb R^d)\) be the class of convex \(1\)-smooth functions on
+        \(\mathbb R^d\) whose sets of minimizers are nonempty. Given a stopping time
+        \(n\in\mathbb N\), an initial point \(x_1\in\mathbb R^d\), and a predetermined
+        schedule \(H=(h_1,\ldots,h_n)\in(0,\infty)^n\), GD generates
+        \[
+        x_{k+1}=x_k-h_k\nabla f(x_k),\qquad k\in[n].
+        \]
+        The schedule may depend on \(n\), but not on \(f\).
+      </p>
+      <p>
+        Define the worst-case convergence rate by
+        \[
+        R_n(H):=
+        \sup_{d\in\mathbb N}
+        \sup_{f\in\mathcal F_1(\mathbb R^d)}
+        \sup_{x^\star\in\arg\min f}
+        \sup_{x_1\in\mathbb R^d}
+        \frac{f(x_{n+1})-f(x^\star)}
+        {\frac12\lVert x_1-x^\star\rVert^2}.
+        \]
+      </p>
+      <div class="theorem" id="our-target">
+        <p><a class="theorem-label" href="#our-target">Our target.</a>
+          <em class="statement">Improve Tsai's lower bound
+          \(R_n(H)=\Omega(n^{-\sqrt3})\) and bring its exponent as close as possible to the
+          \(O(n^{-\log_2(1+\sqrt2)})\) upper bound of
+          <a href="https://arxiv.org/abs/2309.16530">Altschuler and Parrilo</a>.</em></p>
+      </div>
+
+      <h3 id="result"><span>Main Results</span></h3>
+      <div class="theorem" id="theorem-tsai">
+        <p><a class="theorem-label" href="#theorem-tsai">Theorem 1.</a>
+          (<a href="https://chungentsai.github.io/gd-lower-bounds.html#theorem-2">Tsai</a>)
+          <em class="statement">There exists a universal constant \(c_{\mathrm T}&gt;0\)
+          such that, for every \(n\in\mathbb N\) and every
+          \(H\in(0,\infty)^n\),
+          \(R_n(H)\ge c_{\mathrm T}n^{-\sqrt3}\).</em></p>
+      </div>
+      <p>Our sharper analysis gives the following result.</p>
+      <div class="theorem" id="theorem-main">
+        <p><a class="theorem-label" href="#theorem-main">Theorem 2 (Main result).</a>
+          <em class="statement">There exists a universal constant \(c&gt;0\) such that,
+          for every \(n\in\mathbb N\) and every \(H\in(0,\infty)^n\),
+          \(R_n(H)\ge c n^{-1.6342}\).</em></p>
+      </div>
+
+      <figure class="rate-figure" id="rate-landscape">
+        <div class="rate-figure-scroll" tabindex="0" role="region"
+             aria-label="Scrollable convergence-rate landscape"
+             aria-describedby="rate-landscape-description rate-landscape-caption">
+          <div class="rate-figure-canvas">
+            <img src="assets/non-anytime-progress.svg" width="1400" height="250"
+                 alt="Progress on lower bounds for gradient descent. A complete text description follows.">
+            <a class="rate-block-link" style="left:2.857%;width:15.714%"
+               href="https://www2.isye.gatech.edu/~nemirovs/Nemirovskii_Yudin_1983.pdf"
+               aria-label="Nemirovsky and Yudin, Problem Complexity and Method Efficiency in Optimization, 1983"></a>
+            <a class="rate-block-link" style="left:18.571%;width:8.571%"
+               href="https://arxiv.org/abs/2608.10418"
+               aria-label="Ma and Chen, A lower bound for stepsize-based acceleration of gradient descent, 2026"></a>
+            <a class="rate-block-link" style="left:27.143%;width:12.857%"
+               href="https://chungentsai.github.io/gd-lower-bounds.html"
+               aria-label="Chung-En Tsai, An Improved Lower Bound for Non-Anytime Gradient Descent, 2026"></a>
+            <a class="rate-block-link" style="left:40%;width:12.143%"
+               href="#theorem-main" aria-label="This work, Theorem 2"></a>
+            <a class="rate-block-link" style="left:69.286%;width:15.714%"
+               href="https://doi.org/10.1007/s10107-024-02164-2"
+               aria-label="Altschuler and Parrilo, Acceleration by stepsize hedging, 2024"></a>
+            <a class="rate-block-link" style="left:85%;width:12.857%"
+               href="https://doi.org/10.1016/0041-5553(66)90114-5"
+               aria-label="Levitin and Polyak, Constrained minimization methods, 1966"></a>
+          </div>
+        </div>
+        <p id="rate-landscape-description" class="visually-hidden">
+          A schematic diagram with rate markers n to the powers minus 2, minus 1.932,
+          minus 1.733, minus 1.6342, minus 1.271, and minus 1. The lower-bound blocks are
+          labeled Nemirovsky and Yudin, Ma and Chen, Tsai, and This work. The upper-bound
+          blocks are labeled Altschuler and Parrilo, and Levitin and Polyak.
+        </p>
+        <figcaption id="rate-landscape-caption"><strong>Figure 1.</strong> Our progress on lower bound.</figcaption>
+      </figure>
+
+      <p>
+        The first part of our proof follows Ma and Chen and Tsai exactly. The same
+        schedule-dependent hard functions reduce the optimization problem to Lemma 2 below.
+        For the construction itself, see
+        <a href="https://chungentsai.github.io/gd-lower-bounds.html#construction">Tsai's
+        beautiful explanation</a>. We do not repeat it here. Using the same notation, write
+        \(h_{a:b}:=\sum_{k=a}^b h_k\), with an empty sum
+        equal to zero. Choose
+        \[
+        0&lt;t_1&lt;\cdots&lt;t_m\le n,
+        \qquad h_{t_i}&gt;1,
+        \]
+        set \(t_0=0\), \(t_{m+1}=n+1\), and define
+        \[
+        S_i:=h_{t_{i-1}+1:t_i-1},
+        \qquad i\in[m+1].
+        \]
+      </p>
+      <div class="theorem" id="lemma-hard-functions">
+        <p><a class="theorem-label" href="#lemma-hard-functions">Lemma 2.</a>
+          (cf. <a href="https://arxiv.org/html/2608.10418v1#S4.Thmtheorem1">Ma and Chen,
+          Theorem 4.1</a> and
+          <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai,
+          Lemma 6</a>.) <em class="statement">For every such selection,</em></p>
+          \[
+          R_n(H)\ge
+          \frac{1}{S_m+h_{t_m}+2S_{m+1}+1}
+          \prod_{i=1}^{m-1}
+          \frac{S_{i+1}+h_{t_{i+1}}}
+          {S_i+h_{t_i}+S_{i+1}+h_{t_{i+1}}}
+          \prod_{i=1}^{m}\frac{h_{t_i}-1}{S_i+1}.
+          \tag{1}
+          \]
+      </div>
+      <p>
+        Lemma 2 completes the hard-function construction. From this point on, the proof is a
+        sequence inequality for its right-hand side. Tsai treats the selected long steps
+        collectively through a harmonic mean (cf. <a href="https://chungentsai.github.io/gd-lower-bounds.html#harmonic-mean">Tsai's
+        Lemma 7</a>) and a counting function (cf. <a href="https://chungentsai.github.io/gd-lower-bounds.html#upper-bound-number">Tsai's
+        Lemma 8</a>), which loses information about their individual sizes and chronological
+        pairings. To obtain a sharper estimate, we retain every factor coupling two consecutive
+        selected steps (<a href="#normalized-core">Lemma 3</a>) and apply sharper termwise
+        estimates, rearrangements, and rescalings (<a href="#envelope-reduction">Lemma 4</a>,
+        <a href="#gamma-geometry">Lemma 5</a>, and <a href="#path-estimate">Lemma 6</a>).
+      </p>
+      <h3 id="step1"><span>The equivalent sequence problem</span></h3>
+      <div class="theorem sequence-box" id="normalized-core">
+        <p><a class="theorem-label" href="#normalized-core">Lemma 3 (Clean sequence problem).</a>
+          <span class="statement">Fix \(\alpha&gt;0\), so the target rate exponent is
+          \(1+\alpha\). For \(w,z,x,y&gt;0\), define</span></p>
+        \[
+        K_{w,z}(x,y):=
+        \frac{\sqrt{xy}\,(w+z+x+y)}{\sqrt{wz(w+x)(z+y)}}
+        \tag{2}
+        \]
+        <p><span class="statement">To prove
+        \(R_n(H)\ge c_\alpha(n+1)^{-(1+\alpha)}\) for every \(n\) and \(H\), it is
+        enough to find a constant \(C_\alpha&lt;\infty\), depending only on \(\alpha\),
+        such that the following holds for every integer \(q\ge2\). Given positive sequences
+        \(x_1,\ldots,x_q\) and \(\omega_1,\ldots,\omega_q\), write
+        \(\omega_1^\downarrow\ge\cdots\ge\omega_q^\downarrow\) for the decreasing
+        rearrangement of \((\omega_i)\), and define</span></p>
+        \[
+        E_{\mathrm{end}}:=
+        \sqrt{x_1x_q}\sqrt{\frac{1+x_1/\omega_1}{1+x_q/\omega_q}}
+        \left[1+\frac{x_q+2\left(q-\sum_{i=1}^q x_i\right)}{\omega_q}\right].
+        \tag{3}
+        \]
+        <p><span class="statement">If</span></p>
+        \[
+        \sum_{i=1}^q x_i&lt;q,
+        \qquad
+        \sum_{s=m+1}^q \omega_s^\downarrow
+        \ge q\left[\left(\frac qm\right)^\alpha-1\right],
+        \qquad 1\le m&lt;q.
+        \tag{4}
+        \]
+        <p><span class="statement">then</span></p>
+        \[
+        E_{\mathrm{end}}
+        \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
+        \le C_\alpha,
+        \tag{5}
+        \]
+      </div>
+      <details class="proof">
+        <summary>Proof sketch</summary>
+        <div class="proof-body">
+          <p>
+            For a fixed schedule \(H\), sort the positive excesses \((h_k-1)_+\) as
+            \(a_1\ge\cdots\ge a_r&gt;0\), and define
+            \[
+            B:=1+\sum_{k=1}^n\min\{h_k,1\},
+            \qquad D_s:=B+\sum_{\ell=s+1}^r a_\ell.
+            \]
+            When \(r\ge1\), choose
+            \[
+            q=q(H,\alpha)\in
+            \operatorname*{arg\,min}_{1\le s\le r}D_s\,s^\alpha.
+            \]
+            For the main case \(q\ge2\), apply Lemma 2 to the top \(q\) excesses, restored
+            to chronological order, and call them \(c_1,\ldots,c_q\). Let
+            \(b_i=S_i+1\), let
+            \(v=S_{q+1}+1\), and put \(L:=D_q/q\). The unselected excesses lie in the
+            intervening gaps, so
+            \[
+            D_q=\sum_{i=1}^q b_i+v.
+            \]
+            Set \(x_i:=b_i/L\) and \(\omega_i:=c_i/L\). Then \(\sum_i x_i&lt;q\), and
+            the decreasing rearrangement satisfies \(\omega_s^\downarrow=a_s/L\). Minimality
+            of \(q\) gives
+            \[
+            1+\frac1q\sum_{s=m+1}^q \omega_s^\downarrow
+            =\frac{D_m}{D_q}\ge\left(\frac qm\right)^\alpha,
+            \]
+            which is exactly (4).
+          </p>
+          <p>
+            Write \(V_I\) for the selected-chain value in Lemma 2. Direct multiplication and
+            telescoping of its neighboring factors gives
+            \[
+            V_I^{-1}
+            =
+            L\,\widehat E_{\mathrm{end}}
+            \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1}),
+            \]
+            where
+            \[
+            \widehat E_{\mathrm{end}}
+            =
+            \sqrt{x_1x_q}
+            \sqrt{\frac{1+x_1/\omega_1}{1+x_q/\omega_q}}
+            \left[1+\frac{x_q+2(q-\sum_i x_i)-L^{-1}}{\omega_q}\right]
+            \le E_{\mathrm{end}}.
+            \]
+            Thus (5) yields \(V_I\ge q/(C_\alpha D_q)\).
+          </p>
+          <p>
+            The clean problem is pointwise slightly stronger at finite scale because it drops
+            the favorable term \(-L^{-1}/\omega_q\). It is nevertheless equivalent for the
+            best uniform constant. Given any abstract data satisfying (4), take \(L\) large,
+            use selected excesses \(L\omega_i\), pre-transition gap totals \(Lx_i-1\), and
+            terminal gap total \(L(q-\sum_i x_i)-1\). Split every nonnegative gap total into
+            steps of size at most one. This realizes the normalized data with \(r=q\) and
+            \(D_q=Lq\). Moreover, for every \(m&lt;q\), condition (4) gives
+            \[
+            \frac{D_m}{D_q}
+            =
+            1+\frac1q\sum_{s=m+1}^q \omega_s^\downarrow
+            \ge\left(\frac qm\right)^\alpha,
+            \]
+            so this \(q\) is indeed a minimizing rank. Finally,
+            \(\widehat E_{\mathrm{end}}\uparrow E_{\mathrm{end}}\) as \(L\to\infty\).
+          </p>
+        </div>
+      </details>
+
+      <h3 id="step2"><span>Eliminating the variables \(x_i\)</span></h3>
+      <p>
+        To make (5) more tractable, we first eliminate the variables \(x_i\). For a parameter
+        \(\lambda&gt;0\), to be chosen later, define
+        \[
+        \Gamma_\lambda(w,z)
+        :=
+        \sup_{x,y&gt;0}
+        \left\{
+        \log K_{w,z}(x,y)-\lambda(x+y)
+        \right\}.
+        \tag{6}
+        \]
+        By definition, this gives an upper bound for each edge kernel.
+        \[
+        K_{w,z}(x,y)
+        \le
+        \exp\!\left(\lambda(x+y)+\Gamma_\lambda(w,z)\right).
+        \]
+        Multiplying these inequalities naturally produces the sum
+        \(\sum_{i=1}^{q-1}(x_i+x_{i+1})\). Condition (4) gives
+        \[
+        \sum_{i=1}^{q-1}(x_i+x_{i+1})
+        \le 2\sum_{i=1}^q x_i&lt;2q.
+        \]
+        The proof sketch shows that the same exponential penalty also absorbs the endpoint
+        factor \(E_{\mathrm{end}}\).
+      </p>
+      <div class="theorem" id="envelope-reduction">
+        <p><a class="theorem-label" href="#envelope-reduction">Lemma 4.</a>
+          <em class="statement">Every sequence satisfying (4) obeys</em></p>
+          \[
+          E_{\mathrm{end}}
+          \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
+          \le
+          C_{\alpha,\lambda}
+          \exp\!\left\{
+          2\lambda q+
+          \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
+          \right\}.
+          \tag{7}
+          \]
+      </div>
+      <details class="proof">
+        <summary>Proof sketch</summary>
+        <div class="proof-body">
+          <p>
+            Applying the definition of \(\Gamma_\lambda\) to every edge gives the exponential
+            of
+            \[
+            \lambda\sum_{i=1}^{q-1}(x_i+x_{i+1})
+            +
+            \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1}).
+            \]
+            Since
+            \[
+            \sum_{i=1}^{q-1}(x_i+x_{i+1})
+            =
+            2\sum_{i=1}^q x_i-x_1-x_q,
+            \]
+            it remains to bound
+            \[
+            E_{\mathrm{end}}
+            e^{-\lambda\left(
+            2(q-\sum_i x_i)+x_1+x_q
+            \right)}.
+            \]
+            Condition (4) gives \(\omega_1,\omega_q\ge\alpha\). The last display is therefore a
+            polynomial-growth function of the three nonnegative variables
+            \(x_1,x_q,q-\sum_i x_i\), multiplied by exponential decay. Its supremum is a
+            finite constant \(C_{\alpha,\lambda}\), which proves (7).
+          </p>
+          <p>
+            For completeness, the two-dimensional supremum in (6) can itself be reduced to
+            one scalar. Its objective tends to \(-\infty\) when \(x\) or \(y\) approaches
+            zero and when \(x+y\to\infty\). Together with the negative-definite Hessian
+            computed in Lemma 5, this gives a unique maximizer. The first-order equations
+            imply
+            \[
+            x\left(1+\frac{x}{w}\right)
+            =
+            y\left(1+\frac{y}{z}\right)
+            =:\tau.
+            \]
+            Define
+            \[
+            X_w(\tau):=\frac{\sqrt{w^2+4w\tau}-w}{2},
+            \qquad A_w(\tau):=w+X_w(\tau).
+            \]
+            The maximizing pair is
+            \(x=X_w(\tau)\), \(y=X_z(\tau)\), where \(\tau&gt;0\) is the unique solution of
+            \[
+            \frac1{2\tau}
+            +
+            \frac1{A_w(\tau)+A_z(\tau)}
+            =
+            \lambda.
+            \]
+            The left-hand side is strictly decreasing from \(+\infty\) to \(0\), so the
+            solution exists and is unique. Its derivative is nonzero. The implicit-function
+            theorem therefore makes the optimizer smooth in \((w,z)\), justifying the
+            differentiation below.
+          </p>
+        </div>
+      </details>
+
+      <h3 id="step3"><span>Basic properties of \(\Gamma_\lambda\)</span></h3>
+      <div class="theorem" id="gamma-geometry">
+        <p><a class="theorem-label" href="#gamma-geometry">Lemma 5.</a>
+          For every \(\lambda&gt;0\), \(\Gamma_\lambda\) has the following properties.</p>
+        <div class="statement property-list">
+          <p class="property">
+            <strong>(1) Symmetry.</strong>
+            \(\Gamma_\lambda(w,z)=\Gamma_\lambda(z,w)\).
+          </p>
+          <p class="property">
+            <strong>(2) Joint convexity.</strong>
+            The map \((w,z)\mapsto\Gamma_\lambda(w,z)\) is jointly convex on
+            \((0,\infty)^2\).
+          </p>
+          <p class="property">
+            <strong>(3) Decreasing in each coordinate.</strong>
+            \(\Gamma_\lambda\) is strictly decreasing in each coordinate.
+          </p>
+          <p class="property">
+            <strong>(4) Strict submodularity.</strong>
+            \[
+            \partial_{wz}^2\Gamma_\lambda(w,z)&lt;0.
+            \tag{8}
+            \]
+          </p>
+        </div>
+      </div>
+      <details class="proof">
+        <summary>Proof sketch</summary>
+        <div class="proof-body">
+          <p>
+            For fixed \(w,z\), write \(A=w+x\), \(B=z+y\), and
+            \(\Sigma=A+B\). The Hessian of the objective in (6), in any nonzero direction
+            \((a,b)\), is
+            \[
+            -\frac{a^2}{2x^2}-\frac{b^2}{2y^2}
+            -\frac{(a+b)^2}{\Sigma^2}
+            +\frac{a^2}{2A^2}+\frac{b^2}{2B^2}&lt;0.
+            \]
+            Hence the optimizer is unique. Symmetry is immediate.
+          </p>
+          <p>
+            For fixed \(x,y\), the Hessian in \((w,z)\) has quadratic form
+            \[
+            \frac{a^2}{2w^2}+\frac{a^2}{2A^2}
+            +\frac{b^2}{2z^2}+\frac{b^2}{2B^2}
+            -\frac{(a+b)^2}{(A+B)^2}\ge0.
+            \]
+            The first four terms dominate
+            \(a^2/A^2+b^2/B^2\), which dominates the last term by
+            Cauchy--Schwarz. Taking the supremum preserves convexity.
+          </p>
+          <p>
+            Danskin's theorem gives
+            \[
+            \partial_w\Gamma_\lambda
+            =
+            \frac1\Sigma-\frac1{2w}-\frac1{2A}&lt;0,
+            \]
+            and similarly in \(z\). Implicit differentiation of the scalar optimizer equation
+            gives
+            \[
+            \partial_z\tau&lt;0,\qquad
+            \partial_z\Sigma&gt;0,\qquad
+            \partial_z A_w(\tau(w,z))&lt;0.
+            \]
+            Therefore
+            \[
+            \partial_{wz}^2\Gamma_\lambda
+            =
+            -\frac{\partial_z\Sigma}{\Sigma^2}
+            +\frac{\partial_z A_w(\tau(w,z))}{2A^2}&lt;0.
+            \]
+          </p>
+        </div>
+      </details>
+
+      <h3 id="step4"><span>Upper bounding \(\sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})\)</span></h3>
+      <p>
+        Recall from Lemma 3 that
+        \(\omega_1^\downarrow\ge\cdots\ge\omega_q^\downarrow\) is the decreasing
+        rearrangement of \(\omega_1,\ldots,\omega_q\).
+      </p>
+      <p>
+        For a positive vector \(v=(v_1,\ldots,v_N)\) and
+        \(0\le k\le\lfloor N/2\rfloor\), let \(\mathcal M_k(N)\) be the set of all
+        collections of \(k\) disjoint unordered pairs from \([N]\). Define
+        \[
+        \Phi_{k,\lambda}(v_1,\ldots,v_N)
+        :=
+        \max_{M\in\mathcal M_k(N)}
+        \sum_{\{a,b\}\in M}\Gamma_\lambda(v_a,v_b).
+        \]
+        Thus \(\Phi_{k,\lambda}(v)\) is the largest value of a \(k\)-edge matching
+        formed from the entries of \(v\). We use the convention
+        \(\Phi_{0,\lambda}=0\).
+      </p>
+      <p>The odd and even edges of the chronological path form two matchings.</p>
+
+      <figure class="matching-figure" id="parity-matchings"
+              aria-labelledby="parity-matchings-caption">
+        <img src="assets/odd-even-matchings.svg"
+             alt="Eight chronological vertices omega 1 through omega 8. The odd-indexed edges form the upper matching, and the even-indexed edges form the lower matching.">
+        <figcaption id="parity-matchings-caption"><strong>Figure 2.</strong> The chronological path splits into two alternating matchings.</figcaption>
+      </figure>
+
+      <p>
+        Set \(k_q:=\lfloor(q-1)/2\rfloor\). Comparing both with the same maximum matching gives
+        \[
+        \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
+        \le
+        2\Phi_{k_q,\lambda}
+        (\omega_q^\downarrow,\ldots,\omega_2^\downarrow)
+        +C_{\alpha,\lambda}.
+        \tag{9}
+        \]
+        By the coordinatewise-decreasing property of \(\Gamma_\lambda\) in
+        <a href="#gamma-geometry">Lemma 5</a>, replacing a matched entry by an unused entry
+        that is no larger can only increase the matching sum.
+        When \(q\) is odd, each parity matching leaves one index unused. If it contains
+        \(\omega_1^\downarrow\), make this replacement. When \(q\) is even, one parity
+        matching is perfect. Remove its edge containing \(\omega_1^\downarrow\). In the
+        other matching, replace
+        \(\omega_1^\downarrow\), if present, by an unused entry that is no larger. Condition (4)
+        implies \(\omega_q^\downarrow\ge\alpha\), hence every \(\omega_i\ge\alpha\).
+        The removed edge is therefore bounded by a constant depending only on \(\alpha\)
+        and \(\lambda\).
+      </p>
+
+      <p class="theme-emphasis">
+        We now bound \(\Phi_{k_q,\lambda}\) through two finer reductions, using the
+        properties of \(\Gamma_\lambda\) established in
+        <a href="#gamma-geometry">Lemma 5</a>.
+      </p>
+
+      <h4>Step 1. Replace \((\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\) by
+        \((\bar w_q^{(q)},\ldots,\bar w_2^{(q)})\)</h4>
+      <p>For \(2\le s\le q\), define the explicit comparison weights</p>
+      \[
+      \bar w_s^{(q)}
+      :=
+      q^{1+\alpha}\bigl((s-1)^{-\alpha}-s^{-\alpha}\bigr),
+      \qquad 2\le s\le q.
+      \tag{10}
+      \]
+      <p>
+        Their tails satisfy
+        \[
+        \sum_{s=m+1}^q\bar w_s^{(q)}
+        =q\left[\left(\frac qm\right)^\alpha-1\right].
+        \]
+        Together with (4), this gives
+        \[
+        \sum_{s=m+1}^q\omega_s^\downarrow
+        \ge
+        \sum_{s=m+1}^q\bar w_s^{(q)},
+        \qquad 1\le m&lt;q.
+        \]
+        Because \(\Gamma_\lambda\) is symmetric, jointly convex, and coordinatewise
+        decreasing (<a href="#gamma-geometry">Lemma 5</a>), the maximum-matching functional
+        \(\Phi_{k,\lambda}\) is
+        symmetric, convex, and coordinatewise decreasing as well. The tail comparison above
+        therefore gives
+        \[
+        \Phi_{k_q,\lambda}
+        (\omega_q^\downarrow,\ldots,\omega_2^\downarrow)
+        \le
+        \Phi_{k_q,\lambda}
+        (\bar w_q^{(q)},\ldots,\bar w_2^{(q)}).
+        \]
+        The proof below gives the majorization argument.
+      </p>
+
+      <h4>Step 2. Reduce to the worst pairing</h4>
+      <p>
+        Let \(0&lt;v_1\le\cdots\le v_N\) and \(0\le k\le\lfloor N/2\rfloor\).
+        Since \(\Gamma_\lambda\) decreases in each coordinate, a maximizing matching in
+        \(\Phi_{k,\lambda}(v)\) may be chosen to use the \(2k\) smallest entries. Strict
+        submodularity then pairs the two ends of this ordered list.
+        \[
+        \Phi_{k,\lambda}(v_1,\ldots,v_N)
+        =
+        \sum_{j=1}^k
+        \Gamma_\lambda(v_j,v_{2k+1-j}).
+        \tag{11}
+        \]
+        The numbers in (10) satisfy
+        \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\), so (11) applies directly to
+        \((\bar w_q^{(q)},\ldots,\bar w_2^{(q)})\).
+      </p>
+      <p>
+        <span class="theme-emphasis">It remains to estimate this explicit sum.</span>
+        By the mean value theorem, for every
+        \(2\le s\le q\), there is \(\xi_s\in(s-1,s)\) such that
+      </p>
+      \[
+      \bar w_s^{(q)}=W_\alpha(\xi_s/q),
+      \qquad W_\alpha(t):=\alpha t^{-1-\alpha}.
+      \tag{12}
+      \]
+      <p>
+        Using (12), the paired sum in (11) is a Riemann sum for the integral below. The proof
+        controls the endpoint and rounding errors uniformly in \(q\) and gives
+      </p>
+      \[
+      \Phi_{k_q,\lambda}
+      (\bar w_q^{(q)},\ldots,\bar w_2^{(q)})
+      \le
+      q\int_0^{1/2}
+      \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt
+      +C_{\alpha,\lambda}.
+      \]
+      <p>Combining this estimate with (9) gives the following lemma.</p>
+      <div class="theorem" id="path-estimate">
+        <p><a class="theorem-label" href="#path-estimate">Lemma 6.</a>
+          <em class="statement">Fix \(\alpha,\lambda&gt;0\). There is a constant
+          \(C_{\alpha,\lambda}&lt;\infty\) such that, for every integer \(q\ge2\) and every
+          positive sequence \(\omega_1,\ldots,\omega_q\) satisfying the tail condition in
+          (4),</em></p>
+          \[
+          \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
+          \le
+          2q\int_0^{1/2}
+          \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt
+          +C_{\alpha,\lambda}.
+          \tag{13}
+          \]
+      </div>
+      <details class="proof">
+        <summary>Proof sketch</summary>
+        <div class="proof-body">
+          <p>
+            We first prove (9). Split the temporal path into odd and even edges and put
+            \(k_q=\lfloor(q-1)/2\rfloor\). If \(q\) is odd, each matching leaves one
+            coordinate unused. Whenever a matching contains \(\omega_1^\downarrow\), replace
+            it by an unused coordinate that is no larger. If \(q\) is even, remove the edge
+            containing \(\omega_1^\downarrow\) from the perfect matching. In the other
+            matching, make the same replacement if necessary. Coordinatewise decrease can
+            only increase the resulting sums. Taking \(m=q-1\) in (4) gives
+            \[
+            \omega_q^\downarrow
+            \ge q\left[\left(\frac q{q-1}\right)^\alpha-1\right]
+            \ge q\alpha\log\frac q{q-1}\ge\alpha,
+            \]
+            where the last step uses
+            \(\log(1+t)\ge t/(1+t)\). Hence the removed edge is at most
+            \(\Gamma_\lambda(\alpha,\alpha)\), which proves (9).
+          </p>
+          <p>
+            Each fixed-matching sum in the definition of \(\Phi_{k,\lambda}\) is convex
+            and coordinatewise decreasing. Taking the maximum over all matchings preserves
+            these properties. The collection of matchings is invariant under coordinate
+            permutations, so \(\Phi_{k,\lambda}\) is also symmetric.
+          </p>
+          <p>
+            Let \(a_1\le\cdots\le a_N\) and \(b_1\le\cdots\le b_N\) satisfy
+            \(\sum_{i=1}^\ell a_i\ge\sum_{i=1}^\ell b_i\) for every \(\ell\). Choose an
+            ordered subgradient \(g\in\partial\Phi_{k,\lambda}(a)\) with
+            \(g_1\le\cdots\le g_N\le0\). Symmetry and convexity give the ordering, while
+            coordinatewise decrease gives the signs. Put
+            \(D_\ell:=\sum_{i=1}^\ell(b_i-a_i)\le0\). Summation by parts yields
+            \[
+            g\cdot(b-a)
+            =g_ND_N+\sum_{\ell=1}^{N-1}(g_\ell-g_{\ell+1})D_\ell\ge0.
+            \]
+            The subgradient inequality therefore gives
+            \(\Phi_{k,\lambda}(a)\le\Phi_{k,\lambda}(b)\), which is the
+            weak-supermajorization comparison used above.
+          </p>
+          <p>
+            The reference entries also satisfy
+            \[
+            \bar w_s^{(q)}
+            =q^{1+\alpha}\int_{s-1}^{s}\alpha u^{-1-\alpha}\,du.
+            \]
+            Since the integrand decreases, this proves
+            \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\). Their tail sums telescope to the
+            right-hand side of (4), so the preceding majorization argument proves the
+            comparison in part A.
+          </p>
+          <p>
+            For \(a\le b\le c\le d\), submodularity gives
+            \[
+            \Gamma_\lambda(a,d)+\Gamma_\lambda(b,c)
+            \ge\Gamma_\lambda(a,c)+\Gamma_\lambda(b,d),
+            \]
+            and
+            \[
+            \Gamma_\lambda(a,d)+\Gamma_\lambda(b,c)
+            \ge\Gamma_\lambda(a,b)+\Gamma_\lambda(c,d).
+            \]
+            Coordinatewise decrease selects the \(2k\) smallest coordinates, and repeated
+            applications of these two exchange inequalities produce the pairing in (11).
+          </p>
+          <p>
+            Write \(q=2r+1\) or \(q=2r\). The paired sum produced by (11) becomes,
+            respectively,
+            \[
+            \sum_{j=1}^{r}
+            \Gamma_\lambda\!\left(\bar w_{j+1}^{(q)},\bar w_{q+1-j}^{(q)}\right),
+            \qquad
+            \sum_{j=1}^{r-1}
+            \Gamma_\lambda\!\left(\bar w_{j+2}^{(q)},\bar w_{q+1-j}^{(q)}\right).
+            \]
+            By the mean value theorem, for each \(2\le s\le q\) there is
+            \(\xi_s\in(s-1,s)\) such that
+            \[
+            \bar w_s^{(q)}=W_\alpha(\xi_s/q).
+            \]
+            Each paired sum is therefore a Riemann sum along \((t,1-t)\). We now justify a
+            uniform endpoint estimate for
+            \(G(t,s):=\Gamma_\lambda(W_\alpha(t),W_\alpha(s))\). Let
+            \(w=W_\alpha(t)\), \(z=W_\alpha(s)\), and let \((x,y)\) be the optimizer in
+            (6). Set \(A=w+x\), \(B=z+y\), and \(\Sigma=A+B\). The derivative formula in
+            Lemma 5 gives the exact identity
+            \[
+            -\partial_w\Gamma_\lambda
+            =\frac1{2w}+\frac1{2A}-\frac1\Sigma
+            =\frac{x}{2wA}+\frac{B}{A\Sigma}.
+            \]
+            For \(s\in[1/2,1]\), the value \(z\) stays in a compact subinterval of
+            \((0,\infty)\). The scalar equation in Lemma 4 and
+            \(A_z(\tau)\ge\sqrt{z\tau}\) give
+            \[
+            \lambda
+            \le \frac1{2\tau}+\frac1{\sqrt{z\tau}},
+            \]
+            so \(\tau=O_{\alpha,\lambda}(1)\). Since \(x,y\le\tau\), both \(x\) and
+            \(B=z+y\) are uniformly bounded. As \(A,\Sigma\ge w\), the preceding identity
+            proves
+            \[
+            -\partial_w\Gamma_\lambda=O_{\alpha,\lambda}(w^{-2}).
+            \]
+            Moreover
+            \(|W_\alpha'(t)|W_\alpha(t)^{-2}=O_\alpha(t^\alpha)\). The derivative of
+            \(G\) in its second coordinate is uniformly bounded because
+            \(W_\alpha(s)\) and \(W_\alpha'(s)\) remain in compact ranges. Thus \(G\) has a
+            bounded Lipschitz extension on \([0,1/2]\times[1/2,1]\). The constants are
+            locally uniform when \(\alpha\) ranges over a compact subset of
+            \((0,\infty)\).
+          </p>
+          <p>
+            It follows that, in either parity case,
+            \[
+            \Phi_{k_q,\lambda}
+            (\bar w_q^{(q)},\ldots,\bar w_2^{(q)})
+            =q\int_0^{1/2}
+            \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt
+            +O_{\alpha,\lambda}(1).
+            \]
+            The possible central edge and the case \(q=2\) are absorbed into the same
+            constant. Combining this estimate with (9) proves (13).
+          </p>
+        </div>
+      </details>
+
+      <p id="scalar-conclusion">
+        <strong>Finally, it remains only to verify a scalar inequality.</strong> Define
+      </p>
+      \[
+      J(\alpha,\lambda)
+      :=
+      2\lambda+
+      2\int_0^{1/2}
+      \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt.
+      \tag{14}
+      \]
+      <p>Combining Lemmas 4 and 6 gives</p>
+      \[
+      E_{\mathrm{end}}
+      \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
+      \le C_{\alpha,\lambda}e^{qJ(\alpha,\lambda)}.
+      \tag{15}
+      \]
+      <p>
+        Therefore, if \(J(\alpha,\lambda)\le0\), then (5) holds uniformly in \(q\), and
+        Lemma 3 gives
+        \[
+        R_n(H)\ge c_{\alpha,\lambda}(n+1)^{-(1+\alpha)}.
+        \tag{16}
+        \]
+        The proof has thus become a scalar feasibility problem. It remains to find a small
+        \(\alpha&gt;0\) and some \(\lambda&gt;0\) for which \(J(\alpha,\lambda)\le0\).
+      </p>
+      <p>
+        Take \(\alpha=0.6342\) and \(\lambda=0.4506\). A validated interval-arithmetic
+        computation (<a href="verification.html">verification appendix</a>) certifies
+        \[
+        J(0.6342,0.4506)&lt;-0.00005&lt;0.
+        \]
+        Hence \(R_n(H)=\Omega(n^{-1.6342})\), proving Theorem 2.
+      </p>
+      <p>
+        For reference, let \(\alpha_0\) be the unique zero of
+        \(J(\alpha,0.4506)\), and define \(p_0:=1+\alpha_0\). Numerically,
+        \(p_0\approx1.6341605846\).
+      </p>
+      <details class="proof">
+        <summary>Proof sketch</summary>
+        <div class="proof-body">
+          <p>
+            The boundary ranks are immediate. If there is no long step (\(r=0\)), the
+            empty-chain Huber member of the same hard-function family gives
+            \(R_n(H)\ge 1/(2B)\). If \(r\ge1\) and the minimizing rank is \(q=1\), that
+            empty-chain witness together with the singleton instance of Lemma 2 gives
+            \(R_n(H)\ge1/(4D_1)\). Since \(B\le n+1\), \(r+1\le n+1\), and
+            \(D_1\le Br^\alpha\), both cases satisfy (16) after adjusting the universal
+            constant.
+          </p>
+          <p>
+            Equation (15) and Lemma 3 show that, for the minimizing rank
+            \(q\ge2\),
+            \[
+            R_n(H)\ge
+            \frac{q}{C_{\alpha,\lambda}D_q}
+            e^{-qJ(\alpha,\lambda)}.
+            \]
+            If \(J(\alpha,\lambda)\le0\), the exponential factor is at least one.
+            Minimality of \(q\) gives
+            \[
+            D_qq^\alpha\le D_rr^\alpha=Br^\alpha.
+            \]
+            Hence
+            \[
+            \frac q{D_q}
+            \ge
+            \frac{q^{1+\alpha}}{Br^\alpha}
+            \ge
+            \frac1{B(r+1)^\alpha}.
+            \]
+            Finally \(B\le n+1\) and \(r+1\le n+1\), proving (16).
+          </p>
+          <p>
+            For every fixed \(\lambda&gt;0\), the map
+            \(\alpha\mapsto J(\alpha,\lambda)\) is continuous and strictly decreasing.
+            Indeed \(W_\alpha(t)\) increases with \(\alpha\), while
+            \(\Gamma_\lambda\) decreases in each coordinate. The endpoint estimates in the
+            proof of Lemma 6 give locally uniform domination.
+          </p>
+          <p>
+            As \(\alpha\downarrow0\), both profile coordinates tend to zero uniformly on,
+            for example, \([1/4,3/4]\). Evaluating the supremum defining
+            \(\Gamma_\lambda\) at any fixed \(x,y&gt;0\) shows that its integrand tends
+            uniformly to \(+\infty\) on \([1/4,1/2]\). Monotonicity supplies an
+            integrable lower bound on the remaining part of the interval, so this divergence
+            cannot be cancelled. Hence
+            \[
+            \lim_{\alpha\downarrow0}J(\alpha,\lambda)=+\infty.
+            \]
+          </p>
+          <p>
+            As \(\alpha\to\infty\), both profile coordinates are at least \(\alpha\).
+            At the optimizer,
+            \[
+            \Gamma_\lambda(w,z)
+            \le \log\frac{x+y}{\alpha}-\lambda(x+y)
+            \le-\log(\alpha\lambda)-1,
+            \]
+            uniformly in \(t\). Therefore
+            \(\lim_{\alpha\to\infty}J(\alpha,\lambda)=-\infty\).
+            Thus \(J(\,\cdot\,,0.4506)\) has a unique zero \(\alpha_0\).
+          </p>
+          <p>
+            <strong>Computer-assisted verification.</strong> For the exact decimal parameters
+            \(\alpha=0.6342\) and \(\lambda=0.4506\), the validated computation partitions
+            \([0,1/2]\) into \(2^{16}\) rational cells. On every cell it encloses the unique
+            optimizing \(\tau\) by sign-verified brackets and evaluates \(\Gamma_\lambda\)
+            using directed outward rounding. Coordinatewise monotonicity controls the cell
+            adjacent to \(t=0\). Summing the resulting interval bounds certifies
+            \(J(0.6342,0.4506)&lt;-0.00005\). High-precision quadrature gives the numerical
+            value of \(p_0\) displayed above.
+          </p>
+        </div>
+      </details>
+
+      <h3 id="concluding-remarks"><span>Concluding Remarks</span></h3>
+      <p>
+        Starting from the same hard-function construction and the corresponding chain bound in
+        <a href="#lemma-hard-functions">Lemma 2</a> (cf.
+        <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai's Lemma 6</a>),
+        we use a finer term-by-term analysis of the full chronological sequence. This improves
+        Tsai's lower bound from \(\Omega(n^{-\sqrt3})\) to \(\Omega(n^{-1.6342})\).
+      </p>
+      <p>
+        At the exponential scale relevant to the final rate, our sequence estimates appear
+        fairly tight, although we do not prove optimality. One plausible source of slack is the
+        parity split in (9). The odd and even edges form two alternating matchings of the same
+        chronological path, but we bound them independently by the same unconstrained
+        worst-matching value. For strictly ordered weights, they generally cannot both realize
+        the outside-in maximizer exactly.
+      </p>
+      <p>
+        A more structural question is whether Lemma 2 can already yield the
+        \(\Omega(n^{-1.2716})\) lower bound, matching the
+        <a href="https://arxiv.org/abs/2309.16530">silver-stepsize upper bound</a>.
+        Our refined analysis makes us skeptical that this route will close the whole gap, but
+        it does not give an impossibility result. It may instead be necessary to construct hard
+        functions with an explicit hierarchy of scales,
+        mirroring the recursive structure of silver stepsizes, so that long steps at different
+        scales interact within the same instance.
+      </p>
+
+    </article>
+  </main>
+</body>
+</html>
