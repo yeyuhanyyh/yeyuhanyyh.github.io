@@ -7,18 +7,19 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-23T11:32:32-04:00">
+  <meta property="article:modified_time" content="2026-08-23T11:44:30-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:image" content="https://yeyuhanyyh.github.io/gd-lower-bound/assets/social-cover.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="627">
-  <meta property="og:image:alt" content="A rate diagram highlighting the Ω(n^-1.6342) lower bound for non-anytime gradient descent.">
+  <meta property="og:image:alt" content="A rate diagram labeled Lower bound on the left and Upper bound on the right, highlighting the Ω(n^-1.6342) result for non-anytime gradient descent.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta name="twitter:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
   <meta name="twitter:image" content="https://yeyuhanyyh.github.io/gd-lower-bound/assets/social-cover.png">
+  <meta name="twitter:image:alt" content="A rate diagram labeled Lower bound on the left and Upper bound on the right, highlighting the Ω(n^-1.6342) result for non-anytime gradient descent.">
   <title>An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -267,7 +268,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 23, 2026 11:32 (GMT-4).</span>
+            <span>Last updated: August 23, 2026 11:44 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -378,7 +379,8 @@
           A schematic diagram with rate markers n to the powers minus 2, minus 1.932,
           minus 1.733, minus 1.6342, minus 1.271, and minus 1. The lower-bound blocks are
           labeled Nemirovsky and Yudin, Ma and Chen, Tsai, and This work. The upper-bound
-          blocks are labeled Altschuler and Parrilo, and Levitin and Polyak.
+          blocks are labeled Altschuler and Parrilo, and Levitin and Polyak. The horizontal
+          axis is labeled Lower bound on the left and Upper bound on the right.
         </p>
         <figcaption id="rate-landscape-caption"><strong>Figure 1.</strong> Our progress on lower bound.</figcaption>
       </figure>
@@ -561,14 +563,16 @@
         \le
         \exp\!\left(\lambda(x+y)+\Gamma_\lambda(w,z)\right).
         \]
-        Multiplying these inequalities produces the sum
-        \(\sum_{i=1}^{q-1}(x_i+x_{i+1})\). Condition (3) gives
-        \[
-        \sum_{i=1}^{q-1}(x_i+x_{i+1})
-        \le 2\sum_{i=1}^q x_i&lt;2q.
-        \]
-        The proof sketch shows that the same exponential penalty also absorbs the endpoint
-        factor \(E_{\mathrm{end}}\).
+        Multiplying these inequalities introduces
+        \(\lambda\sum_{i=1}^{q-1}(x_i+x_{i+1})\) in the exponent. Condition (3) gives
+        \(\sum_{i=1}^{q-1}(x_i+x_{i+1})=2\sum_{i=1}^q x_i-x_1-x_q&lt;2q\).
+        We retain the unused slack by writing this exponent as
+        \(2\lambda q-\lambda[2(q-\sum_i x_i)+x_1+x_q]\). The resulting factor
+        \(e^{-\lambda[2(q-\sum_i x_i)+x_1+x_q]}\) decays exponentially in
+        \(x_1,x_q,q-\sum_i x_i\), while \(E_{\mathrm{end}}\) grows only polynomially in
+        these variables. Since (3) also gives \(\omega_1,\omega_q\ge\alpha\), the product of
+        \(E_{\mathrm{end}}\) and this decaying factor is bounded by a constant
+        \(C_{\alpha,\lambda}\).
       </p>
       <div class="theorem" id="envelope-reduction">
         <p><a class="theorem-label" href="#envelope-reduction">Lemma 4.</a>
@@ -1183,10 +1187,11 @@
 
       <section class="version-history" aria-labelledby="version-history-title">
         <div id="version-history-title" class="version-history-title">Version history</div>
-        <p><strong>[v3]</strong> August 23, 2026, 11:32 (GMT-4). Current version. Reordered the clean
+        <p><strong>[v4]</strong> August 23, 2026, 11:44 (GMT-4). Current version. Clarified the
+          envelope reduction and labeled the lower- and upper-bound sides of Figure 1.</p>
+        <p><strong>[v3]</strong> August 23, 2026, 11:32 (GMT-4). Reordered the clean
           sequence statement and clarified the parity-matching reduction.</p>
-        <p><strong>[v2]</strong> August 23, 2026, 11:12 (GMT-4). Full mathematical and notation
-          audit, with revised exposition and concluding remarks.</p>
+        <p><strong>[v2]</strong> August 23, 2026, 11:12 (GMT-4).</p>
         <p><strong>[v1]</strong> August 23, 2026, 10:39 (GMT-4). First announced.</p>
       </section>
 

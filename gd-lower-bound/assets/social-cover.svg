@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="627" viewBox="0 0 1200 627" role="img" aria-labelledby="title desc">
   <title id="title">Progress on lower bounds for non-anytime gradient descent</title>
-  <desc id="desc">A rate diagram comparing lower and upper bounds for non-anytime gradient descent, highlighting this work at an exponent of 1.6342.</desc>
+  <desc id="desc">A rate diagram for non-anytime gradient descent, labeled Lower bound on the left and Upper bound on the right, highlighting this work at an exponent of 1.6342.</desc>
 
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
@@ -15,6 +15,7 @@
       .ours { fill: #4b2500; font-size: 21px; font-weight: 800; }
       .upper { fill: #285421; }
       .small { font-size: 16px; }
+      .axis-label { font-family: Georgia, "Times New Roman", serif; font-size: 23px; font-style: italic; fill: #6f6a63; }
     </style>
   </defs>
 
@@ -50,4 +51,6 @@
   <text class="block upper small" x="1107.5" y="391"><tspan x="1107.5">Levitin &amp;</tspan><tspan x="1107.5" dy="25">Polyak</tspan><tspan x="1107.5" dy="25">(1966)</tspan></text>
 
   <line x1="25" y1="470" x2="1182" y2="470" stroke="#111111" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="axis-label" x="34" y="515">Lower bound</text>
+  <text class="axis-label" x="1166" y="515" text-anchor="end">Upper bound</text>
 </svg>

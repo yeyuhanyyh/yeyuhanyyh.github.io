@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="250" viewBox="0 0 1400 250" role="img" aria-labelledby="title desc">
   <title id="title">Progress on lower bounds for gradient descent</title>
-  <desc id="desc">A schematic rate diagram with markers n to the powers minus 2, minus 1.932, minus 1.733, minus 1.6342, minus 1.271, and minus 1. The colored blocks name the corresponding lower- and upper-bound results.</desc>
+  <desc id="desc">A schematic rate diagram with markers n to the powers minus 2, minus 1.932, minus 1.733, minus 1.6342, minus 1.271, and minus 1. The horizontal axis is labeled Lower bound on the left and Upper bound on the right. The colored blocks name the corresponding results.</desc>
 
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
@@ -14,6 +14,7 @@
       .lower { fill: #7a3518; }
       .ours { fill: #4b2500; font-weight: 800; }
       .upper { fill: #285421; }
+      .axis-label { font-family: Georgia, "Times New Roman", serif; font-size: 16px; font-style: italic; fill: #6f6a63; }
     </style>
   </defs>
 
@@ -49,4 +50,6 @@
   <text class="block upper" x="1280" y="185"><tspan x="1280">Levitin &amp; Polyak</tspan><tspan x="1280" dy="24">(1966)</tspan></text>
 
   <line x1="40" y1="224" x2="1385" y2="224" stroke="#2e2b27" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="axis-label" x="48" y="244">Lower bound</text>
+  <text class="axis-label" x="1368" y="244" text-anchor="end">Upper bound</text>
 </svg>
