@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-23T11:57:02-04:00">
+  <meta property="article:modified_time" content="2026-08-23T12:06:18-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
@@ -255,7 +255,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 23, 2026 11:57 (GMT-4).</span>
+            <span>Last updated: August 23, 2026 12:06 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -750,26 +750,11 @@
       </figure>
 
       <p>
-        Set \(k_q:=\lfloor(q-1)/2\rfloor\), and choose one coordinate whose value is
-        \(\omega_1^\downarrow\). Regard this occurrence as the one omitted from
-        \((\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\). By the coordinatewise-decreasing property in
-        <a href="#gamma-geometry">Lemma 5(3)</a>, replacing a matched coordinate by an
-        unused coordinate with no larger value can only increase the matching sum.
-      </p>
-      <p>
-        If \(q\) is odd, each parity matching has \(k_q\) edges and leaves a coordinate unused, so both
-        matchings can be modified to avoid the chosen coordinate. If \(q\) is even, the
-        \(k_q\)-edge matching is handled in the same way. The other matching is perfect. Delete
-        its edge incident to the chosen coordinate, and denote the two endpoint values by
-        \(u\) and \(v\). After these operations, each retained matching has \(k_q\) edges on
-        the remaining \(q-1\) coordinates, so its value is at most
-        \(\Phi_{k_q,\lambda}(\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\).
-      </p>
-      <p>
-        In the even case, (3) with \(m=q-1\) gives \(u,v\ge\alpha\), and hence
-        \(\Gamma_\lambda(u,v)\le\Gamma_\lambda(\alpha,\alpha)\).
-        The quantity \(\Gamma_\lambda(\alpha,\alpha)\) is independent of \(q\), so we absorb it
-        into \(C_{\alpha,\lambda}\). The two parity matchings therefore satisfy
+        Set \(k_q:=\lfloor(q-1)/2\rfloor\). By the coordinatewise-decreasing property in
+        <a href="#gamma-geometry">Lemma 5(3)</a>,
+        \(\Gamma_\lambda(\omega_i,\omega_j)\le\Gamma_\lambda(\alpha,\alpha)\), since
+        (3) with \(m=q-1\) gives \(\omega_i,\omega_j\ge\alpha\). A simple case distinction
+        between odd and even \(q\) gives
         \[
         \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
         \le
@@ -778,6 +763,7 @@
         +C_{\alpha,\lambda}.
         \tag{9}
         \]
+        See the proof sketch for details.
       </p>
 
       <p class="theme-emphasis">
