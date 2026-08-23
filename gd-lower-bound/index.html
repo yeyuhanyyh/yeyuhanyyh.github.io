@@ -3,21 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="An Omega(n^-1.6342) lower bound for non-anytime gradient descent under predetermined stepsize schedules.">
+  <meta name="description" content="An Ω(n^-1.6342) lower bound for non-anytime gradient descent under predetermined stepsize schedules.">
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
+  <meta property="article:modified_time" content="2026-08-23T11:12:20-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:image" content="https://yeyuhanyyh.github.io/gd-lower-bound/assets/social-cover.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="627">
-  <meta property="og:image:alt" content="A rate diagram highlighting the Omega(n^-1.6342) lower bound for gradient descent.">
+  <meta property="og:image:alt" content="A rate diagram highlighting the Ω(n^-1.6342) lower bound for non-anytime gradient descent.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta name="twitter:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
   <meta name="twitter:image" content="https://yeyuhanyyh.github.io/gd-lower-bound/assets/social-cover.png">
-  <title>An Omega(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent</title>
+  <title>An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&amp;display=swap" rel="stylesheet">
@@ -86,7 +88,14 @@
       margin-top: 0.25rem;
     }
     .article-affiliation { color: var(--muted); font-size: 0.92rem; }
-    .article-updated { margin-left: auto; text-align: right; }
+    .article-dates {
+      margin-left: auto;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      text-align: right;
+    }
+    .article-dates span { display: block; }
     .theorem > :last-child { margin-bottom: 0; }
     .theorem-label { font-weight: 700; }
     .theorem .statement { display: inline; margin: 0; font-style: italic; }
@@ -113,6 +122,19 @@
       text-align: right;
       font-size: 1.35rem;
     }
+    .version-history {
+      margin-top: 3rem;
+      padding-top: 0.9rem;
+      border-top: 1px solid #d8c9b5;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+    .version-history-title {
+      margin-bottom: 0.35rem;
+      color: var(--slate);
+      font-weight: 600;
+    }
+    .version-history p { margin: 0.15rem 0; }
     .footnote { color: var(--muted); font-size: 0.92rem; }
     .rate-figure {
       width: min(1120px, calc(100vw - 2rem));
@@ -209,7 +231,10 @@
       h3 { font-size: 1.25rem; }
       .theorem { padding: 1rem; }
       .article-meta-row { display: block; }
-      .article-updated { display: block; margin-top: 0.2rem; }
+      .article-dates { margin-top: 0.2rem; text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
     }
     @media print {
       .page { padding: 0; }
@@ -240,7 +265,10 @@
         Based on discussions with <a class="author-name" href="https://drzfct.github.io/">Kaizhao Liu</a><sup class="affiliation-mark">1</sup>.</span>
         <span class="article-meta-row">
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
-          <span class="article-updated">Last update: August 23, 2026 11:04 (GMT-4).</span>
+          <span class="article-dates">
+            <span>First announced: August 23, 2026.</span>
+            <span>Last updated: August 23, 2026 11:12 (GMT-4).</span>
+          </span>
         </span>
       </p>
 
@@ -248,8 +276,9 @@
       <p>
         Last week, <a href="https://arxiv.org/abs/2608.10418">Ma and Chen</a> proved an
         \(\Omega(n^{-1.932})\) lower bound for gradient descent (GD) under arbitrary
-        non-adaptive stepsize schedules in smooth convex optimization, and Tsai further
-        improved it to \(\Omega(n^{-\sqrt3})\approx\Omega(n^{-1.7321})\)
+        predetermined nonnegative stepsize schedules in smooth convex optimization, and Tsai
+        further improved it to \(\Omega(n^{-\sqrt{3}})\), where
+        \(\sqrt{3}\approx1.7321\)
         (see his <a href="https://chungentsai.github.io/gd-lower-bounds.html">well-written blog post</a>).
         After multiple
         rounds of interaction with ChatGPT-5.6 Sol, we obtained the lower bound
@@ -274,11 +303,11 @@
       <h3 id="problem-setup"><span>Problem Setup</span></h3>
       <p>
         Let \(\mathcal F_1(\mathbb R^d)\) be the class of convex \(1\)-smooth functions on
-        \(\mathbb R^d\) whose sets of minimizers are nonempty. Given a stopping time
-        \(n\in\mathbb N\), an initial point \(x_1\in\mathbb R^d\), and a predetermined
+        \(\mathbb R^d\) whose sets of minimizers are nonempty. Given an integer iteration
+        horizon \(n\ge1\), an initial point \(x_1\in\mathbb R^d\), and a predetermined
         schedule \(H=(h_1,\ldots,h_n)\in(0,\infty)^n\), GD generates
         \[
-        x_{k+1}=x_k-h_k\nabla f(x_k),\qquad k\in[n].
+        x_{k+1}=x_k-h_k\nabla f(x_k),\qquad 1\le k\le n.
         \]
         The schedule may depend on \(n\), but not on \(f\).
       </p>
@@ -289,7 +318,7 @@
         \sup_{d\in\mathbb N}
         \sup_{f\in\mathcal F_1(\mathbb R^d)}
         \sup_{x^\star\in\arg\min f}
-        \sup_{x_1\in\mathbb R^d}
+        \sup_{x_1\in\mathbb R^d\setminus\{x^\star\}}
         \frac{f(x_{n+1})-f(x^\star)}
         {\frac12\lVert x_1-x^\star\rVert^2}.
         \]
@@ -297,8 +326,8 @@
       <div class="theorem" id="our-target">
         <p><a class="theorem-label" href="#our-target">Our target.</a>
           <em class="statement">Improve Tsai's lower bound
-          \(R_n(H)=\Omega(n^{-\sqrt3})\) and bring its exponent as close as possible to the
-          \(O(n^{-\log_2(1+\sqrt2)})\) upper bound of
+          \(R_n(H)=\Omega(n^{-\sqrt{3}})\) and bring its exponent as close as possible to the
+          \(O(n^{-\log_2(1+\sqrt{2})})\) upper bound of
           <a href="https://arxiv.org/abs/2309.16530">Altschuler and Parrilo</a>.</em></p>
       </div>
 
@@ -307,15 +336,15 @@
         <p><a class="theorem-label" href="#theorem-tsai">Theorem 1.</a>
           (<a href="https://chungentsai.github.io/gd-lower-bounds.html#theorem-2">Tsai</a>)
           <em class="statement">There exists a universal constant \(c_{\mathrm T}&gt;0\)
-          such that, for every \(n\in\mathbb N\) and every
+          such that, for every integer \(n\ge1\) and every
           \(H\in(0,\infty)^n\),
-          \(R_n(H)\ge c_{\mathrm T}n^{-\sqrt3}\).</em></p>
+          \(R_n(H)\ge c_{\mathrm T}n^{-\sqrt{3}}\).</em></p>
       </div>
       <p>Our sharper analysis gives the following result.</p>
       <div class="theorem" id="theorem-main">
         <p><a class="theorem-label" href="#theorem-main">Theorem 2 (Main result).</a>
           <em class="statement">There exists a universal constant \(c&gt;0\) such that,
-          for every \(n\in\mathbb N\) and every \(H\in(0,\infty)^n\),
+          for every integer \(n\ge1\) and every \(H\in(0,\infty)^n\),
           \(R_n(H)\ge c n^{-1.6342}\).</em></p>
       </div>
 
@@ -325,7 +354,7 @@
              aria-describedby="rate-landscape-description rate-landscape-caption">
           <div class="rate-figure-canvas">
             <img src="assets/non-anytime-progress.svg" width="1400" height="250"
-                 alt="Progress on lower bounds for gradient descent. A complete text description follows.">
+                 alt="Progress on lower bounds for non-anytime gradient descent. A complete text description follows.">
             <a class="rate-block-link" style="left:2.857%;width:15.714%"
                href="https://www2.isye.gatech.edu/~nemirovs/Nemirovskii_Yudin_1983.pdf"
                aria-label="Nemirovsky and Yudin, Problem Complexity and Method Efficiency in Optimization, 1983"></a>
@@ -361,7 +390,7 @@
         <a href="https://chungentsai.github.io/gd-lower-bounds.html#construction">Tsai's
         beautiful explanation</a>. We do not repeat it here. Using the same notation, write
         \(h_{a:b}:=\sum_{k=a}^b h_k\), with an empty sum
-        equal to zero. Choose
+        equal to zero. For an integer \(1\le m\le n\), choose
         \[
         0&lt;t_1&lt;\cdots&lt;t_m\le n,
         \qquad h_{t_i}&gt;1,
@@ -369,7 +398,7 @@
         set \(t_0=0\), \(t_{m+1}=n+1\), and define
         \[
         S_i:=h_{t_{i-1}+1:t_i-1},
-        \qquad i\in[m+1].
+        \qquad 1\le i\le m+1.
         \]
       </p>
       <div class="theorem" id="lemma-hard-functions">
@@ -377,7 +406,7 @@
           (cf. <a href="https://arxiv.org/html/2608.10418v1#S4.Thmtheorem1">Ma and Chen,
           Theorem 4.1</a> and
           <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai,
-          Lemma 6</a>.) <em class="statement">For every such selection,</em></p>
+          Lemma 6</a>). <em class="statement">For every such selection,</em></p>
           \[
           R_n(H)\ge
           \frac{1}{S_m+h_{t_m}+2S_{m+1}+1}
@@ -389,13 +418,13 @@
           \]
       </div>
       <p>
-        Lemma 2 completes the hard-function construction. From this point on, the proof is a
-        sequence inequality for its right-hand side. Tsai treats the selected long steps
+        Lemma 2 completes the hard-function construction. From this point on, the rest of the
+        proof amounts to a sequence inequality for the right-hand side of (1). Tsai treats the selected long steps
         collectively through a harmonic mean (cf. <a href="https://chungentsai.github.io/gd-lower-bounds.html#harmonic-mean">Tsai's
         Lemma 7</a>) and a counting function (cf. <a href="https://chungentsai.github.io/gd-lower-bounds.html#upper-bound-number">Tsai's
         Lemma 8</a>), which loses information about their individual sizes and chronological
         pairings. To obtain a sharper estimate, we retain every factor coupling two consecutive
-        selected steps (<a href="#normalized-core">Lemma 3</a>) and apply sharper termwise
+        selected steps (<a href="#normalized-core">Lemma 3</a>) and apply sharper term-by-term
         estimates, rearrangements, and rescalings (<a href="#envelope-reduction">Lemma 4</a>,
         <a href="#gamma-geometry">Lemma 5</a>, and <a href="#path-estimate">Lemma 6</a>).
       </p>
@@ -408,6 +437,7 @@
         K_{w,z}(x,y):=
         \frac{\sqrt{xy}\,(w+z+x+y)}{\sqrt{wz(w+x)(z+y)}}
         \tag{2}
+        .
         \]
         <p><span class="statement">To prove
         \(R_n(H)\ge c_\alpha(n+1)^{-(1+\alpha)}\) for every \(n\) and \(H\), it is
@@ -437,24 +467,26 @@
         \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
         \le C_\alpha,
         \tag{5}
+        .
         \]
       </div>
       <details class="proof">
-        <summary>Proof sketch</summary>
+        <summary aria-label="Proof sketch for Lemma 3">Proof sketch</summary>
         <div class="proof-body">
           <p>
             For a fixed schedule \(H\), sort the positive excesses \((h_k-1)_+\) as
             \(a_1\ge\cdots\ge a_r&gt;0\), and define
             \[
             B:=1+\sum_{k=1}^n\min\{h_k,1\},
-            \qquad D_s:=B+\sum_{\ell=s+1}^r a_\ell.
+            \qquad D_s:=B+\sum_{\ell=s+1}^r a_\ell,
+            \qquad 1\le s\le r.
             \]
             When \(r\ge1\), choose
             \[
             q=q(H,\alpha)\in
             \operatorname*{arg\,min}_{1\le s\le r}D_s\,s^\alpha.
             \]
-            For the main case \(q\ge2\), apply Lemma 2 to the top \(q\) excesses, restored
+            For the main case \(q\ge2\), apply Lemma 2 with \(m=q\) to the top \(q\) excesses, restored
             to chronological order, and call them \(c_1,\ldots,c_q\). Let
             \(b_i=S_i+1\), let
             \(v=S_{q+1}+1\), and put \(L:=D_q/q\). The unselected excesses lie in the
@@ -530,7 +562,7 @@
         \le
         \exp\!\left(\lambda(x+y)+\Gamma_\lambda(w,z)\right).
         \]
-        Multiplying these inequalities naturally produces the sum
+        Multiplying these inequalities produces the sum
         \(\sum_{i=1}^{q-1}(x_i+x_{i+1})\). Condition (4) gives
         \[
         \sum_{i=1}^{q-1}(x_i+x_{i+1})
@@ -541,7 +573,10 @@
       </p>
       <div class="theorem" id="envelope-reduction">
         <p><a class="theorem-label" href="#envelope-reduction">Lemma 4.</a>
-          <em class="statement">Every sequence satisfying (4) obeys</em></p>
+          <em class="statement">Fix \(\alpha,\lambda&gt;0\). There is a constant
+          \(C_{\alpha,\lambda}&lt;\infty\) such that, for every integer \(q\ge2\), every
+          pair of positive sequences \((x_i)_{i=1}^q\) and \((\omega_i)_{i=1}^q\)
+          satisfying (4) obeys</em></p>
           \[
           E_{\mathrm{end}}
           \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
@@ -555,7 +590,7 @@
           \]
       </div>
       <details class="proof">
-        <summary>Proof sketch</summary>
+        <summary aria-label="Proof sketch for Lemma 4">Proof sketch</summary>
         <div class="proof-body">
           <p>
             Applying the definition of \(\Gamma_\lambda\) to every edge gives the exponential
@@ -595,6 +630,10 @@
             y\left(1+\frac{y}{z}\right)
             =:\tau.
             \]
+            At any pair satisfying this relation, direct substitution gives
+            \[
+            K_{w,z}(x,y)=\frac{x}{w}+\frac{y}{z}.
+            \]
             Define
             \[
             X_w(\tau):=\frac{\sqrt{w^2+4w\tau}-w}{2},
@@ -610,7 +649,7 @@
             \lambda.
             \]
             The left-hand side is strictly decreasing from \(+\infty\) to \(0\), so the
-            solution exists and is unique. Its derivative is nonzero. The implicit-function
+            solution exists and is unique. Its derivative is nonzero. The implicit function
             theorem therefore makes the optimizer smooth in \((w,z)\), justifying the
             differentiation below.
           </p>
@@ -645,36 +684,40 @@
         </div>
       </div>
       <details class="proof">
-        <summary>Proof sketch</summary>
+        <summary aria-label="Proof sketch for Lemma 5">Proof sketch</summary>
         <div class="proof-body">
           <p>
-            For fixed \(w,z\), write \(A=w+x\), \(B=z+y\), and
-            \(\Sigma=A+B\). The Hessian of the objective in (6), in any nonzero direction
-            \((a,b)\), is
+            For fixed \(w,z\), write \(A_w=w+x\), \(A_z=z+y\), and
+            \(\Sigma=A_w+A_z\). Evaluated along any nonzero direction \((a,b)\), the
+            quadratic form of the Hessian of the objective in (6) is
             \[
             -\frac{a^2}{2x^2}-\frac{b^2}{2y^2}
             -\frac{(a+b)^2}{\Sigma^2}
-            +\frac{a^2}{2A^2}+\frac{b^2}{2B^2}&lt;0.
+            +\frac{a^2}{2A_w^2}+\frac{b^2}{2A_z^2}&lt;0.
             \]
             Hence the optimizer is unique. Symmetry is immediate.
           </p>
           <p>
             For fixed \(x,y\), the Hessian in \((w,z)\) has quadratic form
             \[
-            \frac{a^2}{2w^2}+\frac{a^2}{2A^2}
-            +\frac{b^2}{2z^2}+\frac{b^2}{2B^2}
-            -\frac{(a+b)^2}{(A+B)^2}\ge0.
+            \frac{a^2}{2w^2}+\frac{a^2}{2A_w^2}
+            +\frac{b^2}{2z^2}+\frac{b^2}{2A_z^2}
+            -\frac{(a+b)^2}{(A_w+A_z)^2}\ge0.
             \]
             The first four terms dominate
-            \(a^2/A^2+b^2/B^2\), which dominates the last term by
-            Cauchy--Schwarz. Taking the supremum preserves convexity.
+            \(a^2/A_w^2+b^2/A_z^2\), and Cauchy–Schwarz gives
+            \[
+            \frac{a^2}{A_w^2}+\frac{b^2}{A_z^2}
+            \ge \frac{(a+b)^2}{(A_w+A_z)^2}.
+            \]
+            Taking the supremum preserves convexity.
           </p>
           <p>
             Danskin's theorem gives
             \[
             \partial_w\Gamma_\lambda
             =
-            \frac1\Sigma-\frac1{2w}-\frac1{2A}&lt;0,
+            \frac1\Sigma-\frac1{2w}-\frac1{2A_w}&lt;0,
             \]
             and similarly in \(z\). Implicit differentiation of the scalar optimizer equation
             gives
@@ -688,7 +731,7 @@
             \partial_{wz}^2\Gamma_\lambda
             =
             -\frac{\partial_z\Sigma}{\Sigma^2}
-            +\frac{\partial_z A_w(\tau(w,z))}{2A^2}&lt;0.
+            +\frac{\partial_z A_w(\tau(w,z))}{2A_w^2}&lt;0.
             \]
           </p>
         </div>
@@ -703,7 +746,7 @@
       <p>
         For a positive vector \(v=(v_1,\ldots,v_N)\) and
         \(0\le k\le\lfloor N/2\rfloor\), let \(\mathcal M_k(N)\) be the set of all
-        collections of \(k\) disjoint unordered pairs from \([N]\). Define
+        collections of \(k\) disjoint unordered pairs from \(\{1,\ldots,N\}\). Define
         \[
         \Phi_{k,\lambda}(v_1,\ldots,v_N)
         :=
@@ -814,10 +857,12 @@
       </p>
       \[
       \bar w_s^{(q)}=W_\alpha(\xi_s/q),
-      \qquad W_\alpha(t):=\alpha t^{-1-\alpha}.
+      \qquad W_\alpha(t):=\alpha t^{-1-\alpha},\quad 0&lt;t\le1.
       \tag{12}
       \]
       <p>
+        Every integral below uses the continuous extension at \(t=0\) established in the
+        proof of Lemma 6.
         Using (12), the paired sum in (11) is a Riemann sum for the integral below. The proof
         controls the endpoint and rounding errors uniformly in \(q\) and gives
       </p>
@@ -846,10 +891,10 @@
           \]
       </div>
       <details class="proof">
-        <summary>Proof sketch</summary>
+        <summary aria-label="Proof sketch for Lemma 6">Proof sketch</summary>
         <div class="proof-body">
           <p>
-            We first prove (9). Split the temporal path into odd and even edges and put
+            We first prove (9). Split the chronological path into odd and even edges and put
             \(k_q=\lfloor(q-1)/2\rfloor\). If \(q\) is odd, each matching leaves one
             coordinate unused. Whenever a matching contains \(\omega_1^\downarrow\), replace
             it by an unused coordinate that is no larger. If \(q\) is even, remove the edge
@@ -895,10 +940,10 @@
             Since the integrand decreases, this proves
             \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\). Their tail sums telescope to the
             right-hand side of (4), so the preceding majorization argument proves the
-            comparison in part A.
+            comparison in Step 1.
           </p>
           <p>
-            For \(a\le b\le c\le d\), submodularity gives
+            For \(0&lt;a\le b\le c\le d\), submodularity gives
             \[
             \Gamma_\lambda(a,d)+\Gamma_\lambda(b,c)
             \ge\Gamma_\lambda(a,c)+\Gamma_\lambda(b,d),
@@ -912,13 +957,13 @@
             applications of these two exchange inequalities produce the pairing in (11).
           </p>
           <p>
-            Write \(q=2r+1\) or \(q=2r\). The paired sum produced by (11) becomes,
+            Write \(q=2\ell+1\) or \(q=2\ell\). The paired sum produced by (11) becomes,
             respectively,
             \[
-            \sum_{j=1}^{r}
+            \sum_{j=1}^{\ell}
             \Gamma_\lambda\!\left(\bar w_{j+1}^{(q)},\bar w_{q+1-j}^{(q)}\right),
             \qquad
-            \sum_{j=1}^{r-1}
+            \sum_{j=1}^{\ell-1}
             \Gamma_\lambda\!\left(\bar w_{j+2}^{(q)},\bar w_{q+1-j}^{(q)}\right).
             \]
             By the mean value theorem, for each \(2\le s\le q\) there is
@@ -930,12 +975,12 @@
             uniform endpoint estimate for
             \(G(t,s):=\Gamma_\lambda(W_\alpha(t),W_\alpha(s))\). Let
             \(w=W_\alpha(t)\), \(z=W_\alpha(s)\), and let \((x,y)\) be the optimizer in
-            (6). Set \(A=w+x\), \(B=z+y\), and \(\Sigma=A+B\). The derivative formula in
+            (6). Set \(A_w=w+x\), \(A_z=z+y\), and \(\Sigma=A_w+A_z\). The derivative formula in
             Lemma 5 gives the exact identity
             \[
             -\partial_w\Gamma_\lambda
-            =\frac1{2w}+\frac1{2A}-\frac1\Sigma
-            =\frac{x}{2wA}+\frac{B}{A\Sigma}.
+            =\frac1{2w}+\frac1{2A_w}-\frac1\Sigma
+            =\frac{x}{2wA_w}+\frac{A_z}{A_w\Sigma}.
             \]
             For \(s\in[1/2,1]\), the value \(z\) stays in a compact subinterval of
             \((0,\infty)\). The scalar equation in Lemma 4 and
@@ -945,7 +990,7 @@
             \le \frac1{2\tau}+\frac1{\sqrt{z\tau}},
             \]
             so \(\tau=O_{\alpha,\lambda}(1)\). Since \(x,y\le\tau\), both \(x\) and
-            \(B=z+y\) are uniformly bounded. As \(A,\Sigma\ge w\), the preceding identity
+            \(A_z=z+y\) are uniformly bounded. As \(A_w,\Sigma\ge w\), the preceding identity
             proves
             \[
             -\partial_w\Gamma_\lambda=O_{\alpha,\lambda}(w^{-2}).
@@ -1007,7 +1052,8 @@
         \[
         J(0.6342,0.4506)&lt;-0.00005&lt;0.
         \]
-        Hence \(R_n(H)=\Omega(n^{-1.6342})\), proving Theorem 2.
+        Since \(n+1\le2n\) for \(n\ge1\), the fixed factor \(2^{1.6342}\) is absorbed
+        into the constant. Hence \(R_n(H)=\Omega(n^{-1.6342})\), proving Theorem 2.
       </p>
       <p>
         For reference, let \(\alpha_0\) be the unique zero of
@@ -1015,16 +1061,17 @@
         \(p_0\approx1.6341605846\).
       </p>
       <details class="proof">
-        <summary>Proof sketch</summary>
+        <summary aria-label="Proof sketch for the scalar criterion and Theorem 2">Proof sketch</summary>
         <div class="proof-body">
           <p>
+            Retain the notation \(r,B,D_s,q\) from the proof of Lemma 3.
             The boundary ranks are immediate. If there is no long step (\(r=0\)), the
             empty-chain Huber member of the same hard-function family gives
             \(R_n(H)\ge 1/(2B)\). If \(r\ge1\) and the minimizing rank is \(q=1\), that
             empty-chain witness together with the singleton instance of Lemma 2 gives
             \(R_n(H)\ge1/(4D_1)\). Since \(B\le n+1\), \(r+1\le n+1\), and
-            \(D_1\le Br^\alpha\), both cases satisfy (16) after adjusting the universal
-            constant.
+            \(D_1\le Br^\alpha\), both cases satisfy (16) after decreasing
+            \(c_{\alpha,\lambda}\).
           </p>
           <p>
             Equation (15) and Lemma 3 show that, for the minimizing rank
@@ -1037,7 +1084,7 @@
             If \(J(\alpha,\lambda)\le0\), the exponential factor is at least one.
             Minimality of \(q\) gives
             \[
-            D_qq^\alpha\le D_rr^\alpha=Br^\alpha.
+            D_q\,q^\alpha\le D_r\,r^\alpha=Br^\alpha.
             \]
             Hence
             \[
@@ -1059,7 +1106,7 @@
           <p>
             As \(\alpha\downarrow0\), both profile coordinates tend to zero uniformly on,
             for example, \([1/4,3/4]\). Evaluating the supremum defining
-            \(\Gamma_\lambda\) at any fixed \(x,y&gt;0\) shows that its integrand tends
+            \(\Gamma_\lambda\) at any fixed \(x,y&gt;0\) shows that the integrand in (14) tends
             uniformly to \(+\infty\) on \([1/4,1/2]\). Monotonicity supplies an
             integrable lower bound on the remaining part of the interval, so this divergence
             cannot be cancelled. Hence
@@ -1098,25 +1145,33 @@
         <a href="#lemma-hard-functions">Lemma 2</a> (cf.
         <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai's Lemma 6</a>),
         we use a finer term-by-term analysis of the full chronological sequence. This improves
-        Tsai's lower bound from \(\Omega(n^{-\sqrt3})\) to \(\Omega(n^{-1.6342})\).
+        <a href="https://chungentsai.github.io/gd-lower-bounds.html#theorem-2">Tsai's lower
+        bound</a> from \(\Omega(n^{-\sqrt{3}})\) to \(\Omega(n^{-1.6342})\).
       </p>
       <p>
         At the exponential scale relevant to the final rate, our sequence estimates appear
         fairly tight. One plausible source of slack is the
         parity split in (9). The odd and even edges form two alternating matchings of the same
         chronological path, but we bound them independently by the same unconstrained
-        worst-matching value. For strictly ordered weights, they generally cannot both realize
-        the outside-in maximizer exactly.
+        worst-matching value. For strictly ordered weights, the two matchings need not
+        simultaneously attain the outside-in maximizer in (11).
       </p>
       <p>
         A more structural question is whether Lemma 2 can already yield the
-        \(\Omega(n^{-1.2716})\) lower bound, matching the
+        \(\Omega(n^{-1.271553\ldots})\) lower bound, matching the
         <a href="https://arxiv.org/abs/2309.16530">silver-stepsize upper bound</a>.
         Our refined analysis makes us skeptical that this route will close the whole gap, but
         it does not give an impossibility result. It may instead be necessary to construct hard
         functions with a hierarchy of scales, so that long steps at different scales interact
         within the same instance, mirroring the recursive structure of silver stepsizes.
       </p>
+
+      <section class="version-history" aria-labelledby="version-history-title">
+        <div id="version-history-title" class="version-history-title">Version history</div>
+        <p><strong>[v2]</strong> August 23, 2026, 11:12 (GMT-4). Current version. Full mathematical and
+          notation audit, with revised exposition and concluding remarks.</p>
+        <p><strong>[v1]</strong> August 23, 2026, 10:39 (GMT-4). First announced.</p>
+      </section>
 
     </article>
   </main>
