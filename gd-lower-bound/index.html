@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-23T11:12:20-04:00">
+  <meta property="article:modified_time" content="2026-08-23T11:32:32-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
@@ -267,7 +267,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 23, 2026 11:12 (GMT-4).</span>
+            <span>Last updated: August 23, 2026 11:32 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -335,10 +335,10 @@
       <div class="theorem" id="theorem-tsai">
         <p><a class="theorem-label" href="#theorem-tsai">Theorem 1.</a>
           (<a href="https://chungentsai.github.io/gd-lower-bounds.html#theorem-2">Tsai</a>)
-          <em class="statement">There exists a universal constant \(c_{\mathrm T}&gt;0\)
+          <em class="statement">There exists a universal constant \(c&gt;0\)
           such that, for every integer \(n\ge1\) and every
           \(H\in(0,\infty)^n\),
-          \(R_n(H)\ge c_{\mathrm T}n^{-\sqrt{3}}\).</em></p>
+          \(R_n(H)\ge c n^{-\sqrt{3}}\).</em></p>
       </div>
       <p>Our sharper analysis gives the following result.</p>
       <div class="theorem" id="theorem-main">
@@ -445,29 +445,28 @@
         such that the following holds for every integer \(q\ge2\). Given positive sequences
         \(x_1,\ldots,x_q\) and \(\omega_1,\ldots,\omega_q\), write
         \(\omega_1^\downarrow\ge\cdots\ge\omega_q^\downarrow\) for the decreasing
-        rearrangement of \((\omega_i)\), and define</span></p>
-        \[
-        E_{\mathrm{end}}:=
-        \sqrt{x_1x_q}\sqrt{\frac{1+x_1/\omega_1}{1+x_q/\omega_q}}
-        \left[1+\frac{x_q+2\left(q-\sum_{i=1}^q x_i\right)}{\omega_q}\right].
-        \tag{3}
-        \]
-        <p><span class="statement">If</span></p>
+        rearrangement of \((\omega_i)\). If</span></p>
         \[
         \sum_{i=1}^q x_i&lt;q,
         \qquad
         \sum_{s=m+1}^q \omega_s^\downarrow
         \ge q\left[\left(\frac qm\right)^\alpha-1\right],
         \qquad 1\le m&lt;q.
-        \tag{4}
+        \tag{3}
         \]
         <p><span class="statement">then</span></p>
         \[
         E_{\mathrm{end}}
         \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
         \le C_\alpha,
+        \tag{4}
+        \]
+        <p><span class="statement">where</span></p>
+        \[
+        E_{\mathrm{end}}:=
+        \sqrt{x_1x_q}\sqrt{\frac{1+x_1/\omega_1}{1+x_q/\omega_q}}
+        \left[1+\frac{x_q+2\left(q-\sum_{i=1}^q x_i\right)}{\omega_q}\right].
         \tag{5}
-        .
         \]
       </div>
       <details class="proof">
@@ -501,7 +500,7 @@
             1+\frac1q\sum_{s=m+1}^q \omega_s^\downarrow
             =\frac{D_m}{D_q}\ge\left(\frac qm\right)^\alpha,
             \]
-            which is exactly (4).
+            which is exactly (3).
           </p>
           <p>
             Write \(V_I\) for the selected-chain value in Lemma 2. Direct multiplication and
@@ -521,16 +520,16 @@
             \left[1+\frac{x_q+2(q-\sum_i x_i)-L^{-1}}{\omega_q}\right]
             \le E_{\mathrm{end}}.
             \]
-            Thus (5) yields \(V_I\ge q/(C_\alpha D_q)\).
+            Thus (4) yields \(V_I\ge q/(C_\alpha D_q)\).
           </p>
           <p>
             The clean problem is pointwise slightly stronger at finite scale because it drops
             the favorable term \(-L^{-1}/\omega_q\). It is nevertheless equivalent for the
-            best uniform constant. Given any abstract data satisfying (4), take \(L\) large,
+            best uniform constant. Given any abstract data satisfying (3), take \(L\) large,
             use selected excesses \(L\omega_i\), pre-transition gap totals \(Lx_i-1\), and
             terminal gap total \(L(q-\sum_i x_i)-1\). Split every nonnegative gap total into
             steps of size at most one. This realizes the normalized data with \(r=q\) and
-            \(D_q=Lq\). Moreover, for every \(m&lt;q\), condition (4) gives
+            \(D_q=Lq\). Moreover, for every \(m&lt;q\), condition (3) gives
             \[
             \frac{D_m}{D_q}
             =
@@ -545,7 +544,7 @@
 
       <h3 id="step2"><span>Eliminating the variables \(x_i\)</span></h3>
       <p>
-        To make (5) more tractable, we first eliminate the variables \(x_i\). For a parameter
+        To make (4) more tractable, we first eliminate the variables \(x_i\). For a parameter
         \(\lambda&gt;0\), to be chosen later, define
         \[
         \Gamma_\lambda(w,z)
@@ -563,7 +562,7 @@
         \exp\!\left(\lambda(x+y)+\Gamma_\lambda(w,z)\right).
         \]
         Multiplying these inequalities produces the sum
-        \(\sum_{i=1}^{q-1}(x_i+x_{i+1})\). Condition (4) gives
+        \(\sum_{i=1}^{q-1}(x_i+x_{i+1})\). Condition (3) gives
         \[
         \sum_{i=1}^{q-1}(x_i+x_{i+1})
         \le 2\sum_{i=1}^q x_i&lt;2q.
@@ -576,7 +575,7 @@
           <em class="statement">Fix \(\alpha,\lambda&gt;0\). There is a constant
           \(C_{\alpha,\lambda}&lt;\infty\) such that, for every integer \(q\ge2\), every
           pair of positive sequences \((x_i)_{i=1}^q\) and \((\omega_i)_{i=1}^q\)
-          satisfying (4) obeys</em></p>
+          satisfying (3) obeys</em></p>
           \[
           E_{\mathrm{end}}
           \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
@@ -613,7 +612,7 @@
             2(q-\sum_i x_i)+x_1+x_q
             \right)}.
             \]
-            Condition (4) gives \(\omega_1,\omega_q\ge\alpha\). The last display is therefore a
+            Condition (3) gives \(\omega_1,\omega_q\ge\alpha\). The last display is therefore a
             polynomial-growth function of the three nonnegative variables
             \(x_1,x_q,q-\sum_i x_i\), multiplied by exponential decay. Its supremum is a
             finite constant \(C_{\alpha,\lambda}\), which proves (7).
@@ -767,7 +766,28 @@
       </figure>
 
       <p>
-        Set \(k_q:=\lfloor(q-1)/2\rfloor\). Comparing both with the same maximum matching gives
+        Set \(k_q:=\lfloor(q-1)/2\rfloor\), and choose one coordinate whose value is
+        \(\omega_1^\downarrow\). Regard this occurrence as the one omitted from
+        \((\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\). By the coordinatewise-decreasing property in
+        <a href="#gamma-geometry">Lemma 5(3)</a>, replacing a matched coordinate by an
+        unused coordinate with no larger value can only increase the matching sum.
+      </p>
+      <p>
+        If \(q\) is odd, each parity matching has \(k_q\) edges and leaves a coordinate unused, so both
+        matchings can be modified to avoid the chosen coordinate. If \(q\) is even, the
+        \(k_q\)-edge matching is handled in the same way. The other matching is perfect. Delete
+        its edge incident to the chosen coordinate, and denote the two endpoint values by
+        \(u\) and \(v\). After these operations, each retained matching has \(k_q\) edges on
+        the remaining \(q-1\) coordinates, so its value is at most
+        \(\Phi_{k_q,\lambda}(\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\).
+      </p>
+      <p>
+        In the even case, (3) with \(m=q-1\) gives \(u,v\ge\alpha\), and hence
+        \[
+        \Gamma_\lambda(u,v)\le\Gamma_\lambda(\alpha,\alpha).
+        \]
+        The quantity \(\Gamma_\lambda(\alpha,\alpha)\) is independent of \(q\), so we absorb it
+        into \(C_{\alpha,\lambda}\). The two parity matchings therefore satisfy
         \[
         \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
         \le
@@ -776,17 +796,6 @@
         +C_{\alpha,\lambda}.
         \tag{9}
         \]
-        By the coordinatewise-decreasing property of \(\Gamma_\lambda\) in
-        <a href="#gamma-geometry">Lemma 5</a>, replacing a matched entry by an unused entry
-        that is no larger can only increase the matching sum.
-        When \(q\) is odd, each parity matching leaves one index unused. If it contains
-        \(\omega_1^\downarrow\), make this replacement. When \(q\) is even, one parity
-        matching is perfect. Remove its edge containing \(\omega_1^\downarrow\). In the
-        other matching, replace
-        \(\omega_1^\downarrow\), if present, by an unused entry that is no larger. Condition (4)
-        implies \(\omega_q^\downarrow\ge\alpha\), hence every \(\omega_i\ge\alpha\).
-        The removed edge is therefore bounded by a constant depending only on \(\alpha\)
-        and \(\lambda\).
       </p>
 
       <p class="theme-emphasis">
@@ -811,7 +820,7 @@
         \sum_{s=m+1}^q\bar w_s^{(q)}
         =q\left[\left(\frac qm\right)^\alpha-1\right].
         \]
-        Together with (4), this gives
+        Together with (3), this gives
         \[
         \sum_{s=m+1}^q\omega_s^\downarrow
         \ge
@@ -880,7 +889,7 @@
           <em class="statement">Fix \(\alpha,\lambda&gt;0\). There is a constant
           \(C_{\alpha,\lambda}&lt;\infty\) such that, for every integer \(q\ge2\) and every
           positive sequence \(\omega_1,\ldots,\omega_q\) satisfying the tail condition in
-          (4),</em></p>
+          (3),</em></p>
           \[
           \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
           \le
@@ -894,21 +903,27 @@
         <summary aria-label="Proof sketch for Lemma 6">Proof sketch</summary>
         <div class="proof-body">
           <p>
-            We first prove (9). Split the chronological path into odd and even edges and put
-            \(k_q=\lfloor(q-1)/2\rfloor\). If \(q\) is odd, each matching leaves one
-            coordinate unused. Whenever a matching contains \(\omega_1^\downarrow\), replace
-            it by an unused coordinate that is no larger. If \(q\) is even, remove the edge
-            containing \(\omega_1^\downarrow\) from the perfect matching. In the other
-            matching, make the same replacement if necessary. Coordinatewise decrease can
-            only increase the resulting sums. Taking \(m=q-1\) in (4) gives
+            We first prove (9). Split the chronological path into odd and even edges, put
+            \(k_q=\lfloor(q-1)/2\rfloor\), and choose one coordinate attaining
+            \(\omega_1^\downarrow\). If \(q\) is odd, each matching leaves one coordinate
+            unused. Whenever a matching contains the chosen coordinate, replace it by an
+            unused coordinate that is no larger. If \(q\) is even, remove the edge containing
+            the chosen coordinate from the perfect matching. In the other matching, make the
+            same replacement if necessary. Coordinatewise decrease can only increase the
+            resulting sums. After these operations, both retained matchings have \(k_q\) edges
+            on the \(q-1\) coordinates obtained by deleting the chosen occurrence, so each is
+            bounded by
+            \(\Phi_{k_q,\lambda}(\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\).
+            Taking \(m=q-1\) in (3) gives
             \[
             \omega_q^\downarrow
             \ge q\left[\left(\frac q{q-1}\right)^\alpha-1\right]
             \ge q\alpha\log\frac q{q-1}\ge\alpha,
             \]
             where the last step uses
-            \(\log(1+t)\ge t/(1+t)\). Hence the removed edge is at most
-            \(\Gamma_\lambda(\alpha,\alpha)\), which proves (9).
+            \(\log(1+t)\ge t/(1+t)\). Thus, in the even case, the removed edge is at most
+            \(\Gamma_\lambda(\alpha,\alpha)\). No edge is removed when \(q\) is odd, so this
+            proves (9).
           </p>
           <p>
             Each fixed-matching sum in the definition of \(\Phi_{k,\lambda}\) is convex
@@ -939,7 +954,7 @@
             \]
             Since the integrand decreases, this proves
             \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\). Their tail sums telescope to the
-            right-hand side of (4), so the preceding majorization argument proves the
+            right-hand side of (3), so the preceding majorization argument proves the
             comparison in Step 1.
           </p>
           <p>
@@ -1037,7 +1052,7 @@
       \tag{15}
       \]
       <p>
-        Therefore, if \(J(\alpha,\lambda)\le0\), then (5) holds uniformly in \(q\), and
+        Therefore, if \(J(\alpha,\lambda)\le0\), then (4) holds uniformly in \(q\), and
         Lemma 3 gives
         \[
         R_n(H)\ge c_{\alpha,\lambda}(n+1)^{-(1+\alpha)}.
@@ -1168,8 +1183,10 @@
 
       <section class="version-history" aria-labelledby="version-history-title">
         <div id="version-history-title" class="version-history-title">Version history</div>
-        <p><strong>[v2]</strong> August 23, 2026, 11:12 (GMT-4). Current version. Full mathematical and
-          notation audit, with revised exposition and concluding remarks.</p>
+        <p><strong>[v3]</strong> August 23, 2026, 11:32 (GMT-4). Current version. Reordered the clean
+          sequence statement and clarified the parity-matching reduction.</p>
+        <p><strong>[v2]</strong> August 23, 2026, 11:12 (GMT-4). Full mathematical and notation
+          audit, with revised exposition and concluding remarks.</p>
         <p><strong>[v1]</strong> August 23, 2026, 10:39 (GMT-4). First announced.</p>
       </section>
 
