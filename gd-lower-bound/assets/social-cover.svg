@@ -1,67 +1,53 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="627" viewBox="0 0 1200 627" role="img" aria-labelledby="title desc">
-  <title id="title">An Omega n to the minus 1.6342 lower bound for non-anytime gradient descent</title>
-  <desc id="desc">A social preview card containing a rate diagram for predetermined-step gradient descent. It highlights this work at a lower-bound exponent of 1.6342.</desc>
+  <title id="title">Progress on lower bounds for non-anytime gradient descent</title>
+  <desc id="desc">A rate diagram comparing lower and upper bounds for non-anytime gradient descent, highlighting this work at an exponent of 1.6342.</desc>
 
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2e2b27"/>
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111111"/>
     </marker>
     <style>
-      .eyebrow { font-family: "Open Sans", Arial, sans-serif; font-size: 16px; font-weight: 700; letter-spacing: 2.4px; fill: #3d4934; }
-      .title { font-family: Georgia, "Times New Roman", serif; font-size: 48px; font-weight: 700; fill: #7b3f1d; }
-      .title-exp { font-size: 29px; }
-      .subtitle { font-family: "Open Sans", Arial, sans-serif; font-size: 21px; fill: #6d655d; }
-      .rate { font-family: Georgia, "Times New Roman", serif; font-size: 31px; font-style: italic; fill: #2e2b27; }
-      .exponent { font-size: 18px; font-style: normal; }
-      .guide { stroke: #3d4934; stroke-width: 2; stroke-dasharray: 7 7; }
-      .block { font-family: Georgia, "Times New Roman", serif; font-size: 15px; font-weight: 700; text-anchor: middle; }
+      .rate { font-family: Georgia, "Times New Roman", serif; font-size: 48px; font-style: italic; fill: #111111; }
+      .exponent { font-size: 27px; font-style: normal; }
+      .guide { stroke: #111111; stroke-width: 2.5; stroke-dasharray: 8 8; }
+      .block { font-family: Georgia, "Times New Roman", serif; font-size: 18px; font-weight: 700; text-anchor: middle; }
       .lower { fill: #7a3518; }
-      .ours { fill: #4b2500; font-size: 18px; font-weight: 800; }
+      .ours { fill: #4b2500; font-size: 21px; font-weight: 800; }
       .upper { fill: #285421; }
-      .footer { font-family: "Open Sans", Arial, sans-serif; font-size: 17px; fill: #6d655d; }
+      .small { font-size: 16px; }
     </style>
   </defs>
 
-  <rect width="1200" height="627" fill="#fffdf8"/>
+  <rect x="1" y="1" width="1198" height="625" rx="26" fill="#ffffff" stroke="#d6dde3" stroke-width="2"/>
 
-  <text class="eyebrow" x="56" y="54">SMOOTH CONVEX OPTIMIZATION</text>
-  <text class="title" x="56" y="118">An Ω(n<tspan class="title-exp" baseline-shift="super">−1.6342</tspan>) Lower Bound</text>
-  <text class="title" x="56" y="174">for (Non-Anytime) Gradient Descent</text>
-  <text class="subtitle" x="58" y="215">Arbitrary predetermined stepsize schedules</text>
+  <text class="rate" x="215" y="238" text-anchor="middle">n<tspan class="exponent" dy="-19">−2</tspan></text>
+  <text class="rate" x="325" y="150" text-anchor="middle">n<tspan class="exponent" dy="-19">−1.932</tspan></text>
+  <text class="rate" x="475" y="238" text-anchor="middle">n<tspan class="exponent" dy="-19">−1.733</tspan></text>
+  <text class="rate" x="625" y="150" text-anchor="middle">n<tspan class="exponent" dy="-19">−1.6342</tspan></text>
+  <text class="rate" x="840" y="238" text-anchor="middle">n<tspan class="exponent" dy="-19">−1.271</tspan></text>
+  <text class="rate" x="1040" y="238" text-anchor="middle">n<tspan class="exponent" dy="-19">−1</tspan></text>
 
-  <line x1="56" y1="246" x2="1144" y2="246" stroke="#d8c9b5" stroke-width="2"/>
+  <line class="guide" x1="215" y1="255" x2="215" y2="360"/>
+  <line class="guide" x1="325" y1="168" x2="325" y2="360"/>
+  <line class="guide" x1="475" y1="255" x2="475" y2="360"/>
+  <line class="guide" x1="625" y1="168" x2="625" y2="360"/>
+  <line class="guide" x1="840" y1="255" x2="840" y2="360"/>
+  <line class="guide" x1="1040" y1="255" x2="1040" y2="360"/>
 
-  <text class="rate" x="225" y="348" text-anchor="middle">n<tspan class="exponent" dy="-13">−2</tspan></text>
-  <text class="rate" x="325" y="300" text-anchor="middle">n<tspan class="exponent" dy="-13">−1.932</tspan></text>
-  <text class="rate" x="455" y="348" text-anchor="middle">n<tspan class="exponent" dy="-13">−1.733</tspan></text>
-  <text class="rate" x="600" y="300" text-anchor="middle">n<tspan class="exponent" dy="-13">−1.6342</tspan></text>
-  <text class="rate" x="850" y="348" text-anchor="middle">n<tspan class="exponent" dy="-13">−1.271</tspan></text>
-  <text class="rate" x="1030" y="348" text-anchor="middle">n<tspan class="exponent" dy="-13">−1</tspan></text>
+  <rect x="25" y="360" width="190" height="110" fill="#e7ac8a"/>
+  <rect x="215" y="360" width="110" height="110" fill="#eec8b1"/>
+  <rect x="325" y="360" width="150" height="110" fill="#f8d786"/>
+  <rect x="475" y="360" width="150" height="110" fill="#f4c453"/>
+  <rect x="625" y="360" width="215" height="110" fill="#ffffff"/>
+  <rect x="840" y="360" width="200" height="110" fill="#ddefd3"/>
+  <rect x="1040" y="360" width="135" height="110" fill="#bde3a7"/>
 
-  <line class="guide" x1="225" y1="358" x2="225" y2="412"/>
-  <line class="guide" x1="325" y1="310" x2="325" y2="412"/>
-  <line class="guide" x1="455" y1="358" x2="455" y2="412"/>
-  <line class="guide" x1="600" y1="310" x2="600" y2="412"/>
-  <line class="guide" x1="850" y1="358" x2="850" y2="412"/>
-  <line class="guide" x1="1030" y1="358" x2="1030" y2="412"/>
+  <text class="block lower small" x="120" y="403"><tspan x="120">Nemirovsky &amp; Yudin</tspan><tspan x="120" dy="29">(1983)</tspan></text>
+  <text class="block lower small" x="270" y="403"><tspan x="270">Ma &amp; Chen</tspan><tspan x="270" dy="29">(2026)</tspan></text>
+  <text class="block lower" x="400" y="403"><tspan x="400">Tsai</tspan><tspan x="400" dy="29">(2026)</tspan></text>
+  <text class="block ours" x="550" y="424">This work</text>
+  <text class="block upper" x="940" y="403"><tspan x="940">Altschuler &amp; Parrilo</tspan><tspan x="940" dy="29">(2024)</tspan></text>
+  <text class="block upper small" x="1107.5" y="391"><tspan x="1107.5">Levitin &amp;</tspan><tspan x="1107.5" dy="25">Polyak</tspan><tspan x="1107.5" dy="25">(1966)</tspan></text>
 
-  <rect x="45" y="412" width="180" height="78" fill="#e7ac8a"/>
-  <rect x="225" y="412" width="100" height="78" fill="#eec8b1"/>
-  <rect x="325" y="412" width="130" height="78" fill="#f8d786"/>
-  <rect x="455" y="412" width="145" height="78" fill="#f4c453"/>
-  <rect x="600" y="412" width="250" height="78" fill="#fffdf8"/>
-  <rect x="850" y="412" width="180" height="78" fill="#ddefd3"/>
-  <rect x="1030" y="412" width="125" height="78" fill="#bde3a7"/>
-
-  <text class="block lower" x="135" y="442"><tspan x="135">Nemirovsky &amp; Yudin</tspan><tspan x="135" dy="24">(1983)</tspan></text>
-  <text class="block lower" x="275" y="442"><tspan x="275">Ma &amp; Chen</tspan><tspan x="275" dy="24">(2026)</tspan></text>
-  <text class="block lower" x="390" y="442"><tspan x="390">Tsai</tspan><tspan x="390" dy="24">(2026)</tspan></text>
-  <text class="block ours" x="527.5" y="458">This work</text>
-  <text class="block upper" x="940" y="442"><tspan x="940">Altschuler &amp; Parrilo</tspan><tspan x="940" dy="24">(2024)</tspan></text>
-  <text class="block upper" x="1092.5" y="432"><tspan x="1092.5">Levitin &amp;</tspan><tspan x="1092.5" dy="21">Polyak</tspan><tspan x="1092.5" dy="21">(1966)</tspan></text>
-
-  <line x1="45" y1="490" x2="1165" y2="490" stroke="#2e2b27" stroke-width="3" marker-end="url(#arrow)"/>
-
-  <text class="footer" x="56" y="576">Yuhan Ye · MIT</text>
-  <text class="footer" x="1144" y="576" text-anchor="end">yeyuhanyyh.github.io</text>
+  <line x1="25" y1="470" x2="1182" y2="470" stroke="#111111" stroke-width="3" marker-end="url(#arrow)"/>
 </svg>
