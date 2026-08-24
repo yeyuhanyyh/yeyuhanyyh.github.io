@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-23T22:20:00-04:00">
+  <meta property="article:modified_time" content="2026-08-23T22:46:00-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
@@ -272,7 +272,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 23, 2026 22:20 (GMT-4).</span>
+            <span>Last updated: August 23, 2026 22:46 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -480,71 +480,19 @@
         <summary aria-label="Proof sketch for Lemma 3">Proof sketch</summary>
         <div class="proof-body">
           <p>
-            For a fixed schedule \(H\), sort the positive excesses \((h_k-1)_+\) as
-            \(a_1\ge\cdots\ge a_r&gt;0\), and define
+            For a fixed schedule \(H\), let
+            \(a_1\ge\cdots\ge a_r&gt;0\) be the decreasing rearrangement of its positive
+            excesses \((h_k-1)_+\). Define
             \[
             B:=1+\sum_{k=1}^n\min\{h_k,1\},
-            \qquad D_s:=B+\sum_{\ell=s+1}^r a_\ell,
+            \qquad
+            D_s:=B+\sum_{\ell=s+1}^r a_\ell,
             \qquad 1\le s\le r.
             \]
-            When \(r\ge1\), choose
-            \[
-            q=q(H,\alpha)\in
-            \operatorname*{arg\,min}_{1\le s\le r}D_s\,s^\alpha.
-            \]
-            For the main case \(q\ge2\), apply Lemma 2 with \(m=q\) to the top \(q\) excesses, restored
-            to chronological order, and call them \(c_1,\ldots,c_q\). Let
-            \(b_i=S_i+1\), let
-            \(v=S_{q+1}+1\), and put \(L:=D_q/q\). The unselected excesses lie in the
-            intervening gaps, so
-            \[
-            D_q=\sum_{i=1}^q b_i+v.
-            \]
-            Set \(x_i:=b_i/L\) and \(\omega_i:=c_i/L\). Then \(\sum_i x_i&lt;q\), and
-            the decreasing rearrangement satisfies \(\omega_s^\downarrow=a_s/L\). Minimality
-            of \(q\) gives
-            \[
-            1+\frac1q\sum_{s=m+1}^q \omega_s^\downarrow
-            =\frac{D_m}{D_q}\ge\left(\frac qm\right)^\alpha,
-            \]
-            which is exactly (3).
           </p>
           <p>
-            Write \(V_I\) for the selected-chain value in Lemma 2. Direct multiplication and
-            telescoping of its neighboring factors gives
-            \[
-            V_I^{-1}
-            =
-            L\,\widehat E_{\mathrm{end}}
-            \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1}),
-            \]
-            where
-            \[
-            \widehat E_{\mathrm{end}}
-            =
-            \sqrt{x_1x_q}
-            \sqrt{\frac{1+x_1/\omega_1}{1+x_q/\omega_q}}
-            \left[1+\frac{x_q+2(q-\sum_i x_i)-L^{-1}}{\omega_q}\right]
-            \le E_{\mathrm{end}}.
-            \]
-            Thus (4) yields \(V_I\ge q/(C_\alpha D_q)\). Since Lemma 2 gives
-            \(R_n(H)\ge V_I\), comparison with \(s=r\) in the definition of the minimizing
-            rank gives
-            \[
-            D_q q^\alpha\le D_r r^\alpha=Br^\alpha.
-            \]
-            Therefore, in the case \(q\ge2\),
-            \[
-            R_n(H)
-            \ge \frac{q}{C_\alpha D_q}
-            \ge \frac{q^{1+\alpha}}{C_\alpha Br^\alpha}
-            \ge \frac{1}{C_\alpha B(r+1)^\alpha}.
-            \]
-          </p>
-          <p>
-            It remains to handle the ranks not covered by the clean sequence problem. For any
-            schedule, set \(\delta:=(1+2\sum_{k=1}^n h_k)^{-1}\) and consider the
-            one-dimensional convex, \(1\)-smooth Huber function
+            Set \(\delta:=(1+2\sum_{k=1}^n h_k)^{-1}\) and consider the one-dimensional
+            convex, \(1\)-smooth Huber function
             \[
             f_\delta(x):=
             \begin{cases}
@@ -552,54 +500,108 @@
             \delta|x|-\delta^2/2,&amp; |x|&gt;\delta.
             \end{cases}
             \]
-            Starting from \(\xi_1=1\), GD has
-            \(\xi_k=1-\delta\sum_{j&lt;k}h_j&gt;\delta\), so every iterate stays on the
-            positive affine branch and the normalized final gap is
+            Starting from \(\xi_1=1\), GD satisfies
+            \(\xi_k=1-\delta\sum_{j&lt;k}h_j&gt;\delta\). Hence every iterate stays on the
+            positive affine branch, and the normalized final gap is
             \(2f_\delta(\xi_{n+1})=\delta\). If \(r=0\), then
-            \(\delta=(2B-1)^{-1}\), and hence
+            \(\delta=(2B-1)^{-1}\), so
             \[
-            R_n(H)\ge\frac{1}{2B-1}\ge\frac{1}{2B}.
+            R_n(H)\ge\frac1{2B-1}\ge\frac1{2B}.
             \]
-            Now suppose \(r\ge1\) and the minimizing rank is \(q=1\). Let \(a_1\) be the
-            largest excess. Since \(D_1+a_1=1+\sum_{k=1}^n h_k\), the same empty-chain bound is
-            \([2(D_1+a_1)-1]^{-1}\), which is at least \(1/(4D_1)\) when
-            \(a_1\le D_1\). If \(a_1&gt;D_1\), select only the step carrying \(a_1\).
-            Writing \(U:=S_1+1\) and \(V:=S_2+1\), so that \(D_1=U+V\), Lemma 2 gives
-            \[
-            R_n(H)\ge
-            \frac{a_1}{U(U+a_1+2V-1)}
-            &gt;\frac{1}{3D_1}
-            &gt;\frac{1}{4D_1}.
-            \]
-            Here we used \(U\le D_1\) and
-            \(U+a_1+2V-1&lt;a_1+2D_1&lt;3a_1\). Minimality of \(q=1\) gives
-            \(D_1\le Br^\alpha\).
           </p>
           <p>
-            Finally, \(B\le n+1\) and \(r+1\le n+1\). The three cases above therefore give
+            Assume \(r\ge1\), and choose
+            \[
+            q\in\operatorname*{arg\,min}_{1\le s\le r}D_s s^\alpha.
+            \]
+            If \(q=1\), let \(a_1\) be the largest excess. Since
+            \(D_1+a_1=1+\sum_{k=1}^n h_k\), the Huber bound above is
+            \([2(D_1+a_1)-1]^{-1}\), which is at least \(1/(4D_1)\) when
+            \(a_1\le D_1\). If \(a_1&gt;D_1\), select only the step carrying \(a_1\)
+            in Lemma 2 and write \(U_1:=S_1+1\) and \(V:=S_2+1\). Then
+            \(D_1=U_1+V\), and Lemma 2 gives
+            \[
+            R_n(H)\ge
+            \frac{a_1}{U_1(U_1+a_1+2V-1)}
+            &gt;\frac1{3D_1}
+            &gt;\frac1{4D_1}.
+            \]
+            Since \(U_1\le D_1\) and
+            \(U_1+a_1+2V-1&lt;a_1+2D_1&lt;3a_1\), both cases give
+            \(R_n(H)\ge1/(4D_1)\). Minimality of \(q=1\) gives
+            \(D_1\le D_r r^\alpha=Br^\alpha\), and hence
+            \[
+            R_n(H)\ge\frac1{4B(r+1)^\alpha}.
+            \]
+          </p>
+          <p>
+            Now assume \(q\ge2\). Let \(t_1&lt;\cdots&lt;t_q\) be the positions of the top
+            \(q\) excesses, and set \(\widetilde a_i:=h_{t_i}-1\). Thus
+            \((\widetilde a_1,\ldots,\widetilde a_q)\) is a chronological permutation of
+            \((a_1,\ldots,a_q)\). With \(S_i\) as in Lemma 2, define
+            \[
+            U_i:=S_i+1\quad(1\le i\le q),
+            \qquad V:=S_{q+1}+1,
+            \qquad \bar U:=\frac{D_q}{q}.
+            \]
+            Every unselected excess belongs to one of these gaps, so
+            \[
+            D_q=\sum_{i=1}^q U_i+V.
+            \]
+            Set
+            \[
+            x_i:=\frac{U_i}{\bar U},
+            \qquad
+            \omega_i:=\frac{\widetilde a_i}{\bar U},
+            \qquad 1\le i\le q.
+            \]
+            Then \(\sum_i x_i=q-V/\bar U&lt;q\), while the decreasing rearrangement
+            satisfies \(\omega_s^\downarrow=a_s/\bar U\). For every \(1\le m&lt;q\),
+            minimality of \(q\) gives
+            \[
+            1+\frac1q\sum_{s=m+1}^q\omega_s^\downarrow
+            =\frac{D_m}{D_q}
+            \ge\left(\frac qm\right)^\alpha,
+            \]
+            which is exactly (3).
+          </p>
+          <p>
+            Let \(G_q\) denote the right-hand side of (1) for this selected chain.
+            Direct multiplication and telescoping give
+            \[
+            G_q^{-1}
+            =\bar U\,\widehat E_{\mathrm{end}}
+            \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1}),
+            \]
+            where
+            \[
+            \widehat E_{\mathrm{end}}
+            =\sqrt{x_1x_q}
+            \sqrt{\frac{1+x_1/\omega_1}{1+x_q/\omega_q}}
+            \left[1+\frac{x_q+2(q-\sum_i x_i)-\bar U^{-1}}{\omega_q}\right]
+            \le E_{\mathrm{end}}.
+            \]
+            Hence (4) gives \(G_q\ge q/(C_\alpha D_q)\). Since Lemma 2 gives
+            \(R_n(H)\ge G_q\), and minimality gives
+            \[
+            D_q q^\alpha\le D_r r^\alpha=Br^\alpha,
+            \]
+            we obtain
+            \[
+            R_n(H)
+            \ge\frac{q}{C_\alpha D_q}
+            \ge\frac{q^{1+\alpha}}{C_\alpha Br^\alpha}
+            \ge\frac1{C_\alpha B(r+1)^\alpha}.
+            \]
+          </p>
+          <p>
+            Since \(B\le n+1\) and \(r+1\le n+1\), combining the cases
+            \(r=0\), \(q=1\), and \(q\ge2\) yields
             \[
             R_n(H)\ge c_\alpha(n+1)^{-(1+\alpha)},
             \qquad
             c_\alpha:=\min\{C_\alpha^{-1},1/4\}.
             \]
-          </p>
-          <p>
-            For completeness, the clean problem is pointwise slightly stronger at finite scale
-            because it drops
-            the favorable term \(-L^{-1}/\omega_q\). It is nevertheless equivalent for the
-            best uniform constant. Given any abstract data satisfying (3), take \(L\) large,
-            use selected excesses \(L\omega_i\), pre-transition gap totals \(Lx_i-1\), and
-            terminal gap total \(L(q-\sum_i x_i)-1\). Split every nonnegative gap total into
-            steps of size at most one. This realizes the normalized data with \(r=q\) and
-            \(D_q=Lq\). Moreover, for every \(m&lt;q\), condition (3) gives
-            \[
-            \frac{D_m}{D_q}
-            =
-            1+\frac1q\sum_{s=m+1}^q \omega_s^\downarrow
-            \ge\left(\frac qm\right)^\alpha,
-            \]
-            so this \(q\) is indeed a minimizing rank. Finally,
-            \(\widehat E_{\mathrm{end}}\uparrow E_{\mathrm{end}}\) as \(L\to\infty\).
           </p>
         </div>
       </details>
@@ -662,52 +664,21 @@
             =
             2\sum_{i=1}^q x_i-x_1-x_q,
             \]
-            it remains to bound
+            the remaining factor is
             \[
             E_{\mathrm{end}}
             e^{-\lambda\left(
             2(q-\sum_i x_i)+x_1+x_q
             \right)}.
             \]
-            Condition (3) gives \(\omega_1,\omega_q\ge\alpha\). The last display is therefore a
+            Taking \(m=q-1\) in (3) gives
+            \(\min_i\omega_i=\omega_q^\downarrow
+            \ge q[(q/(q-1))^\alpha-1]
+            \ge q\alpha\log(q/(q-1))\ge\alpha\). Hence
+            \(\omega_1,\omega_q\ge\alpha\). The last display is therefore a
             polynomial-growth function of the three nonnegative variables
             \(x_1,x_q,q-\sum_i x_i\), multiplied by exponential decay. Its supremum is a
             finite constant \(C_{\alpha,\lambda}\), which proves (7).
-          </p>
-          <p>
-            For completeness, the two-dimensional supremum in (6) can itself be reduced to
-            one scalar. Its objective tends to \(-\infty\) when \(x\) or \(y\) approaches
-            zero and when \(x+y\to\infty\). Together with the negative-definite Hessian
-            computed in Lemma 5, this gives a unique maximizer. The first-order equations
-            imply
-            \[
-            x\left(1+\frac{x}{w}\right)
-            =
-            y\left(1+\frac{y}{z}\right)
-            =:\tau.
-            \]
-            At any pair satisfying this relation, direct substitution gives
-            \[
-            K_{w,z}(x,y)=\frac{x}{w}+\frac{y}{z}.
-            \]
-            Define
-            \[
-            X_w(\tau):=\frac{\sqrt{w^2+4w\tau}-w}{2},
-            \qquad A_w(\tau):=w+X_w(\tau).
-            \]
-            The maximizing pair is
-            \(x=X_w(\tau)\), \(y=X_z(\tau)\), where \(\tau&gt;0\) is the unique solution of
-            \[
-            \frac1{2\tau}
-            +
-            \frac1{A_w(\tau)+A_z(\tau)}
-            =
-            \lambda.
-            \]
-            The left-hand side is strictly decreasing from \(+\infty\) to \(0\), so the
-            solution exists and is unique. Its derivative is nonzero. The implicit function
-            theorem therefore makes the optimizer smooth in \((w,z)\), justifying the
-            differentiation below.
           </p>
         </div>
       </details>
@@ -743,28 +714,58 @@
         <summary aria-label="Proof sketch for Lemma 5">Proof sketch</summary>
         <div class="proof-body">
           <p>
-            For fixed \(w,z\), write \(A_w=w+x\), \(A_z=z+y\), and
-            \(\Sigma=A_w+A_z\). Evaluated along any nonzero direction \((a,b)\), the
-            quadratic form of the Hessian of the objective in (6) is
+            Let
             \[
-            -\frac{a^2}{2x^2}-\frac{b^2}{2y^2}
-            -\frac{(a+b)^2}{\Sigma^2}
-            +\frac{a^2}{2A_w^2}+\frac{b^2}{2A_z^2}&lt;0.
+            F_{w,z}(x,y):=\log K_{w,z}(x,y)-\lambda(x+y).
             \]
-            Hence the optimizer is unique. Symmetry is immediate.
+            For fixed \(w,z&gt;0\), \(F_{w,z}(x,y)\to-\infty\) as \(x\downarrow0\),
+            \(y\downarrow0\), or \(x+y\to\infty\). Hence the supremum in (6) is
+            attained at an interior point. Write
+            \[
+            A:=w+x,\qquad B:=z+y,\qquad \Sigma:=A+B.
+            \]
+            For every nonzero direction \((a,b)\),
+            \[
+            D^2_{x,y}F_{w,z}[(a,b)]^2
+            =-\frac{a^2}{2x^2}-\frac{b^2}{2y^2}
+            -\frac{(a+b)^2}{\Sigma^2}
+            +\frac{a^2}{2A^2}+\frac{b^2}{2B^2}&lt;0.
+            \]
+            Thus the maximizer is unique.
+          </p>
+          <p>
+            At the maximizer, the first-order equations imply
+            \[
+            x\left(1+\frac{x}{w}\right)
+            =y\left(1+\frac{y}{z}\right)=:\tau.
+            \]
+            For \(u&gt;0\), define
+            \[
+            X_u(\tau):=\frac{\sqrt{u^2+4u\tau}-u}{2},
+            \qquad A_u(\tau):=u+X_u(\tau).
+            \]
+            Then \(x=X_w(\tau)\), \(y=X_z(\tau)\), and \(\tau\) is the unique solution of
+            \[
+            \frac1{2\tau}+\frac1{A_w(\tau)+A_z(\tau)}=\lambda.
+            \]
+            The left-hand side is strictly decreasing from \(+\infty\) to \(0\).
+            Its derivative with respect to \(\tau\) is strictly negative, so the implicit
+            function theorem makes the optimizer smooth in \((w,z)\). At the optimizer,
+            \(A=A_w(\tau)\) and \(B=A_z(\tau)\). The definition (6) is symmetric under
+            \((w,x)\leftrightarrow(z,y)\), proving (1).
           </p>
           <p>
             For fixed \(x,y\), the Hessian in \((w,z)\) has quadratic form
             \[
-            \frac{a^2}{2w^2}+\frac{a^2}{2A_w^2}
-            +\frac{b^2}{2z^2}+\frac{b^2}{2A_z^2}
-            -\frac{(a+b)^2}{(A_w+A_z)^2}\ge0.
+            \frac{a^2}{2w^2}+\frac{a^2}{2A^2}
+            +\frac{b^2}{2z^2}+\frac{b^2}{2B^2}
+            -\frac{(a+b)^2}{(A+B)^2}\ge0.
             \]
             The first four terms dominate
-            \(a^2/A_w^2+b^2/A_z^2\), and Cauchy–Schwarz gives
+            \(a^2/A^2+b^2/B^2\), and Cauchy–Schwarz gives
             \[
-            \frac{a^2}{A_w^2}+\frac{b^2}{A_z^2}
-            \ge \frac{(a+b)^2}{(A_w+A_z)^2}.
+            \frac{a^2}{A^2}+\frac{b^2}{B^2}
+            \ge \frac{(a+b)^2}{(A+B)^2}.
             \]
             Taking the supremum preserves convexity.
           </p>
@@ -773,11 +774,18 @@
             \[
             \partial_w\Gamma_\lambda
             =
-            \frac1\Sigma-\frac1{2w}-\frac1{2A_w}&lt;0,
+            \frac1\Sigma-\frac1{2w}-\frac1{2A}.
+            \]
+            Equivalently,
+            \[
+            -\partial_w\Gamma_\lambda
+            =\frac{x}{2wA}+\frac{B}{A\Sigma}&gt;0,
             \]
             and similarly in \(z\). This proves the coordinatewise-decreasing property.
-            Implicit differentiation of the scalar optimizer equation
-            gives
+            At fixed \(\tau\), the left-hand side of the optimizer equation decreases with
+            \(z\). Since
+            \(\Sigma=(\lambda-1/(2\tau))^{-1}\) and \(A_w'(\tau)&gt;0\), implicit
+            differentiation gives
             \[
             \partial_z\tau&lt;0,\qquad
             \partial_z\Sigma&gt;0,\qquad
@@ -788,7 +796,7 @@
             \partial_{wz}^2\Gamma_\lambda
             =
             -\frac{\partial_z\Sigma}{\Sigma^2}
-            +\frac{\partial_z A_w(\tau(w,z))}{2A_w^2}&lt;0.
+            +\frac{\partial_z A_w(\tau(w,z))}{2A^2}&lt;0.
             \]
           </p>
         </div>
@@ -1041,7 +1049,7 @@
             =\frac{x}{2wA_w}+\frac{A_z}{A_w\Sigma}.
             \]
             For \(s\in[1/2,1]\), the value \(z\) stays in a compact subinterval of
-            \((0,\infty)\). The scalar equation in Lemma 4 and
+            \((0,\infty)\). The optimizer equation derived in the proof of Lemma 5 and
             \(A_z(\tau)\ge\sqrt{z\tau}\) give
             \[
             \lambda
@@ -1077,7 +1085,7 @@
       </details>
 
       <p id="scalar-conclusion">
-        <strong>Finally, it remains only to verify a scalar inequality.</strong> Define
+        <strong>The remaining task is a scalar inequality.</strong> Define
       </p>
       \[
       J(\alpha,\lambda)
@@ -1101,8 +1109,8 @@
         R_n(H)\ge c_{\alpha,\lambda}(n+1)^{-(1+\alpha)}.
         \tag{16}
         \]
-        The proof has thus become a scalar feasibility problem. It remains to find a small
-        \(\alpha&gt;0\) and some \(\lambda&gt;0\) for which \(J(\alpha,\lambda)\le0\).
+        Thus we seek a small \(\alpha&gt;0\) and some \(\lambda&gt;0\) for which
+        \(J(\alpha,\lambda)\le0\).
       </p>
       <p>
         Take \(\alpha=0.6342\) and \(\lambda=0.4506\). A validated interval-arithmetic
@@ -1114,7 +1122,7 @@
         into the constant. Hence \(R_n(H)=\Omega(n^{-1.6342})\), proving Theorem 2.
       </p>
       <p>
-        For reference, let \(\alpha_0\) be the unique zero of
+        Let \(\alpha_0\) be the unique zero of
         \(J(\alpha,0.4506)\), and define \(p_0:=1+\alpha_0\). Numerically,
         \(p_0\approx1.6341605846\).
       </p>
@@ -1123,8 +1131,7 @@
         <div class="proof-body">
           <p>
             When \(J(\alpha,\lambda)\le0\), equation (15) supplies the uniform constant
-            required in (4). Lemma 3, including the boundary ranks handled in its proof,
-            then gives (16).
+            required in (4). Lemma 3 then gives (16).
           </p>
           <p>
             For every fixed \(\lambda&gt;0\), the map
