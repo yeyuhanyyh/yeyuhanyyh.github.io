@@ -7,9 +7,9 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-23T23:42:00-04:00">
+  <meta property="article:modified_time" content="2026-08-24T00:39:38-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
-  <meta property="og:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
+  <meta property="og:description" content="A proof of an Ω(n^-1.6342) lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:image" content="https://yeyuhanyyh.github.io/gd-lower-bound/assets/social-cover.png">
   <meta property="og:image:width" content="1200">
@@ -17,7 +17,7 @@
   <meta property="og:image:alt" content="A rate diagram labeled Lower bound on the left and Upper bound on the right, highlighting the Ω(n^-1.6342) result for non-anytime gradient descent.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
-  <meta name="twitter:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
+  <meta name="twitter:description" content="A proof of an Ω(n^-1.6342) lower bound for gradient descent under predetermined stepsize schedules.">
   <meta name="twitter:image" content="https://yeyuhanyyh.github.io/gd-lower-bound/assets/social-cover.png">
   <meta name="twitter:image:alt" content="A rate diagram labeled Lower bound on the left and Upper bound on the right, highlighting the Ω(n^-1.6342) result for non-anytime gradient descent.">
   <title>An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent</title>
@@ -272,7 +272,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 23, 2026 23:42 (GMT-4).</span>
+            <span>Last updated: August 24, 2026 00:39 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -281,29 +281,26 @@
       <p>
         Last week, <a href="https://arxiv.org/abs/2608.10418">Ma and Chen</a> proved an
         \(\Omega(n^{-1.932})\) lower bound for gradient descent (GD) under arbitrary
-        predetermined nonnegative stepsize schedules in smooth convex optimization, and Tsai
-        further improved it to \(\Omega(n^{-\sqrt{3}})\), where
-        \(\sqrt{3}\approx1.7321\)
-        (see his <a href="https://chungentsai.github.io/gd-lower-bounds.html">well-written blog post</a>).
-        After multiple
-        rounds of interaction with ChatGPT-5.6 Sol, we obtained the lower bound
+        predetermined nonnegative stepsize schedules in smooth convex optimization. Tsai
+        further improved this to \(\Omega(n^{-\sqrt{3}})\), where
+        \(\sqrt{3}\approx1.7321\). This post proves the lower bound
         \(\Omega(n^{-1.6342})\).
       </p>
       <p>
-        In the proof, we use the same hard-function family introduced by Ma and Chen.
+        In the proof, we use the same hard-function family introduced by Ma and Chen. See
         <a href="https://chungentsai.github.io/gd-lower-bounds.html#construction">Tsai's
-        blog post</a> gives an insightful explanation of this construction (cf.
+        blog post</a> for an exposition of this construction (cf.
         <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai's Lemma 6</a>). Our
-        improvement begins after that construction. We estimate the resulting sequence
-        inequality more precisely through term-by-term control of selected long steps instead
-        of compressing those steps into a harmonic mean
+        improvement begins after that construction. Instead of compressing the selected long
+        steps into a harmonic mean, we keep their contributions separate and estimate them
+        term by term
         (cf. <a href="https://chungentsai.github.io/gd-lower-bounds.html#harmonic-mean">Tsai's
         Lemma 7</a>).
       </p>
       <p>
-        <strong>AI Disclosure.</strong> This improvement was developed through multiple
-        rounds of interaction with ChatGPT-5.6 Sol. The generated proof was disorganized and
-        difficult to follow. The author simplified and rewrote the mathematical presentation.
+        <strong>AI Disclosure.</strong> ChatGPT-5.6 Sol was used during exploratory derivations
+        and drafting. The final mathematical claims and exposition are the author's
+        responsibility.
       </p>
 
       <h3 id="problem-setup"><span>Problem Setup</span></h3>
@@ -346,7 +343,7 @@
           \(H\in(0,\infty)^n\),
           \(R_n(H)\ge c n^{-\sqrt{3}}\).</em></p>
       </div>
-      <p>Our sharper analysis gives the following result.</p>
+      <p>We prove the following.</p>
       <div class="theorem" id="theorem-main">
         <p><a class="theorem-label" href="#theorem-main">Theorem 2 (Main result).</a>
           <em class="statement">There exists a universal constant \(c&gt;0\) such that,
@@ -360,7 +357,7 @@
              aria-describedby="rate-landscape-description rate-landscape-caption">
           <div class="rate-figure-canvas">
             <img src="assets/non-anytime-progress.svg" width="1400" height="250"
-                 alt="Progress on lower bounds for non-anytime gradient descent. A complete text description follows.">
+                 alt="Selected lower and upper bounds for non-anytime gradient descent. A complete text description follows.">
             <a class="rate-block-link" style="left:2.857%;width:15.714%"
                href="https://www2.isye.gatech.edu/~nemirovs/Nemirovskii_Yudin_1983.pdf"
                aria-label="Nemirovsky and Yudin, Problem Complexity and Method Efficiency in Optimization, 1983"></a>
@@ -387,15 +384,12 @@
           blocks are labeled Altschuler and Parrilo, and Levitin and Polyak. The horizontal
           axis is labeled Lower bound on the left and Upper bound on the right.
         </p>
-        <figcaption id="rate-landscape-caption"><strong>Figure 1.</strong> Our progress on lower bound.</figcaption>
+        <figcaption id="rate-landscape-caption"><strong>Figure 1.</strong> Selected lower and upper bounds for non-anytime gradient descent.</figcaption>
       </figure>
 
       <p>
-        The first part of our proof follows Ma and Chen and Tsai exactly. The same
-        schedule-dependent hard functions reduce the optimization problem to Lemma 2 below.
-        For the construction itself, see
-        <a href="https://chungentsai.github.io/gd-lower-bounds.html#construction">Tsai's
-        insightful explanation</a>. We do not repeat it here. Using the same notation, write
+        Up to Lemma 2, we use the hard-function construction of Ma and Chen without modification.
+        This construction gives the product-form lower bound below. Using Tsai's notation, write
         \(h_{a:b}:=\sum_{k=a}^b h_k\), with an empty sum
         equal to zero. For an integer \(1\le m\le n\), choose
         \[
@@ -425,15 +419,15 @@
           \]
       </div>
       <p>
-        Lemma 2 completes the hard-function construction. From this point on, the rest of the
-        proof amounts to a sequence inequality for the right-hand side of (1). Tsai treats the selected long steps
-        collectively through a harmonic mean (cf. <a href="https://chungentsai.github.io/gd-lower-bounds.html#harmonic-mean">Tsai's
+        After Lemma 2, only a sequence inequality for the right-hand side of (1) remains. Tsai
+        bounds the selected long steps using their harmonic mean (cf.
+        <a href="https://chungentsai.github.io/gd-lower-bounds.html#harmonic-mean">Tsai's
         Lemma 7</a>) and a counting function (cf. <a href="https://chungentsai.github.io/gd-lower-bounds.html#upper-bound-number">Tsai's
-        Lemma 8</a>), which loses information about their individual sizes and chronological
-        pairings. To obtain a sharper estimate, we retain every factor coupling two consecutive
-        selected long steps (<a href="#normalized-core">Lemma 3</a>) and apply sharper term-by-term
-        estimates (<a href="#envelope-reduction">Lemma 4</a> and
-        <a href="#path-estimate">Lemma 6</a>).
+        Lemma 8</a>). These summaries do not retain the size and order of each selected step. We
+        instead keep the factors for consecutive selected steps separate
+        (<a href="#normalized-core">Lemma 3</a>), eliminate the variables \(x_i\)
+        (<a href="#envelope-reduction">Lemma 4</a>), and bound the resulting sum
+        (<a href="#path-estimate">Lemma 6</a>).
       </p>
       <h3 id="step1"><span>The equivalent sequence problem</span></h3>
       <div class="theorem sequence-box" id="normalized-core">
@@ -535,7 +529,8 @@
             \qquad V:=S_{q+1}+1,
             \qquad \bar U:=\frac{D_q}{q}.
             \]
-            The gap sums \(S_1,\ldots,S_{q+1}\) contain exactly the unselected steps.
+            The sums \(S_1,\ldots,S_{q+1}\) contain exactly the steps whose indices are not
+            among \(t_1,\ldots,t_q\).
             Hence, by the definition of \(B\),
             \[
             D_q=\sum_{i=1}^q U_i+V.
@@ -636,14 +631,14 @@
         \right\}.
         \tag{6}
         \]
-        By definition, this gives an upper bound for each edge kernel.
+        By definition, for every \(w,z,x,y&gt;0\),
         \[
-        K_{w,z}(x,y)
-        \le
-        \exp\!\left(\lambda(x+y)+\Gamma_\lambda(w,z)\right).
+        \log K_{w,z}(x,y)
+        \le \lambda(x+y)+\Gamma_\lambda(w,z).
         \]
-        Multiplying these inequalities introduces
-        \(\lambda\sum_{i=1}^{q-1}(x_i+x_{i+1})\) in the exponent. Condition (3) gives
+        Summing this inequality with
+        \((w,z,x,y)=(\omega_i,\omega_{i+1},x_i,x_{i+1})\) over \(1\le i&lt;q\)
+        gives the term \(\lambda\sum_{i=1}^{q-1}(x_i+x_{i+1})\). Condition (3) gives
         \(\sum_{i=1}^q x_i&lt;q\).
       </p>
       <div class="theorem" id="envelope-reduction">
@@ -668,8 +663,7 @@
         <summary aria-label="Proof sketch for Lemma 4">Proof sketch</summary>
         <div class="proof-body">
           <p>
-            Applying the definition of \(\Gamma_\lambda\) to every edge gives the exponential
-            of
+            Summing the inequality above over the \(q-1\) factors gives the exponent
             \[
             \lambda\sum_{i=1}^{q-1}(x_i+x_{i+1})
             +
@@ -692,10 +686,23 @@
             \(\min_i\omega_i=\omega_q^\downarrow
             \ge q[(q/(q-1))^\alpha-1]
             \ge q\alpha\log(q/(q-1))\ge\alpha\). Hence
-            \(\omega_1,\omega_q\ge\alpha\). The last display is therefore a
-            polynomial-growth function of the three nonnegative variables
-            \(x_1,x_q,q-\sum_i x_i\), multiplied by exponential decay. Its supremum is a
-            finite constant \(C_{\alpha,\lambda}\), which proves (7).
+            \(\omega_1,\omega_q\ge\alpha\). Put
+            \(\Delta:=q-\sum_i x_i&gt;0\). The definition of \(E_{\mathrm{end}}\) then gives, for
+            some constant \(A_\alpha&lt;\infty\),
+            \[
+            E_{\mathrm{end}}
+            \le
+            \sqrt{x_1x_q}\sqrt{1+x_1/\alpha}
+            \left(1+\frac{x_q+2\Delta}{\alpha}\right)
+            \le A_\alpha(1+x_1+x_q+\Delta)^3.
+            \]
+            Hence
+            \[
+            E_{\mathrm{end}}e^{-\lambda(2\Delta+x_1+x_q)}
+            \le A_\alpha(1+x_1+x_q+\Delta)^3e^{-\lambda(2\Delta+x_1+x_q)}.
+            \]
+            The right-hand side has a finite supremum over \(x_1,x_q,\Delta\ge0\). Denoting this
+            supremum by \(C_{\alpha,\lambda}\) proves (7).
           </p>
         </div>
       </details>
@@ -867,25 +874,29 @@
         \max_{M\in\mathcal M_k(N)}
         \sum_{\{a,b\}\in M}\Gamma_\lambda(v_a,v_b).
         \]
-        Thus \(\Phi_{k,\lambda}(v)\) is the largest value of a \(k\)-edge matching
-        formed from the entries of \(v\). We use the convention
-        \(\Phi_{0,\lambda}=0\).
+        Thus \(\Phi_{k,\lambda}(v)\) is the maximum sum over all collections of \(k\)
+        disjoint pairs of coordinates of \(v\). We set \(\Phi_{0,\lambda}=0\).
       </p>
-      <p>The odd and even edges of the chronological path form two matchings.</p>
+      <p>
+        Splitting the terms in
+        \(\sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})\) according to whether \(i\)
+        is odd or even gives two matchings.
+      </p>
 
       <figure class="matching-figure" id="parity-matchings"
               aria-labelledby="parity-matchings-caption">
         <img src="assets/odd-even-matchings.svg"
              alt="Eight chronological vertices omega 1 through omega 8. The odd-indexed edges form the upper matching, and the even-indexed edges form the lower matching.">
-        <figcaption id="parity-matchings-caption"><strong>Figure 2.</strong> The chronological path splits into two alternating matchings.</figcaption>
+        <figcaption id="parity-matchings-caption"><strong>Figure 2.</strong> The consecutive pairs split into two alternating matchings.</figcaption>
       </figure>
 
       <p>
         Set \(k_q:=\lfloor(q-1)/2\rfloor\). By the coordinatewise-decreasing property in
         <a href="#gamma-geometry">Lemma 5(4)</a>,
         \(\Gamma_\lambda(\omega_i,\omega_j)\le\Gamma_\lambda(\alpha,\alpha)\), since
-        (3) with \(m=q-1\) gives \(\omega_i,\omega_j\ge\alpha\). Considering odd and even
-        \(q\) separately gives
+        (3) with \(m=q-1\) gives \(\omega_i,\omega_j\ge\alpha\). Splitting the sum into
+        these two matchings and treating the one possible deleted pair with the bound above
+        gives
         \[
         \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
         \le
@@ -898,14 +909,13 @@
       </p>
 
       <p class="theme-emphasis">
-        We now bound \(\Phi_{k_q,\lambda}\) through two finer reductions, using the
-        properties of \(\Gamma_\lambda\) established in
+        We first compare the two sequences by majorization and then identify a matching that
+        attains the maximum in \(\Phi_{k_q,\lambda}\). Both arguments use
         <a href="#gamma-geometry">Lemma 5</a>.
       </p>
 
-      <h4>Step 1. Majorization: Replace \((\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\) by
-        \((\bar w_q^{(q)},\ldots,\bar w_2^{(q)})\)</h4>
-      <p>For \(2\le s\le q\), define the explicit comparison weights</p>
+      <h4>Step 1. Majorization</h4>
+      <p>For \(2\le s\le q\), define</p>
       \[
       \bar w_s^{(q)}
       :=
@@ -927,10 +937,9 @@
         \qquad 1\le m&lt;q.
         \]
         Because \(\Gamma_\lambda\) is symmetric, jointly convex, and coordinatewise
-        decreasing (<a href="#gamma-geometry">Lemma 5</a>), the maximum-matching functional
-        \(\Phi_{k,\lambda}\) is
-        symmetric, convex, and coordinatewise decreasing as well. The tail comparison above
-        therefore gives
+        decreasing (<a href="#gamma-geometry">Lemma 5</a>), the function
+        \(\Phi_{k,\lambda}\) is symmetric, convex, and coordinatewise decreasing as well. The
+        tail comparison above therefore gives
         \[
         \Phi_{k_q,\lambda}
         (\omega_q^\downarrow,\ldots,\omega_2^\downarrow)
@@ -940,12 +949,13 @@
         \]
       </p>
 
-      <h4>Step 2. Reduce to the worst pairing</h4>
+      <h4>Step 2. Identify the maximizing pairing</h4>
       <p>
         Let \(0&lt;v_1\le\cdots\le v_N\) and \(0\le k\le\lfloor N/2\rfloor\).
         Since \(\Gamma_\lambda\) decreases in each coordinate, a maximizing matching in
         \(\Phi_{k,\lambda}(v)\) may be chosen to use the \(2k\) smallest entries.
-        Symmetry and strict submodularity then pair the two ends of this ordered list.
+        Symmetry and strict submodularity imply that a maximizing matching pairs
+        \(v_j\) with \(v_{2k+1-j}\).
         \[
         \Phi_{k,\lambda}(v_1,\ldots,v_N)
         =
@@ -962,7 +972,7 @@
       =\sum_{j=1}^{k_q}
       \Gamma_\lambda(\bar w_{q+1-j}^{(q)},\bar w_{q-2k_q+j}^{(q)}).
       \]
-      <p class="theme-emphasis">It remains to estimate this explicit sum.</p>
+      <p class="theme-emphasis">We next estimate this sum.</p>
       <p>
         By the mean value theorem, for every
         \(2\le s\le q\), there is \(\xi_s\in(s-1,s)\) such that
@@ -973,10 +983,9 @@
       \tag{12}
       \]
       <p>
-        Every integral below uses the continuous extension at \(t=0\) established in the
-        proof of Lemma 6.
-        Using (12), the paired sum in (11) is a Riemann sum for the integral below. Controlling
-        the endpoint and rounding errors uniformly in \(q\) gives
+        As shown in the proof of Lemma 6, the integrand extends continuously to \(t=0\).
+        Substituting (12) gives a Riemann sum up to endpoint and mesh errors. The proof bounds
+        these errors uniformly in \(q\) and gives
       </p>
       \[
       \Phi_{k_q,\lambda}
@@ -1008,16 +1017,16 @@
           <p>
             <strong>(1) Proof of (9).</strong>
             We treat odd and even \(q\) separately. Put
-            \(k_q=\lfloor(q-1)/2\rfloor\), and choose one occurrence of
-            \(\omega_1^\downarrow\). If \(q\) is odd, each parity matching has \(k_q\)
-            pairs and leaves one index unused. If a matching contains the chosen occurrence,
-            replace it by the unused index. Its value is no larger, so Lemma 5(4) shows that
-            this replacement cannot decrease the sum.
+            \(k_q=\lfloor(q-1)/2\rfloor\), and choose an index \(i_\star\) such that
+            \(\omega_{i_\star}=\omega_1^\downarrow\). If \(q\) is odd, each parity matching
+            has \(k_q\) pairs and leaves one index unused. If \(i_\star\) is matched, replace it
+            by the unused index. The unused coordinate has no larger value, so Lemma 5(4)
+            shows that the sum cannot decrease.
           </p>
           <p>
-            If \(q\) is even, one parity matching has \(k_q\) pairs and is handled in the
-            same way. The other matching is perfect. Delete its unique pair containing the
-            chosen occurrence. Each remaining matching now has \(k_q\) pairs drawn from
+            If \(q\) is even, the same replacement applies to the matching with \(k_q\)
+            pairs. The other matching is perfect. Delete its unique pair containing
+            \(i_\star\). Each remaining matching then has \(k_q\) pairs drawn from
             \((\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\), and is therefore bounded by
             \(\Phi_{k_q,\lambda}(\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\).
             Taking \(m=q-1\) in (3) gives
@@ -1036,17 +1045,17 @@
           </p>
           <p>
             <strong>(2) Majorization.</strong>
-            Each fixed-matching sum in the definition of \(\Phi_{k,\lambda}\) is convex
-            and coordinatewise decreasing. Taking the maximum over all matchings preserves
-            these properties. The collection of matchings is invariant under coordinate
-            permutations, so \(\Phi_{k,\lambda}\) is also symmetric.
+            For each fixed matching, the corresponding sum is convex and coordinatewise
+            decreasing. Taking the maximum over all matchings preserves these properties. The
+            collection of matchings is invariant under coordinate permutations, so
+            \(\Phi_{k,\lambda}\) is also symmetric.
           </p>
           <p>
             Let \(a_1\le\cdots\le a_N\) and \(b_1\le\cdots\le b_N\) satisfy
-            \(\sum_{i=1}^\ell a_i\ge\sum_{i=1}^\ell b_i\) for every \(\ell\). Choose an
-            ordered subgradient \(g\in\partial\Phi_{k,\lambda}(a)\) with
-            \(g_1\le\cdots\le g_N\le0\). Symmetry and convexity give the ordering, while
-            coordinatewise decrease gives the signs. Put
+            \(\sum_{i=1}^\ell a_i\ge\sum_{i=1}^\ell b_i\) for every \(\ell\). By symmetry
+            and convexity, choose \(g\in\partial\Phi_{k,\lambda}(a)\) with
+            \(g_1\le\cdots\le g_N\). Coordinatewise decrease gives \(g_N\le0\), and hence
+            \(g_i\le0\) for every \(i\). Put
             \(D_\ell:=\sum_{i=1}^\ell(b_i-a_i)\le0\). Summation by parts yields
             \[
             g\cdot(b-a)
@@ -1056,7 +1065,7 @@
             \(\Phi_{k,\lambda}(a)\le\Phi_{k,\lambda}(b)\).
           </p>
           <p>
-            The comparison weights satisfy
+            The numbers defined in (10) satisfy
             \[
             \bar w_s^{(q)}
             =q^{1+\alpha}\int_{s-1}^{s}\alpha u^{-1-\alpha}\,du.
@@ -1072,7 +1081,7 @@
             This proves the comparison in Step 1.
           </p>
           <p>
-            <strong>(3) Reduce to the worst pairing.</strong>
+            <strong>(3) The maximizing pairing.</strong>
             For \(0&lt;a\le b\le c\le d\), symmetry and strict submodularity give
             \[
             \Gamma_\lambda(a,d)+\Gamma_\lambda(b,c)
@@ -1083,8 +1092,9 @@
             \Gamma_\lambda(a,d)+\Gamma_\lambda(b,c)
             \ge\Gamma_\lambda(a,b)+\Gamma_\lambda(c,d).
             \]
-            Coordinatewise decrease selects the \(2k\) smallest coordinates, and repeated
-            applications of these two exchange inequalities produce the pairing in (11).
+            Because \(\Gamma_\lambda\) decreases in each coordinate, a maximizing matching
+            uses the \(2k\) smallest coordinates. Repeated applications of the two inequalities
+            above produce the pairing in (11).
           </p>
           <p>
             <strong>(4) Control the endpoint \(t=0\).</strong>
@@ -1102,8 +1112,8 @@
             \[
             \bar w_s^{(q)}=W_\alpha(\xi_s/q).
             \]
-            We next compare these sums with a Riemann sum along \((t,1-t)\). To control the
-            terms near \(t=0\), define
+            We compare these sums with Riemann sums for
+            \(\int_0^{1/2}G(t,1-t)\,dt\). To control the terms near \(t=0\), define
             \(G(t,s):=\Gamma_\lambda(W_\alpha(t),W_\alpha(s))\). Let
             \(w=W_\alpha(t)\), \(z=W_\alpha(s)\), and let \((x,y)\) be the optimizer in
             (6). Set \(A_w=w+x\), \(A_z=z+y\), and \(\Sigma=A_w+A_z\). The derivative formula in
@@ -1127,12 +1137,12 @@
             -\partial_w\Gamma_\lambda=O_{\alpha,\lambda}(w^{-2}).
             \]
             Moreover
-            \(|W_\alpha'(t)|W_\alpha(t)^{-2}=O_\alpha(t^\alpha)\). The derivative of
-            \(G\) in its second coordinate is uniformly bounded because
-            \(W_\alpha(s)\) and \(W_\alpha'(s)\) remain in compact ranges. Thus \(G\) has a
-            bounded Lipschitz extension on \([0,1/2]\times[1/2,1]\). The constants are
-            locally uniform when \(\alpha\) ranges over a compact subset of
-            \((0,\infty)\).
+            \(|W_\alpha'(t)|W_\alpha(t)^{-2}=O_\alpha(t^\alpha)\). By symmetry, the derivative
+            formula in Lemma 5 and the uniform bound on \(\tau\) show that
+            \(\partial_sG(t,s)\) is uniformly bounded because \(W_\alpha(s)\) and
+            \(W_\alpha'(s)\) remain in compact ranges. Hence \(G\) extends to a Lipschitz
+            function on \([0,1/2]\times[1/2,1]\). The bounds above are locally uniform for
+            \(\alpha\) in compact subsets of \((0,\infty)\).
           </p>
           <p>
             <strong>(5) Compare the finite sums with the integral.</strong>
@@ -1141,9 +1151,10 @@
             \(\Gamma_\lambda(\bar w_{\ell+1}^{(q)},\bar w_{\ell+2}^{(q)})\).
             Formula (12) places both arguments in a fixed compact interval depending only on
             \(\alpha\), so its contribution is bounded independently of \(q\). The remaining terms
-            form Riemann sums for the same integral. The Lipschitz bound above controls the
-            rounding error in each term, and the missing endpoint intervals contribute only
-            a bounded amount. Consequently, for either parity,
+            form Riemann sums for the same integral. The Lipschitz bound controls the
+            difference between each mean-value point and the corresponding mesh point. The
+            missing endpoint intervals contribute only a bounded amount. Consequently, for
+            either parity,
             \[
             \Phi_{k_q,\lambda}
             (\bar w_q^{(q)},\ldots,\bar w_2^{(q)})
@@ -1216,18 +1227,19 @@
             proof of Lemma 6 give locally uniform domination.
           </p>
           <p>
-            As \(\alpha\downarrow0\), both profile coordinates tend to zero uniformly on,
-            for example, \([1/4,3/4]\). Evaluating the supremum defining
+            As \(\alpha\downarrow0\), \(W_\alpha(u)\) tends to zero uniformly for
+            \(u\in[1/4,3/4]\). Evaluating the supremum defining
             \(\Gamma_\lambda\) at any fixed \(x,y&gt;0\) shows that the integrand in (14) tends
-            uniformly to \(+\infty\) on \([1/4,1/2]\). Monotonicity supplies an
-            integrable lower bound on the remaining part of the interval, so this divergence
-            cannot be cancelled. Hence
+            uniformly to \(+\infty\) on \([1/4,1/2]\). The coordinatewise monotonicity of
+            \(\Gamma_\lambda\) gives an integrable lower bound on the rest of the interval, so
+            this divergence cannot be cancelled. Hence
             \[
             \lim_{\alpha\downarrow0}J(\alpha,\lambda)=+\infty.
             \]
           </p>
           <p>
-            As \(\alpha\to\infty\), both profile coordinates are at least \(\alpha\).
+            As \(\alpha\to\infty\), both \(W_\alpha(t)\) and \(W_\alpha(1-t)\) are
+            at least \(\alpha\) for \(0&lt;t\le1/2\).
             At the optimizer,
             \[
             \Gamma_\lambda(w,z)
@@ -1253,29 +1265,27 @@
 
       <h3 id="concluding-remarks"><span>Concluding Remarks</span></h3>
       <p>
-        Starting from the same hard-function construction and the corresponding chain bound in
+        We use the same hard-function construction and the product-form lower bound in
         <a href="#lemma-hard-functions">Lemma 2</a> (cf.
-        <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai's Lemma 6</a>),
-        we use a finer term-by-term analysis of the full chronological sequence. This improves
+        <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai's Lemma 6</a>).
+        We then estimate the resulting factors term by term. This improves
         <a href="https://chungentsai.github.io/gd-lower-bounds.html#theorem-2">Tsai's lower
         bound</a> from \(\Omega(n^{-\sqrt{3}})\) to \(\Omega(n^{-1.6342})\).
       </p>
       <p>
-        At the exponential scale relevant to the final rate, our sequence estimates appear
-        fairly tight. One plausible source of slack is the
-        parity split in (9). The odd and even edges form two alternating matchings of the same
-        chronological path, but we bound them independently by the same unconstrained
-        worst-matching value. For strictly ordered weights, the two matchings need not
-        simultaneously attain the outside-in maximizer in (11).
+        The \(O_{\alpha,\lambda}(1)\) errors in Lemma 6 do not affect the exponent. A possible
+        source of slack is (9). It bounds the odd- and even-indexed terms separately by the
+        same maximum \(\Phi_{k_q,\lambda}\) over all \(k_q\)-matchings. For strictly ordered
+        entries, the two matchings need not simultaneously realize the maximizing pairing in
+        (11).
       </p>
       <p>
         A more structural question is whether Lemma 2 can already yield the
         \(\Omega(n^{-1.271553\ldots})\) lower bound, matching the
         <a href="https://arxiv.org/abs/2309.16530">silver-stepsize upper bound</a>.
-        Our refined analysis makes us skeptical that this route will close the whole gap, but
-        it does not give an impossibility result. It may instead be necessary to construct hard
-        functions with a hierarchy of scales, so that long steps at different scales interact
-        within the same instance, mirroring the recursive structure of silver stepsizes.
+        We do not know whether this is possible. The estimates above suggest that Lemma 2 alone
+        may not close the gap, but they do not prove impossibility. One possible direction is to
+        construct a hard function in which long steps at several scales interact.
       </p>
 
       <h3 id="bibliographic-information"><span>Bibliographic Information</span></h3>
@@ -1291,6 +1301,6 @@
 
     </article>
   </main>
-  <script src="https://cdn.counter.dev/script.js" data-id="c0ec236a-81f6-4058-b026-cc4ed3513157" data-utcoffset="-5"></script>
+  <script src="https://cdn.counter.dev/script.js" data-id="c0ec236a-81f6-4058-b026-cc4ed3513157" data-utcoffset="-4"></script>
 </body>
 </html>

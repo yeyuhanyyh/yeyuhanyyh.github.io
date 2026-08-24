@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="250" viewBox="0 0 1400 250" role="img" aria-labelledby="title desc">
-  <title id="title">Progress on lower bounds for gradient descent</title>
+  <title id="title">Selected lower and upper bounds for non-anytime gradient descent</title>
   <desc id="desc">A schematic rate diagram with markers n to the powers minus 2, minus 1.932, minus 1.733, minus 1.6342, minus 1.271, and minus 1. The horizontal axis is labeled Lower bound on the left and Upper bound on the right. The colored blocks name the corresponding results.</desc>
 
   <defs>

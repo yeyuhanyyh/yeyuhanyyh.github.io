@@ -49,11 +49,12 @@ and
 -\lambda\bigl(X_w(\tau)+X_z(\tau)\bigr).
 \]
 
-On every interval cell in \(t\), Arb encloses both profile coordinates,
-the unique root \(\tau\), and the displayed formula for \(\Gamma_\lambda\).
+On every subinterval in \(t\), Arb encloses both \(W_\alpha(t)\) and
+\(W_\alpha(1-t)\), the unique root \(\tau\), and the displayed formula for
+\(\Gamma_\lambda\).
 The root equation is strictly decreasing in \(\tau,w,z\), so sign-verified
-mixed-corner brackets contain the optimizer throughout the cell. The first
-cell touches \(t=0\); it is bounded by coordinatewise monotonicity:
+mixed-corner brackets contain the optimizer throughout the subinterval. The
+first subinterval contains \(t=0\) and is bounded by coordinatewise monotonicity:
 
 \[
 \Gamma_\lambda(W_\alpha(t),W_\alpha(1-t))
