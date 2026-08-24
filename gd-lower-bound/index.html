@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-24T08:05:00-04:00">
+  <meta property="article:modified_time" content="2026-08-24T08:31:00-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A proof of an Ω(n^-1.6342) lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
@@ -272,7 +272,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 24, 2026 08:05 (GMT-4).</span>
+            <span>Last updated: August 24, 2026 08:31 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -282,8 +282,7 @@
         Last week, <a href="https://arxiv.org/abs/2608.10418">Ma and Chen</a> proved an
         \(\Omega(n^{-1.932})\) lower bound for gradient descent (GD) under arbitrary
         predetermined nonnegative stepsize schedules in smooth convex optimization, and Tsai
-        further improved it to \(\Omega(n^{-\sqrt{3}})\), where
-        \(\sqrt{3}\approx1.7321\)
+        further improved it to \(\Omega(n^{-1.7321})\)
         (see his <a href="https://chungentsai.github.io/gd-lower-bounds.html">blog post</a>).
         After multiple
         rounds of interaction with ChatGPT-5.6 Sol, I obtained the lower bound
@@ -332,7 +331,7 @@
       <div class="theorem" id="our-target">
         <p><a class="theorem-label" href="#our-target">Our target.</a>
           <em class="statement">Improve Tsai's lower bound
-          \(R_n(H)=\Omega(n^{-\sqrt{3}})\) and bring its exponent as close as possible to the
+          \(R_n(H)=\Omega(n^{-1.7321})\) and bring its exponent as close as possible to the
           \(O(n^{-\log_2(1+\sqrt{2})})\) upper bound of
           <a href="https://arxiv.org/abs/2309.16530">Altschuler and Parrilo</a>.</em></p>
       </div>
@@ -344,7 +343,7 @@
           <em class="statement">There exists a universal constant \(c&gt;0\)
           such that, for every integer \(n\ge1\) and every
           \(H\in(0,\infty)^n\),
-          \(R_n(H)\ge c n^{-\sqrt{3}}\).</em></p>
+          \(R_n(H)\ge c n^{-1.7321}\).</em></p>
       </div>
       <p>We prove the following.</p>
       <div class="theorem" id="theorem-main">
@@ -391,7 +390,7 @@
       </figure>
 
       <p>
-        Up to Lemma 2, we use the hard-function construction of Ma and Chen without modification.
+        Up to <a href="#lemma-hard-functions">Lemma 2</a>, we use the hard-function construction of Ma and Chen without modification.
         This construction gives the product-form lower bound below. Using Tsai's notation, write
         \(h_{a:b}:=\sum_{k=a}^b h_k\), with an empty sum
         equal to zero. For an integer \(1\le m\le n\), choose
@@ -418,12 +417,13 @@
           \frac{S_{i+1}+h_{t_{i+1}}}
           {S_i+h_{t_i}+S_{i+1}+h_{t_{i+1}}}
           \prod_{i=1}^{m}\frac{h_{t_i}-1}{S_i+1}.
-          \tag{1}
+          \tag{1}\label{eq:hard-product}
           \]
       </div>
       <p>
-        Lemma 2 completes the hard-function construction. From this point on, the rest of the
-        proof amounts to a sequence inequality for the right-hand side of (1). Tsai treats the
+        <a href="#lemma-hard-functions">Lemma 2</a> completes the hard-function construction. From this point on, the rest of the
+        proof amounts to a sequence inequality for the right-hand side of
+        \(\eqref{eq:hard-product}\). Tsai treats the
         selected long steps collectively through a harmonic mean (cf.
         <a href="https://chungentsai.github.io/gd-lower-bounds.html#harmonic-mean">Tsai's
         Lemma 7</a>) and a counting function (cf. <a href="https://chungentsai.github.io/gd-lower-bounds.html#upper-bound-number">Tsai's
@@ -441,7 +441,7 @@
         \[
         K_{w,z}(x,y):=
         \frac{\sqrt{xy}\,(w+z+x+y)}{\sqrt{wz(w+x)(z+y)}}
-        \tag{2}
+        \tag{2}\label{eq:kernel}
         .
         \]
         <p><span class="statement">To prove
@@ -457,28 +457,29 @@
         \sum_{s=m+1}^q \omega_s^\downarrow
         \ge q\left[\left(\frac qm\right)^\alpha-1\right],
         \qquad 1\le m&lt;q.
-        \tag{3}
+        \tag{3}\label{eq:sequence-constraints}
         \]
         <p><span class="statement">then</span></p>
         \[
         E_{\mathrm{end}}
         \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
         \le C_\alpha,
-        \tag{4}
+        \tag{4}\label{eq:sequence-bound}
         \]
         <p><span class="statement">where</span></p>
         \[
         E_{\mathrm{end}}:=
         \sqrt{x_1x_q}\sqrt{\frac{1+x_1/\omega_1}{1+x_q/\omega_q}}
         \left[1+\frac{x_q+2\left(q-\sum_{i=1}^q x_i\right)}{\omega_q}\right].
-        \tag{5}
+        \tag{5}\label{eq:endpoint-factor}
         \]
       </div>
-      <details class="proof">
+      <details class="proof" id="proof-lemma-3">
         <summary aria-label="Proof sketch for Lemma 3">Proof sketch</summary>
         <div class="proof-body">
           <p>
-            Suppose (3) implies (4) with a constant \(C_\alpha\) uniform over
+            Suppose \(\eqref{eq:sequence-constraints}\) implies
+            \(\eqref{eq:sequence-bound}\) with a constant \(C_\alpha\) uniform over
             \(q\ge2\). Fix \(n\ge1\) and a schedule
             \(H=(h_1,\ldots,h_n)\). Let
             \(r:=\#\{k:h_k&gt;1\}\) and
@@ -497,13 +498,14 @@
           </p>
           <p class="theme-emphasis">
             We first treat the general case \(q\ge2\), which is the case where
-            condition (3) is needed.
+            condition \(\eqref{eq:sequence-constraints}\) is needed.
           </p>
           <p>
-            <strong>Case 1a: \(q\ge2\).</strong> Let
+            <strong id="lemma3-case-1a">Case 1a: \(q\ge2\).</strong> Let
             \(t_1&lt;\cdots&lt;t_q\) be the indices of the \(q\) largest positive
             excesses \(h_k-1\), with ties broken arbitrarily.
-            With \(S_1,\ldots,S_{q+1}\) defined as in Lemma 2, let
+            With \(S_1,\ldots,S_{q+1}\) defined as in
+            <a href="#lemma-hard-functions">Lemma 2</a>, let
             \(U_i:=S_i+1\) for \(1\le i\le q\), and let \(V:=S_{q+1}+1\).
             The intervals defining \(S_1,\ldots,S_{q+1}\) partition the indices not
             among \(t_1,\ldots,t_q\). Therefore
@@ -538,11 +540,12 @@
             =\frac{D_m}{D_q}
             \ge\left(\frac qm\right)^\alpha.
             \]
-            Thus \(x_i,\omega_i\) satisfy (3).
+            Thus \(x_i,\omega_i\) satisfy \(\eqref{eq:sequence-constraints}\).
           </p>
           <p>
-            Let \(G\) be the right-hand side of (1), with \(m=q\) and the indices
-            chosen above. Lemma 2 gives \(R_n(H)\ge G\), and substitution yields
+            Let \(G\) be the right-hand side of \(\eqref{eq:hard-product}\), with \(m=q\)
+            and the indices chosen above. <a href="#lemma-hard-functions">Lemma 2</a> gives
+            \(R_n(H)\ge G\), and substitution yields
             \[
             G^{-1}
             =\bar U\sqrt{x_1x_q}
@@ -558,7 +561,8 @@
             1+\frac{x_q+2(q-\sum_{i=1}^q x_i)-\bar U^{-1}}{\omega_q}
             =\frac{U_q+(h_{t_q}-1)+2V-1}{h_{t_q}-1}&gt;0.
             \]
-            Replacing \(-\bar U^{-1}\) by \(0\) increases the bracket. Therefore (4) gives
+            Replacing \(-\bar U^{-1}\) by \(0\) increases the bracket. Therefore
+            \(\eqref{eq:sequence-bound}\) gives
             \[
             G^{-1}
             \le \bar U E_{\mathrm{end}}
@@ -576,7 +580,8 @@
             \]
           </p>
           <p class="theme-emphasis">
-            It remains to treat the boundary cases outside Case 1a. For these
+            It remains to treat the boundary cases outside
+            <a href="#lemma3-case-1a">Case 1a</a>. For these
             cases, we use the following Huber loss to construct a lower bound.
           </p>
           <p>
@@ -610,11 +615,12 @@
             \(R_n(H)\ge[2(D_1+a_1)-1]^{-1}\).
             If \(a_1\le D_1\), this is at least \(1/(4D_1)\).
             If \(a_1&gt;D_1\), choose an index \(t\) with \(h_t-1=a_1\), and apply
-            Lemma 2 with \(m=1\) and \(t_1=t\). Write \(U_1:=S_1+1\) and
+            <a href="#lemma-hard-functions">Lemma 2</a> with \(m=1\) and \(t_1=t\).
+            Write \(U_1:=S_1+1\) and
             \(V:=S_2+1\).
             Then \(D_1=U_1+V\), \(U_1\le D_1\), and
             \(U_1+a_1+2V-1&lt;a_1+2D_1&lt;3a_1\).
-            Lemma 2 therefore gives
+            <a href="#lemma-hard-functions">Lemma 2</a> therefore gives
             \[
             R_n(H)\ge
             \frac{a_1}{U_1(U_1+a_1+2V-1)}
@@ -646,7 +652,8 @@
 
       <h3 id="step2"><span>Eliminating the variables \(x_i\)</span></h3>
       <p>
-        To make (4) more tractable, we first eliminate the variables \(x_i\). For a parameter
+        To make \(\eqref{eq:sequence-bound}\) more tractable, we first eliminate the variables
+        \(x_i\). For a parameter
         \(\lambda&gt;0\), to be chosen later, define
         \[
         \Gamma_\lambda(w,z)
@@ -655,15 +662,16 @@
         \left\{
         \log K_{w,z}(x,y)-\lambda(x+y)
         \right\}.
-        \tag{6}
+        \tag{6}\label{eq:gamma-definition}
         \]
         By definition, for every \(w,z,x,y&gt;0\),
         \[
         \log K_{w,z}(x,y)
         \le \lambda(x+y)+\Gamma_\lambda(w,z).
-        \tag{6a}
+        \tag{6a}\label{eq:gamma-envelope}
         \]
-        Lemma 4 applies (6a) to the \(q-1\) consecutive pairs and uses the budget
+        <a href="#envelope-reduction">Lemma 4</a> applies
+        \(\eqref{eq:gamma-envelope}\) to the \(q-1\) consecutive pairs and uses the budget
         \(\sum_{i=1}^q x_i&lt;q\) to absorb the endpoint factor.
       </p>
       <div class="theorem" id="envelope-reduction">
@@ -671,7 +679,7 @@
           <em class="statement">Fix \(\alpha,\lambda&gt;0\). There is a constant
           \(C_{\alpha,\lambda}&lt;\infty\) such that, for every integer \(q\ge2\), every
           pair of positive sequences \((x_i)_{i=1}^q\) and \((\omega_i)_{i=1}^q\)
-          satisfying (3) obeys</em></p>
+          satisfying \(\eqref{eq:sequence-constraints}\) obeys</em></p>
           \[
           E_{\mathrm{end}}
           \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
@@ -681,15 +689,15 @@
           2\lambda q+
           \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
           \right\}.
-          \tag{7}
+          \tag{7}\label{eq:envelope-reduction}
           \]
       </div>
-      <details class="proof">
+      <details class="proof" id="proof-lemma-4">
         <summary aria-label="Proof sketch for Lemma 4">Proof sketch</summary>
         <div class="proof-body">
           <p>
             Set \(\Delta:=q-\sum_{i=1}^q x_i&gt;0\).
-            Applying (6a) to every consecutive pair gives
+            Applying \(\eqref{eq:gamma-envelope}\) to every consecutive pair gives
             \[
             \log\prod_{i=1}^{q-1}
             K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
@@ -717,7 +725,7 @@
             sequences.
           </p>
           <p>
-            Taking \(m=q-1\) in (3) yields
+            Taking \(m=q-1\) in \(\eqref{eq:sequence-constraints}\) yields
             \[
             \min_{1\le i\le q}\omega_i
             =\omega_q^\downarrow
@@ -727,7 +735,8 @@
             \]
             Here the last two inequalities use \(e^u-1\ge u\) and
             \(\log(1+t)\ge t/(1+t)\). In particular,
-            \(\omega_1,\omega_q\ge\alpha\). Using this in (5) and writing
+            \(\omega_1,\omega_q\ge\alpha\). Using this in
+            \(\eqref{eq:endpoint-factor}\) and writing
             \(T:=x_1+x_q+\Delta\), we directly obtain
             \[
             E_{\mathrm{end}}e^{-\lambda(2\Delta+x_1+x_q)}
@@ -735,17 +744,19 @@
             \le C_\alpha\sup_{t\ge0}(1+t)^{5/2}e^{-\lambda t}
             =:C_{\alpha,\lambda}&lt;\infty.
             \]
-            This proves (7).
+            This proves \(\eqref{eq:envelope-reduction}\).
           </p>
         </div>
       </details>
 
       <h3 id="step3"><span>Basic properties of \(\Gamma_\lambda\)</span></h3>
       <div class="theme-emphasis">
-        We now need to bound the right-hand side of (7). It is enough to obtain a sharp
+        We now need to bound the right-hand side of \(\eqref{eq:envelope-reduction}\). It is
+        enough to obtain a sharp
         and computable upper bound on
         \(\sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})\) for every sequence
-        \(\omega_1,\ldots,\omega_q\) satisfying (3). To proceed, we first establish the
+        \(\omega_1,\ldots,\omega_q\) satisfying
+        \(\eqref{eq:sequence-constraints}\). To proceed, we first establish the
         basic properties of \(\Gamma_\lambda\).
       </div>
 
@@ -753,36 +764,37 @@
         <p><a class="theorem-label" href="#gamma-geometry">Lemma 5.</a>
           For every \(\lambda&gt;0\), \(\Gamma_\lambda\) has the following properties.</p>
         <div class="statement property-list">
-          <p class="property">
+          <p class="property" id="gamma-property-1">
             <strong>(1) Smoothness.</strong>
-            For every \(w,z&gt;0\), the supremum in (6) is attained at a unique pair
+            For every \(w,z&gt;0\), the supremum in \(\eqref{eq:gamma-definition}\) is attained
+            at a unique pair
             \((x_\lambda(w,z),y_\lambda(w,z))\in(0,\infty)^2\). The optimizer map
             \((w,z)\mapsto(x_\lambda(w,z),y_\lambda(w,z))\) and \(\Gamma_\lambda\) are
             \(C^\infty\) on \((0,\infty)^2\).
           </p>
-          <p class="property">
+          <p class="property" id="gamma-property-2">
             <strong>(2) Symmetry.</strong>
             \(\Gamma_\lambda(w,z)=\Gamma_\lambda(z,w)\).
           </p>
-          <p class="property">
+          <p class="property" id="gamma-property-3">
             <strong>(3) Joint convexity.</strong>
             The map \((w,z)\mapsto\Gamma_\lambda(w,z)\) is jointly convex on
             \((0,\infty)^2\).
           </p>
-          <p class="property">
+          <p class="property" id="gamma-property-4">
             <strong>(4) Decreasing in each coordinate.</strong>
             \(\Gamma_\lambda\) is strictly decreasing in each coordinate.
           </p>
-          <p class="property">
+          <p class="property" id="gamma-property-5">
             <strong>(5) Strict submodularity.</strong>
             \[
             \partial_{wz}^2\Gamma_\lambda(w,z)&lt;0.
-            \tag{8}
+            \tag{8}\label{eq:submodularity}
             \]
           </p>
         </div>
       </div>
-      <details class="proof">
+      <details class="proof" id="proof-lemma-5">
         <summary aria-label="Proof sketch for Lemma 5">Proof sketch</summary>
         <div class="proof-body">
           <p>
@@ -808,8 +820,9 @@
           </p>
           <p>
             <strong>(2) Symmetry.</strong>
-            The definition (6) is invariant under
-            \((w,x)\leftrightarrow(z,y)\), which proves Property (2).
+            The definition \(\eqref{eq:gamma-definition}\) is invariant under
+            \((w,x)\leftrightarrow(z,y)\), which proves
+            <a href="#gamma-property-2">Property (2)</a>.
           </p>
           <p>
             <strong>(3) Joint convexity.</strong>
@@ -823,7 +836,8 @@
             The first four terms dominate
             \(a^2/A^2+b^2/B^2\), which is at least
             \((a+b)^2/(A+B)^2\) by Cauchy–Schwarz.
-            Taking the supremum in (6) preserves convexity, proving Property (3).
+            Taking the supremum in \(\eqref{eq:gamma-definition}\) preserves convexity,
+            proving <a href="#gamma-property-3">Property (3)</a>.
           </p>
           <p>
             <strong>(4) Decreasing in each coordinate.</strong>
@@ -845,11 +859,13 @@
             -\partial_w\Gamma_\lambda
             =\frac{x_\ast}{2wA}+\frac{B}{A\Sigma}&gt;0,
             \]
-            and similarly in \(z\). This proves Property (4).
+            and similarly in \(z\). This proves
+            <a href="#gamma-property-4">Property (4)</a>.
           </p>
           <p>
             <strong>(5) Strict submodularity.</strong>
-            With the notation from Property (4), the first-order conditions imply
+            With the notation from <a href="#gamma-property-4">Property (4)</a>, the
+            first-order conditions imply
             \[
             \lambda-\frac1\Sigma
             =\frac{w}{2x_\ast A}
@@ -888,14 +904,14 @@
             -\frac{\partial_z\Sigma}{\Sigma^2}
             +\frac{\partial_z A}{2A^2}&lt;0,
             \]
-            proving Property (5).
+            proving <a href="#gamma-property-5">Property (5)</a>.
           </p>
         </div>
       </details>
 
       <h3 id="step4"><span>Upper bounding \(\sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})\)</span></h3>
       <p>
-        Recall from Lemma 3 that
+        Recall from <a href="#normalized-core">Lemma 3</a> that
         \(\omega_1^\downarrow\ge\cdots\ge\omega_q^\downarrow\) is the decreasing
         rearrangement of \(\omega_1,\ldots,\omega_q\).
       </p>
@@ -927,9 +943,10 @@
 
       <p>
         Set \(k_q:=\lfloor(q-1)/2\rfloor\). By the coordinatewise-decreasing property in
-        <a href="#gamma-geometry">Lemma 5(4)</a>,
+        <a href="#gamma-property-4">Lemma 5(4)</a>,
         \(\Gamma_\lambda(\omega_i,\omega_j)\le\Gamma_\lambda(\alpha,\alpha)\), since
-        (3) with \(m=q-1\) gives \(\omega_i,\omega_j\ge\alpha\). Splitting the sum into
+        \(\eqref{eq:sequence-constraints}\) with \(m=q-1\) gives
+        \(\omega_i,\omega_j\ge\alpha\). Splitting the sum into
         these two matchings and treating the one possible deleted pair with the bound above
         gives
         \[
@@ -938,9 +955,9 @@
         2\Phi_{k_q,\lambda}
         (\omega_q^\downarrow,\ldots,\omega_2^\downarrow)
         +C_{\alpha,\lambda}.
-        \tag{9}
+        \tag{9}\label{eq:parity-bound}
         \]
-        See the proof sketch for details.
+        See the <a href="#proof-lemma-6">proof sketch</a> for details.
       </p>
 
       <p class="theme-emphasis">
@@ -949,14 +966,14 @@
         <a href="#gamma-geometry">Lemma 5</a>.
       </p>
 
-      <h4>Step 1. Majorization</h4>
+      <h4 id="majorization">Step 1. Majorization</h4>
       <p>For \(2\le s\le q\), define</p>
       \[
       \bar w_s^{(q)}
       :=
       q^{1+\alpha}\bigl((s-1)^{-\alpha}-s^{-\alpha}\bigr),
       \qquad 2\le s\le q.
-      \tag{10}
+      \tag{10}\label{eq:reference-weights}
       \]
       <p>
         Their tails satisfy
@@ -964,7 +981,7 @@
         \sum_{s=m+1}^q\bar w_s^{(q)}
         =q\left[\left(\frac qm\right)^\alpha-1\right].
         \]
-        Together with (3), this gives
+        Together with \(\eqref{eq:sequence-constraints}\), this gives
         \[
         \sum_{s=m+1}^q\omega_s^\downarrow
         \ge
@@ -984,7 +1001,7 @@
         \]
       </p>
 
-      <h4>Step 2. Identify the maximizing pairing</h4>
+      <h4 id="worst-pairing">Step 2. Identify the maximizing pairing</h4>
       <p>
         Let \(0&lt;v_1\le\cdots\le v_N\) and \(0\le k\le\lfloor N/2\rfloor\).
         Since \(\Gamma_\lambda\) decreases in each coordinate, a maximizing matching in
@@ -996,10 +1013,11 @@
         =
         \sum_{j=1}^k
         \Gamma_\lambda(v_j,v_{2k+1-j}).
-        \tag{11}
+        \tag{11}\label{eq:maximizing-pairing}
         \]
-        The numbers in (10) satisfy
-        \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\), so (11) applies directly to
+        The numbers in \(\eqref{eq:reference-weights}\) satisfy
+        \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\), so
+        \(\eqref{eq:maximizing-pairing}\) applies directly to
         \((\bar w_q^{(q)},\ldots,\bar w_2^{(q)})\). In particular,
       </p>
       \[
@@ -1017,11 +1035,12 @@
       \[
       \bar w_s^{(q)}=W_\alpha(\theta_s/q),
       \qquad W_\alpha(t):=\alpha t^{-1-\alpha},\quad 0&lt;t\le1.
-      \tag{12}
+      \tag{12}\label{eq:mean-value-profile}
       \]
       <p>
-        As shown in the proof of Lemma 6, the integrand extends continuously to \(t=0\).
-        Each point \(\theta_s/q\) in (12) is within \(1/q\) of the relevant grid point.
+        As shown in the <a href="#proof-lemma-6">proof of Lemma 6</a>, the integrand extends
+        continuously to \(t=0\). Each point \(\theta_s/q\) in
+        \(\eqref{eq:mean-value-profile}\) is within \(1/q\) of the relevant grid point.
         The Lipschitz estimate makes the sum of all these displacements bounded independently
         of \(q\). The intervals left outside the grid have total length \(O(1/q)\), so after
         multiplication by \(q\) they also contribute only a bounded amount. Therefore
@@ -1034,32 +1053,33 @@
       \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt
       +C_{\alpha,\lambda}.
       \]
-      <p>Combining this estimate with (9) gives the following lemma.</p>
+      <p>Combining this estimate with \(\eqref{eq:parity-bound}\) gives the following lemma.</p>
       <div class="theorem" id="path-estimate">
         <p><a class="theorem-label" href="#path-estimate">Lemma 6.</a>
           <em class="statement">Fix \(\alpha,\lambda&gt;0\). There is a constant
           \(C_{\alpha,\lambda}&lt;\infty\) such that, for every integer \(q\ge2\) and every
           positive sequence \(\omega_1,\ldots,\omega_q\) satisfying the tail condition in
-          (3),</em></p>
+          \(\eqref{eq:sequence-constraints}\),</em></p>
           \[
           \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
           \le
           2q\int_0^{1/2}
           \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt
           +C_{\alpha,\lambda}.
-          \tag{13}
+          \tag{13}\label{eq:path-estimate}
           \]
       </div>
-      <details class="proof">
+      <details class="proof" id="proof-lemma-6">
         <summary aria-label="Proof sketch for Lemma 6">Proof sketch</summary>
         <div class="proof-body">
-          <p>
-            <strong>(1) Proof of (9).</strong>
+          <p id="proof-eq-9">
+            <strong>(1) Proof of \(\eqref{eq:parity-bound}\).</strong>
             We treat odd and even \(q\) separately. Put
             \(k_q=\lfloor(q-1)/2\rfloor\), and choose an index \(i_\star\) such that
             \(\omega_{i_\star}=\omega_1^\downarrow\). If \(q\) is odd, each parity matching
             has \(k_q\) pairs and leaves one index unused. If \(i_\star\) is matched, replace it
-            by the unused index. The unused coordinate has no larger value, so Lemma 5(4)
+            by the unused index. The unused coordinate has no larger value, so
+            <a href="#gamma-property-4">Lemma 5(4)</a>
             shows that the sum cannot decrease.
           </p>
           <p>
@@ -1068,29 +1088,30 @@
             \(i_\star\). Each remaining matching then has \(k_q\) pairs drawn from
             \((\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\), and is therefore bounded by
             \(\Phi_{k_q,\lambda}(\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\).
-            Taking \(m=q-1\) in (3) gives
+            Taking \(m=q-1\) in \(\eqref{eq:sequence-constraints}\) gives
             \[
             \omega_q^\downarrow
             \ge q\left[\left(\frac q{q-1}\right)^\alpha-1\right]
             \ge q\alpha\log\frac q{q-1}\ge\alpha,
             \]
             where the last step uses
-            \(\log(1+t)\ge t/(1+t)\). Hence every \(\omega_i\ge\alpha\), and Lemma 5(4)
+            \(\log(1+t)\ge t/(1+t)\). Hence every \(\omega_i\ge\alpha\), and
+            <a href="#gamma-property-4">Lemma 5(4)</a>
             gives
             \(\Gamma_\lambda(\omega_i,\omega_j)\le
             \Gamma_\lambda(\alpha,\alpha)\). In particular, the pair deleted in the even
             case is bounded by \(\max\{0,\Gamma_\lambda(\alpha,\alpha)\}\).
-            This proves (9).
+            This proves \(\eqref{eq:parity-bound}\).
           </p>
-          <p>
-            <strong>(2) Proof of Step 1. Majorization.</strong>
+          <p id="proof-majorization">
+            <strong>(2) Proof of <a href="#majorization">Step 1. Majorization</a>.</strong>
             For a fixed matching, the sum of its \(\Gamma_\lambda\)-terms is convex and
             coordinatewise decreasing. Taking the maximum over all matchings preserves both
             properties, and permuting the coordinates only permutes the matchings. Hence
             \(\Phi_{k,\lambda}\) is symmetric, convex, and coordinatewise decreasing.
           </p>
-          <p>
-            <strong>Lemma 6.1.</strong>
+          <p id="lemma-6-1">
+            <a class="theorem-label" href="#lemma-6-1">Lemma 6.1.</a>
             Let \(F:(0,\infty)^N\to\mathbb R\) be symmetric, convex, and coordinatewise
             decreasing. If \(a_1\le\cdots\le a_N\), \(b_1\le\cdots\le b_N\), and
             \(\sum_{i=1}^{\ell}a_i\ge\sum_{i=1}^{\ell}b_i\) for every
@@ -1121,7 +1142,8 @@
             Thus \(F(b)\ge F(a)+g\cdot(b-a)\ge F(a)\).
           </p>
           <p>
-            We apply Lemma 6.1 to \(F=\Phi_{k_q,\lambda}\). Formula (10) can be written as
+            We apply <a href="#lemma-6-1">Lemma 6.1</a> to \(F=\Phi_{k_q,\lambda}\).
+            Formula \(\eqref{eq:reference-weights}\) can be written as
             \(\bar w_s^{(q)}=q^{1+\alpha}\int_{s-1}^{s}\alpha u^{-1-\alpha}\,du\).
             Since the integrand decreases,
             \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\), and for
@@ -1131,13 +1153,14 @@
             =q^{1+\alpha}\int_m^q\alpha u^{-1-\alpha}\,du
             =q\left[\left(\frac qm\right)^\alpha-1\right].
             \]
-            Setting \(m=q-\ell\) in (3) gives, for \(1\le\ell\le q-1\),
+            Setting \(m=q-\ell\) in \(\eqref{eq:sequence-constraints}\) gives, for
+            \(1\le\ell\le q-1\),
             \[
             \sum_{i=1}^{\ell}\omega_{q+1-i}^\downarrow
             \ge
             \sum_{i=1}^{\ell}\bar w_{q+1-i}^{(q)}.
             \]
-            Lemma 6.1, applied to
+            <a href="#lemma-6-1">Lemma 6.1</a>, applied to
             \(a=(\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\) and
             \(b=(\bar w_q^{(q)},\ldots,\bar w_2^{(q)})\), now gives
             \[
@@ -1148,8 +1171,8 @@
             (\bar w_q^{(q)},\ldots,\bar w_2^{(q)}).
             \]
           </p>
-          <p>
-            <strong>(3) Proof of Step 2. Identify the maximizing pairing.</strong>
+          <p id="proof-worst-pairing">
+            <strong>(3) Proof of <a href="#worst-pairing">Step 2. Identify the maximizing pairing</a>.</strong>
             For \(0&lt;a\le b\le c\le d\), symmetry and strict submodularity give
             \[
             \begin{aligned}
@@ -1165,11 +1188,12 @@
             paired with the largest selected value \(v_{2k}\), exchange the partners of their
             two pairs. The two displayed inequalities show that the total cannot decrease.
             Fix the pair \((v_1,v_{2k})\) and repeat with the remaining values. This gives the
-            pairing in (11).
+            pairing in \(\eqref{eq:maximizing-pairing}\).
           </p>
-          <p>
+          <p id="proof-lipschitz">
             <strong>(4) A uniform Lipschitz bound near \(t=0\).</strong>
-            Write \(q=2\ell+1\) or \(q=2\ell\). The paired sum produced by (11) becomes,
+            Write \(q=2\ell+1\) or \(q=2\ell\). The paired sum produced by
+            \(\eqref{eq:maximizing-pairing}\) becomes,
             respectively,
             \[
             \sum_{j=1}^{\ell}
@@ -1189,16 +1213,17 @@
             \]
             We first show that \(G\) remains Lipschitz as \(t\downarrow0\). Put
             \(w=W_\alpha(t)\), \(z=W_\alpha(s)\), and let
-            \((x_\ast,y_\ast)\) be the optimizer in (6). Write \(A:=w+x_\ast\),
+            \((x_\ast,y_\ast)\) be the optimizer in \(\eqref{eq:gamma-definition}\). Write
+            \(A:=w+x_\ast\),
             \(B:=z+y_\ast\), and \(\Sigma:=A+B\).
-            The derivative identity from Lemma 5(4) is
+            The derivative identity from <a href="#gamma-property-4">Lemma 5(4)</a> is
             \[
             -\partial_w\Gamma_\lambda
             =\frac{x_\ast}{2wA}+\frac{B}{A\Sigma}.
             \]
             For \(s\in[1/2,1]\),
             \(\alpha\le z=W_\alpha(s)\le\alpha2^{1+\alpha}\).
-            By Lemma 5,
+            By <a href="#gamma-geometry">Lemma 5</a>,
             \(A=A_w(\tau_\ast)\) and \(B=A_z(\tau_\ast)\). In particular,
             \(B\ge\sqrt{z\tau_\ast}\), so the first-order condition gives
             \[
@@ -1227,12 +1252,12 @@
             Integrating these derivative bounds shows that \(G\) has a bounded Lipschitz
             extension to \([0,1/2]\times[1/2,1]\).
           </p>
-          <p>
+          <p id="proof-riemann-sum">
             <strong>(5) Compare the finite sum with the integral.</strong>
             Define \(I(t):=G(t,1-t)
             =\Gamma_\lambda(W_\alpha(t),W_\alpha(1-t))\) for
             \(0\le t\le1/2\).
-            By part (4), there are finite constants
+            By <a href="#proof-lipschitz">part (4)</a>, there are finite constants
             \(L_{\alpha,\lambda}\) and \(M_{\alpha,\lambda}\) such that
             \[
             |G(t,s)-G(t',s')|
@@ -1246,11 +1271,11 @@
             Suppose first that \(q\ge3\). In either parity, the term nearest
             \(t=1/2\) is
             \(T_q:=\Gamma_\lambda(\bar w_{\ell+1}^{(q)},\bar w_{\ell+2}^{(q)})\).
-            Formula (12) gives
+            Formula \(\eqref{eq:mean-value-profile}\) gives
             \(\theta_{\ell+1}/q,\theta_{\ell+2}/q\in[1/3,1]\), so
             \(\bar w_{\ell+1}^{(q)},\bar w_{\ell+2}^{(q)}
             \in[\alpha,\alpha3^{1+\alpha}]\).
-            Lemma 5 therefore gives the uniform bound
+            <a href="#gamma-geometry">Lemma 5</a> therefore gives the uniform bound
             \[
             |T_q|
             \le
@@ -1266,7 +1291,7 @@
             \sum_{j=1}^{\ell-1}
             G\left(\frac{\theta_{j+1}}q,\frac{\theta_{q+1-j}}q\right).
             \]
-            Put \(u_j:=j/q\). The locations in (12) satisfy
+            Put \(u_j:=j/q\). The locations in \(\eqref{eq:mean-value-profile}\) satisfy
             \[
             \frac{\theta_{j+1}}q
             \in\left(u_j,u_j+\frac1q\right),
@@ -1340,7 +1365,8 @@
             +O_{\alpha,\lambda}(1).
             \]
             When \(q=2\), \(\Phi_{k_q,\lambda}=\Phi_{0,\lambda}=0\), so the same estimate
-            holds after enlarging the constant. Combining it with (9) proves (13).
+            holds after enlarging the constant. Combining it with
+            \(\eqref{eq:parity-bound}\) proves \(\eqref{eq:path-estimate}\).
           </p>
         </div>
       </details>
@@ -1354,21 +1380,22 @@
       2\lambda+
       2\int_0^{1/2}
       \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt.
-      \tag{14}
+      \tag{14}\label{eq:scalar-functional}
       \]
-      <p>Combining Lemmas 4 and 6 gives</p>
+      <p>Combining Lemmas <a href="#envelope-reduction">4</a> and
+      <a href="#path-estimate">6</a> gives</p>
       \[
       E_{\mathrm{end}}
       \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
       \le C_{\alpha,\lambda}e^{qJ(\alpha,\lambda)}.
-      \tag{15}
+      \tag{15}\label{eq:scalar-product-bound}
       \]
       <p>
-        Therefore, if \(J(\alpha,\lambda)\le0\), then (4) holds uniformly in \(q\), and
-        Lemma 3 gives
+        Therefore, if \(J(\alpha,\lambda)\le0\), then \(\eqref{eq:sequence-bound}\) holds
+        uniformly in \(q\), and <a href="#normalized-core">Lemma 3</a> gives
         \[
         R_n(H)\ge c_{\alpha,\lambda}(n+1)^{-(1+\alpha)}.
-        \tag{16}
+        \tag{16}\label{eq:final-rate}
         \]
         Thus we seek a small \(\alpha&gt;0\) and some \(\lambda&gt;0\) for which
         \(J(\alpha,\lambda)\le0\).
@@ -1380,31 +1407,35 @@
         J(0.6342,0.4506)&lt;-0.00005&lt;0.
         \]
         Since \(n+1\le2n\) for \(n\ge1\), the fixed factor \(2^{1.6342}\) is absorbed
-        into the constant. Hence \(R_n(H)=\Omega(n^{-1.6342})\), proving Theorem 2.
+        into the constant. Hence \(R_n(H)=\Omega(n^{-1.6342})\), proving
+        <a href="#theorem-main">Theorem 2</a>.
       </p>
       <p>
         Let \(\alpha_0\) be the unique zero of
         \(J(\alpha,0.4506)\), and define \(p_0:=1+\alpha_0\). Numerically,
         \(p_0\approx1.6341605846\).
       </p>
-      <details class="proof">
+      <details class="proof" id="proof-theorem-2">
         <summary aria-label="Proof sketch for the scalar criterion and Theorem 2">Proof sketch</summary>
         <div class="proof-body">
           <p>
-            When \(J(\alpha,\lambda)\le0\), equation (15) supplies the uniform constant
-            required in (4). Lemma 3 then gives (16).
+            When \(J(\alpha,\lambda)\le0\), equation
+            \(\eqref{eq:scalar-product-bound}\) supplies the uniform constant required in
+            \(\eqref{eq:sequence-bound}\). <a href="#normalized-core">Lemma 3</a> then gives
+            \(\eqref{eq:final-rate}\).
           </p>
           <p>
             For every fixed \(\lambda&gt;0\), the map
             \(\alpha\mapsto J(\alpha,\lambda)\) is continuous and strictly decreasing.
             Indeed \(W_\alpha(t)\) increases with \(\alpha\), while
             \(\Gamma_\lambda\) decreases in each coordinate. The endpoint estimates in the
-            proof of Lemma 6 give locally uniform domination.
+            <a href="#proof-lemma-6">proof of Lemma 6</a> give locally uniform domination.
           </p>
           <p>
             As \(\alpha\downarrow0\), \(W_\alpha(u)\) tends to zero uniformly for
             \(u\in[1/4,3/4]\). Evaluating the supremum defining
-            \(\Gamma_\lambda\) at any fixed \(x,y&gt;0\) shows that the integrand in (14) tends
+            \(\Gamma_\lambda\) at any fixed \(x,y&gt;0\) shows that the integrand in
+            \(\eqref{eq:scalar-functional}\) tends
             uniformly to \(+\infty\) on \([1/4,1/2]\). The coordinatewise monotonicity of
             \(\Gamma_\lambda\) gives an integrable lower bound on the rest of the interval, so
             this divergence cannot be cancelled. Hence
@@ -1443,18 +1474,20 @@
         <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai's Lemma 6</a>),
         we use a finer term-by-term analysis of the full chronological sequence. This improves
         <a href="https://chungentsai.github.io/gd-lower-bounds.html#theorem-2">Tsai's lower
-        bound</a> from \(\Omega(n^{-\sqrt{3}})\) to \(\Omega(n^{-1.6342})\).
+        bound</a> from \(\Omega(n^{-1.7321})\) to \(\Omega(n^{-1.6342})\).
       </p>
       <p>
         At the exponential scale relevant to the final rate, our sequence estimates appear
         fairly tight. One plausible source of slack is the
-        parity split in (9). The odd and even edges form two alternating matchings of the same
+        parity split in \(\eqref{eq:parity-bound}\). The odd and even edges form two alternating
+        matchings of the same
         chronological path, but we bound them independently by the same unconstrained
         worst-matching value. For strictly ordered weights, the two matchings need not
-        simultaneously attain the outside-in maximizer in (11).
+        simultaneously attain the outside-in maximizer in \(\eqref{eq:maximizing-pairing}\).
       </p>
       <p>
-        A more structural question is whether Lemma 2 can already yield the
+        A more structural question is whether <a href="#lemma-hard-functions">Lemma 2</a> can
+        already yield the
         \(\Omega(n^{-1.271553\ldots})\) lower bound, matching the
         <a href="https://arxiv.org/abs/2309.16530">silver-stepsize upper bound</a>.
         Our refined analysis makes me skeptical that this route will close the whole gap, but
