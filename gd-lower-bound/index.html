@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-23T22:11:00-04:00">
+  <meta property="article:modified_time" content="2026-08-23T22:20:00-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
@@ -272,7 +272,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 23, 2026 22:11 (GMT-4).</span>
+            <span>Last updated: August 23, 2026 22:20 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -775,7 +775,8 @@
             =
             \frac1\Sigma-\frac1{2w}-\frac1{2A_w}&lt;0,
             \]
-            and similarly in \(z\). Implicit differentiation of the scalar optimizer equation
+            and similarly in \(z\). This proves the coordinatewise-decreasing property.
+            Implicit differentiation of the scalar optimizer equation
             gives
             \[
             \partial_z\tau&lt;0,\qquad
