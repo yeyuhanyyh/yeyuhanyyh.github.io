@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-24T08:31:00-04:00">
+  <meta property="article:modified_time" content="2026-08-24T08:47:00-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A proof of an Ω(n^-1.6342) lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
@@ -272,7 +272,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 24, 2026 08:31 (GMT-4).</span>
+            <span>Last updated: August 24, 2026 08:47 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -668,7 +668,7 @@
         \[
         \log K_{w,z}(x,y)
         \le \lambda(x+y)+\Gamma_\lambda(w,z).
-        \tag{6a}\label{eq:gamma-envelope}
+        \tag{7}\label{eq:gamma-envelope}
         \]
         <a href="#envelope-reduction">Lemma 4</a> applies
         \(\eqref{eq:gamma-envelope}\) to the \(q-1\) consecutive pairs and uses the budget
@@ -689,7 +689,7 @@
           2\lambda q+
           \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
           \right\}.
-          \tag{7}\label{eq:envelope-reduction}
+          \tag{8}\label{eq:envelope-reduction}
           \]
       </div>
       <details class="proof" id="proof-lemma-4">
@@ -789,7 +789,7 @@
             <strong>(5) Strict submodularity.</strong>
             \[
             \partial_{wz}^2\Gamma_\lambda(w,z)&lt;0.
-            \tag{8}\label{eq:submodularity}
+            \tag{9}\label{eq:submodularity}
             \]
           </p>
         </div>
@@ -955,7 +955,7 @@
         2\Phi_{k_q,\lambda}
         (\omega_q^\downarrow,\ldots,\omega_2^\downarrow)
         +C_{\alpha,\lambda}.
-        \tag{9}\label{eq:parity-bound}
+        \tag{10}\label{eq:parity-bound}
         \]
         See the <a href="#proof-lemma-6">proof sketch</a> for details.
       </p>
@@ -973,7 +973,7 @@
       :=
       q^{1+\alpha}\bigl((s-1)^{-\alpha}-s^{-\alpha}\bigr),
       \qquad 2\le s\le q.
-      \tag{10}\label{eq:reference-weights}
+      \tag{11}\label{eq:reference-weights}
       \]
       <p>
         Their tails satisfy
@@ -1013,7 +1013,7 @@
         =
         \sum_{j=1}^k
         \Gamma_\lambda(v_j,v_{2k+1-j}).
-        \tag{11}\label{eq:maximizing-pairing}
+        \tag{12}\label{eq:maximizing-pairing}
         \]
         The numbers in \(\eqref{eq:reference-weights}\) satisfy
         \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\), so
@@ -1035,7 +1035,7 @@
       \[
       \bar w_s^{(q)}=W_\alpha(\theta_s/q),
       \qquad W_\alpha(t):=\alpha t^{-1-\alpha},\quad 0&lt;t\le1.
-      \tag{12}\label{eq:mean-value-profile}
+      \tag{13}\label{eq:mean-value-profile}
       \]
       <p>
         As shown in the <a href="#proof-lemma-6">proof of Lemma 6</a>, the integrand extends
@@ -1066,7 +1066,7 @@
           2q\int_0^{1/2}
           \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt
           +C_{\alpha,\lambda}.
-          \tag{13}\label{eq:path-estimate}
+          \tag{14}\label{eq:path-estimate}
           \]
       </div>
       <details class="proof" id="proof-lemma-6">
@@ -1380,7 +1380,7 @@
       2\lambda+
       2\int_0^{1/2}
       \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt.
-      \tag{14}\label{eq:scalar-functional}
+      \tag{15}\label{eq:scalar-functional}
       \]
       <p>Combining Lemmas <a href="#envelope-reduction">4</a> and
       <a href="#path-estimate">6</a> gives</p>
@@ -1388,14 +1388,14 @@
       E_{\mathrm{end}}
       \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
       \le C_{\alpha,\lambda}e^{qJ(\alpha,\lambda)}.
-      \tag{15}\label{eq:scalar-product-bound}
+      \tag{16}\label{eq:scalar-product-bound}
       \]
       <p>
         Therefore, if \(J(\alpha,\lambda)\le0\), then \(\eqref{eq:sequence-bound}\) holds
         uniformly in \(q\), and <a href="#normalized-core">Lemma 3</a> gives
         \[
         R_n(H)\ge c_{\alpha,\lambda}(n+1)^{-(1+\alpha)}.
-        \tag{16}\label{eq:final-rate}
+        \tag{17}\label{eq:final-rate}
         \]
         Thus we seek a small \(\alpha&gt;0\) and some \(\lambda&gt;0\) for which
         \(J(\alpha,\lambda)\le0\).
