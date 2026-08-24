@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-23T22:46:00-04:00">
+  <meta property="article:modified_time" content="2026-08-23T23:09:00-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A sharper lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
@@ -272,7 +272,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 23, 2026 22:46 (GMT-4).</span>
+            <span>Last updated: August 23, 2026 23:09 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -500,9 +500,9 @@
             \delta|x|-\delta^2/2,&amp; |x|&gt;\delta.
             \end{cases}
             \]
-            Starting from \(\xi_1=1\), GD satisfies
+            Starting from \(\xi_1=1\), an induction gives
             \(\xi_k=1-\delta\sum_{j&lt;k}h_j&gt;\delta\). Hence every iterate stays on the
-            positive affine branch, and the normalized final gap is
+            positive affine branch, and the ratio in the definition of \(R_n(H)\) is
             \(2f_\delta(\xi_{n+1})=\delta\). If \(r=0\), then
             \(\delta=(2B-1)^{-1}\), so
             \[
@@ -514,11 +514,17 @@
             \[
             q\in\operatorname*{arg\,min}_{1\le s\le r}D_s s^\alpha.
             \]
+            Thus
+            \[
+            D_q q^\alpha\le D_s s^\alpha,
+            \qquad 1\le s\le r.
+            \]
             If \(q=1\), let \(a_1\) be the largest excess. Since
-            \(D_1+a_1=1+\sum_{k=1}^n h_k\), the Huber bound above is
-            \([2(D_1+a_1)-1]^{-1}\), which is at least \(1/(4D_1)\) when
-            \(a_1\le D_1\). If \(a_1&gt;D_1\), select only the step carrying \(a_1\)
-            in Lemma 2 and write \(U_1:=S_1+1\) and \(V:=S_2+1\). Then
+            \(D_1+a_1=1+\sum_{k=1}^n h_k\), the Huber construction gives
+            \(R_n(H)\ge[2(D_1+a_1)-1]^{-1}\), which is at least \(1/(4D_1)\) when
+            \(a_1\le D_1\). If \(a_1&gt;D_1\), choose an index \(t\) with
+            \(h_t-1=a_1\) and apply Lemma 2 with \(m=1\) and \(t_1=t\). Write
+            \(U_1:=S_1+1\) and \(V:=S_2+1\). Then
             \(D_1=U_1+V\), and Lemma 2 gives
             \[
             R_n(H)\ge
@@ -528,23 +534,27 @@
             \]
             Since \(U_1\le D_1\) and
             \(U_1+a_1+2V-1&lt;a_1+2D_1&lt;3a_1\), both cases give
-            \(R_n(H)\ge1/(4D_1)\). Minimality of \(q=1\) gives
+            \(R_n(H)\ge1/(4D_1)\). Taking \(s=r\) in
+            \(D_q q^\alpha\le D_s s^\alpha\), with \(q=1\), gives
             \(D_1\le D_r r^\alpha=Br^\alpha\), and hence
             \[
             R_n(H)\ge\frac1{4B(r+1)^\alpha}.
             \]
           </p>
           <p>
-            Now assume \(q\ge2\). Let \(t_1&lt;\cdots&lt;t_q\) be the positions of the top
-            \(q\) excesses, and set \(\widetilde a_i:=h_{t_i}-1\). Thus
-            \((\widetilde a_1,\ldots,\widetilde a_q)\) is a chronological permutation of
-            \((a_1,\ldots,a_q)\). With \(S_i\) as in Lemma 2, define
+            Now assume \(q\ge2\). Let \(t_1&lt;\cdots&lt;t_q\) be the indices of the \(q\)
+            largest positive excesses, listed in increasing order, and set
+            \(\widetilde a_i:=h_{t_i}-1\). Thus
+            \((\widetilde a_1,\ldots,\widetilde a_q)\) consists of
+            \(a_1,\ldots,a_q\), listed in the order in which the corresponding steps occur.
+            With \(S_i\) as in Lemma 2, define
             \[
             U_i:=S_i+1\quad(1\le i\le q),
             \qquad V:=S_{q+1}+1,
             \qquad \bar U:=\frac{D_q}{q}.
             \]
-            Every unselected excess belongs to one of these gaps, so
+            The gap sums \(S_1,\ldots,S_{q+1}\) contain exactly the unselected steps.
+            Hence, by the definition of \(B\),
             \[
             D_q=\sum_{i=1}^q U_i+V.
             \]
@@ -557,7 +567,7 @@
             \]
             Then \(\sum_i x_i=q-V/\bar U&lt;q\), while the decreasing rearrangement
             satisfies \(\omega_s^\downarrow=a_s/\bar U\). For every \(1\le m&lt;q\),
-            minimality of \(q\) gives
+            the comparison \(D_q q^\alpha\le D_m m^\alpha\) gives
             \[
             1+\frac1q\sum_{s=m+1}^q\omega_s^\downarrow
             =\frac{D_m}{D_q}
@@ -566,8 +576,10 @@
             which is exactly (3).
           </p>
           <p>
-            Let \(G_q\) denote the right-hand side of (1) for this selected chain.
-            Direct multiplication and telescoping give
+            Let \(G_q\) be the expression on the right-hand side of (1), with \(m=q\)
+            and the indices \(t_1,\ldots,t_q\) chosen above. Lemma 2 gives
+            \(R_n(H)\ge G_q\). Rewriting the factors in (1) in terms of \(x_i\),
+            \(\omega_i\), and \(\bar U\) gives
             \[
             G_q^{-1}
             =\bar U\,\widehat E_{\mathrm{end}}
@@ -581,12 +593,13 @@
             \left[1+\frac{x_q+2(q-\sum_i x_i)-\bar U^{-1}}{\omega_q}\right]
             \le E_{\mathrm{end}}.
             \]
-            Hence (4) gives \(G_q\ge q/(C_\alpha D_q)\). Since Lemma 2 gives
-            \(R_n(H)\ge G_q\), and minimality gives
+            Using (4) and \(\widehat E_{\mathrm{end}}\le E_{\mathrm{end}}\), we obtain
+            \(G_q\ge q/(C_\alpha D_q)\). Taking \(s=r\) in
+            \(D_q q^\alpha\le D_s s^\alpha\) gives
             \[
-            D_q q^\alpha\le D_r r^\alpha=Br^\alpha,
+            D_q q^\alpha\le D_r r^\alpha=Br^\alpha.
             \]
-            we obtain
+            Therefore
             \[
             R_n(H)
             \ge\frac{q}{C_\alpha D_q}
@@ -689,20 +702,27 @@
           For every \(\lambda&gt;0\), \(\Gamma_\lambda\) has the following properties.</p>
         <div class="statement property-list">
           <p class="property">
-            <strong>(1) Symmetry.</strong>
+            <strong>(1) Smoothness.</strong>
+            For every \(w,z&gt;0\), the supremum in (6) is attained at a unique pair
+            \((x_\lambda(w,z),y_\lambda(w,z))\in(0,\infty)^2\). The optimizer map
+            \((w,z)\mapsto(x_\lambda(w,z),y_\lambda(w,z))\) and \(\Gamma_\lambda\) are
+            \(C^\infty\) on \((0,\infty)^2\).
+          </p>
+          <p class="property">
+            <strong>(2) Symmetry.</strong>
             \(\Gamma_\lambda(w,z)=\Gamma_\lambda(z,w)\).
           </p>
           <p class="property">
-            <strong>(2) Joint convexity.</strong>
+            <strong>(3) Joint convexity.</strong>
             The map \((w,z)\mapsto\Gamma_\lambda(w,z)\) is jointly convex on
             \((0,\infty)^2\).
           </p>
           <p class="property">
-            <strong>(3) Decreasing in each coordinate.</strong>
+            <strong>(4) Decreasing in each coordinate.</strong>
             \(\Gamma_\lambda\) is strictly decreasing in each coordinate.
           </p>
           <p class="property">
-            <strong>(4) Strict submodularity.</strong>
+            <strong>(5) Strict submodularity.</strong>
             \[
             \partial_{wz}^2\Gamma_\lambda(w,z)&lt;0.
             \tag{8}
@@ -714,6 +734,7 @@
         <summary aria-label="Proof sketch for Lemma 5">Proof sketch</summary>
         <div class="proof-body">
           <p>
+            <strong>(1) Smoothness.</strong>
             Let
             \[
             F_{w,z}(x,y):=\log K_{w,z}(x,y)-\lambda(x+y).
@@ -732,8 +753,6 @@
             +\frac{a^2}{2A^2}+\frac{b^2}{2B^2}&lt;0.
             \]
             Thus the maximizer is unique.
-          </p>
-          <p>
             At the maximizer, the first-order equations imply
             \[
             x\left(1+\frac{x}{w}\right)
@@ -748,13 +767,29 @@
             \[
             \frac1{2\tau}+\frac1{A_w(\tau)+A_z(\tau)}=\lambda.
             \]
-            The left-hand side is strictly decreasing from \(+\infty\) to \(0\).
-            Its derivative with respect to \(\tau\) is strictly negative, so the implicit
-            function theorem makes the optimizer smooth in \((w,z)\). At the optimizer,
-            \(A=A_w(\tau)\) and \(B=A_z(\tau)\). The definition (6) is symmetric under
-            \((w,x)\leftrightarrow(z,y)\), proving (1).
+            The left-hand side decreases from \(+\infty\) to \(0\), and
+            \[
+            \frac{\partial}{\partial\tau}
+            \left[
+            \frac1{2\tau}+\frac1{A_w(\tau)+A_z(\tau)}
+            \right]
+            =-\frac1{2\tau^2}
+            -\frac{A_w'(\tau)+A_z'(\tau)}
+            {(A_w(\tau)+A_z(\tau))^2}&lt;0.
+            \]
+            By the implicit function theorem and uniqueness of the root, \(\tau(w,z)\), and
+            hence the unique optimizer, is \(C^\infty\) throughout \((0,\infty)^2\). Since
+            \(\Gamma_\lambda\) is the objective evaluated at this optimizer, it is also
+            \(C^\infty\). At the optimizer,
+            \(A=A_w(\tau)\) and \(B=A_z(\tau)\).
           </p>
           <p>
+            <strong>(2) Symmetry.</strong>
+            The definition (6) is invariant under
+            \((w,x)\leftrightarrow(z,y)\), which proves Property (2).
+          </p>
+          <p>
+            <strong>(3) Joint convexity.</strong>
             For fixed \(x,y\), the Hessian in \((w,z)\) has quadratic form
             \[
             \frac{a^2}{2w^2}+\frac{a^2}{2A^2}
@@ -767,10 +802,11 @@
             \frac{a^2}{A^2}+\frac{b^2}{B^2}
             \ge \frac{(a+b)^2}{(A+B)^2}.
             \]
-            Taking the supremum preserves convexity.
+            Taking the supremum in (6) preserves convexity, proving Property (3).
           </p>
           <p>
-            Danskin's theorem gives
+            <strong>(4) Decreasing in each coordinate.</strong>
+            At the unique optimizer, Danskin's theorem gives
             \[
             \partial_w\Gamma_\lambda
             =
@@ -781,23 +817,32 @@
             -\partial_w\Gamma_\lambda
             =\frac{x}{2wA}+\frac{B}{A\Sigma}&gt;0,
             \]
-            and similarly in \(z\). This proves the coordinatewise-decreasing property.
-            At fixed \(\tau\), the left-hand side of the optimizer equation decreases with
-            \(z\). Since
-            \(\Sigma=(\lambda-1/(2\tau))^{-1}\) and \(A_w'(\tau)&gt;0\), implicit
-            differentiation gives
+            and similarly in \(z\). This proves Property (4).
+          </p>
+          <p>
+            <strong>(5) Strict submodularity.</strong>
+            Define
             \[
-            \partial_z\tau&lt;0,\qquad
-            \partial_z\Sigma&gt;0,\qquad
-            \partial_z A_w(\tau(w,z))&lt;0.
+            g(\tau;w,z):=
+            \frac1{2\tau}+\frac1{A_w(\tau)+A_z(\tau)}-\lambda.
             \]
-            Therefore
+            At fixed \(w\), \(\partial_\tau g&lt;0\), while \(\partial_z g&lt;0\) because
+            \(A_z(\tau)\) increases with \(z\). Thus
+            \(\partial_z\tau=-(\partial_zg)/(\partial_\tau g)&lt;0\). At the optimizer,
+            \(\Sigma=(\lambda-1/(2\tau))^{-1}\) and \(A=A_w(\tau)\). Since \(\Sigma\)
+            decreases with \(\tau\) and \(A_w'(\tau)&gt;0\),
+            \[
+            \partial_z\Sigma&gt;0,\qquad
+            \partial_z A=A_w'(\tau)\partial_z\tau&lt;0.
+            \]
+            Differentiating the formula for \(\partial_w\Gamma_\lambda\) gives
             \[
             \partial_{wz}^2\Gamma_\lambda
             =
             -\frac{\partial_z\Sigma}{\Sigma^2}
-            +\frac{\partial_z A_w(\tau(w,z))}{2A^2}&lt;0.
+            +\frac{\partial_z A}{2A^2}&lt;0,
             \]
+            proving Property (5).
           </p>
         </div>
       </details>
@@ -833,7 +878,7 @@
 
       <p>
         Set \(k_q:=\lfloor(q-1)/2\rfloor\). By the coordinatewise-decreasing property in
-        <a href="#gamma-geometry">Lemma 5(3)</a>,
+        <a href="#gamma-geometry">Lemma 5(4)</a>,
         \(\Gamma_\lambda(\omega_i,\omega_j)\le\Gamma_\lambda(\alpha,\alpha)\), since
         (3) with \(m=q-1\) gives \(\omega_i,\omega_j\ge\alpha\). Considering odd and even
         \(q\) separately gives
@@ -895,8 +940,8 @@
       <p>
         Let \(0&lt;v_1\le\cdots\le v_N\) and \(0\le k\le\lfloor N/2\rfloor\).
         Since \(\Gamma_\lambda\) decreases in each coordinate, a maximizing matching in
-        \(\Phi_{k,\lambda}(v)\) may be chosen to use the \(2k\) smallest entries. Strict
-        submodularity then pairs the two ends of this ordered list.
+        \(\Phi_{k,\lambda}(v)\) may be chosen to use the \(2k\) smallest entries.
+        Symmetry and strict submodularity then pair the two ends of this ordered list.
         \[
         \Phi_{k,\lambda}(v_1,\ldots,v_N)
         =
@@ -907,9 +952,12 @@
         The numbers in (10) satisfy
         \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\), so (11) applies directly to
         \((\bar w_q^{(q)},\ldots,\bar w_2^{(q)})\). In particular,
-        \(\Phi_{k_q,\lambda}(\bar w_q^{(q)},\ldots,\bar w_2^{(q)})
-        =\sum_{j=1}^{k_q}\Gamma_\lambda(\bar w_{q+1-j}^{(q)},\bar w_{q-2k_q+j}^{(q)})\).
       </p>
+      \[
+      \Phi_{k_q,\lambda}(\bar w_q^{(q)},\ldots,\bar w_2^{(q)})
+      =\sum_{j=1}^{k_q}
+      \Gamma_\lambda(\bar w_{q+1-j}^{(q)},\bar w_{q-2k_q+j}^{(q)}).
+      \]
       <p class="theme-emphasis">It remains to estimate this explicit sum.</p>
       <p>
         By the mean value theorem, for every
@@ -954,16 +1002,18 @@
         <summary aria-label="Proof sketch for Lemma 6">Proof sketch</summary>
         <div class="proof-body">
           <p>
-            We first prove (9). Split the chronological path into odd and even edges, put
-            \(k_q=\lfloor(q-1)/2\rfloor\), and choose one coordinate attaining
-            \(\omega_1^\downarrow\). If \(q\) is odd, each matching leaves one coordinate
-            unused. Whenever a matching contains the chosen coordinate, replace it by an
-            unused coordinate that is no larger. If \(q\) is even, remove the edge containing
-            the chosen coordinate from the perfect matching. In the other matching, make the
-            same replacement if necessary. Coordinatewise decrease can only increase the
-            resulting sums. After these operations, both retained matchings have \(k_q\) edges
-            on the \(q-1\) coordinates obtained by deleting the chosen occurrence, so each is
-            bounded by
+            <strong>(1) Split the consecutive pairs by parity.</strong>
+            Put \(k_q=\lfloor(q-1)/2\rfloor\), and choose one occurrence of
+            \(\omega_1^\downarrow\). If \(q\) is odd, each parity matching has \(k_q\)
+            pairs and leaves one index unused. If a matching contains the chosen occurrence,
+            replace it by the unused index. Its value is no larger, so Lemma 5(4) shows that
+            this replacement cannot decrease the sum.
+          </p>
+          <p>
+            If \(q\) is even, one parity matching has \(k_q\) pairs and is handled in the
+            same way. The other matching is perfect. Delete its unique pair containing the
+            chosen occurrence. Each remaining matching now has \(k_q\) pairs drawn from
+            \((\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\), and is therefore bounded by
             \(\Phi_{k_q,\lambda}(\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\).
             Taking \(m=q-1\) in (3) gives
             \[
@@ -972,11 +1022,15 @@
             \ge q\alpha\log\frac q{q-1}\ge\alpha,
             \]
             where the last step uses
-            \(\log(1+t)\ge t/(1+t)\). Thus, in the even case, the removed edge is at most
-            \(\Gamma_\lambda(\alpha,\alpha)\). No edge is removed when \(q\) is odd, so this
-            proves (9).
+            \(\log(1+t)\ge t/(1+t)\). Hence every \(\omega_i\ge\alpha\), and Lemma 5(4)
+            gives
+            \(\Gamma_\lambda(\omega_i,\omega_j)\le
+            \Gamma_\lambda(\alpha,\alpha)\). In particular, the pair deleted in the even
+            case is bounded by \(\max\{0,\Gamma_\lambda(\alpha,\alpha)\}\).
+            This proves (9).
           </p>
           <p>
+            <strong>(2) Compare the two ordered vectors.</strong>
             Each fixed-matching sum in the definition of \(\Phi_{k,\lambda}\) is convex
             and coordinatewise decreasing. Taking the maximum over all matchings preserves
             these properties. The collection of matchings is invariant under coordinate
@@ -994,22 +1048,27 @@
             =g_ND_N+\sum_{\ell=1}^{N-1}(g_\ell-g_{\ell+1})D_\ell\ge0.
             \]
             The subgradient inequality therefore gives
-            \(\Phi_{k,\lambda}(a)\le\Phi_{k,\lambda}(b)\), which is the
-            weak-supermajorization comparison used above.
+            \(\Phi_{k,\lambda}(a)\le\Phi_{k,\lambda}(b)\).
           </p>
           <p>
-            The reference entries also satisfy
+            The comparison weights satisfy
             \[
             \bar w_s^{(q)}
             =q^{1+\alpha}\int_{s-1}^{s}\alpha u^{-1-\alpha}\,du.
             \]
             Since the integrand decreases, this proves
             \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\). Their tail sums telescope to the
-            right-hand side of (3), so the preceding majorization argument proves the
-            comparison in Step 1.
+            right-hand side of (3). Apply the preceding partial-sum argument with
+            \[
+            a=(\omega_q^\downarrow,\ldots,\omega_2^\downarrow),
+            \qquad
+            b=(\bar w_q^{(q)},\ldots,\bar w_2^{(q)}).
+            \]
+            This proves the comparison in Step 1.
           </p>
           <p>
-            For \(0&lt;a\le b\le c\le d\), submodularity gives
+            <strong>(3) Determine the maximizing pairing.</strong>
+            For \(0&lt;a\le b\le c\le d\), symmetry and strict submodularity give
             \[
             \Gamma_\lambda(a,d)+\Gamma_\lambda(b,c)
             \ge\Gamma_\lambda(a,c)+\Gamma_\lambda(b,d),
@@ -1023,6 +1082,7 @@
             applications of these two exchange inequalities produce the pairing in (11).
           </p>
           <p>
+            <strong>(4) Control the endpoint \(t=0\).</strong>
             Write \(q=2\ell+1\) or \(q=2\ell\). The paired sum produced by (11) becomes,
             respectively,
             \[
@@ -1037,8 +1097,8 @@
             \[
             \bar w_s^{(q)}=W_\alpha(\xi_s/q).
             \]
-            Each paired sum is therefore a Riemann sum along \((t,1-t)\). We now justify a
-            uniform endpoint estimate for
+            We next compare these sums with a Riemann sum along \((t,1-t)\). To control the
+            terms near \(t=0\), define
             \(G(t,s):=\Gamma_\lambda(W_\alpha(t),W_\alpha(s))\). Let
             \(w=W_\alpha(t)\), \(z=W_\alpha(s)\), and let \((x,y)\) be the optimizer in
             (6). Set \(A_w=w+x\), \(A_z=z+y\), and \(\Sigma=A_w+A_z\). The derivative formula in
@@ -1070,7 +1130,15 @@
             \((0,\infty)\).
           </p>
           <p>
-            It follows that, in either parity case,
+            <strong>(5) Compare the finite sums with the integral.</strong>
+            When the displayed sum is nonempty, remove its final term. In both parity cases
+            this term is
+            \(\Gamma_\lambda(\bar w_{\ell+1}^{(q)},\bar w_{\ell+2}^{(q)})\).
+            Formula (12) places both arguments in a fixed compact interval depending only on
+            \(\alpha\), so its contribution is bounded independently of \(q\). The remaining terms
+            form Riemann sums for the same integral. The Lipschitz bound above controls the
+            rounding error in each term, and the missing endpoint intervals contribute only
+            a bounded amount. Consequently, for either parity,
             \[
             \Phi_{k_q,\lambda}
             (\bar w_q^{(q)},\ldots,\bar w_2^{(q)})
@@ -1078,8 +1146,10 @@
             \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt
             +O_{\alpha,\lambda}(1).
             \]
-            The possible central edge and the case \(q=2\) are absorbed into the same
-            constant. Combining this estimate with (9) proves (13).
+            When \(q=2\), \(\Phi_{k_q,\lambda}=\Phi_{0,\lambda}=0\). Since the integral is
+            finite, the same estimate holds after enlarging the
+            \(O_{\alpha,\lambda}(1)\) term, and (9) also bounds the single pair in the
+            original sum. Combining the estimate above with (9) proves (13).
           </p>
         </div>
       </details>
