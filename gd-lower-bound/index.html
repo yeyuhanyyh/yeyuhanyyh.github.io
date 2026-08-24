@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-24T01:05:24-04:00">
+  <meta property="article:modified_time" content="2026-08-24T01:07:55-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A proof of an Ω(n^-1.6342) lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
@@ -272,7 +272,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 24, 2026 01:05 (GMT-4).</span>
+            <span>Last updated: August 24, 2026 01:07 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -909,8 +909,8 @@
       </p>
 
       <p class="theme-emphasis">
-        We first compare the two sequences by majorization and then identify a matching that
-        attains the maximum in \(\Phi_{k_q,\lambda}\). Both arguments use
+        We now bound \(\Phi_{k_q,\lambda}\) through two finer reductions, using the
+        properties of \(\Gamma_\lambda\) established in
         <a href="#gamma-geometry">Lemma 5</a>.
       </p>
 
@@ -1265,27 +1265,29 @@
 
       <h3 id="concluding-remarks"><span>Concluding Remarks</span></h3>
       <p>
-        We use the same hard-function construction and the product-form lower bound in
+        Starting from the same hard-function construction and the corresponding chain bound in
         <a href="#lemma-hard-functions">Lemma 2</a> (cf.
-        <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai's Lemma 6</a>).
-        We then estimate the resulting factors term by term. This improves
+        <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai's Lemma 6</a>),
+        we use a finer term-by-term analysis of the full chronological sequence. This improves
         <a href="https://chungentsai.github.io/gd-lower-bounds.html#theorem-2">Tsai's lower
         bound</a> from \(\Omega(n^{-\sqrt{3}})\) to \(\Omega(n^{-1.6342})\).
       </p>
       <p>
-        The \(O_{\alpha,\lambda}(1)\) errors in Lemma 6 do not affect the exponent. A possible
-        source of slack is (9). It bounds the odd- and even-indexed terms separately by the
-        same maximum \(\Phi_{k_q,\lambda}\) over all \(k_q\)-matchings. For strictly ordered
-        entries, the two matchings need not simultaneously realize the maximizing pairing in
-        (11).
+        At the exponential scale relevant to the final rate, our sequence estimates appear
+        fairly tight. One plausible source of slack is the
+        parity split in (9). The odd and even edges form two alternating matchings of the same
+        chronological path, but we bound them independently by the same unconstrained
+        worst-matching value. For strictly ordered weights, the two matchings need not
+        simultaneously attain the outside-in maximizer in (11).
       </p>
       <p>
         A more structural question is whether Lemma 2 can already yield the
         \(\Omega(n^{-1.271553\ldots})\) lower bound, matching the
         <a href="https://arxiv.org/abs/2309.16530">silver-stepsize upper bound</a>.
-        We do not know whether this is possible. The estimates above suggest that Lemma 2 alone
-        may not close the gap, but they do not prove impossibility. One possible direction is to
-        construct a hard function in which long steps at several scales interact.
+        Our refined analysis makes us skeptical that this route will close the whole gap, but
+        it does not give an impossibility result. It may instead be necessary to construct hard
+        functions with a hierarchy of scales, so that long steps at different scales interact
+        within the same instance, mirroring the recursive structure of silver stepsizes.
       </p>
 
       <h3 id="bibliographic-information"><span>Bibliographic Information</span></h3>
