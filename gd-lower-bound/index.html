@@ -637,8 +637,9 @@
         \tag{7}\label{eq:gamma-envelope}
         \]
         <a href="#envelope-reduction">Lemma 4</a> applies
-        \(\eqref{eq:gamma-envelope}\) to the \(q-1\) consecutive pairs and uses the budget
-        \(\sum_{i=1}^q x_i&lt;q\) to absorb the endpoint factor.
+        \(\eqref{eq:gamma-envelope}\) to each
+        \(K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})\), \(1\le i&lt;q\), and eliminates the variables
+        \(x_i\) using the condition \(\sum_{i=1}^q x_i\le q\).
       </p>
       <div class="theorem" id="envelope-reduction">
         <p><a class="theorem-label" href="#envelope-reduction">Lemma 4.</a>
@@ -663,24 +664,21 @@
         <div class="proof-body">
           <p>
             Set \(\Delta:=q-\sum_{i=1}^q x_i&gt;0\).
-            Apply \(\eqref{eq:gamma-envelope}\) to every consecutive pair and sum. Since
+            Apply \(\eqref{eq:gamma-envelope}\) to
+            \(K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})\) for \(1\le i&lt;q\), and sum. Since
             \(\sum_{i=1}^{q-1}(x_i+x_{i+1})
             =2\sum_{i=1}^q x_i-x_1-x_q=2q-(2\Delta+x_1+x_q)\), we obtain
             \[
-            \begin{aligned}
-            E_{\mathrm{end}}
-            \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
-            &amp;\le
+            E_{\mathrm{end}}\prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
+            \le
             \exp\!\left\{
             2\lambda q+
             \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
-            \right\}\\
-            &amp;\qquad{}\times
-            E_{\mathrm{end}}e^{-\lambda(2\Delta+x_1+x_q)}.
-            \end{aligned}
+            \right\}E_{\mathrm{end}}e^{-\lambda(2\Delta+x_1+x_q)}.
             \]
-            It remains to bound the last factor independently of \(q\) and the two
-            sequences.
+            It remains to bound
+            \(E_{\mathrm{end}}e^{-\lambda(2\Delta+x_1+x_q)}\) independently of
+            \(q\), \((x_i)_{i=1}^q\), and \((\omega_i)_{i=1}^q\).
           </p>
           <p>
             Taking \(m=q-1\) in \(\eqref{eq:sequence-constraints}\) yields
@@ -1267,62 +1265,9 @@
       </p>
       <p class="footnote" id="fn-exponent">
         <sup>1</sup>
-        Let \(\alpha_0\) be the unique zero of
-        \(J(\alpha,0.4506)\). Numerically,
-        \(1+\alpha_0\approx1.6341605846\). <a href="#fnref-exponent" aria-label="Back to footnote reference">↩</a>
+        Numerically, solving \(J(\alpha,0.4506)=0\) gives
+        \(1+\alpha\approx1.6341605846\). <a href="#fnref-exponent" aria-label="Back to footnote reference">↩</a>
       </p>
-      <details class="proof" id="proof-theorem-2">
-        <summary aria-label="Full proof for the scalar criterion and Theorem 2">Full proof</summary>
-        <div class="proof-body">
-          <p>
-            When \(J(\alpha,\lambda)\le0\), equation
-            \(\eqref{eq:scalar-product-bound}\) supplies the uniform constant required in
-            \(\eqref{eq:sequence-bound}\). <a href="#normalized-core">Lemma 3</a> then gives
-            \(\eqref{eq:final-rate}\).
-          </p>
-          <p>
-            For every fixed \(\lambda&gt;0\), the map
-            \(\alpha\mapsto J(\alpha,\lambda)\) is continuous and strictly decreasing.
-            Indeed \(W_\alpha(t)\) increases with \(\alpha\), while
-            \(\Gamma_\lambda\) decreases in each coordinate. The endpoint estimates in the
-            <a href="#proof-lemma-6">proof of Lemma 6</a> give locally uniform domination.
-          </p>
-          <p>
-            As \(\alpha\downarrow0\), \(W_\alpha(u)\) tends to zero uniformly for
-            \(u\in[1/4,3/4]\). Evaluating the supremum defining
-            \(\Gamma_\lambda\) at any fixed \(x,y&gt;0\) shows that the integrand in
-            \(\eqref{eq:scalar-functional}\) tends
-            uniformly to \(+\infty\) on \([1/4,1/2]\). The coordinatewise monotonicity of
-            \(\Gamma_\lambda\) gives an integrable lower bound on the rest of the interval, so
-            this divergence cannot be cancelled. Hence
-            \(\lim_{\alpha\downarrow0}J(\alpha,\lambda)=+\infty\).
-          </p>
-          <p>
-            As \(\alpha\to\infty\), both \(W_\alpha(t)\) and \(W_\alpha(1-t)\) are
-            at least \(\alpha\) for \(0&lt;t\le1/2\).
-            At the optimizer,
-            \[
-            \Gamma_\lambda(w,z)
-            \le \log\frac{x+y}{\alpha}-\lambda(x+y)
-            \le-\log(\alpha\lambda)-1,
-            \]
-            uniformly in \(t\). Therefore
-            \(\lim_{\alpha\to\infty}J(\alpha,\lambda)=-\infty\).
-            Thus \(J(\,\cdot\,,0.4506)\) has a unique zero \(\alpha_0\).
-          </p>
-          <p>
-            <strong>Computer-assisted verification.</strong> For the exact decimal parameters
-            \(\alpha=0.6342\) and \(\lambda=0.4506\), the validated computation partitions
-            \([0,1/2]\) into \(2^{16}\) rational cells. On every cell it encloses the unique
-            optimizing \(\tau\) by sign-verified brackets and evaluates \(\Gamma_\lambda\)
-            using directed outward rounding. Coordinatewise monotonicity controls the cell
-            adjacent to \(t=0\). Summing the resulting interval bounds certifies
-            \(J(0.6342,0.4506)&lt;-0.00005\). High-precision quadrature gives the value of
-            \(1+\alpha_0\) stated in <a href="#fn-exponent">Footnote 1</a>.
-          </p>
-        </div>
-      </details>
-
       <h3 id="concluding-remarks"><span>Concluding Remarks</span></h3>
       <p>
         Starting from the same hard-function construction and the corresponding product-form lower bound in
