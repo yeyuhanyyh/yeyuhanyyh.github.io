@@ -475,7 +475,7 @@
         \]
       </div>
       <details class="proof" id="proof-lemma-3">
-        <summary aria-label="Proof sketch for Lemma 3">Proof sketch</summary>
+        <summary aria-label="Full proof for Lemma 3">Full proof</summary>
         <div class="proof-body">
           <p>
             Suppose \(\eqref{eq:sequence-constraints}\) implies
@@ -693,7 +693,7 @@
           \]
       </div>
       <details class="proof" id="proof-lemma-4">
-        <summary aria-label="Proof sketch for Lemma 4">Proof sketch</summary>
+        <summary aria-label="Full proof for Lemma 4">Full proof</summary>
         <div class="proof-body">
           <p>
             Set \(\Delta:=q-\sum_{i=1}^q x_i&gt;0\).
@@ -795,7 +795,7 @@
         </div>
       </div>
       <details class="proof" id="proof-lemma-5">
-        <summary aria-label="Proof sketch for Lemma 5">Proof sketch</summary>
+        <summary aria-label="Full proof for Lemma 5">Full proof</summary>
         <div class="proof-body">
           <p>
             <strong>(1) Smoothness.</strong>
@@ -957,7 +957,7 @@
         +C_{\alpha,\lambda}.
         \tag{10}\label{eq:parity-bound}
         \]
-        See the <a href="#proof-lemma-6">proof sketch</a> for details.
+        See the <a href="#proof-lemma-6">full proof</a> for details.
       </p>
 
       <p class="theme-emphasis">
@@ -998,6 +998,7 @@
         \le
         \Phi_{k_q,\lambda}
         (\bar w_q^{(q)},\ldots,\bar w_2^{(q)}).
+        \tag{12}\label{eq:majorization-comparison}
         \]
       </p>
 
@@ -1013,7 +1014,7 @@
         =
         \sum_{j=1}^k
         \Gamma_\lambda(v_j,v_{2k+1-j}).
-        \tag{12}\label{eq:maximizing-pairing}
+        \tag{13}\label{eq:maximizing-pairing}
         \]
         The numbers in \(\eqref{eq:reference-weights}\) satisfy
         \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\), so
@@ -1024,9 +1025,12 @@
       \Phi_{k_q,\lambda}(\bar w_q^{(q)},\ldots,\bar w_2^{(q)})
       =\sum_{j=1}^{k_q}
       \Gamma_\lambda(\bar w_{q+1-j}^{(q)},\bar w_{q-2k_q+j}^{(q)}).
+      \tag{14}\label{eq:reference-pairing}
       \]
       <div class="theme-emphasis">
-        We next estimate this sum by comparing it with its corresponding Riemann integral.
+        We next estimate
+        \(\sum_{j=1}^{k_q}\Gamma_\lambda(\bar w_{q+1-j}^{(q)},
+        \bar w_{q-2k_q+j}^{(q)})\) by comparing it with its corresponding Riemann integral.
       </div>
       <p>
         By the mean value theorem, for every
@@ -1035,7 +1039,7 @@
       \[
       \bar w_s^{(q)}=W_\alpha(\theta_s/q),
       \qquad W_\alpha(t):=\alpha t^{-1-\alpha},\quad 0&lt;t\le1.
-      \tag{13}\label{eq:mean-value-profile}
+      \tag{15}\label{eq:mean-value-profile}
       \]
       <p>
         As shown in the <a href="#proof-lemma-6">proof of Lemma 6</a>, the integrand extends
@@ -1046,14 +1050,16 @@
         multiplication by \(q\) they also contribute only a bounded amount. Therefore
       </p>
       \[
-      \Phi_{k_q,\lambda}
-      (\bar w_q^{(q)},\ldots,\bar w_2^{(q)})
+      \sum_{j=1}^{k_q}
+      \Gamma_\lambda(\bar w_{q+1-j}^{(q)},\bar w_{q-2k_q+j}^{(q)})
       \le
       q\int_0^{1/2}
       \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt
       +C_{\alpha,\lambda}.
       \]
-      <p>Combining this estimate with \(\eqref{eq:parity-bound}\) gives the following lemma.</p>
+      <p>Combining this with \(\eqref{eq:parity-bound}\),
+      \(\eqref{eq:majorization-comparison}\), and \(\eqref{eq:reference-pairing}\)
+      gives the following lemma.</p>
       <div class="theorem" id="path-estimate">
         <p><a class="theorem-label" href="#path-estimate">Lemma 6.</a>
           <em class="statement">Fix \(\alpha,\lambda&gt;0\). There is a constant
@@ -1066,13 +1072,13 @@
           2q\int_0^{1/2}
           \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt
           +C_{\alpha,\lambda}.
-          \tag{14}\label{eq:path-estimate}
+          \tag{16}\label{eq:path-estimate}
           \]
       </div>
       <details class="proof" id="proof-lemma-6">
-        <summary aria-label="Proof sketch for Lemma 6">Proof sketch</summary>
+        <summary aria-label="Full proof for Lemma 6">Full proof</summary>
         <div class="proof-body">
-          <p id="proof-eq-9">
+          <p id="proof-eq-10">
             <strong>(1) Proof of \(\eqref{eq:parity-bound}\).</strong>
             We treat odd and even \(q\) separately. Put
             \(k_q=\lfloor(q-1)/2\rfloor\), and choose an index \(i_\star\) such that
@@ -1382,7 +1388,7 @@
       2\lambda+
       2\int_0^{1/2}
       \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt.
-      \tag{15}\label{eq:scalar-functional}
+      \tag{17}\label{eq:scalar-functional}
       \]
       <p>Combining Lemmas <a href="#envelope-reduction">4</a> and
       <a href="#path-estimate">6</a> gives</p>
@@ -1390,14 +1396,14 @@
       E_{\mathrm{end}}
       \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
       \le C_{\alpha,\lambda}e^{qJ(\alpha,\lambda)}.
-      \tag{16}\label{eq:scalar-product-bound}
+      \tag{18}\label{eq:scalar-product-bound}
       \]
       <p>
         Therefore, if \(J(\alpha,\lambda)\le0\), then \(\eqref{eq:sequence-bound}\) holds
         uniformly in \(q\), and <a href="#normalized-core">Lemma 3</a> gives
         \[
         R_n(H)\ge c_{\alpha,\lambda}(n+1)^{-(1+\alpha)}.
-        \tag{17}\label{eq:final-rate}
+        \tag{19}\label{eq:final-rate}
         \]
       </p>
       <p class="theme-emphasis">
@@ -1421,7 +1427,7 @@
         \(1+\alpha_0\approx1.6341605846\). <a href="#fnref-exponent" aria-label="Back to footnote reference">↩</a>
       </p>
       <details class="proof" id="proof-theorem-2">
-        <summary aria-label="Proof sketch for the scalar criterion and Theorem 2">Proof sketch</summary>
+        <summary aria-label="Full proof for the scalar criterion and Theorem 2">Full proof</summary>
         <div class="proof-body">
           <p>
             When \(J(\alpha,\lambda)\le0\), equation
