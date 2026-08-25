@@ -1405,20 +1405,20 @@
         \(J(\alpha,\lambda)\le0\).
       </p>
       <p>
-        Take \(\alpha=0.6342\)<sup id="fnref-p0"><a href="#fn-p0" aria-label="Footnote 1">1</a></sup>
-        and \(\lambda=0.4506\). Numerical integration
+        Take \(\alpha=0.6342\) and \(\lambda=0.4506\). Numerical integration
         (<a href="verification.html">verification appendix</a>) gives
         \[
         J(0.6342,0.4506)&lt;-0.00005&lt;0.
         \]
-        Hence \(R_n(H)=\Omega(n^{-1.6342})\), proving
+        Hence \(R_n(H)=\Omega(n^{-1.6342})\)<sup id="fnref-exponent"><a
+        href="#fn-exponent" aria-label="Footnote 1">1</a></sup>, proving
         <a href="#theorem-main">Theorem 2</a>.
       </p>
-      <p class="footnote" id="fn-p0">
+      <p class="footnote" id="fn-exponent">
         <sup>1</sup>
         Let \(\alpha_0\) be the unique zero of
-        \(J(\alpha,0.4506)\), and define \(p_0:=1+\alpha_0\). Numerically,
-        \(p_0\approx1.6341605846\). <a href="#fnref-p0" aria-label="Back to footnote reference">↩</a>
+        \(J(\alpha,0.4506)\). Numerically,
+        \(1+\alpha_0\approx1.6341605846\). <a href="#fnref-exponent" aria-label="Back to footnote reference">↩</a>
       </p>
       <details class="proof" id="proof-theorem-2">
         <summary aria-label="Proof sketch for the scalar criterion and Theorem 2">Proof sketch</summary>
@@ -1466,8 +1466,8 @@
             optimizing \(\tau\) by sign-verified brackets and evaluates \(\Gamma_\lambda\)
             using directed outward rounding. Coordinatewise monotonicity controls the cell
             adjacent to \(t=0\). Summing the resulting interval bounds certifies
-            \(J(0.6342,0.4506)&lt;-0.00005\). High-precision quadrature gives the numerical
-            value of \(p_0\) displayed above.
+            \(J(0.6342,0.4506)&lt;-0.00005\). High-precision quadrature gives the value of
+            \(1+\alpha_0\) stated in <a href="#fn-exponent">Footnote 1</a>.
           </p>
         </div>
       </details>
