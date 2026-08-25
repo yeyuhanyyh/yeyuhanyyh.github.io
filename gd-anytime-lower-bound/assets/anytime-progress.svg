@@ -1,11 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1400" height="430" viewBox="0 0 1400 430" role="img" aria-labelledby="title desc">
   <title id="title">Progress on bounds for non-anytime and anytime gradient descent</title>
-  <desc id="desc">A two-row rate diagram on one shared linear exponent scale. The upper row shows non-anytime bounds, with the exponent 1.6342 labeled Previous blog. The lower row shows anytime bounds, with the exponent 1.2408 labeled This work.</desc>
+  <desc id="desc">A two-row rate diagram on one shared linear exponent scale. The upper row shows non-anytime bounds, with the exponent 1.6342 labeled Previous blog. The lower row shows anytime bounds, with the exponent 1.2408 labeled This work. The horizontal direction runs from lower bounds on the left to upper bounds on the right.</desc>
 
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2e2b27"/>
-    </marker>
     <style>
       .rate { font-family: Georgia, "Times New Roman", serif; font-size: 32px; font-style: italic; fill: #2e2b27; }
       .exponent { font-size: 19px; font-style: normal; }
@@ -17,6 +14,7 @@
       .highlight { fill: #4b2500; font-weight: 800; }
       .upper { fill: #285421; }
       .row-label { font-family: Georgia, "Times New Roman", serif; font-size: 18px; font-style: italic; font-weight: 700; fill: #6f6a63; }
+      .axis-label { font-family: Georgia, "Times New Roman", serif; font-size: 16px; font-style: italic; font-weight: 700; fill: #6f6a63; }
     </style>
   </defs>
 
@@ -57,7 +55,8 @@
   <text class="block upper small" x="1280" y="162"><tspan x="1280">Levitin &amp;</tspan><tspan x="1280" dy="18">Polyak</tspan><tspan x="1280" dy="18">(1966)</tspan></text>
 
   <!-- Shared center line. -->
-  <line x1="40" y1="220" x2="1385" y2="220" stroke="#2e2b27" stroke-width="3" marker-end="url(#arrow)"/>
+  <line x1="40" y1="220" x2="1382" y2="220" stroke="#2e2b27" stroke-width="3"/>
+  <polygon points="1380,211 1396,220 1380,229" fill="#2e2b27"/>
 
   <!-- Anytime row. -->
   <rect x="40" y="220" width="220" height="75" fill="#e7ac8a"/>
@@ -87,4 +86,7 @@
   <text class="rate" x="966" y="370" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.2408</tspan></text>
   <text class="rate" x="1079" y="414" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.119</tspan></text>
   <text class="rate" x="1190" y="370" text-anchor="middle">n<tspan class="exponent" dy="-14">−1</tspan></text>
+
+  <text class="axis-label" x="45" y="414">Lower Bound</text>
+  <text class="axis-label" x="1355" y="414" text-anchor="end">Upper Bound</text>
 </svg>
