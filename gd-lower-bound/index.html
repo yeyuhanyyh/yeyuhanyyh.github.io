@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-24T22:15:00-04:00">
+  <meta property="article:modified_time" content="2026-08-24T22:51:00-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A proof of an Ω(n^-1.6342) lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
@@ -272,7 +272,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 24, 2026 22:15 (GMT-4).</span>
+            <span>Last updated: August 24, 2026 22:51 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -494,7 +494,9 @@
             \(D_s:=B+\sum_{\ell=s+1}^r a_\ell\) for \(1\le s\le r\).
             Then \(1+\sum_{k=1}^n h_k=B+\sum_{\ell=1}^r a_\ell\) and
             \(D_r=B\). Choose
-            \(q\in\operatorname*{arg\,min}_{1\le s\le r}D_s s^\alpha\).
+            \[
+            q\in\operatorname*{arg\,min}_{1\le s\le r}D_s s^\alpha.
+            \]
             Thus \(D_q q^\alpha\le D_s s^\alpha\) for every \(1\le s\le r\).
             As \(s\) increases, \(D_s\) decreases because one more large excess is
             removed, while \(s^\alpha\) increases. The choice of \(q\) balances these
@@ -530,7 +532,10 @@
             Therefore every
             index outside \(\{t_1,\ldots,t_q\}\) occurs in exactly one of
             \(S_1,\ldots,S_{q+1}\), and
-            \(\sum_{i=1}^{q+1}S_i=\sum_{k\notin\{t_1,\ldots,t_q\}}h_k\).
+            \[
+            \sum_{i=1}^{q+1}S_i
+            =\sum_{k\notin\{t_1,\ldots,t_q\}}h_k.
+            \]
           </p>
           <p>
             The same quantity \(D_q\) also has a direct description in chronological
@@ -547,13 +552,21 @@
           </p>
           <p>
             For \(1\le i\le q\), define
-            \(x_i:=q(S_i+1)/D_q\) and
-            \(\omega_i:=q(h_{t_i}-1)/D_q\).
+            \[
+            x_i:=\frac{q(S_i+1)}{D_q},
+            \qquad
+            \omega_i:=\frac{q(h_{t_i}-1)}{D_q},
+            \qquad 1\le i\le q.
+            \]
             The \(q\) variables \(x_i\) correspond to the sums immediately before the
             selected indices \(t_i\). The final sum \(S_{q+1}\) makes their total
             strictly smaller than \(q\), since
-            \(\sum_{i=1}^q x_i
-            =q-q(S_{q+1}+1)/D_q&lt;q\).
+            \[
+            \sum_{i=1}^q x_i
+            =\frac q{D_q}\sum_{i=1}^q(S_i+1)
+            =q-\frac{q(S_{q+1}+1)}{D_q}
+            &lt;q.
+            \]
           </p>
           <p>
             Each \(\omega_i\) is a selected excess multiplied by the same factor
@@ -634,9 +647,13 @@
             \(H\), with \(\xi_1:=1\) and
             \(\xi_{k+1}:=\xi_k-h_k f_\delta'(\xi_k)\) for \(1\le k\le n\).
             An induction gives
-            \(\xi_k=1-\delta\sum_{j=1}^{k-1}h_j
-            \ge1-\delta\sum_{j=1}^n h_j&gt;\delta\) for every
-            \(1\le k\le n+1\).
+            \[
+            \xi_k
+            =1-\delta\sum_{j=1}^{k-1}h_j
+            \ge1-\delta\sum_{j=1}^n h_j
+            &gt;\delta,
+            \qquad 1\le k\le n+1.
+            \]
             Hence every iterate lies on the positive affine branch, where
             \(f_\delta'=\delta\). The minimizer is \(0\), and the choice of \(\delta\)
             gives \(R_n(H)\ge2f_\delta(\xi_{n+1})=\delta\).
@@ -651,11 +668,18 @@
             Then \(D_1=(S_1+1)+(S_2+1)\), and
             \((S_1+1)+a_1+2(S_2+1)-1&lt;a_1+2D_1&lt;3a_1\).
             <a href="#lemma-hard-functions">Lemma 2</a> therefore gives
-            \(R_n(H)\ge a_1/[(S_1+1)(S_1+a_1+2S_2+2)]
-            &gt;1/[3(S_1+1)]\ge1/(3D_1)&gt;1/(4D_1)\).
+            \[
+            R_n(H)
+            \ge\frac{a_1}{(S_1+1)(S_1+a_1+2S_2+2)}
+            &gt;\frac1{3(S_1+1)}
+            \ge\frac1{3D_1}
+            &gt;\frac1{4D_1}.
+            \]
             Thus \(R_n(H)\ge1/(4D_1)\) in either subcase. Using the minimizing
             property with \(s=r\), we obtain \(D_1\le D_r r^\alpha=Br^\alpha\), and hence
-            \(R_n(H)\ge1/[4B(r+1)^\alpha]\).
+            \[
+            R_n(H)\ge\frac1{4B(r+1)^\alpha}.
+            \]
           </p>
           <p>
             <strong>Case 2: \(r=0\).</strong> Here \(h_k\le1\) for every \(k\), so
@@ -664,8 +688,11 @@
           </p>
           <p>
             Since \(B\le n+1\) and \(r+1\le n+1\), these estimates give
-            \(R_n(H)\ge c_\alpha(n+1)^{-(1+\alpha)}\), where
-            \(c_\alpha:=\min\{C_\alpha^{-1},1/4\}\).
+            \[
+            R_n(H)\ge c_\alpha(n+1)^{-(1+\alpha)},
+            \qquad
+            c_\alpha:=\min\{C_\alpha^{-1},1/4\}.
+            \]
           </p>
         </div>
       </details>
@@ -720,18 +747,24 @@
             Set \(\Delta:=q-\sum_{i=1}^q x_i&gt;0\).
             Applying \(\eqref{eq:gamma-envelope}\) to
             \(K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})\) for \(1\le i&lt;q\) and summing gives
-            \(\log\prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
+            \[
+            \log\prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
             \le\lambda\sum_{i=1}^{q-1}(x_i+x_{i+1})
-            +\sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})\). Since
+            +\sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1}).
+            \]
+            Since
             \(\sum_{i=1}^{q-1}(x_i+x_{i+1})
             =2\sum_{i=1}^q x_i-x_1-x_q=2q-(2\Delta+x_1+x_q)\), we obtain
             \[
+            \begin{aligned}
             E_{\mathrm{end}}\prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
-            \le
+            &amp;\le
             \exp\!\left\{
             2\lambda q+
             \sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})
-            \right\}E_{\mathrm{end}}e^{-\lambda(2\Delta+x_1+x_q)}.
+            \right\}\\
+            &amp;\qquad{}\times E_{\mathrm{end}}e^{-\lambda(2\Delta+x_1+x_q)}.
+            \end{aligned}
             \]
             It remains to bound
             \(E_{\mathrm{end}}e^{-\lambda(2\Delta+x_1+x_q)}\) independently of
@@ -739,11 +772,13 @@
           </p>
           <p>
             Taking \(m=q-1\) in \(\eqref{eq:sequence-constraints}\) yields
-            \(\min_{1\le i\le q}\omega_i
+            \[
+            \min_{1\le i\le q}\omega_i
             =\omega_q^\downarrow
-            \ge q[(q/(q-1))^\alpha-1]
+            \ge q\left[\left(\frac q{q-1}\right)^\alpha-1\right]
             \ge\alpha q\log\frac q{q-1}
-            \ge\alpha\).
+            \ge\alpha.
+            \]
             Here the last two inequalities use \(e^u-1\ge u\) and
             \(\log(1+t)\ge t/(1+t)\). In particular,
             \(\omega_1,\omega_q\ge\alpha\). Using this in
@@ -822,7 +857,7 @@
             +\frac{a^2}{2A^2}+\frac{b^2}{2B^2}&lt;0.
             \]
             Thus the maximizer is unique. Fix \((w_0,z_0)\), and let \((x_0,y_0)\) be its
-            maximizer. The Jacobian in \((x,y)\) of the first-order system
+            maximizer. The Jacobian in \((x,y)\) of the first-order condition
             \(\nabla_{x,y}F_{w,z}(x,y)=0\) is the invertible Hessian above. The implicit
             function theorem therefore gives a neighborhood \(U\) of \((w_0,z_0)\) and a
             \(C^\infty\) solution \((x(w,z),y(w,z))\) of this system on \(U\). For every
@@ -858,13 +893,18 @@
             <strong>(4) Decreasing in each coordinate.</strong>
             Write \(x_\ast:=x_\lambda(w,z)\), \(y_\ast:=y_\lambda(w,z)\), and set
             \(A:=w+x_\ast\), \(B:=z+y_\ast\), and \(\Sigma:=A+B\).
-            The chain rule gives
-            \(\partial_w\Gamma_\lambda=\partial_wF_{w,z}
+            The chain rule and the first-order conditions give
+            \[
+            \begin{aligned}
+            \partial_w\Gamma_\lambda
+            &amp;=\partial_wF_{w,z}
             +\partial_xF_{w,z}\,\partial_wx_\ast
-            +\partial_yF_{w,z}\,\partial_wy_\ast\). At the optimizer, the first-order
-            conditions make the last two terms vanish. Therefore
-            \(\partial_w\Gamma_\lambda=\partial_wF_{w,z}
-            =\Sigma^{-1}-(2w)^{-1}-(2A)^{-1}\), and hence
+            +\partial_yF_{w,z}\,\partial_wy_\ast\\
+            &amp;=\partial_wF_{w,z}
+            =\frac1\Sigma-\frac1{2w}-\frac1{2A}.
+            \end{aligned}
+            \]
+            Equivalently,
             \[
             -\partial_w\Gamma_\lambda
             =\frac{x_\ast}{2wA}+\frac{B}{A\Sigma}&gt;0,
@@ -876,9 +916,21 @@
             <strong>(5) Strict submodularity.</strong>
             With the notation from <a href="#gamma-property-4">Property (4)</a>, the
             first-order conditions imply
-            \(\lambda-\Sigma^{-1}=w/(2x_\ast A)=z/(2y_\ast B)\).
-            Thus \(\tau_\ast:=x_\ast A/w=y_\ast B/z&gt;0\). For \(u,\tau&gt;0\), set
-            \(A_u(\tau):=(u+\sqrt{u^2+4u\tau})/2\). Then
+            \[
+            \lambda-\frac1\Sigma
+            =\frac{w}{2x_\ast A}
+            =\frac{z}{2y_\ast B}.
+            \]
+            Thus
+            \[
+            \tau_\ast:=\frac{x_\ast A}{w}
+            =\frac{y_\ast B}{z}&gt;0.
+            \]
+            For \(u,\tau&gt;0\), set
+            \[
+            A_u(\tau):=\frac{u+\sqrt{u^2+4u\tau}}2.
+            \]
+            Then
             \(A=A_w(\tau_\ast)\), \(B=A_z(\tau_\ast)\), and
             \[
             g(\tau_\ast;w,z)=0,
@@ -889,8 +941,12 @@
             The explicit formula for \(A_u\) shows that it increases in both arguments, so
             \(\partial_\tau g&lt;0\) and \(\partial_zg&lt;0\). Implicit differentiation now gives
             \(\partial_z\tau_\ast=-(\partial_zg)/(\partial_\tau g)&lt;0\).
-            Moreover, \(\Sigma=(\lambda-1/(2\tau_\ast))^{-1}\) and
-            \(A=A_w(\tau_\ast)\). Since
+            Moreover,
+            \[
+            \Sigma=\left(\lambda-\frac1{2\tau_\ast}\right)^{-1},
+            \qquad A=A_w(\tau_\ast).
+            \]
+            Since
             \(d\Sigma/d\tau=-\Sigma^2/(2\tau^2)&lt;0\), we have
             \(\partial_z\Sigma&gt;0\) and
             \(\partial_z A=A_w'(\tau_\ast)\partial_z\tau_\ast&lt;0\).
@@ -1092,9 +1148,12 @@
             \((\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\), and is therefore bounded by
             \(\Phi_{k_q,\lambda}(\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\).
             Taking \(m=q-1\) in \(\eqref{eq:sequence-constraints}\) gives
-            \(\omega_q^\downarrow
-            \ge q[(q/(q-1))^\alpha-1]
-            \ge q\alpha\log(q/(q-1))\ge\alpha\),
+            \[
+            \omega_q^\downarrow
+            \ge q\left[\left(\frac q{q-1}\right)^\alpha-1\right]
+            \ge q\alpha\log\frac q{q-1}
+            \ge\alpha,
+            \]
             where the last step uses
             \(\log(1+t)\ge t/(1+t)\). Hence every \(\omega_i\ge\alpha\), and
             <a href="#gamma-property-4">Lemma 5(4)</a>
@@ -1149,17 +1208,28 @@
             Since the integrand decreases,
             \(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\), and for
             \(1\le m&lt;q\),
-            \(\sum_{s=m+1}^q\bar w_s^{(q)}
+            \[
+            \sum_{s=m+1}^q\bar w_s^{(q)}
             =q^{1+\alpha}\int_m^q\alpha u^{-1-\alpha}\,du
-            =q[(q/m)^\alpha-1]\).
+            =q\left[\left(\frac qm\right)^\alpha-1\right].
+            \]
             Setting \(m=q-\ell\) in \(\eqref{eq:sequence-constraints}\) gives, for
             \(1\le\ell\le q-1\),
-            \(\sum_{i=1}^{\ell}\omega_{q+1-i}^\downarrow
-            \ge\sum_{i=1}^{\ell}\bar w_{q+1-i}^{(q)}\).
+            \[
+            \sum_{i=1}^{\ell}\omega_{q+1-i}^\downarrow
+            \ge\sum_{i=1}^{\ell}\bar w_{q+1-i}^{(q)}.
+            \]
             <a href="#lemma-6-1">Lemma 6.1</a>, applied to
             \(a=(\omega_q^\downarrow,\ldots,\omega_2^\downarrow)\) and
             \(b=(\bar w_q^{(q)},\ldots,\bar w_2^{(q)})\), now gives
-            \(\eqref{eq:majorization-comparison}\).
+            \[
+            \Phi_{k_q,\lambda}
+            (\omega_q^\downarrow,\ldots,\omega_2^\downarrow)
+            \le
+            \Phi_{k_q,\lambda}
+            (\bar w_q^{(q)},\ldots,\bar w_2^{(q)}),
+            \]
+            which is \(\eqref{eq:majorization-comparison}\).
           </p>
           <p id="proof-worst-pairing">
             <strong>(3) Proof of <a href="#worst-pairing">Step 2. Identify the maximizing pairing</a>.</strong>
@@ -1184,8 +1254,10 @@
             <strong>(4) Compare the finite sum with the integral.</strong>
             For every \(2\le s\le q\), let \(\theta_s\in(s-1,s)\) be the point in
             \(\eqref{eq:mean-value-profile}\). Define
-            \(G(t,v):=\Gamma_\lambda(W_\alpha(t),W_\alpha(v))\) for
-            \(0&lt;t\le1\) and \(1/2\le v\le1\).
+            \[
+            G(t,v):=\Gamma_\lambda(W_\alpha(t),W_\alpha(v)),
+            \qquad 0&lt;t\le1,\quad \frac12\le v\le1.
+            \]
           </p>
           <p id="lemma-6-2">
             <a class="theorem-label" href="#lemma-6-2">Lemma 6.2
@@ -1199,12 +1271,22 @@
             \((x_\ast,y_\ast)\) be the optimizer in
             \(\eqref{eq:gamma-definition}\). The first-order relations used in
             <a href="#gamma-property-5">Lemma 5(5)</a> give
-            \(\tau_\ast:=x_\ast(w+x_\ast)/w
-            =y_\ast(z+y_\ast)/z\) and
-            \(\lambda=1/(2\tau_\ast)+1/(w+x_\ast+z+y_\ast)\).
+            \[
+            \tau_\ast
+            :=\frac{x_\ast(w+x_\ast)}w
+            =\frac{y_\ast(z+y_\ast)}z,
+            \qquad
+            \lambda
+            =\frac1{2\tau_\ast}
+            +\frac1{w+x_\ast+z+y_\ast}.
+            \]
             Since \(\alpha\le z\le\alpha2^{1+\alpha}\) and
             \(z+y_\ast\ge\sqrt{z\tau_\ast}\), we have
-            \(\lambda\le1/(2\tau_\ast)+1/\sqrt{\alpha\tau_\ast}\).
+            \[
+            \lambda
+            \le\frac1{2\tau_\ast}
+            +\frac1{\sqrt{\alpha\tau_\ast}}.
+            \]
             The right-hand side tends to \(0\) as \(\tau_\ast\to\infty\), so
             \(\tau_\ast\le C_{\alpha,\lambda}\). In particular,
             \(x_\ast,y_\ast\le\tau_\ast\).
@@ -1214,12 +1296,18 @@
             \(B:=z+y_\ast\le\alpha2^{1+\alpha}+C_{\alpha,\lambda}\), while
             \(A:=w+x_\ast\ge w\) and \(\Sigma:=A+B\ge w\). The derivative identity in
             <a href="#gamma-property-4">Lemma 5(4)</a> therefore gives
-            \(|\partial_w\Gamma_\lambda(w,z)|\le C_{\alpha,\lambda}w^{-2}\).
+            \[
+            |\partial_w\Gamma_\lambda(w,z)|
+            \le C_{\alpha,\lambda}w^{-2}.
+            \]
             Its symmetric version is
-            \(-\partial_z\Gamma_\lambda
-            =y_\ast/[2z(z+y_\ast)]
-            +(w+x_\ast)/[(z+y_\ast)(w+x_\ast+z+y_\ast)]
-            \le\tau_\ast/(2\alpha^2)+1/\alpha\). Hence
+            \[
+            -\partial_z\Gamma_\lambda(w,z)
+            =\frac{y_\ast}{2z(z+y_\ast)}
+            +\frac{w+x_\ast}{(z+y_\ast)(w+x_\ast+z+y_\ast)}
+            \le\frac{\tau_\ast}{2\alpha^2}+\frac1\alpha.
+            \]
+            Hence
             \[
             |\partial_tG(t,v)|
             \le C_{\alpha,\lambda}|W_\alpha'(t)|W_\alpha(t)^{-2}
@@ -1233,27 +1321,57 @@
             \(\square\)
           </p>
           <p>
-            Define \(I(t):=G(t,1-t)\) for \(0\le t\le1/2\), using the extension at
-            \(t=0\). By <a href="#lemma-6-2">Lemma 6.2</a>, after enlarging the
+            Using the extension at \(t=0\), define
+            \[
+            I(t):=G(t,1-t),
+            \qquad 0\le t\le\frac12.
+            \]
+            By <a href="#lemma-6-2">Lemma 6.2</a>, after enlarging the
             Lipschitz constant if necessary, there are
-            \(L_{\alpha,\lambda},M_{\alpha,\lambda}&lt;\infty\) such that \(G\) and \(I\)
-            are \(L_{\alpha,\lambda}\)-Lipschitz and
-            \(|I(t)|\le M_{\alpha,\lambda}\).
+            \(L_{\alpha,\lambda},M_{\alpha,\lambda}&lt;\infty\) such that
+            \[
+            \begin{aligned}
+            |G(t,v)-G(t',v')|
+            &amp;\le L_{\alpha,\lambda}(|t-t'|+|v-v'|),\\
+            |I(t)-I(t')|
+            &amp;\le L_{\alpha,\lambda}|t-t'|,
+            \qquad |I(t)|\le M_{\alpha,\lambda}.
+            \end{aligned}
+            \]
           </p>
           <p>
-            Assume \(q\ge3\), and put \(k:=k_q\),
-            \(r_q:=q-2k\in\{1,2\}\), and
-            \(u_j:=(r_q+j-1)/q\) for \(1\le j\le k\). By symmetry and
-            \(\eqref{eq:reference-pairing}\), the reference pairing equals
-            \(\sum_{j=1}^k
-            G(\theta_{r_q+j}/q,\theta_{q+1-j}/q)\).
+            Assume \(q\ge3\), and recall the definition of \(k_q\):
+            \[
+            k_q:=\left\lfloor\frac{q-1}{2}\right\rfloor,
+            \qquad
+            r_q:=q-2k_q\in\{1,2\},
+            \qquad
+            u_j:=\frac{r_q+j-1}{q},\quad 1\le j\le k_q.
+            \]
+            By symmetry and \(\eqref{eq:reference-pairing}\),
+            \[
+            \Phi_{k_q,\lambda}(\bar w_q^{(q)},\ldots,\bar w_2^{(q)})
+            =\sum_{j=1}^{k_q}
+            G\left(\frac{\theta_{r_q+j}}q,\frac{\theta_{q+1-j}}q\right).
+            \]
             Moreover,
-            \(\theta_{r_q+j}/q\in(u_j,u_j+1/q)\), while
-            \(\theta_{q+1-j}/q\in
-            (1-u_j+(r_q-1)/q,\,1-u_j+r_q/q)\).
+            \[
+            \frac{\theta_{r_q+j}}q
+            \in\left(u_j,u_j+\frac1q\right),
+            \qquad
+            \frac{\theta_{q+1-j}}q
+            \in\left(1-u_j+\frac{r_q-1}{q},\,
+            1-u_j+\frac{r_q}{q}\right).
+            \]
             The total displacement from \((u_j,1-u_j)\) is therefore less than
-            \((1+r_q)/q\le3/q\). Since \(k\le q/2\), the reference pairing differs from
-            \(\sum_{j=1}^k I(u_j)\) by at most \(3L_{\alpha,\lambda}/2\).
+            \((1+r_q)/q\le3/q\). Since \(k_q\le q/2\),
+            \[
+            \left|
+            \Phi_{k_q,\lambda}(\bar w_q^{(q)},\ldots,\bar w_2^{(q)})
+            -\sum_{j=1}^{k_q}I(u_j)
+            \right|
+            \le\frac32L_{\alpha,\lambda}.
+            \]
           </p>
           <p>
             The intervals \([u_j-1/q,u_j]\) are consecutive. If \(q\) is odd, they fill
@@ -1261,9 +1379,13 @@
             Thus at most \(1/q\) of \([0,1/2]\) is omitted. On each covered interval,
             replacing \(I(t)\) by its value at the right endpoint costs at most
             \(L_{\alpha,\lambda}/(2q)\) after multiplication by \(q\). Hence
-            \(\bigl|\sum_{j=1}^k I(u_j)
-            -q\int_0^{1/2}I(t)\,dt\bigr|
-            \le L_{\alpha,\lambda}/4+M_{\alpha,\lambda}\).
+            \[
+            \left|
+            \sum_{j=1}^{k_q}I(u_j)
+            -q\int_0^{1/2}I(t)\,dt
+            \right|
+            \le\frac14L_{\alpha,\lambda}+M_{\alpha,\lambda}.
+            \]
           </p>
           <p>
             Combining the two comparisons gives
@@ -1271,9 +1393,9 @@
             \begin{aligned}
             \Phi_{k_q,\lambda}
             (\bar w_q^{(q)},\ldots,\bar w_2^{(q)})
-            &amp;=\sum_{j=1}^k
+            &amp;=\sum_{j=1}^{k_q}
             G\left(\frac{\theta_{r_q+j}}q,\frac{\theta_{q+1-j}}q\right)\\
-            &amp;=\sum_{j=1}^k I(u_j)+O_{\alpha,\lambda}(1)\\
+            &amp;=\sum_{j=1}^{k_q}I(u_j)+O_{\alpha,\lambda}(1)\\
             &amp;=q\int_0^{1/2}
             \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt
             +O_{\alpha,\lambda}(1).
