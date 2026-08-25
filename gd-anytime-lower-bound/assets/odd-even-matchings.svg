@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 190" role="img"
      aria-labelledby="title desc">
-  <title id="title">Two alternating groups of consecutive pairs</title>
-  <desc id="desc">Eight values omega one through omega eight in their original order. Brown arcs above connect pairs starting at odd indices. Olive dashed arcs below connect pairs starting at even indices.</desc>
+  <title id="title">Odd and even matchings of a chronological path</title>
+  <desc id="desc">Eight chronological vertices omega one through omega eight. Brown arcs above connect one to two, three to four, five to six, and seven to eight. Olive dashed arcs below connect two to three, four to five, and six to seven.</desc>
   <defs>
     <style>
       .node { fill: #25231f; }
@@ -49,7 +49,7 @@
     <text class="label" x="610" y="117" text-anchor="middle">ω₇</text>
     <text class="label" x="700" y="117" text-anchor="middle">ω₈</text>
 
-    <text class="key" x="755" y="60" fill="#7b3f1d">first group</text>
-    <text class="key" x="755" y="137" fill="#3d4934">second group</text>
+    <text class="key" x="755" y="60" fill="#7b3f1d">odd edges</text>
+    <text class="key" x="755" y="137" fill="#3d4934">even edges</text>
   </g>
 </svg>
