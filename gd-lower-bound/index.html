@@ -664,8 +664,11 @@
         <div class="proof-body">
           <p>
             Set \(\Delta:=q-\sum_{i=1}^q x_i&gt;0\).
-            Apply \(\eqref{eq:gamma-envelope}\) to
-            \(K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})\) for \(1\le i&lt;q\), and sum. Since
+            Applying \(\eqref{eq:gamma-envelope}\) to
+            \(K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})\) for \(1\le i&lt;q\) and summing gives
+            \(\log\prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
+            \le\lambda\sum_{i=1}^{q-1}(x_i+x_{i+1})
+            +\sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})\). Since
             \(\sum_{i=1}^{q-1}(x_i+x_{i+1})
             =2\sum_{i=1}^q x_i-x_1-x_q=2q-(2\Delta+x_1+x_q)\), we obtain
             \[
@@ -764,10 +767,14 @@
             -\frac{(a+b)^2}{\Sigma^2}
             +\frac{a^2}{2A^2}+\frac{b^2}{2B^2}&lt;0.
             \]
-            Thus the maximizer is unique. It satisfies the first-order condition
-            \(\nabla_{x,y}F_{w,z}=0\), whose Jacobian in \((x,y)\) is the invertible
-            Hessian above. The implicit function theorem gives a local \(C^\infty\)
-            optimizer map. Uniqueness makes these local maps agree, so
+            Thus the maximizer is unique. Fix \((w_0,z_0)\), and let \((x_0,y_0)\) be its
+            maximizer. The Jacobian in \((x,y)\) of the first-order system
+            \(\nabla_{x,y}F_{w,z}(x,y)=0\) is the invertible Hessian above. The implicit
+            function theorem therefore gives a neighborhood \(U\) of \((w_0,z_0)\) and a
+            \(C^\infty\) solution \((x(w,z),y(w,z))\) of this system on \(U\). For every
+            \((w,z)\in U\), strict concavity makes this critical point the unique global maximizer.
+            Hence the local solution maps obtained from different base points agree on their
+            overlaps. Since \((w_0,z_0)\) was arbitrary,
             \((w,z)\mapsto(x_\lambda(w,z),y_\lambda(w,z))\) is \(C^\infty\) on
             \((0,\infty)^2\). Substitution into \(F_{w,z}\) proves the same for
             \(\Gamma_\lambda\).
@@ -797,9 +804,13 @@
             <strong>(4) Decreasing in each coordinate.</strong>
             Write \(x_\ast:=x_\lambda(w,z)\), \(y_\ast:=y_\lambda(w,z)\), and set
             \(A:=w+x_\ast\), \(B:=z+y_\ast\), and \(\Sigma:=A+B\).
-            At the optimizer, the first-order conditions eliminate the chain-rule terms, so
+            The chain rule gives
             \(\partial_w\Gamma_\lambda=\partial_wF_{w,z}
-            =\Sigma^{-1}-(2w)^{-1}-(2A)^{-1}\). Hence
+            +\partial_xF_{w,z}\,\partial_wx_\ast
+            +\partial_yF_{w,z}\,\partial_wy_\ast\). At the optimizer, the first-order
+            conditions make the last two terms vanish. Therefore
+            \(\partial_w\Gamma_\lambda=\partial_wF_{w,z}
+            =\Sigma^{-1}-(2w)^{-1}-(2A)^{-1}\), and hence
             \[
             -\partial_w\Gamma_\lambda
             =\frac{x_\ast}{2wA}+\frac{B}{A\Sigma}&gt;0,
@@ -816,13 +827,14 @@
             \(A_u(\tau):=(u+\sqrt{u^2+4u\tau})/2\). Then
             \(A=A_w(\tau_\ast)\), \(B=A_z(\tau_\ast)\), and
             \[
-            \frac1{2\tau_\ast}
-            +\frac1{A_w(\tau_\ast)+A_z(\tau_\ast)}
-            =\lambda.
+            g(\tau_\ast;w,z)=0,
+            \qquad
+            g(\tau;w,z):=
+            \frac1{2\tau}+\frac1{A_w(\tau)+A_z(\tau)}-\lambda.
             \]
-            The explicit formula for \(A_u\) shows that it increases in both arguments.
-            Hence the left-hand side decreases strictly in \(\tau_\ast\) and decreases in
-            \(z\), so implicit differentiation gives \(\partial_z\tau_\ast&lt;0\).
+            The explicit formula for \(A_u\) shows that it increases in both arguments, so
+            \(\partial_\tau g&lt;0\) and \(\partial_zg&lt;0\). Implicit differentiation now gives
+            \(\partial_z\tau_\ast=-(\partial_zg)/(\partial_\tau g)&lt;0\).
             Moreover, \(\Sigma=(\lambda-1/(2\tau_\ast))^{-1}\) and
             \(A=A_w(\tau_\ast)\). Since
             \(d\Sigma/d\tau=-\Sigma^2/(2\tau^2)&lt;0\), we have
@@ -1074,7 +1086,7 @@
             \sum_{\ell=1}^{N-1}(g_\ell-g_{\ell+1})D_\ell
             \ge0.
             \]
-            Thus \(F(b)\ge F(a)+g\cdot(b-a)\ge F(a)\).
+            Thus \(F(b)\ge F(a)+g\cdot(b-a)\ge F(a)\). \(\square\)
           </p>
           <p>
             We apply <a href="#lemma-6-1">Lemma 6.1</a> to \(F=\Phi_{k_q,\lambda}\).
@@ -1164,6 +1176,7 @@
             Here we used that \(|W_\alpha'(v)|\) is bounded on \([1/2,1]\).
             Thus \(G\) is uniformly Lipschitz on its open domain. Integrating along
             coordinate lines gives a unique Lipschitz extension to the closed rectangle.
+            \(\square\)
           </p>
           <p>
             Define \(I(t):=G(t,1-t)\) for \(0\le t\le1/2\), using the extension at
