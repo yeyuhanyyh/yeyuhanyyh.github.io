@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verification Appendix</title>
+  <style>
+    :root { --link: #7b3f1d; --ink: #2e2b27; --slate: #3d4934; --wash: #f7f1e4; --paper: #fffdf8; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Open Sans", Arial, sans-serif;
+      font-size: 16px;
+      line-height: 1.55;
+    }
+    main { max-width: 760px; margin: 0 auto; padding: 48px 24px 72px; }
+    h1 { margin: 0 0 8px; color: var(--link); font-size: 36px; line-height: 1.2; font-weight: 600; }
+    h2 { margin: 38px 0 12px; color: var(--slate); font-size: 26px; line-height: 1.25; font-weight: 600; }
+    p { margin: 0 0 16px; }
+    a { color: var(--link); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .back { margin-bottom: 28px; }
+    .certificate { margin: 26px 0; padding: 20px 24px; border: 1px solid var(--slate); border-radius: 4px; }
+    pre { overflow-x: auto; padding: 14px 16px; border: 1px solid #d8d0c5; background: var(--wash); font: 14px/1.45 Consolas, monospace; }
+    mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; }
+  </style>
+  <script>
+    window.MathJax = { tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] }, chtml: { scale: 1 } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <main>
+    <p class="back"><a href="index.html">← Back to the blog post</a></p>
+    <h1>Verification Appendix</h1>
+    <p>
+      This appendix records the computer-assisted certificate used in the truncated sequence
+      estimate. All reported bounds use directed outward rounding.
+    </p>
+    <div class="certificate">
+      <p><strong>Certified statement.</strong> For the exact decimal parameters
+        \(\alpha=0.6342\) and \(\lambda=0.4506\),</p>
+      \[
+      J(0.6342,0.4506)&lt;-0.00005&lt;0.
+      \]
+    </div>
+    <h2>Validated computation</h2>
+    <p>
+      The verification uses Arb ball arithmetic through <code>python-flint 0.9.0</code> at
+      80 decimal digits. It partitions \([0,1/2]\) into \(2^{16}\) rational cells. On
+      each cell, sign-verified interval brackets enclose the unique optimizer defining
+      \(\Gamma_\lambda\), and directed rounding encloses the resulting value.
+      Coordinatewise monotonicity controls the cell adjacent to \(t=0\).
+    </p>
+    <p>
+      Summing the cellwise upper bounds gives an upper endpoint below
+      \(-0.0000512188\), which is strictly smaller than \(-0.00005\). Ordinary
+      high-precision quadrature is used only as an independent numerical check.
+    </p>
+    <h2>Reproduction</h2>
+    <p>From the project root, install the pinned dependency and run:</p>
+    <pre>python -m pip install -r verification/requirements.txt
+python verification/certify_j_arb.py --cells 65536 --dps 80</pre>
+    <p>
+      The <a href="verification/certify_j_arb.py">verification program</a>,
+      <a href="verification/requirements.txt">dependency specification</a>, and
+      <a href="verification/README.md">technical notes</a> accompany this post.
+    </p>
+  </main>
+</body>
+</html>

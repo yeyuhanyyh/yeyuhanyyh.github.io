@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 190" role="img"
+     aria-labelledby="title desc">
+  <title id="title">Two alternating groups of consecutive pairs</title>
+  <desc id="desc">Eight values omega one through omega eight in their original order. Brown arcs above connect pairs starting at odd indices. Olive dashed arcs below connect pairs starting at even indices.</desc>
+  <defs>
+    <style>
+      .node { fill: #25231f; }
+      .label {
+        fill: #25231f;
+        stroke: #fffdf8;
+        stroke-width: 8px;
+        stroke-linejoin: round;
+        paint-order: stroke fill;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 22px;
+      }
+      .odd { fill: none; stroke: #7b3f1d; stroke-width: 4; stroke-linecap: round; }
+      .even { fill: none; stroke: #3d4934; stroke-width: 4; stroke-linecap: round; stroke-dasharray: 9 7; }
+      .key { font-family: "Open Sans", Arial, sans-serif; font-size: 18px; font-weight: 600; }
+    </style>
+  </defs>
+
+  <g aria-hidden="true">
+    <path class="odd" d="M70 86 C70 32 160 32 160 86"/>
+    <path class="odd" d="M250 86 C250 32 340 32 340 86"/>
+    <path class="odd" d="M430 86 C430 32 520 32 520 86"/>
+    <path class="odd" d="M610 86 C610 32 700 32 700 86"/>
+
+    <path class="even" d="M160 94 C160 158 250 158 250 94"/>
+    <path class="even" d="M340 94 C340 158 430 158 430 94"/>
+    <path class="even" d="M520 94 C520 158 610 158 610 94"/>
+
+    <circle class="node" cx="70" cy="90" r="5"/>
+    <circle class="node" cx="160" cy="90" r="5"/>
+    <circle class="node" cx="250" cy="90" r="5"/>
+    <circle class="node" cx="340" cy="90" r="5"/>
+    <circle class="node" cx="430" cy="90" r="5"/>
+    <circle class="node" cx="520" cy="90" r="5"/>
+    <circle class="node" cx="610" cy="90" r="5"/>
+    <circle class="node" cx="700" cy="90" r="5"/>
+
+    <text class="label" x="70" y="117" text-anchor="middle">ω₁</text>
+    <text class="label" x="160" y="117" text-anchor="middle">ω₂</text>
+    <text class="label" x="250" y="117" text-anchor="middle">ω₃</text>
+    <text class="label" x="340" y="117" text-anchor="middle">ω₄</text>
+    <text class="label" x="430" y="117" text-anchor="middle">ω₅</text>
+    <text class="label" x="520" y="117" text-anchor="middle">ω₆</text>
+    <text class="label" x="610" y="117" text-anchor="middle">ω₇</text>
+    <text class="label" x="700" y="117" text-anchor="middle">ω₈</text>
+
+    <text class="key" x="755" y="60" fill="#7b3f1d">first group</text>
+    <text class="key" x="755" y="137" fill="#3d4934">second group</text>
+  </g>
+</svg>

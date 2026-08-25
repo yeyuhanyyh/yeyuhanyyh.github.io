@@ -7,7 +7,7 @@
   <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-lower-bound/">
   <meta property="og:type" content="article">
   <meta property="article:published_time" content="2026-08-23T10:39:13-04:00">
-  <meta property="article:modified_time" content="2026-08-24T23:37:00-04:00">
+  <meta property="article:modified_time" content="2026-08-25T08:58:00-04:00">
   <meta property="og:title" content="An Ω(n^-1.6342) Lower Bound for (Non-Anytime) Gradient Descent">
   <meta property="og:description" content="A proof of an Ω(n^-1.6342) lower bound for gradient descent under predetermined stepsize schedules.">
   <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-lower-bound/">
@@ -137,7 +137,7 @@
     .rate-figure-canvas {
       position: relative;
       width: 100%;
-      min-width: 1050px;
+      min-width: 1120px;
     }
     .rate-figure img {
       display: block;
@@ -146,12 +146,12 @@
     }
     .rate-block-link {
       position: absolute;
-      top: 63.2%;
-      height: 26.4%;
       z-index: 1;
       border-radius: 2px;
       cursor: pointer;
     }
+    .rate-block-link.non-anytime { top: 33.721%; height: 17.442%; }
+    .rate-block-link.anytime { top: 51.163%; height: 17.442%; }
     .rate-block-link:hover {
       box-shadow: inset 0 -3px 0 rgba(46, 43, 39, 0.55);
     }
@@ -272,7 +272,7 @@
           <span class="article-affiliation"><sup>1</sup> Massachusetts Institute of Technology.</span>
           <span class="article-dates">
             <span>First announced: August 23, 2026.</span>
-            <span>Last updated: August 24, 2026 23:37 (GMT-4).</span>
+            <span>Last updated: August 25, 2026 08:58 (GMT-4).</span>
           </span>
         </span>
       </p>
@@ -287,6 +287,10 @@
         After multiple
         rounds of interaction with ChatGPT-5.6 Sol, I obtained the lower bound
         \(\Omega(n^{-1.6342})\).
+      </p>
+      <p>
+        We further proved an \(\Omega(n^{-1.2408})\) lower bound for anytime GD in the
+        <a href="https://yeyuhanyyh.github.io/gd-anytime-lower-bound/">next blog post</a>.
       </p>
       <p>
         In the proof, we use the same hard-function family introduced by Ma and Chen.
@@ -358,35 +362,53 @@
              aria-label="Scrollable convergence-rate landscape"
              aria-describedby="rate-landscape-description rate-landscape-caption">
           <div class="rate-figure-canvas">
-            <img src="assets/non-anytime-progress.svg" width="1400" height="250"
-                 alt="Lower and upper bounds for non-anytime gradient descent. A complete text description follows.">
-            <a class="rate-block-link" style="left:2.857%;width:15.714%"
+            <img src="assets/gd-progress.svg" width="1400" height="430"
+                 alt="Selected non-anytime and anytime bounds for gradient descent on a shared exponent scale. A complete text description follows.">
+            <a class="rate-block-link non-anytime" style="left:2.857%;width:15.714%"
                href="https://www2.isye.gatech.edu/~nemirovs/Nemirovskii_Yudin_1983.pdf"
                aria-label="Nemirovsky and Yudin, Problem Complexity and Method Efficiency in Optimization, 1983"></a>
-            <a class="rate-block-link" style="left:18.571%;width:8.571%"
+            <a class="rate-block-link non-anytime" style="left:18.571%;width:4.5%"
                href="https://arxiv.org/abs/2608.10418"
                aria-label="Ma and Chen, A lower bound for stepsize-based acceleration of gradient descent, 2026"></a>
-            <a class="rate-block-link" style="left:27.143%;width:12.857%"
+            <a class="rate-block-link non-anytime" style="left:23.071%;width:13.286%"
                href="https://chungentsai.github.io/gd-lower-bounds.html"
                aria-label="Chung-En Tsai, An Improved Lower Bound for Non-Anytime Gradient Descent, 2026"></a>
-            <a class="rate-block-link" style="left:40%;width:12.143%"
+            <a class="rate-block-link non-anytime" style="left:36.357%;width:6.5%"
                href="#theorem-main" aria-label="This work, Theorem 2"></a>
-            <a class="rate-block-link" style="left:69.286%;width:15.714%"
-               href="https://doi.org/10.1007/s10107-024-02164-2"
+            <a class="rate-block-link non-anytime" style="left:67%;width:18%"
+               href="https://arxiv.org/abs/2309.16530"
                aria-label="Altschuler and Parrilo, Acceleration by stepsize hedging, 2024"></a>
-            <a class="rate-block-link" style="left:85%;width:12.857%"
+            <a class="rate-block-link non-anytime" style="left:85%;width:12.857%"
                href="https://doi.org/10.1016/0041-5553(66)90114-5"
                aria-label="Levitin and Polyak, Constrained minimization methods, 1966"></a>
+
+            <a class="rate-block-link anytime" style="left:2.857%;width:15.714%"
+               href="https://www2.isye.gatech.edu/~nemirovs/Nemirovskii_Yudin_1983.pdf"
+               aria-label="Nemirovsky and Yudin, classical anytime lower bound, 1983"></a>
+            <a class="rate-block-link anytime" style="left:18.571%;width:44.286%"
+               href="https://arxiv.org/html/2607.02053v1#S1.Thmtheorem1"
+               aria-label="Tsai, Fatkhullin, Zhang, and He, anytime lower bound, 2026"></a>
+            <a class="rate-block-link anytime" style="left:62.857%;width:6.143%"
+               href="https://yeyuhanyyh.github.io/gd-anytime-lower-bound/"
+               aria-label="Next blog, anytime lower bound at exponent 1.2408"></a>
+            <a class="rate-block-link anytime" style="left:77.071%;width:7.929%"
+               href="https://proceedings.mlr.press/v291/zhang25a.html"
+               aria-label="Zhang, Lee, Du, and Chen, anytime upper bound, 2025"></a>
+            <a class="rate-block-link anytime" style="left:85%;width:12.857%"
+               href="https://doi.org/10.1016/0041-5553(66)90114-5"
+               aria-label="Levitin and Polyak, standard gradient descent upper bound, 1966"></a>
           </div>
         </div>
         <p id="rate-landscape-description" class="visually-hidden">
-          A schematic diagram with rate markers n to the powers minus 2, minus 1.932,
-          minus 1.733, minus 1.6342, minus 1.271, and minus 1. The lower-bound blocks are
-          labeled Nemirovsky and Yudin, Ma and Chen, Tsai, and This work. The upper-bound
-          blocks are labeled Altschuler and Parrilo, and Levitin and Polyak. The horizontal
-          axis is labeled Lower bound on the left and Upper bound on the right.
+          A two-row diagram uses the same horizontal exponent scale from n to the minus 2
+          to n to the minus 1. The upper Non-Anytime row shows the lower bounds of
+          Nemirovsky and Yudin, Ma and Chen, Tsai, and This work at exponent 1.6342,
+          followed by the upper bounds of Altschuler and Parrilo and Levitin and Polyak.
+          The lower Anytime row shows the lower bounds of Nemirovsky and Yudin, Tsai and
+          coauthors, and the Next blog at exponent 1.2408, followed by the upper bounds of
+          Zhang and coauthors and Levitin and Polyak.
         </p>
-        <figcaption id="rate-landscape-caption"><strong>Figure 1.</strong> Lower and upper bounds for non-anytime gradient descent.</figcaption>
+        <figcaption id="rate-landscape-caption"><strong>Figure 1.</strong> Progress on lower bounds for GD.</figcaption>
       </figure>
 
       <p>

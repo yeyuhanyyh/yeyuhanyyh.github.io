@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="627" viewBox="0 0 1200 627" role="img" aria-labelledby="title desc">
+  <title id="title">Progress on bounds for anytime gradient descent</title>
+  <desc id="desc">A rate diagram for anytime gradient descent highlighting the new no-o barrier at exponent 1.2408 between the previous 1.334 barrier and the 1.119 upper bound.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#111111"/>
+    </marker>
+    <style>
+      .rate { font-family: Georgia, "Times New Roman", serif; font-size: 48px; font-style: italic; fill: #111111; }
+      .exponent { font-size: 27px; font-style: normal; }
+      .guide { stroke: #111111; stroke-width: 2.5; stroke-dasharray: 8 8; }
+      .block { font-family: Georgia, "Times New Roman", serif; font-size: 18px; font-weight: 700; text-anchor: middle; }
+      .lower { fill: #7a3518; }
+      .ours { fill: #4b2500; font-size: 21px; font-weight: 800; }
+      .upper { fill: #285421; }
+      .small { font-size: 16px; }
+      .axis-label { font-family: Georgia, "Times New Roman", serif; font-size: 23px; font-style: italic; fill: #6f6a63; }
+    </style>
+  </defs>
+  <rect x="1" y="1" width="1198" height="625" rx="26" fill="#ffffff" stroke="#d6dde3" stroke-width="2"/>
+  <text class="rate" x="225" y="238" text-anchor="middle">n<tspan class="exponent" dy="-19">−2</tspan></text>
+  <text class="rate" x="405" y="150" text-anchor="middle">n<tspan class="exponent" dy="-19">−1.334</tspan></text>
+  <text class="rate" x="620" y="238" text-anchor="middle">n<tspan class="exponent" dy="-19">−1.2408</tspan></text>
+  <text class="rate" x="865" y="150" text-anchor="middle">n<tspan class="exponent" dy="-19">−1.119</tspan></text>
+  <text class="rate" x="1045" y="238" text-anchor="middle">n<tspan class="exponent" dy="-19">−1</tspan></text>
+  <line class="guide" x1="225" y1="255" x2="225" y2="360"/>
+  <line class="guide" x1="405" y1="168" x2="405" y2="360"/>
+  <line class="guide" x1="620" y1="255" x2="620" y2="360"/>
+  <line class="guide" x1="865" y1="168" x2="865" y2="360"/>
+  <line class="guide" x1="1045" y1="255" x2="1045" y2="360"/>
+  <rect x="25" y="360" width="200" height="110" fill="#e7ac8a"/>
+  <rect x="225" y="360" width="180" height="110" fill="#eec8b1"/>
+  <rect x="405" y="360" width="215" height="110" fill="#f4c453"/>
+  <rect x="620" y="360" width="245" height="110" fill="#ffffff"/>
+  <rect x="865" y="360" width="180" height="110" fill="#ddefd3"/>
+  <rect x="1045" y="360" width="130" height="110" fill="#bde3a7"/>
+  <text class="block lower small" x="125" y="403"><tspan x="125">Nemirovsky &amp; Yudin</tspan><tspan x="125" dy="29">(1983)</tspan></text>
+  <text class="block lower" x="315" y="403"><tspan x="315">Tsai et al.</tspan><tspan x="315" dy="29">(2026)</tspan></text>
+  <text class="block ours" x="512.5" y="424">This work</text>
+  <text class="block upper" x="955" y="403"><tspan x="955">Zhang et al.</tspan><tspan x="955" dy="29">(2025)</tspan></text>
+  <text class="block upper small" x="1110" y="391"><tspan x="1110">Levitin &amp;</tspan><tspan x="1110" dy="25">Polyak</tspan><tspan x="1110" dy="25">(1966)</tspan></text>
+  <line x1="25" y1="470" x2="1182" y2="470" stroke="#111111" stroke-width="3" marker-end="url(#arrow)"/>
+  <text class="axis-label" x="34" y="515">Lower bound</text>
+  <text class="axis-label" x="1166" y="515" text-anchor="end">Upper bound</text>
+</svg>
