@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 440" role="img"
+     aria-labelledby="title desc">
+  <title id="title">Rank order and chronological order of the selected excesses</title>
+  <desc id="desc">The positive excesses are first arranged from largest to smallest. For each cut s, D s contains B and the tail after a s. The minimizing cut q selects the first q excesses. Those excesses are then shown at their original chronological positions t one through t q, with the remaining indices grouped into S one through S q plus one.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7b3f1d"/>
+    </marker>
+    <style>
+      .row-label {
+        fill: #3d4934;
+        font-family: "Open Sans", Arial, sans-serif;
+        font-size: 19px;
+        font-weight: 600;
+      }
+      .math {
+        fill: #2e2b27;
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 25px;
+        font-style: italic;
+      }
+      .note {
+        fill: #6d655d;
+        font-family: "Open Sans", Arial, sans-serif;
+        font-size: 16px;
+      }
+      .selected { fill: #f0cf82; stroke: #7b3f1d; stroke-width: 2; }
+      .remaining { fill: #e8eddf; stroke: #3d4934; stroke-width: 2; }
+      .divider { stroke: #9b9185; stroke-width: 1.5; }
+      .timeline { stroke: #3d4934; stroke-width: 3; stroke-linecap: round; }
+      .selected-mark { fill: #7b3f1d; }
+      .guide { stroke: #7b3f1d; stroke-width: 2.2; fill: none; }
+      .gap { fill: #f7f1e4; stroke: #9b9185; stroke-width: 1.4; }
+    </style>
+  </defs>
+
+  <g aria-hidden="true">
+    <text class="row-label" x="22" y="73">Ranked by size</text>
+
+    <rect class="selected" x="190" y="34" width="490" height="78" rx="5"/>
+    <rect class="remaining" x="680" y="34" width="390" height="78" rx="5"/>
+    <line class="divider" x1="300" y1="34" x2="300" y2="112"/>
+    <line class="divider" x1="410" y1="34" x2="410" y2="112"/>
+    <line class="divider" x1="545" y1="34" x2="545" y2="112"/>
+    <line class="divider" x1="790" y1="34" x2="790" y2="112"/>
+    <line class="divider" x1="925" y1="34" x2="925" y2="112"/>
+
+    <text class="math" x="245" y="82" text-anchor="middle">a₁</text>
+    <text class="math" x="355" y="82" text-anchor="middle">a₂</text>
+    <text class="math" x="478" y="82" text-anchor="middle">⋯</text>
+    <text class="math" x="612" y="82" text-anchor="middle">a<tspan baseline-shift="sub" font-size="17">s</tspan></text>
+    <text class="math" x="735" y="82" text-anchor="middle">a<tspan baseline-shift="sub" font-size="17">s+1</tspan></text>
+    <text class="math" x="858" y="82" text-anchor="middle">⋯</text>
+    <text class="math" x="998" y="82" text-anchor="middle">a<tspan baseline-shift="sub" font-size="17">r</tspan></text>
+
+    <text class="note" x="435" y="137" text-anchor="middle">first s excesses</text>
+    <text class="note" x="875" y="137" text-anchor="middle">tail included in D<tspan baseline-shift="sub" font-size="12">s</tspan></text>
+
+    <text class="math" x="630" y="176" text-anchor="middle">D<tspan baseline-shift="sub" font-size="17">s</tspan> = B + a<tspan baseline-shift="sub" font-size="17">s+1</tspan> + ⋯ + a<tspan baseline-shift="sub" font-size="17">r</tspan></text>
+    <text class="note" x="630" y="203" text-anchor="middle">move the cut and choose q to minimize D<tspan baseline-shift="sub" font-size="12">s</tspan> s<tspan baseline-shift="super" font-size="12">α</tspan></text>
+
+    <path class="guide" d="M560 215 L560 264" marker-end="url(#arrow)"/>
+    <text class="note" x="580" y="239">place a₁,…,a<tspan baseline-shift="sub" font-size="12">q</tspan> at their original indices</text>
+
+    <text class="row-label" x="22" y="319">Ordered by time</text>
+
+    <rect class="gap" x="190" y="286" width="135" height="54" rx="3"/>
+    <rect class="gap" x="325" y="286" width="175" height="54" rx="3"/>
+    <rect class="gap" x="500" y="286" width="200" height="54" rx="3"/>
+    <rect class="gap" x="700" y="286" width="155" height="54" rx="3"/>
+    <rect class="gap" x="855" y="286" width="215" height="54" rx="3"/>
+    <line class="timeline" x1="190" y1="313" x2="1070" y2="313"/>
+
+    <circle class="selected-mark" cx="325" cy="313" r="8"/>
+    <circle class="selected-mark" cx="500" cy="313" r="8"/>
+    <circle class="selected-mark" cx="855" cy="313" r="8"/>
+
+    <text class="math" x="325" y="279" text-anchor="middle">t₁</text>
+    <text class="math" x="500" y="279" text-anchor="middle">t₂</text>
+    <text class="math" x="600" y="279" text-anchor="middle">⋯</text>
+    <text class="math" x="855" y="279" text-anchor="middle">t<tspan baseline-shift="sub" font-size="17">q</tspan></text>
+
+    <text class="math" x="255" y="324" text-anchor="middle">S₁</text>
+    <text class="math" x="412" y="324" text-anchor="middle">S₂</text>
+    <text class="math" x="600" y="324" text-anchor="middle">⋯</text>
+    <text class="math" x="778" y="324" text-anchor="middle">S<tspan baseline-shift="sub" font-size="17">q</tspan></text>
+    <text class="math" x="965" y="324" text-anchor="middle">S<tspan baseline-shift="sub" font-size="17">q+1</tspan></text>
+
+    <text class="math" x="630" y="382" text-anchor="middle">S<tspan baseline-shift="sub" font-size="17">i</tspan> = Σ<tspan baseline-shift="sub" font-size="17">tᵢ₋₁&lt;k&lt;tᵢ</tspan> h<tspan baseline-shift="sub" font-size="17">k</tspan></text>
+    <text class="math" x="630" y="420" text-anchor="middle">D<tspan baseline-shift="sub" font-size="17">q</tspan> = Σ<tspan baseline-shift="sub" font-size="17">i=1</tspan><tspan baseline-shift="super" font-size="17">q+1</tspan> (S<tspan baseline-shift="sub" font-size="17">i</tspan> + 1)</text>
+  </g>
+</svg>
