@@ -384,20 +384,20 @@ E_{\mathrm{end}}
 <p>Fix <span class="math inline">\(\alpha&gt;0\)</span> and assume that <a href="#eq-clean-condition">(3)</a> implies <a href="#eq-clean-target">(4)</a>, with the same constants <span class="math inline">\(\eta_\alpha,C_\alpha\)</span> for every integer <span class="math inline">\(q\ge2\)</span> and every integer <span class="math inline">\(1\le\ell\le\eta_\alpha q\)</span>. Set <span class="math display">\[
 \theta:=\frac{2(1+\alpha)}{2+\alpha}.
 \]</span></p>
-<p>Fix a finite schedule <span class="math inline">\(H=(h_1,\ldots,h_n)\)</span> and write <span class="math inline">\(R:=R_n(H)\)</span>. Let <span class="math inline">\(a_1\ge\cdots\ge a_r&gt;0\)</span> be the decreasing rearrangement of the positive excesses <span class="math inline">\((h_k-1)_+\)</span>. Define <span class="math display">\[
+<p>Fix a finite schedule <span class="math inline">\(H=(h_1,\ldots,h_n)\)</span>. Let <span class="math inline">\(a_1\ge\cdots\ge a_r&gt;0\)</span> be the decreasing rearrangement of the positive excesses <span class="math inline">\((h_k-1)_+\)</span>. Define <span class="math display">\[
 B:=1+\sum_{k=1}^n\min\{h_k,1\},
 \qquad
 D_s:=B+\sum_{j=s+1}^r a_j,\qquad 1\le s\le r.
 \]</span></p>
 <p><strong>Part I. Prove <a href="#finite-prefix-profile">(6)</a> for every finite prefix.</strong></p>
-<p>We prove that there are constants <span class="math inline">\(c_0,C&gt;0\)</span>, depending only on <span class="math inline">\(\alpha\)</span>, such that every <span class="math inline">\(1\le m\le r\)</span> with <span class="math inline">\(R D_m\le c_0\)</span> satisfies</p>
+<p>We prove that there are constants <span class="math inline">\(c_0,C&gt;0\)</span>, depending only on <span class="math inline">\(\alpha\)</span>, such that every <span class="math inline">\(1\le m\le r\)</span> with <span class="math inline">\(R_n(H)D_m\le c_0\)</span> satisfies</p>
 <p id="finite-prefix-profile"><span class="math display">\[
 m a_m\le C D_m,
 \qquad
 D_m\le C(n+1)^{1+\alpha}m^{-\alpha}.
 \tag{6}
 \]</span></p>
-<p>If <span class="math inline">\(r=0\)</span>, there is nothing to prove. Otherwise fix <span class="math inline">\(m\)</span> for which <span class="math inline">\(R D_m\le c_0\)</span>.</p>
+<p>If <span class="math inline">\(r=0\)</span>, there is nothing to prove. Otherwise fix <span class="math inline">\(m\)</span> for which <span class="math inline">\(R_n(H)D_m\le c_0\)</span>.</p>
 <p><strong>(1) Use the <span class="math inline">\(q\)</span> largest excesses.</strong> For any <span class="math inline">\(2\le q\le r\)</span>, choose the <span class="math inline">\(q\)</span> largest positive excesses and list their locations as <span class="math inline">\(t_1&lt;\cdots&lt;t_q\)</span>. Set <span class="math inline">\(t_0=0\)</span>, <span class="math inline">\(t_{q+1}=n+1\)</span>, and <span class="math display">\[
 U_i:=1+\sum_{k=t_{i-1}+1}^{t_i-1}h_k\quad(1\le i\le q),
 \qquad
@@ -420,18 +420,18 @@ x_i:=\frac{U_i}{\bar U},
 1+\frac{x_q+2(q-\sum_i x_i)-\bar U^{-1}}{\omega_q}
 =\frac{U_q+(h_{t_q}-1)+2V-1}{h_{t_q}-1}&gt;0.
 \]</span> Removing <span class="math inline">\(-\bar U^{-1}/\omega_q\)</span> increases this bracket to the one in <a href="#eq-endpoint-factor">(5)</a>, which only weakens the lower bound. Therefore <span class="math display">\[
-R\ge
+R_n(H)\ge
 \frac{q}{
 D_q E_{\mathrm{end}}
 \prod_{i=1}^{q-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})}.
 \]</span></p>
-<p>We first rule out <span class="math inline">\(m=1\)</span> by proving <span class="math inline">\(R D_1\ge1/4\)</span> directly. If <span class="math inline">\(a_1\le D_1\)</span>, the Huber function used in the <a href="https://yeyuhanyyh.github.io/gd-lower-bound/#normalized-core">proof of Lemma 3 in the previous post</a> gives <span class="math display">\[
-R\ge\frac{1}{2(D_1+a_1)-1}\ge\frac1{4D_1}.
+<p>We first rule out <span class="math inline">\(m=1\)</span> by proving <span class="math inline">\(R_n(H)D_1\ge1/4\)</span> directly. If <span class="math inline">\(a_1\le D_1\)</span>, the Huber function used in the <a href="https://yeyuhanyyh.github.io/gd-lower-bound/#normalized-core">proof of Lemma 3 in the previous post</a> gives <span class="math display">\[
+R_n(H)\ge\frac{1}{2(D_1+a_1)-1}\ge\frac1{4D_1}.
 \]</span> If <span class="math inline">\(a_1&gt;D_1\)</span>, apply the same lower bound with <span class="math inline">\(q=1\)</span> at an index carrying <span class="math inline">\(a_1\)</span>. Writing <span class="math inline">\(D_1=U_1+V\)</span>, we obtain <span class="math display">\[
-R\ge
+R_n(H)\ge
 \frac{a_1}{U_1(U_1+a_1+2V-1)}
 &gt;\frac1{3D_1}&gt;\frac1{4D_1}.
-\]</span> Here <span class="math inline">\(U_1\le D_1\)</span> and <span class="math inline">\(U_1+a_1+2V-1&lt;3a_1\)</span>, which proves the first strict inequality. Choose <span class="math inline">\(c_0&lt;1/4\)</span>. Then <span class="math inline">\(R D_m\le c_0\)</span> implies <span class="math inline">\(m\ge2\)</span>.</p>
+\]</span> Here <span class="math inline">\(U_1\le D_1\)</span> and <span class="math inline">\(U_1+a_1+2V-1&lt;3a_1\)</span>, which proves the first strict inequality. Choose <span class="math inline">\(c_0&lt;1/4\)</span>. Then <span class="math inline">\(R_n(H)D_m\le c_0\)</span> implies <span class="math inline">\(m\ge2\)</span>.</p>
 <p><strong>(2) Prove the first inequality in <a href="#finite-prefix-profile">(6)</a>.</strong> We claim that a constant <span class="math inline">\(L&gt;0\)</span> can be chosen so that <span class="math display">\[
 s a_s\le L D_s,\qquad m\le s\le r.
 \]</span> Repeat part (1) with <span class="math inline">\(q=s\)</span>. If <span class="math inline">\(s a_s&gt;L D_s\)</span>, then <span class="math inline">\(\omega_i&gt;L\)</span> for every <span class="math inline">\(i\)</span>. Define <span class="math display">\[
@@ -448,13 +448,13 @@ C_0\exp\!\left\{
 2s+\sum_{i=1}^{s-1}\Gamma_1(\omega_i,\omega_{i+1})
 \le 2s+(s-1)(-\log L-1).
 \]</span> Choose <span class="math inline">\(L\)</span> large enough that, for some <span class="math inline">\(\delta&gt;0\)</span> and <span class="math inline">\(C_L&lt;\infty\)</span>, <span class="math inline">\(2s+(s-1)(-\log L-1)\le-\delta s+C_L\)</span> for every <span class="math inline">\(s\ge2\)</span>. The preceding product is then at most <span class="math inline">\(C_1e^{-\delta s}\)</span>. Applying the bound from part (1) with <span class="math inline">\(q=s\)</span> gives <span class="math display">\[
-R\ge
+R_n(H)\ge
 \frac{s}{
 D_s E_{\mathrm{end}}
 \prod_{i=1}^{s-1}K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
 }
 \ge\frac{s e^{\delta s}}{C_1D_s}
-\ge\frac{s e^{\delta s}}{C_1c_0}R,
+\ge\frac{s e^{\delta s}}{C_1c_0}R_n(H),
 \]</span> which is impossible after <span class="math inline">\(c_0\)</span> is chosen sufficiently small. Thus <span class="math inline">\(s a_s\le L D_s\)</span> for every <span class="math inline">\(m\le s\le r\)</span>, proving the first inequality in <a href="#finite-prefix-profile">(6)</a>.</p>
 <p>Since <span class="math inline">\(D_{s-1}=D_s+a_s\)</span>, for any <span class="math inline">\(\kappa&gt;\max\{L,\alpha\}\)</span> there is <span class="math inline">\(C_\kappa&lt;\infty\)</span> such that <span class="math display">\[
 \frac{D_m}{D_q}
@@ -486,9 +486,9 @@ E_{\mathrm{end}}
 \prod_{i=1}^{q-1}
 K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
 \le C_\alpha.
-\]</span> Combining the bound from part (1), <a href="#eq-clean-target">(4)</a>, and <span class="math inline">\(D_q\le D_m\le c_0/R\)</span> gives <span class="math display">\[
-R\ge\frac{q}{C_\alpha D_q}
-\ge\frac{q}{C_\alpha c_0}R,
+\]</span> Combining the bound from part (1), <a href="#eq-clean-target">(4)</a>, and <span class="math inline">\(D_q\le D_m\le c_0/R_n(H)\)</span> gives <span class="math display">\[
+R_n(H)\ge\frac{q}{C_\alpha D_q}
+\ge\frac{q}{C_\alpha c_0}R_n(H),
 \]</span> again a contradiction after <span class="math inline">\(c_0\)</span> is decreased if necessary. Hence <span class="math inline">\(F_m\le A F_r\)</span>. Since <span class="math inline">\(D_r=B\le n+1\)</span> and <span class="math inline">\(r\le n\)</span>, <span class="math display">\[
 D_m m^\alpha=F_m
 \le A F_r
@@ -496,58 +496,56 @@ D_m m^\alpha=F_m
 \le A(n+1)n^\alpha.
 \]</span> Therefore <span class="math inline">\(D_m\le C(n+1)^{1+\alpha}m^{-\alpha}\)</span>, proving the second inequality in <a href="#finite-prefix-profile">(6)</a>.</p>
 <p><strong>Part II. Deduce the anytime conclusion from <a href="#finite-prefix-profile">(6)</a>.</strong></p>
-<p>Fix a positive infinite schedule. For each prefix <span class="math inline">\(H_n\)</span>, define <span class="math inline">\(a_1,\ldots,a_r,B,D_s\)</span> as in Part I, and put <span class="math display">\[
-\Sigma_n:=\sum_{k=1}^n h_k,
+<p>Fix a positive infinite schedule and write <span class="math inline">\(\Sigma_n:=\sum_{k=1}^n h_k\)</span>. For each prefix <span class="math inline">\(H_n\)</span>, define <span class="math inline">\(a_1,\ldots,a_r,B,D_s\)</span> as in Part I. We use the quadratic lower bound and the terminal-step bound <span class="math display">\[
+R_n(H_n)\ge\frac1{4(1+2\Sigma_n)},
 \qquad
-R_n:=R_n(H_n).
-\]</span> We use the quadratic lower bound and the terminal-step bound <span class="math display">\[
-R_n\ge\frac1{4(1+2\Sigma_n)},
-\qquad
-h_n-1\le(1+\Sigma_{n-1})\sqrt{R_n}
+h_n-1\le(1+\Sigma_{n-1})\sqrt{R_n(H_n)}
 \quad\text{when }h_n&gt;1.
-\]</span> The quadratic lower bound follows from <a href="https://arxiv.org/html/2607.02053v1#S2.Thmlemma1">Tsai et al., Lemma 2.1(i)</a>, because <span class="math inline">\(R_n(H_n)\)</span> is a supremum over a class that contains the convex quadratics used there. The terminal-step bound is the terminal case of <a href="https://arxiv.org/html/2607.02053v1#S3.Thmlemma1">their Lemma 3.1</a>.</p>
-<p>Suppose for contradiction that <span class="math inline">\(R_n=o(n^{-\theta})\)</span>. Since <span class="math inline">\(\theta&gt;1\)</span>, the quadratic lower bound implies <span class="math inline">\(\Sigma_n/n\to\infty\)</span>. Hence the steps are unbounded, so there are infinitely many indices <span class="math inline">\(n\)</span> such that <span class="math inline">\(h_n&gt;\max_{k&lt;n}h_k\)</span>.</p>
-<p>Fix a sufficiently large record time <span class="math inline">\(n\)</span>, and abbreviate <span class="math inline">\(R:=R_n\)</span> and <span class="math inline">\(\Sigma:=\Sigma_n\)</span>. Then <span class="math inline">\(a_1=h_n-1\)</span>. For a fixed <span class="math inline">\(\varepsilon\in(0,1/2)\)</span>, define <span class="math display">\[
-m_\star:=\left\lfloor\frac{\varepsilon}{\sqrt R}\right\rfloor.
+\]</span> For the first inequality, <a href="https://arxiv.org/html/2607.02053v1#S2.Thmlemma1">Tsai et al., Lemma 2.1(i)</a> chooses the admissible quadratic <span class="math inline">\(f(x)=\lambda x^2/2\)</span> with <span class="math inline">\(\lambda=(1+2\Sigma_n)^{-1}\)</span> and obtains a normalized final gap of at least <span class="math inline">\(1/[4(1+2\Sigma_n)]\)</span>. Since this quadratic is included in the supremum defining <span class="math inline">\(R_n(H_n)\)</span>, the first inequality follows. For the second inequality, take <span class="math inline">\(m=n\)</span> in <a href="https://arxiv.org/html/2607.02053v1#S3.Thmlemma1">their Lemma 3.1</a>. When <span class="math inline">\(h_n&gt;1\)</span>, it gives <span class="math inline">\(R_n(H_n)\ge (h_n-1)^2/(1+\Sigma_{n-1})^2\)</span>, which rearranges to the displayed terminal-step bound.</p>
+<p>Suppose for contradiction that <span class="math inline">\(R_n(H_n)=o(n^{-\theta})\)</span>. Since <span class="math inline">\(\theta&gt;1\)</span>, the quadratic lower bound implies <span class="math inline">\(\Sigma_n/n\to\infty\)</span>. Hence the steps are unbounded, so there are infinitely many indices <span class="math inline">\(n\)</span> such that <span class="math inline">\(h_n&gt;\max_{k&lt;n}h_k\)</span>.</p>
+<p>Fix a sufficiently large record time <span class="math inline">\(n\)</span>. Then <span class="math inline">\(a_1=h_n-1\)</span>. For a fixed <span class="math inline">\(\varepsilon\in(0,1/2)\)</span>, define <span class="math display">\[
+m_\star:=\left\lfloor
+\frac{\varepsilon}{\sqrt{R_n(H_n)}}
+\right\rfloor.
 \]</span> If <span class="math inline">\(r\le m_\star\)</span>, the terminal-step bound gives <span class="math display">\[
 \sum_{j=1}^r a_j
 \le m_\star a_1
-\le\varepsilon(1+\Sigma).
-\]</span> Since <span class="math inline">\(\Sigma=(B-1)+\sum_{j=1}^r a_j\)</span> and <span class="math inline">\(B-1\le n\)</span>, this would imply <span class="math inline">\(\Sigma=O(n)\)</span>, a contradiction. Thus <span class="math inline">\(r&gt;m_\star\)</span>.</p>
-<p>We next prove <span class="math inline">\(R D_{m_\star}\le c_0\)</span>. Otherwise <span class="math inline">\(R D_r=RB\le R(n+1)\to0\)</span>, so there is a first <span class="math inline">\(q&gt;m_\star\)</span> such that <span class="math inline">\(R D_q\le c_0\)</span>. Applying both inequalities in <a href="#finite-prefix-profile">(6)</a> with <span class="math inline">\(m=q\)</span> gives <span class="math display">\[
+\le\varepsilon(1+\Sigma_n).
+\]</span> Since <span class="math inline">\(\Sigma_n=(B-1)+\sum_{j=1}^r a_j\)</span> and <span class="math inline">\(B-1\le n\)</span>, this would imply <span class="math inline">\(\Sigma_n=O(n)\)</span>, a contradiction. Thus <span class="math inline">\(r&gt;m_\star\)</span>.</p>
+<p>We next prove <span class="math inline">\(R_n(H_n)D_{m_\star}\le c_0\)</span>. Suppose instead that <span class="math inline">\(R_n(H_n)D_{m_\star}&gt;c_0\)</span>. Since <span class="math inline">\(R_n(H_n)D_r=R_n(H_n)B\le R_n(H_n)(n+1)\to0\)</span>, there is a first <span class="math inline">\(q&gt;m_\star\)</span> such that <span class="math inline">\(R_n(H_n)D_q\le c_0\)</span>. Applying both inequalities in <a href="#finite-prefix-profile">(6)</a> with <span class="math inline">\(m=q\)</span> gives <span class="math display">\[
 D_{q-1}=D_q+a_q
 \le\left(1+\frac Cq\right)D_q
 \le C(n+1)^{1+\alpha}q^{-\alpha}.
-\]</span> For all sufficiently large record times, <span class="math inline">\(q&gt;m_\star\ge\varepsilon/(2\sqrt R)\)</span>. Therefore <span class="math display">\[
-R D_{q-1}
+\]</span> For all sufficiently large record times, <span class="math inline">\(q&gt;m_\star\ge\varepsilon/(2\sqrt{R_n(H_n)})\)</span>. Therefore <span class="math display">\[
+R_n(H_n)D_{q-1}
 \le C_\varepsilon
-n^{1+\alpha}R^{1+\alpha/2}
-=C_\varepsilon\bigl(n^\theta R\bigr)^{(2+\alpha)/2}
+n^{1+\alpha}R_n(H_n)^{1+\alpha/2}
+=C_\varepsilon\bigl(n^\theta R_n(H_n)\bigr)^{(2+\alpha)/2}
 =o(1),
-\]</span> contradicting the definition of <span class="math inline">\(q\)</span>, which gives <span class="math inline">\(R D_{q-1}&gt;c_0\)</span>. Hence <span class="math inline">\(R D_{m_\star}\le c_0\)</span>.</p>
-<p>For every <span class="math inline">\(m_\star&lt;j\le r\)</span>, <span class="math inline">\(D_j\le D_{m_\star}\)</span>, so <span class="math inline">\(R D_j\le c_0\)</span>. Applying <a href="#finite-prefix-profile">(6)</a> with <span class="math inline">\(m=j\)</span> gives <span class="math display">\[
+\]</span> contradicting the definition of <span class="math inline">\(q\)</span>, which gives <span class="math inline">\(R_n(H_n)D_{q-1}&gt;c_0\)</span>. Hence <span class="math inline">\(R_n(H_n)D_{m_\star}\le c_0\)</span>.</p>
+<p>For every <span class="math inline">\(m_\star&lt;j\le r\)</span>, <span class="math inline">\(D_j\le D_{m_\star}\)</span>, so <span class="math inline">\(R_n(H_n)D_j\le c_0\)</span>. Applying <a href="#finite-prefix-profile">(6)</a> with <span class="math inline">\(m=j\)</span> gives <span class="math display">\[
 a_j\le\frac{C D_j}{j}
 \le C(n+1)^{1+\alpha}j^{-1-\alpha}.
 \]</span> For <span class="math inline">\(1\le j\le m_\star\)</span>, we have <span class="math inline">\(a_j\le a_1=h_n-1\)</span>, so the terminal-step bound controls the first sum below. For <span class="math inline">\(m_\star&lt;j\le r\)</span>, summing <span class="math inline">\(a_j\le C(n+1)^{1+\alpha}j^{-1-\alpha}\)</span> gives the second sum. <span class="math display">\[
 \sum_{j=1}^{m_\star}a_j
 \le m_\star a_1
-\le\varepsilon(1+\Sigma),
+\le\varepsilon(1+\Sigma_n),
 \qquad
 \sum_{j=m_\star+1}^{r}a_j
-\le C_\varepsilon n^{1+\alpha}R^{\alpha/2}.
-\]</span> Using <span class="math inline">\(\Sigma=(B-1)+\sum_j a_j\)</span>, <span class="math inline">\(B-1\le n\)</span>, and <span class="math inline">\(\varepsilon&lt;1/2\)</span>, move the term <span class="math inline">\(\varepsilon\Sigma\)</span> to the left to obtain <span class="math display">\[
-\Sigma\le
-C_\varepsilon\left(n+n^{1+\alpha}R^{\alpha/2}\right).
-\]</span> Multiplying by <span class="math inline">\(R\)</span> gives <span class="math display">\[
-R\Sigma
+\le C_\varepsilon n^{1+\alpha}R_n(H_n)^{\alpha/2}.
+\]</span> Using <span class="math inline">\(\Sigma_n=(B-1)+\sum_j a_j\)</span>, <span class="math inline">\(B-1\le n\)</span>, and <span class="math inline">\(\varepsilon&lt;1/2\)</span>, move the term <span class="math inline">\(\varepsilon\Sigma_n\)</span> to the left to obtain <span class="math display">\[
+\Sigma_n\le
+C_\varepsilon\left(n+n^{1+\alpha}R_n(H_n)^{\alpha/2}\right).
+\]</span> Multiplying by <span class="math inline">\(R_n(H_n)\)</span> gives <span class="math display">\[
+R_n(H_n)\Sigma_n
 \le C_\varepsilon\left(
-nR+n^{1+\alpha}R^{1+\alpha/2}
+nR_n(H_n)+n^{1+\alpha}R_n(H_n)^{1+\alpha/2}
 \right)
 =C_\varepsilon\left(
-nR+\bigl(n^\theta R\bigr)^{(2+\alpha)/2}
+nR_n(H_n)+\bigl(n^\theta R_n(H_n)\bigr)^{(2+\alpha)/2}
 \right)
 =o(1).
-\]</span> But the quadratic lower bound is equivalent to <span class="math inline">\(R+2R\Sigma\ge1/4\)</span>, a contradiction. Therefore <span class="math display">\[
+\]</span> But the quadratic lower bound is equivalent to <span class="math inline">\(R_n(H_n)(1+2\Sigma_n)\ge1/4\)</span>, a contradiction. Therefore <span class="math display">\[
 \limsup_{n\to\infty}n^\theta R_n(H_n)&gt;0.
 \]</span></p>
 </div></details>
