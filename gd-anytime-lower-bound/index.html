@@ -398,28 +398,28 @@ D_m\le C(n+1)^{1+\alpha}m^{-\alpha}.
 \tag{6}
 \]</span></p>
 <p>If <span class="math inline">\(r=0\)</span>, there is nothing to prove. Otherwise fix <span class="math inline">\(m\)</span> for which <span class="math inline">\(R_n(H)D_m\le c_0\)</span>.</p>
-<p><strong>(1) Use the <span class="math inline">\(q\)</span> largest excesses.</strong> For any <span class="math inline">\(2\le q\le r\)</span>, choose the <span class="math inline">\(q\)</span> largest positive excesses and list their locations as <span class="math inline">\(t_1&lt;\cdots&lt;t_q\)</span>. Set <span class="math inline">\(t_0=0\)</span>, <span class="math inline">\(t_{q+1}=n+1\)</span>, and <span class="math display">\[
-U_i:=1+\sum_{k=t_{i-1}+1}^{t_i-1}h_k\quad(1\le i\le q),
+<p><strong>(1) Use the <span class="math inline">\(q\)</span> largest excesses.</strong> For any <span class="math inline">\(1\le q\le r\)</span>, choose the <span class="math inline">\(q\)</span> largest positive excesses and list their locations as <span class="math inline">\(t_1&lt;\cdots&lt;t_q\)</span>. Set <span class="math inline">\(t_0=0\)</span>, <span class="math inline">\(t_{q+1}=n+1\)</span>, and <span class="math display">\[
+S_i:=\sum_{k=t_{i-1}+1}^{t_i-1}h_k,
+\qquad 1\le i\le q+1.
+\]</span> The intervals defining <span class="math inline">\(S_1,\ldots,S_{q+1}\)</span> partition the unselected indices, so <span class="math display">\[
+\sum_{i=1}^{q+1}(S_i+1)
+=q+1+\sum_{k\notin\{t_1,\ldots,t_q\}}h_k
+=D_q.
+\]</span> Now suppose <span class="math inline">\(q\ge2\)</span>, and define <span class="math display">\[
+x_i:=\frac{q(S_i+1)}{D_q},
 \qquad
-V:=1+\sum_{k=t_q+1}^{n}h_k,
-\qquad
-\bar U:=\frac{D_q}{q}.
-\]</span> The intervals between the selected steps partition the unselected indices, so <span class="math display">\[
-\sum_{i=1}^qU_i+V=D_q.
-\]</span> Define <span class="math display">\[
-x_i:=\frac{U_i}{\bar U},
-\qquad
-\omega_i:=\frac{h_{t_i}-1}{\bar U},
+\omega_i:=\frac{q(h_{t_i}-1)}{D_q},
 \qquad 1\le i\le q.
 \]</span> Then <span class="math display">\[
-\sum_{i=1}^q x_i=q-\frac{V}{\bar U}&lt;q,
+\sum_{i=1}^q x_i
+=q-\frac{q(S_{q+1}+1)}{D_q}&lt;q,
 \qquad
 \omega_j^\downarrow=\frac{q a_j}{D_q}\quad(1\le j\le q).
 \]</span></p>
 <p>Apply <a href="https://arxiv.org/html/2608.10418v1#S4.Thmtheorem1">Ma and Chen, Theorem 4.1</a> to the selected indices <span class="math inline">\(t_1,\ldots,t_q\)</span>. The same bound appears in <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai’s Lemma 6</a>. In the resulting lower bound, the last bracket of the endpoint factor is <span class="math display">\[
-1+\frac{x_q+2(q-\sum_i x_i)-\bar U^{-1}}{\omega_q}
-=\frac{U_q+(h_{t_q}-1)+2V-1}{h_{t_q}-1}&gt;0.
-\]</span> Removing <span class="math inline">\(-\bar U^{-1}/\omega_q\)</span> increases this bracket to the one in <a href="#eq-endpoint-factor">(5)</a>, which only weakens the lower bound. Therefore <span class="math display">\[
+1+\frac{x_q+2(q-\sum_i x_i)-q/D_q}{\omega_q}
+=\frac{S_q+h_{t_q}+2S_{q+1}+1}{h_{t_q}-1}&gt;0.
+\]</span> Replacing <span class="math inline">\(-q/D_q\)</span> by <span class="math inline">\(0\)</span> increases this bracket to the one in <a href="#eq-endpoint-factor">(5)</a>, which only weakens the lower bound. Therefore <span class="math display">\[
 R_n(H)\ge
 \frac{q}{
 D_q E_{\mathrm{end}}
@@ -427,11 +427,11 @@ D_q E_{\mathrm{end}}
 \]</span></p>
 <p>We first rule out <span class="math inline">\(m=1\)</span> by proving <span class="math inline">\(R_n(H)D_1\ge1/4\)</span> directly. If <span class="math inline">\(a_1\le D_1\)</span>, the Huber function used in the <a href="https://yeyuhanyyh.github.io/gd-lower-bound/#normalized-core">proof of Lemma 3 in the previous post</a> gives <span class="math display">\[
 R_n(H)\ge\frac{1}{2(D_1+a_1)-1}\ge\frac1{4D_1}.
-\]</span> If <span class="math inline">\(a_1&gt;D_1\)</span>, apply the same lower bound with <span class="math inline">\(q=1\)</span> at an index carrying <span class="math inline">\(a_1\)</span>. Writing <span class="math inline">\(D_1=U_1+V\)</span>, we obtain <span class="math display">\[
+\]</span> If <span class="math inline">\(a_1&gt;D_1\)</span>, apply the same lower bound with <span class="math inline">\(q=1\)</span> at an index carrying <span class="math inline">\(a_1\)</span>. Since <span class="math inline">\(D_1=S_1+S_2+2\)</span>, we obtain <span class="math display">\[
 R_n(H)\ge
-\frac{a_1}{U_1(U_1+a_1+2V-1)}
+\frac{a_1}{(S_1+1)(S_1+a_1+2S_2+2)}
 &gt;\frac1{3D_1}&gt;\frac1{4D_1}.
-\]</span> Here <span class="math inline">\(U_1\le D_1\)</span> and <span class="math inline">\(U_1+a_1+2V-1&lt;3a_1\)</span>, which proves the first strict inequality. Choose <span class="math inline">\(c_0&lt;1/4\)</span>. Then <span class="math inline">\(R_n(H)D_m\le c_0\)</span> implies <span class="math inline">\(m\ge2\)</span>.</p>
+\]</span> Indeed, <span class="math inline">\(S_1+1\le D_1\)</span> and <span class="math inline">\(S_1+a_1+2S_2+2&lt;a_1+2D_1&lt;3a_1\)</span>. Choose <span class="math inline">\(c_0&lt;1/4\)</span>. Then <span class="math inline">\(R_n(H)D_m\le c_0\)</span> implies <span class="math inline">\(m\ge2\)</span>.</p>
 <p><strong>(2) Prove the first inequality in <a href="#finite-prefix-profile">(6)</a>.</strong> We claim that a constant <span class="math inline">\(L&gt;0\)</span> can be chosen so that <span class="math display">\[
 s a_s\le L D_s,\qquad m\le s\le r.
 \]</span> Repeat part (1) with <span class="math inline">\(q=s\)</span>. If <span class="math inline">\(s a_s&gt;L D_s\)</span>, then <span class="math inline">\(\omega_i&gt;L\)</span> for every <span class="math inline">\(i\)</span>. Define <span class="math display">\[
