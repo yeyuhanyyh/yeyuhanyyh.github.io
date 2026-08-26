@@ -281,7 +281,7 @@
         </p>
 <h2 id="introduction">Introduction</h2>
 <p>In my <a href="https://yeyuhanyyh.github.io/gd-lower-bound/">previous blog post</a>, we proved an <span class="math inline">\(\Omega(n^{-1.6342})\)</span> lower bound for non-anytime gradient descent (GD) with predetermined stepsizes. The key was a term-by-term analysis of the sequence inequality arising from the <a href="https://yeyuhanyyh.github.io/gd-lower-bound/#lemma-hard-functions">hard functions of Ma and Chen</a>.</p>
-<p>In this post, we show that the refined term-by-term analysis developed in our <a href="https://yeyuhanyyh.github.io/gd-lower-bound/">previous post</a> also sharpens the anytime lower bound. Combining this analysis with the finite-horizon-to-anytime transfer argument of <a href="https://arxiv.org/html/2607.02053v1#S4.SS1">Tsai et al.</a>, we prove that no positive anytime stepsize schedule can achieve <span class="math inline">\(R_n(H_n)=o(n^{-1.2408})\)</span>. This improves the previous <a href="https://arxiv.org/html/2607.02053v1#S1.Thmtheorem1"><span class="math inline">\(\Omega(n^{-4/3})\)</span> barrier</a>, while the best known upper bound is <a href="https://proceedings.mlr.press/v291/zhang25a.html"><span class="math inline">\(O(n^{-1.119})\)</span></a>.</p>
+<p>In this post, we show that the refined term-by-term analysis developed in our <a href="https://yeyuhanyyh.github.io/gd-lower-bound/">previous post</a> also sharpens the anytime lower bound. Combining this analysis with the anytime transfer argument of <a href="https://arxiv.org/html/2607.02053v1#S4.SS1">Tsai et al.</a>, we prove that no positive anytime stepsize schedule can achieve <span class="math inline">\(R_n(H_n)=o(n^{-1.2408})\)</span>. This improves the previous <a href="https://arxiv.org/html/2607.02053v1#S1.Thmtheorem1"><span class="math inline">\(\Omega(n^{-4/3})\)</span> barrier</a>, while the best known upper bound is <a href="https://proceedings.mlr.press/v291/zhang25a.html"><span class="math inline">\(O(n^{-1.119})\)</span></a>.</p>
 <p><strong>AI Disclosure.</strong> This improvement was developed through multiple rounds of interaction with ChatGPT-5.6 Sol. The generated proof was disorganized and difficult to follow. I simplified and rewrote the mathematical presentation.</p>
 <h3 id="problem-setup"><span>Problem Setup</span></h3>
 <p>Let <span class="math inline">\(\mathcal F_1(\mathbb R^d)\)</span> be the class of convex <span class="math inline">\(1\)</span>-smooth functions on <span class="math inline">\(\mathbb R^d\)</span> whose sets of minimizers are nonempty. Given an integer horizon <span class="math inline">\(n\ge1\)</span>, an initial point <span class="math inline">\(x_1\in\mathbb R^d\)</span>, and a predetermined schedule <span class="math inline">\(H=(h_1,\ldots,h_n)\in(0,\infty)^n\)</span>, GD generates</p>
@@ -301,7 +301,7 @@ R_n(H):=
 \]</span></p>
 <p>For the anytime model, fix one positive infinite schedule <span class="math inline">\(h=(h_k)_{k\ge1}\)</span> and write <span class="math inline">\(H_n=(h_1,\ldots,h_n)\)</span>. The same schedule <span class="math inline">\((h_k)_{k\ge1}\)</span> is used for every horizon. An anytime statement concerns <span class="math inline">\(R_n(H_n)\)</span> as <span class="math inline">\(n\to\infty\)</span>.</p>
 <div class="theorem" id="our-target">
-<p><strong><a href="#our-target" class="theorem-label">Our target.</a></strong> <em class="statement">Improve <a href="https://arxiv.org/html/2607.02053v1#S1.Thmtheorem1">Tsai et al.’s no-<span class="math inline">\(o(n^{-4/3})\)</span> barrier</a> for anytime GD toward the <span class="math inline">\(O(n^{-1.119})\)</span> upper bound of <a href="https://proceedings.mlr.press/v291/zhang25a.html">Zhang et al.</a></em></p>
+<p><strong><a href="#our-target" class="theorem-label">Our target.</a></strong> <em class="statement">Improve <a href="https://arxiv.org/html/2607.02053v1#S1.Thmtheorem1">Tsai’s <span class="math inline">\(\Omega(n^{-4/3})\)</span> barrier</a> for anytime GD toward the <span class="math inline">\(O(n^{-1.119})\)</span> upper bound of <a href="https://proceedings.mlr.press/v291/zhang25a.html">Zhang et al.</a></em></p>
 </div>
 <h3 id="main-result"><span>Main Result</span></h3>
 <div class="theorem" id="theorem-main">
@@ -377,7 +377,7 @@ E_{\mathrm{end}}
 \tag{5}
 \]</span></p>
 </div>
-<p>The proof of <a href="#lemma-clean-sequence">Lemma 2</a> uses the finite-horizon-to-anytime transfer argument of <a href="https://arxiv.org/html/2607.02053v1#S4.SS1">Tsai et al.</a> (cf. their <a href="https://arxiv.org/html/2607.02053v1#S2.Thmlemma1">Lemmas 2.1</a> and <a href="https://arxiv.org/html/2607.02053v1#S3.Thmlemma1">3.1</a>).</p>
+<p>The proof of <a href="#lemma-clean-sequence">Lemma 2</a> uses the anytime transfer argument of <a href="https://arxiv.org/html/2607.02053v1#S4.SS1">Tsai et al.</a> (cf. their <a href="https://arxiv.org/html/2607.02053v1#S2.Thmlemma1">Lemmas 2.1</a> and <a href="https://arxiv.org/html/2607.02053v1#S3.Thmlemma1">3.1</a>).</p>
 <details id="proof-clean-reduction" class="proof">
 <summary>Proof sketch</summary>
 <div class="proof-body">
