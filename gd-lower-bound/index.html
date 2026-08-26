@@ -620,8 +620,8 @@
             &gt;\delta,
             \qquad 1\le k\le n+1.
             \]
-            Hence every iterate lies on the positive affine branch, where
-            \(f_\delta'=\delta\). The minimizer is \(0\), and the choice of \(\delta\)
+            Hence every iterate lies in the region \(x&gt;\delta\), where
+            \(f_\delta'(x)=\delta\). The minimizer is \(0\), and the choice of \(\delta\)
             gives \(R_n(H)\ge2f_\delta(\xi_{n+1})=\delta\).
           </p>
           <p>
@@ -1061,12 +1061,10 @@
       \tag{15}\label{eq:mean-value-profile}
       \]
       <p>
-        As shown in the <a href="#proof-lemma-6">proof of Lemma 6</a>, the integrand extends
-        continuously to \(t=0\). Each point \(\theta_s/q\) in
-        \(\eqref{eq:mean-value-profile}\) is within \(1/q\) of the relevant grid point.
-        The Lipschitz estimate makes the sum of all these displacements bounded independently
-        of \(q\). The intervals left outside the grid have total length \(O(1/q)\), so after
-        multiplication by \(q\) they also contribute only a bounded amount. Therefore
+        By <a href="#lemma-6-2">Lemma 6.2</a>, replacing the mean-value points in
+        \(\eqref{eq:reference-pairing}\) by the mesh points changes the sum by
+        \(O_{\alpha,\lambda}(1)\), and the uncovered part of \([0,1/2]\) contributes
+        another \(O_{\alpha,\lambda}(1)\). Therefore
       </p>
       \[
       \sum_{j=1}^{k_q}
@@ -1377,8 +1375,7 @@
 
       <p class="theme-emphasis" id="scalar-conclusion">
         We have now bounded
-        \(\sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})\) by the following
-        function of \(\alpha\) and \(\lambda\) alone:
+        \(\sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})\).
       </p>
       \[
       J(\alpha,\lambda)
@@ -1433,8 +1430,8 @@
         bound</a> from \(\Omega(n^{-1.7321})\) to \(\Omega(n^{-1.6342})\).
       </p>
       <p>
-        At the exponential scale relevant to the final rate, our sequence estimates appear
-        fairly tight. One plausible source of slack is the
+        The \(O_{\alpha,\lambda}(1)\) errors in Lemma 6 do not affect the exponent.
+        One plausible source of slack is the
         parity split in \(\eqref{eq:parity-bound}\). The odd and even edges form two alternating
         matchings of the same
         chronological path, but we bound them independently by the same unconstrained
