@@ -1375,7 +1375,10 @@
 
       <p class="theme-emphasis" id="scalar-conclusion">
         We have now bounded
-        \(\sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})\).
+        \(\sum_{i=1}^{q-1}\Gamma_\lambda(\omega_i,\omega_{i+1})\) by \(q\) times a
+        function depending only on \(\alpha\) and \(\lambda\), up to an additive
+        \(O_{\alpha,\lambda}(1)\) term. Including the \(2\lambda q\) contribution from
+        <a href="#envelope-reduction">Lemma 4</a>, define
       </p>
       \[
       J(\alpha,\lambda)
@@ -1430,8 +1433,8 @@
         bound</a> from \(\Omega(n^{-1.7321})\) to \(\Omega(n^{-1.6342})\).
       </p>
       <p>
-        The \(O_{\alpha,\lambda}(1)\) errors in Lemma 6 do not affect the exponent.
-        One plausible source of slack is the
+        The term-by-term estimates used to prove the sequence inequality in
+        <a href="#normalized-core">Lemma 3</a> appear fairly tight. One plausible source of slack is the
         parity split in \(\eqref{eq:parity-bound}\). The odd and even edges form two alternating
         matchings of the same
         chronological path, but we bound them independently by the same unconstrained
