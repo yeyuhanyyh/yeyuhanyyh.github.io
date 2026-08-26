@@ -307,10 +307,6 @@ R_n(H):=
 <div class="theorem" id="theorem-main">
 <p><strong><a href="#theorem-main" class="theorem-label">Theorem 1 (Main result).</a></strong> <em class="statement">No positive infinite schedule <span class="math inline">\(h=(h_k)_{k\ge1}\)</span>, with <span class="math inline">\(H_n=(h_1,\ldots,h_n)\)</span>, satisfies <span class="math inline">\(R_n(H_n)=o(n^{-1.2408})\)</span>.</em></p>
 </div>
-<p id="eq-main-result"><span class="math display">\[
-\limsup_{n\to\infty}n^{1.2407562068\ldots}R_n(H_n)&gt;0.
-\tag{1}
-\]</span></p>
 <figure class="rate-figure" id="rate-landscape">
           <div class="rate-figure-scroll" tabindex="0" role="region" aria-label="Scrollable convergence-rate landscape for non-anytime and anytime gradient descent" aria-describedby="rate-landscape-description rate-landscape-caption">
             <div class="rate-figure-canvas">
@@ -341,13 +337,13 @@ R_n(H):=
           </p>
           <figcaption id="rate-landscape-caption"><strong>Figure 1.</strong> Progress on lower bounds for GD.</figcaption>
         </figure><h3 id="reduction-to-a-sequence-problem"><span>Reduction to a sequence problem</span></h3>
-<p>We first reduce the anytime problem to a clean sequence inequality. Compared with <a href="https://yeyuhanyyh.github.io/gd-lower-bound/#normalized-core">Lemma 3 in the previous post</a>, the only difference is that the power-law inequalities in <a href="#eq-clean-condition">(3)</a> are assumed only for <span class="math inline">\(\ell\le k&lt;q\)</span>.</p>
+<p>We first reduce the anytime problem to a clean sequence inequality. Compared with <a href="https://yeyuhanyyh.github.io/gd-lower-bound/#normalized-core">Lemma 3 in the previous post</a>, the only difference is that the power-law inequalities in <a href="#eq-clean-condition">(2)</a> are assumed only for <span class="math inline">\(\ell\le k&lt;q\)</span>.</p>
 <div class="theorem sequence-box" id="lemma-clean-sequence">
 <p><strong><a href="#lemma-clean-sequence" class="theorem-label">Lemma 2 (Truncated sequence problem).</a></strong> <em class="statement">Fix <span class="math inline">\(\alpha&gt;0\)</span>. For <span class="math inline">\(w,z,x,y&gt;0\)</span>, define</em></p>
 <p id="eq-kernel"><span class="math display">\[
 K_{w,z}(x,y):=
 \frac{\sqrt{xy}\,(w+z+x+y)}{\sqrt{wz(w+x)(z+y)}}.
-\tag{2}
+\tag{1}
 \]</span></p>
 <p><em class="statement">To prove <span class="math inline">\(\limsup_{n\to\infty}
 n^{\frac{2(1+\alpha)}{2+\alpha}}R_n(H_n)&gt;0\)</span> for every positive infinite schedule, it is enough to find constants <span class="math inline">\(\eta_\alpha\in(0,1)\)</span> and <span class="math inline">\(C_\alpha&lt;\infty\)</span>, depending only on <span class="math inline">\(\alpha\)</span>, such that the following holds for every integer <span class="math inline">\(q\ge2\)</span> and every integer <span class="math inline">\(1\le\ell\le\eta_\alpha q\)</span>:</em></p>
@@ -358,7 +354,7 @@ n^{\frac{2(1+\alpha)}{2+\alpha}}R_n(H_n)&gt;0\)</span> for every positive infini
 \sum_{s=k+1}^q\omega_s^\downarrow
 \ge q\left[\left(\frac qk\right)^\alpha-1\right]
 \quad(\ell\le k&lt;q),
-\tag{3}
+\tag{2}
 \]</span></p>
 <p><em class="statement">then</em></p>
 <p id="eq-clean-target"><span class="math display">\[
@@ -366,7 +362,7 @@ E_{\mathrm{end}}
 \prod_{i=1}^{q-1}
 K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
 \le C_\alpha.
-\tag{4}
+\tag{3}
 \]</span></p>
 <p><em class="statement">where</em></p>
 <p id="eq-endpoint-factor"><span class="math display">\[
@@ -374,14 +370,14 @@ E_{\mathrm{end}}
 :=\sqrt{x_1x_q}
 \sqrt{\frac{1+x_1/\omega_1}{1+x_q/\omega_q}}
 \left[1+\frac{x_q+2\left(q-\sum_{i=1}^q x_i\right)}{\omega_q}\right].
-\tag{5}
+\tag{4}
 \]</span></p>
 </div>
 <p>The proof of <a href="#lemma-clean-sequence">Lemma 2</a> uses the anytime transfer argument of <a href="https://arxiv.org/html/2607.02053v1#S4.SS1">Tsai et al.</a> (cf. their <a href="https://arxiv.org/html/2607.02053v1#S2.Thmlemma1">Lemmas 2.1</a> and <a href="https://arxiv.org/html/2607.02053v1#S3.Thmlemma1">3.1</a>).</p>
 <details id="proof-clean-reduction" class="proof">
 <summary>Proof sketch</summary>
 <div class="proof-body">
-<p>Fix <span class="math inline">\(\alpha&gt;0\)</span> and assume that <a href="#eq-clean-condition">(3)</a> implies <a href="#eq-clean-target">(4)</a>, with the same constants <span class="math inline">\(\eta_\alpha,C_\alpha\)</span> for every integer <span class="math inline">\(q\ge2\)</span> and every integer <span class="math inline">\(1\le\ell\le\eta_\alpha q\)</span>. Set <span class="math display">\[
+<p>Fix <span class="math inline">\(\alpha&gt;0\)</span> and assume that <a href="#eq-clean-condition">(2)</a> implies <a href="#eq-clean-target">(3)</a>, with the same constants <span class="math inline">\(\eta_\alpha,C_\alpha\)</span> for every integer <span class="math inline">\(q\ge2\)</span> and every integer <span class="math inline">\(1\le\ell\le\eta_\alpha q\)</span>. Set <span class="math display">\[
 \theta:=\frac{2(1+\alpha)}{2+\alpha}.
 \]</span></p>
 <p>Fix a finite schedule <span class="math inline">\(H=(h_1,\ldots,h_n)\)</span>. Let <span class="math inline">\(a_1\ge\cdots\ge a_r&gt;0\)</span> be the decreasing rearrangement of the positive excesses <span class="math inline">\((h_k-1)_+\)</span>. Define <span class="math display">\[
@@ -389,13 +385,13 @@ B:=1+\sum_{k=1}^n\min\{h_k,1\},
 \qquad
 D_s:=B+\sum_{j=s+1}^r a_j,\qquad 1\le s\le r.
 \]</span></p>
-<p><strong>Part I. Prove <a href="#finite-prefix-profile">(6)</a> for every finite prefix.</strong></p>
+<p><strong>Part I. Prove <a href="#finite-prefix-profile">(5)</a> for every finite prefix.</strong></p>
 <p>We prove that there are constants <span class="math inline">\(c_0,C&gt;0\)</span>, depending only on <span class="math inline">\(\alpha\)</span>, such that every <span class="math inline">\(1\le m\le r\)</span> with <span class="math inline">\(R_n(H)D_m\le c_0\)</span> satisfies</p>
 <p id="finite-prefix-profile"><span class="math display">\[
 m a_m\le C D_m,
 \qquad
 D_m\le C(n+1)^{1+\alpha}m^{-\alpha}.
-\tag{6}
+\tag{5}
 \]</span></p>
 <p>If <span class="math inline">\(r=0\)</span>, there is nothing to prove. Otherwise fix <span class="math inline">\(m\)</span> for which <span class="math inline">\(R_n(H)D_m\le c_0\)</span>.</p>
 <p><strong>(1) Use the <span class="math inline">\(q\)</span> largest excesses.</strong> For any <span class="math inline">\(1\le q\le r\)</span>, choose the <span class="math inline">\(q\)</span> largest positive excesses and list their locations as <span class="math inline">\(t_1&lt;\cdots&lt;t_q\)</span>. Set <span class="math inline">\(t_0=0\)</span>, <span class="math inline">\(t_{q+1}=n+1\)</span>, and <span class="math display">\[
@@ -419,7 +415,7 @@ x_i:=\frac{q(S_i+1)}{D_q},
 <p>Apply <a href="https://arxiv.org/html/2608.10418v1#S4.Thmtheorem1">Ma and Chen, Theorem 4.1</a> to the selected indices <span class="math inline">\(t_1,\ldots,t_q\)</span>. The same bound appears in <a href="https://chungentsai.github.io/gd-lower-bounds.html#multi-step">Tsai’s Lemma 6</a>. In the resulting lower bound, the last bracket of the endpoint factor is <span class="math display">\[
 1+\frac{x_q+2(q-\sum_i x_i)-q/D_q}{\omega_q}
 =\frac{S_q+h_{t_q}+2S_{q+1}+1}{h_{t_q}-1}&gt;0.
-\]</span> Replacing <span class="math inline">\(-q/D_q\)</span> by <span class="math inline">\(0\)</span> increases this bracket to the one in <a href="#eq-endpoint-factor">(5)</a>, which only weakens the lower bound. Therefore <span class="math display">\[
+\]</span> Replacing <span class="math inline">\(-q/D_q\)</span> by <span class="math inline">\(0\)</span> increases this bracket to the one in <a href="#eq-endpoint-factor">(4)</a>, which only weakens the lower bound. Therefore <span class="math display">\[
 R_n(H)\ge
 \frac{q}{
 D_q E_{\mathrm{end}}
@@ -432,7 +428,7 @@ R_n(H)\ge
 \frac{a_1}{(S_1+1)(S_1+a_1+2S_2+2)}
 &gt;\frac1{3D_1}&gt;\frac1{4D_1}.
 \]</span> Indeed, <span class="math inline">\(S_1+1\le D_1\)</span> and <span class="math inline">\(S_1+a_1+2S_2+2&lt;a_1+2D_1&lt;3a_1\)</span>. Choose <span class="math inline">\(c_0&lt;1/4\)</span>. Then <span class="math inline">\(R_n(H)D_m\le c_0\)</span> implies <span class="math inline">\(m\ge2\)</span>.</p>
-<p><strong>(2) Prove the first inequality in <a href="#finite-prefix-profile">(6)</a>.</strong> We claim that a constant <span class="math inline">\(L&gt;0\)</span> can be chosen so that <span class="math display">\[
+<p><strong>(2) Prove the first inequality in <a href="#finite-prefix-profile">(5)</a>.</strong> We claim that a constant <span class="math inline">\(L&gt;0\)</span> can be chosen so that <span class="math display">\[
 s a_s\le L D_s,\qquad m\le s\le r.
 \]</span> Repeat part (1) with <span class="math inline">\(q=s\)</span>. If <span class="math inline">\(s a_s&gt;L D_s\)</span>, then <span class="math inline">\(\omega_i&gt;L\)</span> for every <span class="math inline">\(i\)</span>. Define <span class="math display">\[
 \Gamma_1(w,z):=
@@ -455,7 +451,7 @@ D_s E_{\mathrm{end}}
 }
 \ge\frac{s e^{\delta s}}{C_1D_s}
 \ge\frac{s e^{\delta s}}{C_1c_0}R_n(H),
-\]</span> which is impossible after <span class="math inline">\(c_0\)</span> is chosen sufficiently small. Thus <span class="math inline">\(s a_s\le L D_s\)</span> for every <span class="math inline">\(m\le s\le r\)</span>, proving the first inequality in <a href="#finite-prefix-profile">(6)</a>.</p>
+\]</span> which is impossible after <span class="math inline">\(c_0\)</span> is chosen sufficiently small. Thus <span class="math inline">\(s a_s\le L D_s\)</span> for every <span class="math inline">\(m\le s\le r\)</span>, proving the first inequality in <a href="#finite-prefix-profile">(5)</a>.</p>
 <p>Since <span class="math inline">\(D_{s-1}=D_s+a_s\)</span>, for any <span class="math inline">\(\kappa&gt;\max\{L,\alpha\}\)</span> there is <span class="math inline">\(C_\kappa&lt;\infty\)</span> such that <span class="math display">\[
 \frac{D_m}{D_q}
 =\prod_{s=m+1}^q\left(1+\frac{a_s}{D_s}\right)
@@ -467,7 +463,7 @@ D_s E_{\mathrm{end}}
 \frac{D_q}{D_m}
 \ge C_\kappa^{-1}\left(\frac mq\right)^\kappa.
 \]</span></p>
-<p><strong>(3) Prove the second inequality in <a href="#finite-prefix-profile">(6)</a>.</strong> Put <span class="math inline">\(F_s:=D_s s^\alpha\)</span>, and choose <span class="math display">\[
+<p><strong>(3) Prove the second inequality in <a href="#finite-prefix-profile">(5)</a>.</strong> Put <span class="math inline">\(F_s:=D_s s^\alpha\)</span>, and choose <span class="math display">\[
 q\in\operatorname*{arg\,min}_{m\le s\le r}F_s.
 \]</span> We first prove that <span class="math inline">\(F_m\le A F_r\)</span> for a constant <span class="math inline">\(A\)</span> depending only on <span class="math inline">\(\alpha\)</span>. If <span class="math inline">\(F_m&gt;A F_r\)</span>, then <span class="math inline">\(q&gt;m\)</span> and <span class="math display">\[
 \frac{F_q}{F_m}&lt;\frac1A,
@@ -481,12 +477,12 @@ q\in\operatorname*{arg\,min}_{m\le s\le r}F_s.
 \sum_{s=k+1}^q\omega_s^\downarrow
 =q\left(\frac{D_k}{D_q}-1\right)
 \ge q\left[\left(\frac qk\right)^\alpha-1\right].
-\]</span> Thus these <span class="math inline">\(x_i,\omega_i\)</span> satisfy <a href="#eq-clean-condition">(3)</a> with <span class="math inline">\(\ell=m\)</span>. Applying <a href="#eq-clean-target">(4)</a> gives <span class="math display">\[
+\]</span> Thus these <span class="math inline">\(x_i,\omega_i\)</span> satisfy <a href="#eq-clean-condition">(2)</a> with <span class="math inline">\(\ell=m\)</span>. Applying <a href="#eq-clean-target">(3)</a> gives <span class="math display">\[
 E_{\mathrm{end}}
 \prod_{i=1}^{q-1}
 K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
 \le C_\alpha.
-\]</span> Combining the bound from part (1), <a href="#eq-clean-target">(4)</a>, and <span class="math inline">\(D_q\le D_m\le c_0/R_n(H)\)</span> gives <span class="math display">\[
+\]</span> Combining the bound from part (1), <a href="#eq-clean-target">(3)</a>, and <span class="math inline">\(D_q\le D_m\le c_0/R_n(H)\)</span> gives <span class="math display">\[
 R_n(H)\ge\frac{q}{C_\alpha D_q}
 \ge\frac{q}{C_\alpha c_0}R_n(H),
 \]</span> again a contradiction after <span class="math inline">\(c_0\)</span> is decreased if necessary. Hence <span class="math inline">\(F_m\le A F_r\)</span>. Since <span class="math inline">\(D_r=B\le n+1\)</span> and <span class="math inline">\(r\le n\)</span>, <span class="math display">\[
@@ -494,8 +490,8 @@ D_m m^\alpha=F_m
 \le A F_r
 =A D_r r^\alpha
 \le A(n+1)n^\alpha.
-\]</span> Therefore <span class="math inline">\(D_m\le C(n+1)^{1+\alpha}m^{-\alpha}\)</span>, proving the second inequality in <a href="#finite-prefix-profile">(6)</a>.</p>
-<p><strong>Part II. Deduce the anytime conclusion from <a href="#finite-prefix-profile">(6)</a>.</strong></p>
+\]</span> Therefore <span class="math inline">\(D_m\le C(n+1)^{1+\alpha}m^{-\alpha}\)</span>, proving the second inequality in <a href="#finite-prefix-profile">(5)</a>.</p>
+<p><strong>Part II. Deduce the anytime conclusion from <a href="#finite-prefix-profile">(5)</a>.</strong></p>
 <p>Fix a positive infinite schedule and write <span class="math inline">\(\Sigma_n:=\sum_{k=1}^n h_k\)</span>. For each prefix <span class="math inline">\(H_n\)</span>, define <span class="math inline">\(a_1,\ldots,a_r,B,D_s\)</span> as in Part I. We use the quadratic lower bound and the terminal-step bound <span class="math display">\[
 R_n(H_n)\ge\frac1{4(1+2\Sigma_n)},
 \qquad
@@ -512,7 +508,7 @@ m_\star:=\left\lfloor
 \le m_\star a_1
 \le\varepsilon(1+\Sigma_n).
 \]</span> Since <span class="math inline">\(\Sigma_n=(B-1)+\sum_{j=1}^r a_j\)</span> and <span class="math inline">\(B-1\le n\)</span>, this would imply <span class="math inline">\(\Sigma_n=O(n)\)</span>, a contradiction. Thus <span class="math inline">\(r&gt;m_\star\)</span>.</p>
-<p>We next prove <span class="math inline">\(R_n(H_n)D_{m_\star}\le c_0\)</span>. Suppose instead that <span class="math inline">\(R_n(H_n)D_{m_\star}&gt;c_0\)</span>. Since <span class="math inline">\(R_n(H_n)D_r=R_n(H_n)B\le R_n(H_n)(n+1)\to0\)</span>, there is a first <span class="math inline">\(q&gt;m_\star\)</span> such that <span class="math inline">\(R_n(H_n)D_q\le c_0\)</span>. Applying both inequalities in <a href="#finite-prefix-profile">(6)</a> with <span class="math inline">\(m=q\)</span> gives <span class="math display">\[
+<p>We next prove <span class="math inline">\(R_n(H_n)D_{m_\star}\le c_0\)</span>. Suppose instead that <span class="math inline">\(R_n(H_n)D_{m_\star}&gt;c_0\)</span>. Since <span class="math inline">\(R_n(H_n)D_r=R_n(H_n)B\le R_n(H_n)(n+1)\to0\)</span>, there is a first <span class="math inline">\(q&gt;m_\star\)</span> such that <span class="math inline">\(R_n(H_n)D_q\le c_0\)</span>. Applying both inequalities in <a href="#finite-prefix-profile">(5)</a> with <span class="math inline">\(m=q\)</span> gives <span class="math display">\[
 D_{q-1}=D_q+a_q
 \le\left(1+\frac Cq\right)D_q
 \le C(n+1)^{1+\alpha}q^{-\alpha}.
@@ -523,7 +519,7 @@ n^{1+\alpha}R_n(H_n)^{1+\alpha/2}
 =C_\varepsilon\bigl(n^\theta R_n(H_n)\bigr)^{(2+\alpha)/2}
 =o(1),
 \]</span> contradicting the definition of <span class="math inline">\(q\)</span>, which gives <span class="math inline">\(R_n(H_n)D_{q-1}&gt;c_0\)</span>. Hence <span class="math inline">\(R_n(H_n)D_{m_\star}\le c_0\)</span>.</p>
-<p>For every <span class="math inline">\(m_\star&lt;j\le r\)</span>, <span class="math inline">\(D_j\le D_{m_\star}\)</span>, so <span class="math inline">\(R_n(H_n)D_j\le c_0\)</span>. Applying <a href="#finite-prefix-profile">(6)</a> with <span class="math inline">\(m=j\)</span> gives <span class="math display">\[
+<p>For every <span class="math inline">\(m_\star&lt;j\le r\)</span>, <span class="math inline">\(D_j\le D_{m_\star}\)</span>, so <span class="math inline">\(R_n(H_n)D_j\le c_0\)</span>. Applying <a href="#finite-prefix-profile">(5)</a> with <span class="math inline">\(m=j\)</span> gives <span class="math display">\[
 a_j\le\frac{C D_j}{j}
 \le C(n+1)^{1+\alpha}j^{-1-\alpha}.
 \]</span> For <span class="math inline">\(1\le j\le m_\star\)</span>, we have <span class="math inline">\(a_j\le a_1=h_n-1\)</span>, so the terminal-step bound controls the first sum below. For <span class="math inline">\(m_\star&lt;j\le r\)</span>, summing <span class="math inline">\(a_j\le C(n+1)^{1+\alpha}j^{-1-\alpha}\)</span> gives the second sum. <span class="math display">\[
@@ -550,7 +546,7 @@ nR_n(H_n)+\bigl(n^\theta R_n(H_n)\bigr)^{(2+\alpha)/2}
 \]</span></p>
 </div></details>
 <h3 id="term-by-term-analysis"><span>Proving the sequence inequality</span></h3>
-<p>It remains to prove <a href="#eq-clean-target">(4)</a>. For <span class="math inline">\(\lambda&gt;0\)</span>, define</p>
+<p>It remains to prove <a href="#eq-clean-target">(3)</a>. For <span class="math inline">\(\lambda&gt;0\)</span>, define</p>
 <p id="eq-gamma-j"><span class="math display">\[
 \begin{aligned}
 \Gamma_\lambda(w,z)
@@ -561,7 +557,7 @@ J(\alpha,\lambda)
 &amp;:=2\lambda+2\int_0^{1/2}
 \Gamma_\lambda\bigl(W_\alpha(t),W_\alpha(1-t)\bigr)\,dt.
 \end{aligned}
-\tag{7}
+\tag{6}
 \]</span></p>
 <p>The following Fact comes directly from the <a href="https://yeyuhanyyh.github.io/gd-lower-bound/#scalar-conclusion">previous blog</a> and corresponds to the <span class="math inline">\(\ell=1\)</span> special case of Lemma 2.</p>
 <div class="theorem" id="fact-exact-profile">
@@ -578,12 +574,12 @@ E_{\mathrm{end}}
 K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
 \le C_{\alpha,\lambda}
 \exp\!\left\{qJ(\alpha,\lambda)\right\}.
-\tag{8}
+\tag{7}
 \]</span></p>
 </div>
-<p>However, under the truncated condition <a href="#eq-clean-condition">(3)</a>, <span class="math inline">\(\omega_1^\downarrow,\ldots,\omega_\ell^\downarrow\)</span> have no constraint. We therefore set these values aside and apply <strong class="theme-inline">the same estimation technique</strong> as in <a href="#fact-exact-profile">Fact 3</a>. Lemma 4 shows that this changes the exponent by at most <span class="math inline">\(O_{\alpha,\lambda}(\ell+1)\)</span>.</p>
+<p>However, under the truncated condition <a href="#eq-clean-condition">(2)</a>, <span class="math inline">\(\omega_1^\downarrow,\ldots,\omega_\ell^\downarrow\)</span> have no constraint. We therefore set these values aside and apply <strong class="theme-inline">the same estimation technique</strong> as in <a href="#fact-exact-profile">Fact 3</a>. Lemma 4 shows that this changes the exponent by at most <span class="math inline">\(O_{\alpha,\lambda}(\ell+1)\)</span>.</p>
 <div class="theorem" id="lemma-truncated">
-<p><strong><a href="#lemma-truncated" class="theorem-label">Lemma 4.</a></strong> <em class="statement">Fix <span class="math inline">\(\alpha,\lambda&gt;0\)</span>. There are constants <span class="math inline">\(A_{\alpha,\lambda}&gt;0\)</span> and <span class="math inline">\(B_{\alpha,\lambda}\ge0\)</span>, depending only on <span class="math inline">\(\alpha,\lambda\)</span>, such that the following holds for every integer <span class="math inline">\(q\ge2\)</span>, every integer <span class="math inline">\(1\le\ell&lt;q\)</span>, and all positive sequences <span class="math inline">\((x_i)_{i=1}^q\)</span>, <span class="math inline">\((\omega_i)_{i=1}^q\)</span>. If the conditions in <a href="#eq-clean-condition">(3)</a> hold, then</em></p>
+<p><strong><a href="#lemma-truncated" class="theorem-label">Lemma 4.</a></strong> <em class="statement">Fix <span class="math inline">\(\alpha,\lambda&gt;0\)</span>. There are constants <span class="math inline">\(A_{\alpha,\lambda}&gt;0\)</span> and <span class="math inline">\(B_{\alpha,\lambda}\ge0\)</span>, depending only on <span class="math inline">\(\alpha,\lambda\)</span>, such that the following holds for every integer <span class="math inline">\(q\ge2\)</span>, every integer <span class="math inline">\(1\le\ell&lt;q\)</span>, and all positive sequences <span class="math inline">\((x_i)_{i=1}^q\)</span>, <span class="math inline">\((\omega_i)_{i=1}^q\)</span>. If the conditions in <a href="#eq-clean-condition">(2)</a> hold, then</em></p>
 <p id="eq-truncated-bound"><span class="math display">\[
 E_{\mathrm{end}}
 \prod_{i=1}^{q-1}
@@ -592,14 +588,14 @@ K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
 \exp\!\left\{
 qJ(\alpha,\lambda)+B_{\alpha,\lambda}(\ell+1)
 \right\}.
-\tag{9}
+\tag{8}
 \]</span></p>
 </div>
 <details id="proof-truncated" class="proof">
 <summary>Proof sketch</summary>
 <div class="proof-body">
 <p><strong>(1) Eliminate the <span class="math inline">\(x_i\)</span>’s.</strong></p>
-<p>Taking <span class="math inline">\(k=q-1\)</span> in <a href="#eq-clean-condition">(3)</a> gives <span class="math display">\[
+<p>Taking <span class="math inline">\(k=q-1\)</span> in <a href="#eq-clean-condition">(2)</a> gives <span class="math display">\[
 \min_i\omega_i=\omega_q^\downarrow
 \ge q\left[\left(\frac q{q-1}\right)^\alpha-1\right]
 \ge\alpha,
@@ -614,11 +610,11 @@ K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
 \sum_{i=1}^{q-1}
 \Gamma_\lambda(\omega_i,\omega_{i+1})
 \right\}.
-\tag{10}
+\tag{9}
 \]</span></p>
-<p>It remains to bound the sum in <a href="#eq-envelope-bound">(10)</a>.</p>
+<p>It remains to bound the sum in <a href="#eq-envelope-bound">(9)</a>.</p>
 <p><strong>(2) Set aside the <span class="math inline">\(\ell\)</span> unconstrained largest values and compare the remaining values with an explicit sequence.</strong></p>
-<p>The sum in <a href="#eq-envelope-bound">(10)</a> contains one term for each consecutive pair <span class="math inline">\((\omega_i,\omega_{i+1})\)</span>. Separate these pairs into the two alternating groups <span class="math display">\[
+<p>The sum in <a href="#eq-envelope-bound">(9)</a> contains one term for each consecutive pair <span class="math inline">\((\omega_i,\omega_{i+1})\)</span>. Separate these pairs into the two alternating groups <span class="math display">\[
 (\omega_1,\omega_2),(\omega_3,\omega_4),\ldots
 \qquad\text{and}\qquad
 (\omega_2,\omega_3),(\omega_4,\omega_5),\ldots.
@@ -629,7 +625,7 @@ K_{\omega_i,\omega_{i+1}}(x_i,x_{i+1})
 <strong>Figure 2.</strong> The consecutive pairs split into two alternating matchings.
 </figcaption>
 </figure>
-<p>The <span class="math inline">\(\ell\)</span> values <span class="math inline">\(\omega_1^\downarrow,\ldots,\omega_\ell^\downarrow\)</span> do not occur in the tail inequalities in <a href="#eq-clean-condition">(3)</a>. Mark their positions in the original sequence, breaking ties arbitrarily, and set aside every consecutive pair containing a marked position. No new pair is created. Each marked position belongs to at most one pair in each group, so at most <span class="math inline">\(2\ell\)</span> terms are set aside.</p>
+<p>The <span class="math inline">\(\ell\)</span> values <span class="math inline">\(\omega_1^\downarrow,\ldots,\omega_\ell^\downarrow\)</span> do not occur in the tail inequalities in <a href="#eq-clean-condition">(2)</a>. Mark their positions in the original sequence, breaking ties arbitrarily, and set aside every consecutive pair containing a marked position. No new pair is created. Each marked position belongs to at most one pair in each group, so at most <span class="math inline">\(2\ell\)</span> terms are set aside.</p>
 <p>Let <span class="math inline">\(M_0\)</span> and <span class="math inline">\(M_1\)</span> be the pairs that remain in the first and second groups, respectively, and put <span class="math display">\[
 k_\nu:=|M_\nu|,
 \qquad
@@ -643,7 +639,7 @@ d_\nu:=q-2k_\nu.
 \]</span> Since <span class="math inline">\(u\mapsto\alpha u^{-1-\alpha}\)</span> is decreasing, <span class="math inline">\(\bar w_q^{(q)}\le\cdots\le\bar w_2^{(q)}\)</span>. For every <span class="math inline">\(\ell\le m&lt;q\)</span>, <span class="math display">\[
 \sum_{s=m+1}^q\bar w_s^{(q)}
 =q\left[\left(\frac qm\right)^\alpha-1\right].
-\]</span> Hence <a href="#eq-clean-condition">(3)</a> gives, for every <span class="math inline">\(1\le j\le q-\ell\)</span>, <span class="math display">\[
+\]</span> Hence <a href="#eq-clean-condition">(2)</a> gives, for every <span class="math inline">\(1\le j\le q-\ell\)</span>, <span class="math display">\[
 \sum_{s=q-j+1}^q\omega_s^\downarrow
 \ge
 \sum_{s=q-j+1}^q\bar w_s^{(q)}.
@@ -680,9 +676,9 @@ I_{\alpha,\lambda}
 \right)
 \le qI_{\alpha,\lambda}
 +C_{\alpha,\lambda}(d+1).
-\tag{11}
+\tag{10}
 \]</span></p>
-<p>To prove <a href="#eq-shifted-riemann">(11)</a>, first suppose <span class="math inline">\(d\ge q/4\)</span>. Since <span class="math inline">\(\bar w_s^{(q)}\ge\alpha\)</span> for every <span class="math inline">\(s\)</span>, each summand is at most <span class="math inline">\(M_{\alpha,\lambda}:=\max\{0,\Gamma_\lambda(\alpha,\alpha)\}\)</span>. Therefore <span class="math display">\[
+<p>To prove <a href="#eq-shifted-riemann">(10)</a>, first suppose <span class="math inline">\(d\ge q/4\)</span>. Since <span class="math inline">\(\bar w_s^{(q)}\ge\alpha\)</span> for every <span class="math inline">\(s\)</span>, each summand is at most <span class="math inline">\(M_{\alpha,\lambda}:=\max\{0,\Gamma_\lambda(\alpha,\alpha)\}\)</span>. Therefore <span class="math display">\[
 \sum_{j=1}^{k}
 \Gamma_\lambda(
 \bar w_{q+1-j}^{(q)},\bar w_{d+j}^{(q)})
@@ -712,26 +708,26 @@ g_{\alpha,\lambda}(u_j)
 \]</span> There are at most <span class="math inline">\(d+1\)</span> indices with <span class="math inline">\(u_j&gt;1/2\)</span>. Since <span class="math inline">\(d&lt;q/4\)</span>, the two mean-value points for each of these indices lie in <span class="math inline">\([1/4,1]\)</span>. Thus both arguments of <span class="math inline">\(\Gamma_\lambda\)</span> lie in <span class="math inline">\([\alpha,\alpha4^{1+\alpha}]\)</span>, and the total contribution of these terms is at most <span class="math inline">\(C_{\alpha,\lambda}(d+1)\)</span>. For the other indices, the grid <span class="math inline">\(u_j\)</span> has mesh <span class="math inline">\(1/q\)</span> and begins at <span class="math inline">\((d+1)/q\)</span>. The Lipschitz bound for <span class="math inline">\(g_{\alpha,\lambda}\)</span> therefore gives <span class="math display">\[
 \sum_{j:\,u_j\le1/2}g_{\alpha,\lambda}(u_j)
 \le qI_{\alpha,\lambda}+C_{\alpha,\lambda}(d+1).
-\]</span> Summing the error <span class="math inline">\(C_{\alpha,\lambda}(d+1)/q\)</span> over these indices and adding the at most <span class="math inline">\(d+1\)</span> terms with <span class="math inline">\(u_j&gt;1/2\)</span> proves <a href="#eq-shifted-riemann">(11)</a>.</p>
-<p>Apply <a href="#eq-shifted-riemann">(11)</a> to the two groups, with <span class="math inline">\((k,d)=(k_\nu,d_\nu)\)</span>. Add back the at most <span class="math inline">\(2\ell\)</span> terms set aside in part (2). By part (1), <span class="math inline">\(\omega_i\ge\alpha\)</span> for every <span class="math inline">\(i\)</span>, so each such term is at most <span class="math inline">\(B_0:=\max\{0,\Gamma_\lambda(\alpha,\alpha)\}\)</span>. Since <span class="math inline">\(d_\nu\le2\ell+2\)</span>, we obtain</p>
+\]</span> Summing the error <span class="math inline">\(C_{\alpha,\lambda}(d+1)/q\)</span> over these indices and adding the at most <span class="math inline">\(d+1\)</span> terms with <span class="math inline">\(u_j&gt;1/2\)</span> proves <a href="#eq-shifted-riemann">(10)</a>.</p>
+<p>Apply <a href="#eq-shifted-riemann">(10)</a> to the two groups, with <span class="math inline">\((k,d)=(k_\nu,d_\nu)\)</span>. Add back the at most <span class="math inline">\(2\ell\)</span> terms set aside in part (2). By part (1), <span class="math inline">\(\omega_i\ge\alpha\)</span> for every <span class="math inline">\(i\)</span>, so each such term is at most <span class="math inline">\(B_0:=\max\{0,\Gamma_\lambda(\alpha,\alpha)\}\)</span>. Since <span class="math inline">\(d_\nu\le2\ell+2\)</span>, we obtain</p>
 <p id="eq-gamma-path-bound"><span class="math display">\[
 \sum_{i=1}^{q-1}
 \Gamma_\lambda(\omega_i,\omega_{i+1})
 \le
 2qI_{\alpha,\lambda}
 +C_{\alpha,\lambda}(\ell+1).
-\tag{12}
+\tag{11}
 \]</span></p>
-<p>Combining <a href="#eq-envelope-bound">(10)</a> and <a href="#eq-gamma-path-bound">(12)</a>, and using <span class="math inline">\(J(\alpha,\lambda)=2\lambda+2I_{\alpha,\lambda}\)</span>, proves <a href="#eq-truncated-bound">(9)</a>.</p>
+<p>Combining <a href="#eq-envelope-bound">(9)</a> and <a href="#eq-gamma-path-bound">(11)</a>, and using <span class="math inline">\(J(\alpha,\lambda)=2\lambda+2I_{\alpha,\lambda}\)</span>, proves <a href="#eq-truncated-bound">(8)</a>.</p>
 </div></details>
 <h3 id="proof-main"><span>Proof of Theorem 1</span></h3>
 <p>With Lemmas 2 and 4 in hand, Theorem 1 follows easily.</p>
 <p>Take <span class="math inline">\(\alpha=0.6342\)</span> and <span class="math inline">\(\lambda=0.4506\)</span>. Numerical integration (<a href="https://yeyuhanyyh.github.io/gd-lower-bound/verification.html">verification appendix</a>) gives</p>
 <p id="eq-scalar-certificate"><span class="math display">\[
 J(0.6342,0.4506)&lt;-0.00005&lt;0.
-\tag{13}
+\tag{12}
 \]</span></p>
-<p>Choose <span class="math inline">\(\eta_\alpha\in(0,1)\)</span> small enough that <span class="math inline">\(B_{\alpha,\lambda}\eta_\alpha\le-J(\alpha,\lambda)/2\)</span>. If <span class="math inline">\(\ell\le\eta_\alpha q\)</span>, Lemma 4 and <a href="#eq-truncated-bound">(9)</a> give <span class="math display">\[
+<p>Choose <span class="math inline">\(\eta_\alpha\in(0,1)\)</span> small enough that <span class="math inline">\(B_{\alpha,\lambda}\eta_\alpha\le-J(\alpha,\lambda)/2\)</span>. If <span class="math inline">\(\ell\le\eta_\alpha q\)</span>, Lemma 4 and <a href="#eq-truncated-bound">(8)</a> give <span class="math display">\[
 \begin{aligned}
 E_{\mathrm{end}}
 \prod_{i=1}^{q-1}
@@ -744,12 +740,11 @@ qJ(\alpha,\lambda)+B_{\alpha,\lambda}(\ell+1)
 C\exp\!\left\{\frac12qJ(\alpha,\lambda)\right\}
 \le Ce^{-cq},
 \end{aligned}
-\]</span> where the constant <span class="math inline">\(C\)</span> absorbs the factor <span class="math inline">\(e^{B_{\alpha,\lambda}}\)</span>. In particular, <a href="#eq-clean-target">(4)</a> holds uniformly in <span class="math inline">\(q\)</span> and <span class="math inline">\(\ell\)</span>.</p>
-<p>The certificate <a href="#eq-scalar-certificate">(13)</a> and Lemma 4 verify the hypothesis of Lemma 2 with <span class="math inline">\(\alpha=0.6342\)</span>. Lemma 2 gives <span class="math display">\[
-\frac{2(1+\alpha)}{2+\alpha}
-=\frac{2(1+0.6342)}{2+0.6342}
-=1.2407562068\ldots,
-\]</span> which proves <a href="#eq-main-result">(1)</a>.</p>
+\]</span> where the constant <span class="math inline">\(C\)</span> absorbs the factor <span class="math inline">\(e^{B_{\alpha,\lambda}}\)</span>. In particular, <a href="#eq-clean-target">(3)</a> holds uniformly in <span class="math inline">\(q\)</span> and <span class="math inline">\(\ell\)</span>.</p>
+<p>The certificate <a href="#eq-scalar-certificate">(12)</a> and Lemma 4 verify the hypothesis of Lemma 2 with <span class="math inline">\(\alpha=0.6342\)</span>. Since <span class="math inline">\(2(1+0.6342)/(2+0.6342)=1.2407562068\ldots\)</span>, Lemma 2 gives <span class="math display">\[
+\limsup_{n\to\infty}
+n^{1.2407562068\ldots}R_n(H_n)&gt;0.
+\]</span> Because <span class="math inline">\(1.2407562068\ldots&lt;1.2408\)</span>, this proves Theorem 1.</p>
 <h3 id="bibliographic-information"><span>Bibliographic Information</span></h3>
 <div class="citation-block"><pre><code>@misc{ye2026anytime,
   author = {Yuhan Ye},
