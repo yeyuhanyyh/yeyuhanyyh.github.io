@@ -27,7 +27,7 @@ jobs:
           lake update 2>&1 | tee lean-setup.log
           lake exe cache get 2>&1 | tee -a lean-setup.log
       - name: Build Lean project
-        id: lean-build
+        id: lean_build
         if: steps.setup.outcome == 'success'
         continue-on-error: true
         working-directory: gd-lower-bound/lean
@@ -45,7 +45,7 @@ jobs:
             gd-lower-bound/lean/lean-build.log
           if-no-files-found: warn
       - name: Reject placeholders and custom axioms
-        if: steps.lean-build.outcome == 'success'
+        if: steps.lean_build.outcome == 'success'
         working-directory: gd-lower-bound/lean
         run: |
           if grep -RInE '\b(sorry|admit)\b|^[[:space:]]*(axiom|constant)[[:space:]]' GDLowerBound GDLowerBound.lean; then
@@ -53,5 +53,5 @@ jobs:
             exit 1
           fi
       - name: Fail if setup or Lean build failed
-        if: steps.setup.outcome != 'success' || steps.lean-build.outcome != 'success'
+        if: steps.setup.outcome != 'success' || steps.lean_build.outcome != 'success'
         run: exit 1
