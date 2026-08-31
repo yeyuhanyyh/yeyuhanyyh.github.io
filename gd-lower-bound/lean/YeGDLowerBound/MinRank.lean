@@ -1,5 +1,5 @@
 import GDLowerBound.Schedule.TopChain
-import GDLowerBound.RankProfile
+import YeGDLowerBound.RankProfile
 
 /-!
 # The minimizing rank
@@ -38,7 +38,7 @@ theorem residual_ratio_of_minimizing_rank
     (hq : 1 ≤ q) (hm : 1 ≤ m)
     (hmin : rankScore alpha h q ≤ rankScore alpha h m) :
     Real.rpow ((q : ℝ) / m) alpha ≤ unresolvedMass h m / unresolvedMass h q := by
-  apply GDLowerBound.ratio_of_weighted_min
+  apply ratio_of_weighted_min
   · exact unresolvedMass_pos hh q
   · exact_mod_cast hq
   · exact_mod_cast hm
