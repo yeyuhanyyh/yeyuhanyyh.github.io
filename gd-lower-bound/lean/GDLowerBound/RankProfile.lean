@@ -20,7 +20,7 @@ lemma ratio_of_weighted_min
   have hma : 0 < m ^ α := Real.rpow_pos_of_pos hm α
   have hdiv : q ^ α / m ^ α ≤ Dm / Dq := by
     rw [div_le_div_iff₀ hma hDq]
-    exact hmin
+    simpa [mul_comm] using hmin
   rw [Real.div_rpow hq.le hm.le]
   exact hdiv
 
@@ -77,7 +77,10 @@ lemma one_le_nat_mul_log_ratio {q : ℕ} (hq : 2 ≤ q) :
     field_simp [ne_of_gt hqm1R, ne_of_gt hqR]
     norm_num [Nat.cast_sub (by omega : 1 ≤ q)]
   rw [hden] at hlog
-  nlinarith
+  have hmul := mul_le_mul_of_nonneg_left hlog hqR.le
+  have hqinv : (q : ℝ) * (1 / q) = 1 := by
+    field_simp [ne_of_gt hqR]
+  simpa [hqinv] using hmul
 
 /-- The bottom reference weight is at least `α`. -/
 lemma alpha_le_bottom_reference
@@ -99,7 +102,7 @@ lemma alpha_le_bottom_reference
   calc
     α ≤ (q : ℝ) * (α * L) := hfirst
     _ ≤ (q : ℝ) * (Real.exp (α * L) - 1) := hsecond
-    _ = (q : ℝ) * (Real.exp (L * α) - 1) := by ring_nf
+    _ = (q : ℝ) * (Real.exp (L * α) - 1) := by rw [mul_comm L α]
 
 /-- A generic finite telescoping identity. -/
 lemma sum_range_sub_telescope (b : ℕ → ℝ) (m k : ℕ) :
