@@ -50,8 +50,8 @@ lemma rootEq_continuousOn {lam w z : ℝ} (hw : 0 < w) (hz : 0 < z) :
 lemma rootEq_strictAnti {lam w z : ℝ} (hw : 0 < w) (hz : 0 < z) :
     StrictAntiOn (rootEq lam w z) (Set.Ioi 0) := by
   intro a ha b hb hab
-  have h2a : 0 < 2 * a := by nlinarith
-  have h2b : 0 < 2 * b := by nlinarith
+  have h2a : 0 < 2 * a := mul_pos (by norm_num) ha
+  have h2b : 0 < 2 * b := mul_pos (by norm_num) hb
   have hfirst : 1 / (2 * b) < 1 / (2 * a) := by
     rw [div_lt_div_iff₀ h2b h2a]
     nlinarith
@@ -123,14 +123,12 @@ lemma four_div_le_sqrt_at_rootHi {lam w : ℝ}
   have hright : 0 ≤ w * rootHi lam w := mul_nonneg hw.le hhi.le
   rw [Real.le_sqrt hleft hright]
   have hsquare : (4 / lam) ^ 2 = 16 / lam ^ 2 := by
-    field_simp [hlam.ne']
-    ring
+    field_simp [hlam.ne'] <;> ring
   rw [hsquare]
   have heq :
       w * rootHi lam w = 2 * w / lam + 16 / lam ^ 2 := by
     unfold rootHi
-    field_simp [hlam.ne', hw.ne']
-    ring
+    field_simp [hlam.ne', hw.ne'] <;> ring
   rw [heq]
   have hnonneg : 0 ≤ 2 * w / lam := (div_pos (mul_pos (by norm_num) hw) hlam).le
   linarith
