@@ -7,6 +7,7 @@ import YeGDLowerBound.MinRank
 import YeGDLowerBound.SequenceNormalization
 import YeGDLowerBound.GammaScalar
 import YeGDLowerBound.GammaRoot
+import YeGDLowerBound.GammaObjective
 
 /-!
 # Yuhan Ye's improved lower bound for predetermined gradient descent
