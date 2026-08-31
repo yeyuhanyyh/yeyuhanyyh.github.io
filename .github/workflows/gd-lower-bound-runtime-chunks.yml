@@ -1,0 +1,92 @@
+name: Export GD Lean runtime chunks
+
+on:
+  push:
+    branches: [lean-gd-lower-bound-formalization]
+    paths:
+      - '.github/workflows/gd-lower-bound-runtime-chunks.yml'
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Fetch pinned dependencies and Mathlib cache
+        working-directory: gd-lower-bound/lean
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: Pack and split runtime
+        run: |
+          mkdir -p runtime-parts
+          tar -I 'zstd -3 -T0' -cf - \
+            -C /home/runner .elan/toolchains/leanprover--lean4---v4.32.1 \
+            -C "$GITHUB_WORKSPACE/gd-lower-bound/lean" .lake/packages lake-manifest.json \
+            | split -d -a 2 -b 450M - runtime-parts/runtime.tar.zst.part-
+          ls -lh runtime-parts
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-runtime-part-00
+          path: runtime-parts/runtime.tar.zst.part-00
+          compression-level: 0
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-runtime-part-01
+          path: runtime-parts/runtime.tar.zst.part-01
+          compression-level: 0
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-runtime-part-02
+          path: runtime-parts/runtime.tar.zst.part-02
+          compression-level: 0
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-runtime-part-03
+          path: runtime-parts/runtime.tar.zst.part-03
+          compression-level: 0
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-runtime-part-04
+          path: runtime-parts/runtime.tar.zst.part-04
+          compression-level: 0
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-runtime-part-05
+          path: runtime-parts/runtime.tar.zst.part-05
+          compression-level: 0
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-runtime-part-06
+          path: runtime-parts/runtime.tar.zst.part-06
+          compression-level: 0
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-runtime-part-07
+          path: runtime-parts/runtime.tar.zst.part-07
+          compression-level: 0
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-runtime-part-08
+          path: runtime-parts/runtime.tar.zst.part-08
+          compression-level: 0
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lean-runtime-part-09
+          path: runtime-parts/runtime.tar.zst.part-09
+          compression-level: 0
+          if-no-files-found: ignore
