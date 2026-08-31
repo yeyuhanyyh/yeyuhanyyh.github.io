@@ -48,30 +48,17 @@ def scalarJ (alpha lam : ℝ) : ℝ :=
   unfold kernel
   congr 2 <;> ring
 
+lemma gammaRange_swap (lam w z : ℝ) :
+    gammaRange lam z w = gammaRange lam w z := by
+  ext r
+  constructor
+  · rintro ⟨x, hx, y, hy, rfl⟩
+    exact ⟨y, hy, x, hx, by simp [kernel_swap, add_comm]⟩
+  · rintro ⟨x, hx, y, hy, rfl⟩
+    exact ⟨y, hy, x, hx, by simp [kernel_swap, add_comm]⟩
+
 @[simp] theorem Gamma_swap (lam w z : ℝ) : Gamma lam z w = Gamma lam w z := by
-  apply le_antisymm
-  · apply csSup_le
-    · refine ⟨Real.log (kernel w z 1 1) - lam * 2, ?_⟩
-      exact ⟨1, by norm_num, 1, by norm_num, by ring⟩
-    · intro r hr
-      rcases hr with ⟨x, hx, y, hy, rfl⟩
-      apply le_csSup
-      · exact ⟨Real.exp (Real.log (kernel w z x y) - lam * (x + y)) + 1,
-          fun s hs => by
-            rcases hs with ⟨a, ha, b, hb, rfl⟩
-            exact le_add_of_le_of_nonneg (Real.le_exp _) zero_le_one⟩
-      · exact ⟨y, hy, x, hx, by simp [kernel_swap, add_comm]⟩
-  · apply csSup_le
-    · refine ⟨Real.log (kernel z w 1 1) - lam * 2, ?_⟩
-      exact ⟨1, by norm_num, 1, by norm_num, by ring⟩
-    · intro r hr
-      rcases hr with ⟨x, hx, y, hy, rfl⟩
-      apply le_csSup
-      · exact ⟨Real.exp (Real.log (kernel z w x y) - lam * (x + y)) + 1,
-          fun s hs => by
-            rcases hs with ⟨a, ha, b, hb, rfl⟩
-            exact le_add_of_le_of_nonneg (Real.le_exp _) zero_le_one⟩
-      · exact ⟨y, hy, x, hx, by simp [kernel_swap, add_comm]⟩
+  simp only [Gamma, gammaRange_swap]
 
 end
 
