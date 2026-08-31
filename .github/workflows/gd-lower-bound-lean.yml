@@ -13,30 +13,37 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Install Lean and fetch Mathlib cache
-        uses: leanprover/lean-action@v1
-        with:
-          lake-package-directory: gd-lower-bound/lean
-          auto-config: false
-          build: false
-          test: false
-          lint: false
-          use-github-cache: true
-          use-mathlib-cache: true
-      - name: Build Lean project
-        id: lean-build
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Update dependencies and fetch Mathlib cache
+        id: setup
         continue-on-error: true
         working-directory: gd-lower-bound/lean
         run: |
           set -o pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update 2>&1 | tee lean-setup.log
+          lake exe cache get 2>&1 | tee -a lean-setup.log
+      - name: Build Lean project
+        id: lean-build
+        if: steps.setup.outcome == 'success'
+        continue-on-error: true
+        working-directory: gd-lower-bound/lean
+        run: |
+          set -o pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
           lake build 2>&1 | tee lean-build.log
-      - name: Upload Lean build log
+      - name: Upload Lean logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: lean-build-log
-          path: gd-lower-bound/lean/lean-build.log
-          if-no-files-found: error
+          name: lean-build-logs
+          path: |
+            gd-lower-bound/lean/lean-setup.log
+            gd-lower-bound/lean/lean-build.log
+          if-no-files-found: warn
       - name: Reject placeholders and custom axioms
         if: steps.lean-build.outcome == 'success'
         working-directory: gd-lower-bound/lean
@@ -45,6 +52,6 @@ jobs:
             echo 'Found an unproved placeholder or custom axiom.'
             exit 1
           fi
-      - name: Fail if Lean build failed
-        if: steps.lean-build.outcome != 'success'
+      - name: Fail if setup or Lean build failed
+        if: steps.setup.outcome != 'success' || steps.lean-build.outcome != 'success'
         run: exit 1
