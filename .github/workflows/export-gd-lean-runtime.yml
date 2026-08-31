@@ -1,0 +1,66 @@
+name: Export GD Lean runtime
+
+on:
+  push:
+    branches: [lean-gd-lower-bound-formalization]
+    paths:
+      - '.github/workflows/export-gd-lean-runtime.yml'
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan and fetch pinned dependencies
+        working-directory: gd-lower-bound/lean
+        run: |
+          set -euxo pipefail
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: Pack runtime
+        working-directory: gd-lower-bound/lean
+        run: |
+          set -euxo pipefail
+          tar --zstd -cf /tmp/gd-lean-runtime.tar.zst \
+            .lake \
+            "$HOME/.elan/toolchains/leanprover--lean4---v4.32.1"
+          split -b 450M -d -a 2 /tmp/gd-lean-runtime.tar.zst /tmp/gd-lean-runtime-part-
+          ls -lh /tmp/gd-lean-runtime-part-*
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gd-lean-runtime-00
+          path: /tmp/gd-lean-runtime-part-00
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gd-lean-runtime-01
+          path: /tmp/gd-lean-runtime-part-01
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gd-lean-runtime-02
+          path: /tmp/gd-lean-runtime-part-02
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gd-lean-runtime-03
+          path: /tmp/gd-lean-runtime-part-03
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gd-lean-runtime-04
+          path: /tmp/gd-lean-runtime-part-04
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gd-lean-runtime-05
+          path: /tmp/gd-lean-runtime-part-05
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gd-lean-runtime-06
+          path: /tmp/gd-lean-runtime-part-06
+          compression-level: 0
