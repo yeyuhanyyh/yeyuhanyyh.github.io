@@ -65,7 +65,6 @@ lemma exact_local_factorization
         = blockP x u * blockQ x u +
             blockP x u ^ 2 * (blockQ y v / blockP y v) := by
               field_simp [hpy]
-              ring
     _ = x * u + x * (1 + x * u) * (v / (1 + y * v)) := by
           rw [blockP_mul_blockQ hx hu, blockP_sq hx.le hu.le,
             blockQ_div_blockP hy hv]
@@ -90,7 +89,7 @@ lemma ratioChain_eq_div
       have hlt : ∀ c ∈ l, c ≠ 0 := by
         intro c hc
         exact hl c (by simp [hc])
-      rw [ratioChain, ih hb hz hlt]
+      rw [ratioChain, ih hb hlt]
       field_simp
 
 end
