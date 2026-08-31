@@ -80,9 +80,9 @@ lemma gammaObjective_stationary {lam w z : ℝ}
     phi_deriv_inv_form hz (by simpa [Y] using optX_pos hz ht)
   constructor
   · rw [hdx, ← hAw, ← hSigma]
-    simpa [X] using hx
+    linarith [hx]
   · rw [hdy, ← hAz, ← hSigma]
-    simpa [Y] using hy
+    linarith [hy]
 
 /-- The scalar point globally maximizes the logarithmic objective. -/
 theorem gammaObjective_le_optimizer {lam w z x y : ℝ}
@@ -158,7 +158,8 @@ theorem gammaObjective_le_optimizer {lam w z x y : ℝ}
     _ = phi w X + phi z Y + Real.log (w + z + X + Y) -
           (Real.log w + Real.log z) / 2 - lam * (X + Y) := by
             rw [hpenalty]
-            rfl
+            dsimp [Sigma]
+            ring
 
 /-- The optimizer is unique. -/
 theorem gammaObjective_lt_optimizer_of_ne {lam w z x y : ℝ}
@@ -239,7 +240,8 @@ theorem gammaObjective_lt_optimizer_of_ne {lam w z x y : ℝ}
       _ = phi w X + phi z Y + Real.log (w + z + X + Y) -
             (Real.log w + Real.log z) / 2 - lam * (X + Y) := by
               rw [hpenalty]
-              rfl
+              dsimp [Sigma]
+              ring
   · have hphiX : phi w x < phi w X + dx * (x - X) := by
       exact strictConcave_tangent_lt (strictConcaveOn_phi hw) hX hx hxX
         (hasDerivAt_phi hw hX)
@@ -258,12 +260,14 @@ theorem gammaObjective_lt_optimizer_of_ne {lam w z x y : ℝ}
       _ = phi w X + phi z Y + Real.log Sigma -
             (Real.log w + Real.log z) / 2 +
             (dx * (x - X) + dy * (y - Y) +
-              c * ((w + z + x + y) - Sigma) - lam * (x + y)) := by
+              c * ((w + z + x + y) - Sigma)
+              - lam * (x + y)) := by
                 ring
       _ = phi w X + phi z Y + Real.log (w + z + X + Y) -
             (Real.log w + Real.log z) / 2 - lam * (X + Y) := by
               rw [hpenalty]
-              rfl
+              dsimp [Sigma]
+              ring
 
 lemma gammaRange_nonempty (lam w z : ℝ) : (gammaRange lam w z).Nonempty := by
   refine ⟨Real.log (kernel w z 1 1) - lam * 2, ?_⟩
