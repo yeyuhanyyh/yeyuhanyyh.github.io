@@ -1,0 +1,61 @@
+name: Patch GammaMaximum
+
+on:
+  push:
+    branches: [lean-gd-lower-bound-formalization]
+    paths: ['.github/workflows/patch-gamma-maximum.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: lean-gd-lower-bound-formalization
+      - name: Patch the tangent normalization proof
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('gd-lower-bound/lean/YeGDLowerBound/GammaMaximum.lean')
+          s = p.read_text()
+          old = '''  have htangent :
+              tangent = gammaObjective lam w z X Y := by
+            unfold tangent gammaObjective
+            rw [hcancel]
+            dsimp [Sigma]
+            ring
+          '''
+          new = '''  have htangent :
+              tangent = gammaObjective lam w z X Y := by
+            unfold tangent gammaObjective
+            calc
+              phi w X + dx * (x - X) + (phi z Y + dy * (y - Y)) +
+                    (Real.log Sigma + c * ((w + z + x + y) - Sigma)) -
+                    (Real.log w + Real.log z) / 2 - lam * (x + y)
+                  = phi w X + phi z Y + Real.log Sigma -
+                      (Real.log w + Real.log z) / 2 +
+                      (dx * (x - X) + dy * (y - Y) +
+                        c * ((w + z + x + y) - Sigma) - lam * (x + y)) := by ring
+              _ = phi w X + phi z Y + Real.log Sigma -
+                      (Real.log w + Real.log z) / 2 - lam * (X + Y) := by
+                    rw [hcancel]
+                    ring
+              _ = phi w X + phi z Y + Real.log (w + z + X + Y) -
+                      (Real.log w + Real.log z) / 2 - lam * (X + Y) := by
+                    rfl
+          '''
+          if old not in s:
+              raise SystemExit('old snippet not found')
+          p.write_text(s.replace(old, new, 1))
+          PY
+      - name: Commit patch
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add gd-lower-bound/lean/YeGDLowerBound/GammaMaximum.lean
+          git commit -m 'Fix GammaMaximum tangent normalization'
+          git push origin HEAD:lean-gd-lower-bound-formalization
