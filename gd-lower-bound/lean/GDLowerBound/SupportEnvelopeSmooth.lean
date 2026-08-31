@@ -21,7 +21,8 @@ variable (K : FiniteConvexSet E)
 
 /-- The support envelope is convex because it is the pointwise supremum of affine functions. -/
 lemma convex_envelope : ConvexOn ℝ Set.univ K.envelope := by
-  intro x _ y _ a b ha hb hab
+  refine ⟨convex_univ, ?_⟩
+  intro x hx y hy a b ha hb hab
   let p := K.proj (a • x + b • y)
   have hp : p ∈ K.carrier := K.proj_mem _
   have hid :
@@ -32,8 +33,8 @@ lemma convex_envelope : ConvexOn ℝ Set.univ K.envelope := by
     rw [abs_of_nonneg ha, abs_of_nonneg hb]
     nlinarith [hab]
   rw [hid]
-  have hx := K.affineValue_le_envelope hp x
-  have hy := K.affineValue_le_envelope hp y
+  have hx' := K.affineValue_le_envelope hp x
+  have hy' := K.affineValue_le_envelope hp y
   nlinarith
 
 /-- Quadratic first-order error estimate for the support envelope. -/
@@ -78,10 +79,16 @@ lemma hasGradientAt_envelope (x : E) : HasGradientAt K.envelope (K.proj x) x := 
       calc
         ‖h‖⁻¹ * err h ≤ ‖h‖⁻¹ * ‖h‖ ^ 2 := hmul
         _ = ‖h‖ := by field_simp [ne_of_gt hn]
+  let g : E → ℝ := fun y => ‖y - x‖
   apply squeeze_zero'
-  · exact Eventually.of_forall fun h => mul_nonneg (inv_nonneg.mpr (norm_nonneg h)) (norm_nonneg _)
-  · exact Eventually.of_forall hbound
-  · simpa using (tendsto_norm_zero : Tendsto (fun h : E => ‖h‖) (𝓝 0) (𝓝 0))
+  · exact Eventually.of_forall fun y =>
+      mul_nonneg (inv_nonneg.mpr (norm_nonneg (y - x))) (norm_nonneg _)
+  · exact Eventually.of_forall fun y => by
+      simpa [err, g, add_sub_cancel_left] using hbound (y - x)
+  · have hsub : Tendsto (fun y : E => y - x) (𝓝 x) (𝓝 0) := by
+      simpa using (tendsto_id.sub tendsto_const_nhds :
+        Tendsto (fun y : E => y - x) (𝓝 x) (𝓝 (x - x)))
+    exact (tendsto_norm_zero.comp hsub)
 
 lemma differentiable_envelope : Differentiable ℝ K.envelope :=
   fun x => (K.hasGradientAt_envelope x).differentiableAt
@@ -95,7 +102,9 @@ theorem envelope_convex_one_smooth :
       Differentiable ℝ K.envelope ∧
       LipschitzWith 1 (gradient K.envelope) := by
   refine ⟨K.convex_envelope, K.differentiable_envelope, ?_⟩
-  simpa only [funext fun x => K.gradient_envelope x] using K.gradient_lipschitz
+  have hfun : gradient K.envelope = K.proj := funext K.gradient_envelope
+  rw [hfun]
+  exact K.gradient_lipschitz
 
 end FiniteConvexSet
 
