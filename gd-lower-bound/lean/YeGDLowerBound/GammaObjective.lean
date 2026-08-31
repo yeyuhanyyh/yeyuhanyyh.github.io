@@ -20,15 +20,18 @@ lemma hasDerivAt_phi {w x : ℝ} (hw : 0 < w) (hx : 0 < x) :
     HasDerivAt (phi w) (w / (2 * x * (w + x))) x := by
   have hsum : w + x ≠ 0 := ne_of_gt (add_pos hw hx)
   have hlogx := Real.hasDerivAt_log hx.ne'
-  have hadd : HasDerivAt (fun y : ℝ => w + y) 1 x :=
-    (hasDerivAt_const x w).add (hasDerivAt_id x)
+  have hadd0 := (hasDerivAt_const x w).add (hasDerivAt_id x)
+  have hadd : HasDerivAt (fun y : ℝ => w + y) 1 x := by
+    simpa only [Pi.add_apply, id_eq, zero_add] using hadd0
   have hlogsum := (Real.hasDerivAt_log hsum).comp x hadd
   have h := (hlogx.sub hlogsum).div_const 2
-  convert h using 1
-  · field_simp [hx.ne', hsum]
+  change HasDerivAt (fun y : ℝ => (Real.log y - Real.log (w + y)) / 2)
+    ((x⁻¹ - (w + x)⁻¹) / 2) x at h
+  have hcoef : (x⁻¹ - (w + x)⁻¹) / 2 = w / (2 * x * (w + x)) := by
+    field_simp [hx.ne', hsum]
     ring
-  · ext y
-    simp [phi]
+  rw [hcoef] at h
+  simpa only [phi] using h
 
 lemma deriv_phi {w x : ℝ} (hw : 0 < w) (hx : 0 < x) :
     deriv (phi w) x = w / (2 * x * (w + x)) :=
@@ -47,9 +50,9 @@ lemma deriv_phi_strictAnti {w : ℝ} (hw : 0 < w) :
     mul_pos (mul_pos (by norm_num) ha) (add_pos hw ha)
   have hdb : 0 < 2 * b * (w + b) :=
     mul_pos (mul_pos (by norm_num) hb) (add_pos hw hb)
-  have hfactor : 0 < (b - a) * (w + a + b) := by
-    apply mul_pos (sub_pos.mpr hab)
-    nlinarith
+  have hsum : 0 < w + a + b := add_pos (add_pos hw ha) hb
+  have hfactor : 0 < (b - a) * (w + a + b) :=
+    mul_pos (sub_pos.mpr hab) hsum
   have hden : 2 * a * (w + a) < 2 * b * (w + b) := by
     nlinarith
   rw [div_lt_div_iff₀ hdb hda]
