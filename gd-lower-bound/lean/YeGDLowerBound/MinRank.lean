@@ -25,7 +25,10 @@ theorem exists_minimizing_rank {T : ℕ} (alpha : ℝ) (h : StepSchedule T)
       ∀ s : ℕ, 1 ≤ s → s ≤ longCount h → rankScore alpha h q ≤ rankScore alpha h s := by
   let S : Set ℕ := Set.Icc 1 (longCount h)
   have hfinite : S.Finite := Set.finite_Icc 1 (longCount h)
-  have hnonempty : S.Nonempty := ⟨1, by simp [S, hr]⟩
+  have hnonempty : S.Nonempty := ⟨1, by
+    constructor
+    · exact le_rfl
+    · omega⟩
   obtain ⟨q, hqS, hqmin⟩ := Set.exists_min_image S (rankScore alpha h) hfinite hnonempty
   refine ⟨q, hqS.1, hqS.2, ?_⟩
   intro s hs1 hsr
