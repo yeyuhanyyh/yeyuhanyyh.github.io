@@ -37,6 +37,17 @@ jobs:
             echo 'Found an unproved placeholder or custom axiom.'
             exit 1
           fi
+      - name: Upload current Lean source
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lean-source
+          path: |
+            gd-lower-bound/lean/YeGDLowerBound
+            gd-lower-bound/lean/YeGDLowerBound.lean
+            gd-lower-bound/lean/lakefile.toml
+            gd-lower-bound/lean/lean-toolchain
+          if-no-files-found: error
       - name: Upload Lean logs and manifest
         if: always()
         uses: actions/upload-artifact@v4
