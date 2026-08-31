@@ -13,19 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Restore Lean and package cache
-        id: lean-cache
-        uses: actions/cache/restore@v4
-        with:
-          path: |
-            ~/.elan
-            gd-lower-bound/lean/.lake/packages
-          key: ye-gd-lower-bound-v4.32.1-machen-e41ce4-v1
       - name: Install elan
         run: |
-          if [ ! -x "$HOME/.elan/bin/elan" ]; then
-            curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
-          fi
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
       - name: Update pinned dependencies and fetch Mathlib cache
         working-directory: gd-lower-bound/lean
@@ -34,14 +24,6 @@ jobs:
           export PATH="$HOME/.elan/bin:$PATH"
           lake update 2>&1 | tee lean-setup.log
           lake exe cache get 2>&1 | tee -a lean-setup.log
-      - name: Save Lean and package cache
-        if: steps.lean-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
-        with:
-          path: |
-            ~/.elan
-            gd-lower-bound/lean/.lake/packages
-          key: ye-gd-lower-bound-v4.32.1-machen-e41ce4-v1
       - name: Build Lean project
         working-directory: gd-lower-bound/lean
         run: |
