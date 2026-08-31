@@ -21,7 +21,7 @@ lemma hasDerivAt_phi {w x : ℝ} (hw : 0 < w) (hx : 0 < x) :
   have hsum : w + x ≠ 0 := ne_of_gt (add_pos hw hx)
   have hlogx := Real.hasDerivAt_log hx.ne'
   have hadd : HasDerivAt (fun y : ℝ => w + y) 1 x :=
-    (hasDerivAt_const x w).add hasDerivAt_id
+    (hasDerivAt_const x w).add (hasDerivAt_id x)
   have hlogsum := (Real.hasDerivAt_log hsum).comp x hadd
   have h := (hlogx.sub hlogsum).div_const 2
   convert h using 1
@@ -37,8 +37,7 @@ lemma deriv_phi {w x : ℝ} (hw : 0 < w) (hx : 0 < x) :
 lemma continuousOn_phi {w : ℝ} (hw : 0 < w) :
     ContinuousOn (phi w) (Set.Ioi 0) := by
   intro x hx
-  unfold phi
-  fun_prop
+  exact (hasDerivAt_phi hw hx).continuousAt.continuousWithinAt
 
 lemma deriv_phi_strictAnti {w : ℝ} (hw : 0 < w) :
     StrictAntiOn (deriv (phi w)) (Set.Ioi 0) := by
@@ -48,13 +47,19 @@ lemma deriv_phi_strictAnti {w : ℝ} (hw : 0 < w) :
     mul_pos (mul_pos (by norm_num) ha) (add_pos hw ha)
   have hdb : 0 < 2 * b * (w + b) :=
     mul_pos (mul_pos (by norm_num) hb) (add_pos hw hb)
+  have hfactor : 0 < (b - a) * (w + a + b) := by
+    apply mul_pos (sub_pos.mpr hab)
+    nlinarith
+  have hden : 2 * a * (w + a) < 2 * b * (w + b) := by
+    nlinarith
   rw [div_lt_div_iff₀ hdb hda]
-  nlinarith
+  exact mul_lt_mul_of_pos_left hden hw
 
 /-- The coordinate term is strictly concave on the positive half-line. -/
 theorem strictConcaveOn_phi {w : ℝ} (hw : 0 < w) :
     StrictConcaveOn ℝ (Set.Ioi 0) (phi w) := by
-  apply (deriv_phi_strictAnti hw).strictConcaveOn_of_deriv (convex_Ioi 0)
+  apply (show StrictAntiOn (deriv (phi w)) (interior (Set.Ioi 0)) by
+      simpa using deriv_phi_strictAnti hw).strictConcaveOn_of_deriv (convex_Ioi 0)
   exact continuousOn_phi hw
 
 /-- The additive representation of the optimized logarithmic objective. -/
@@ -66,6 +71,9 @@ lemma gammaObjective_eq_log_kernel {lam w z x y : ℝ}
     (hw : 0 < w) (hz : 0 < z) (hx : 0 < x) (hy : 0 < y) :
     gammaObjective lam w z x y = Real.log (kernel w z x y) - lam * (x + y) := by
   have hxy : 0 < x * y := mul_pos hx hy
+  have hwz : w * z ≠ 0 := mul_ne_zero hw.ne' hz.ne'
+  have hwzx : w * z * (w + x) ≠ 0 :=
+    mul_ne_zero hwz (add_pos hw hx).ne'
   have hden : 0 < w * z * (w + x) * (z + y) := by positivity
   have hsum : 0 < w + z + x + y := by positivity
   have hsqrtxy : 0 < Real.sqrt (x * y) := Real.sqrt_pos.2 hxy
@@ -74,8 +82,9 @@ lemma gammaObjective_eq_log_kernel {lam w z x y : ℝ}
   rw [Real.log_div (mul_ne_zero hsqrtxy.ne' hsum.ne') hsqrtd.ne',
     Real.log_mul hsqrtxy.ne' hsum.ne', Real.log_sqrt hxy.le,
     Real.log_sqrt hden.le, Real.log_mul hx.ne' hy.ne',
-    Real.log_mul (mul_ne_zero hw.ne' hz.ne') (mul_ne_zero (add_pos hw hx).ne' (add_pos hz hy).ne'),
-    Real.log_mul hw.ne' hz.ne', Real.log_mul (add_pos hw hx).ne' (add_pos hz hy).ne']
+    Real.log_mul hwzx (add_pos hz hy).ne',
+    Real.log_mul hwz (add_pos hw hx).ne',
+    Real.log_mul hw.ne' hz.ne']
   ring
 
 end
