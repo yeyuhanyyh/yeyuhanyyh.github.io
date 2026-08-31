@@ -177,6 +177,11 @@ theorem gammaObjective_lt_optimizer_of_ne {lam w z x y : ℝ}
   let dx := w / (2 * X * (w + X))
   let dy := z / (2 * Y * (z + Y))
   let c := 1 / Sigma
+  let tangent :=
+    (phi w X + dx * (x - X)) +
+      (phi z Y + dy * (y - Y)) +
+      (Real.log Sigma + c * ((w + z + x + y) - Sigma)) -
+      (Real.log w + Real.log z) / 2 - lam * (x + y)
   have ht : 0 < tau := tauStar_pos hlam hw hz
   have hX : 0 < X := optX_pos hw ht
   have hY : 0 < Y := optX_pos hz ht
@@ -206,11 +211,11 @@ theorem gammaObjective_lt_optimizer_of_ne {lam w z x y : ℝ}
     rw [hdx, hdy]
     dsimp [Sigma]
     ring
-  have hpenalty :
-      dx * (x - X) + dy * (y - Y) +
-          c * ((w + z + x + y) - Sigma) - lam * (x + y)
-        = -lam * (X + Y) := by
+  have htangent :
+      tangent = gammaObjective lam w z X Y := by
+    unfold tangent gammaObjective
     rw [hcancel]
+    dsimp [Sigma]
     ring
   by_cases hxX : x = X
   · have hyY : y ≠ Y := by
@@ -223,51 +228,22 @@ theorem gammaObjective_lt_optimizer_of_ne {lam w z x y : ℝ}
     have hphiY : phi z y < phi z Y + dy * (y - Y) := by
       exact strictConcave_tangent_lt (strictConcaveOn_phi hz) hY hy hyY
         (hasDerivAt_phi hz hY)
-    unfold gammaObjective
     calc
-      phi w x + phi z y + Real.log (w + z + x + y) -
-            (Real.log w + Real.log z) / 2 - lam * (x + y)
-          < (phi w X + dx * (x - X)) +
-              (phi z Y + dy * (y - Y)) +
-              (Real.log Sigma + c * ((w + z + x + y) - Sigma)) -
-              (Real.log w + Real.log z) / 2 - lam * (x + y) := by
-                linarith
-      _ = phi w X + phi z Y + Real.log Sigma -
-            (Real.log w + Real.log z) / 2 +
-            (dx * (x - X) + dy * (y - Y) +
-              c * ((w + z + x + y) - Sigma) - lam * (x + y)) := by
-                ring
-      _ = phi w X + phi z Y + Real.log (w + z + X + Y) -
-            (Real.log w + Real.log z) / 2 - lam * (X + Y) := by
-              rw [hpenalty]
-              dsimp [Sigma]
-              ring
+      gammaObjective lam w z x y < tangent := by
+        unfold gammaObjective tangent
+        linarith
+      _ = gammaObjective lam w z X Y := htangent
   · have hphiX : phi w x < phi w X + dx * (x - X) := by
       exact strictConcave_tangent_lt (strictConcaveOn_phi hw) hX hx hxX
         (hasDerivAt_phi hw hX)
     have hphiY : phi z y ≤ phi z Y + dy * (y - Y) := by
       exact concave_tangent_le (strictConcaveOn_phi hz).concaveOn hY hy
         (hasDerivAt_phi hz hY)
-    unfold gammaObjective
     calc
-      phi w x + phi z y + Real.log (w + z + x + y) -
-            (Real.log w + Real.log z) / 2 - lam * (x + y)
-          < (phi w X + dx * (x - X)) +
-              (phi z Y + dy * (y - Y)) +
-              (Real.log Sigma + c * ((w + z + x + y) - Sigma)) -
-              (Real.log w + Real.log z) / 2 - lam * (x + y) := by
-                linarith
-      _ = phi w X + phi z Y + Real.log Sigma -
-            (Real.log w + Real.log z) / 2 +
-            (dx * (x - X) + dy * (y - Y) +
-              c * ((w + z + x + y) - Sigma)
-              - lam * (x + y)) := by
-                ring
-      _ = phi w X + phi z Y + Real.log (w + z + X + Y) -
-            (Real.log w + Real.log z) / 2 - lam * (X + Y) := by
-              rw [hpenalty]
-              dsimp [Sigma]
-              ring
+      gammaObjective lam w z x y < tangent := by
+        unfold gammaObjective tangent
+        linarith
+      _ = gammaObjective lam w z X Y := htangent
 
 lemma gammaRange_nonempty (lam w z : ℝ) : (gammaRange lam w z).Nonempty := by
   refine ⟨Real.log (kernel w z 1 1) - lam * 2, ?_⟩
