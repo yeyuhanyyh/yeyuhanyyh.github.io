@@ -21,12 +21,14 @@ lemma hasDerivAt_phi {w x : ℝ} (hw : 0 < w) (hx : 0 < x) :
   have hsum : w + x ≠ 0 := ne_of_gt (add_pos hw hx)
   have hadd : HasDerivAt (fun y : ℝ => w + y) 1 x :=
     (hasDerivAt_id x).const_add w
-  have hlogx := Real.hasDerivAt_log hx.ne'
-  have hlogsum := (Real.hasDerivAt_log hsum).comp x hadd
+  have hlogx : HasDerivAt Real.log x⁻¹ x := Real.hasDerivAt_log hx.ne'
+  have hlogsum :
+      HasDerivAt (fun y : ℝ => Real.log (w + y)) (w + x)⁻¹ x := by
+    simpa [Function.comp_def] using (Real.hasDerivAt_log hsum).comp x hadd
   have hsub : HasDerivAt
       (fun y : ℝ => Real.log y - Real.log (w + y))
-      (x⁻¹ - (w + x)⁻¹) x := by
-    exact hlogx.sub hlogsum
+      (x⁻¹ - (w + x)⁻¹) x :=
+    hlogx.sub hlogsum
   have hraw : HasDerivAt
       (fun y : ℝ => (Real.log y - Real.log (w + y)) / 2)
       ((x⁻¹ - (w + x)⁻¹) / 2) x :=
@@ -35,7 +37,7 @@ lemma hasDerivAt_phi {w x : ℝ} (hw : 0 < w) (hx : 0 < x) :
     field_simp [hx.ne', hsum]
     ring
   rw [hcoef] at hraw
-  simpa only [phi] using hraw
+  simpa [phi] using hraw
 
 lemma deriv_phi {w x : ℝ} (hw : 0 < w) (hx : 0 < x) :
     deriv (phi w) x = w / (2 * x * (w + x)) :=
