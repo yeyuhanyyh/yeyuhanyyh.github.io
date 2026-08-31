@@ -14,12 +14,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Restore Lean and Mathlib package cache
-        uses: actions/cache@v4
+        id: lean-cache
+        uses: actions/cache/restore@v4
         with:
           path: |
             ~/.elan
             gd-lower-bound/lean/.lake/packages
-          key: gd-lower-bound-lean-v4.32.2-mathlib-v4.32.2-v1
+          key: gd-lower-bound-lean-v4.32.2-mathlib-v4.32.2-v2
       - name: Install elan
         run: |
           if [ ! -x "$HOME/.elan/bin/elan" ]; then
@@ -33,6 +34,14 @@ jobs:
           export PATH="$HOME/.elan/bin:$PATH"
           lake update 2>&1 | tee lean-setup.log
           lake exe cache get 2>&1 | tee -a lean-setup.log
+      - name: Save Lean and Mathlib package cache
+        if: steps.lean-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ~/.elan
+            gd-lower-bound/lean/.lake/packages
+          key: gd-lower-bound-lean-v4.32.2-mathlib-v4.32.2-v2
       - name: Build Lean project
         working-directory: gd-lower-bound/lean
         run: |
