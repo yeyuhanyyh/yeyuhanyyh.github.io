@@ -140,7 +140,6 @@ lemma norm_proj_sub_sq_le_inner (x y : E) :
     linarith
   have hdecomp : x - y = (x - K.proj x) + d + (K.proj y - y) := by
     simp [d]
-    module
   rw [hdecomp, inner_add_right, inner_add_right]
   rw [show inner ℝ d d = ‖d‖ ^ 2 by simp [inner_self_eq_norm_sq_to_K]]
   linarith
@@ -173,7 +172,7 @@ lemma affineValue_le_envelope {g : E} (hg : g ∈ K.carrier) (x : E) :
         = inner ℝ (x - K.proj x) (g - K.proj x)
           - (1 / 2 : ℝ) * ‖g - K.proj x‖ ^ 2 := by
     simp only [affineValue, inner_sub_left, inner_sub_right]
-    rw [norm_sub_sq_real]
+    rw [norm_sub_sq_real, inner_self_eq_norm_sq_to_K]
     rw [real_inner_comm x g, real_inner_comm x (K.proj x),
       real_inner_comm (K.proj x) g]
     ring
