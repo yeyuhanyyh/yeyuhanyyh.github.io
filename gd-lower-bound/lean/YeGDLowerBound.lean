@@ -4,6 +4,7 @@ import YeGDLowerBound.RankProfile
 import YeGDLowerBound.KernelFactorization
 import YeGDLowerBound.Definitions
 import YeGDLowerBound.MinRank
+import YeGDLowerBound.SequenceNormalization
 
 /-!
 # Yuhan Ye's improved lower bound for predetermined gradient descent
