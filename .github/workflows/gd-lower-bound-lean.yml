@@ -11,16 +11,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: gd-lower-bound/lean
     steps:
       - uses: actions/checkout@v4
       - uses: leanprover/lean-action@v1
         with:
+          lake-package-directory: gd-lower-bound/lean
           build: true
           use-github-cache: true
+          use-mathlib-cache: true
+          axiom-audit: true
+          axiom-audit-root: GDLowerBound
       - name: Reject placeholders and custom axioms
+        working-directory: gd-lower-bound/lean
         run: |
           if grep -RInE '\b(sorry|admit)\b|^[[:space:]]*(axiom|constant)[[:space:]]' GDLowerBound GDLowerBound.lean; then
             echo 'Found an unproved placeholder or custom axiom.'
