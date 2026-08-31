@@ -1,11 +1,11 @@
-name = "gd_lower_bound"
+name = "ye_gd_lower_bound"
 version = "0.1.0"
-defaultTargets = ["GDLowerBound"]
+defaultTargets = ["YeGDLowerBound"]
 
 [[require]]
-name = "mathlib"
-git = "https://github.com/leanprover-community/mathlib4.git"
-rev = "v4.32.2"
+name = "maChenGDLowerBound"
+git = "https://github.com/jianhaoma/gd-lower-bound-lean.git"
+rev = "e41ce4b7e0a92b2e460f2dbc898d91e862379419"
 
 [[lean_lib]]
-name = "GDLowerBound"
+name = "YeGDLowerBound"
