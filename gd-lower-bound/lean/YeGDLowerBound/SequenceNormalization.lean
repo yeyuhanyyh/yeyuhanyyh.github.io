@@ -96,13 +96,13 @@ theorem sum_rankedExcessNat_Ico {T m q : ℕ} (h : StepSchedule T)
   | base => simp
   | succ q hmq ih =>
       have hqR : q < longCount h := lt_of_lt_of_le (Nat.lt_succ_self q) hqr
-      rw [Finset.sum_Ico_succ_top hmq, ih hqr.le]
+      rw [Finset.sum_Ico_succ_top hmq, ih (Nat.le_of_succ_le hqr)]
       rw [unresolvedMass_recurrence_nat h hqR]
       ring
 
 /-- The ranked normalized tail has the exact residual-mass value. -/
 theorem sum_rankedOmega_Ico {T m q : ℕ} {h : StepSchedule T}
-    (hh : IsNonnegativeSchedule h) (hq0 : 0 < q)
+    (_hh : IsNonnegativeSchedule h) (_hq0 : 0 < q)
     (hmq : m ≤ q) (hqr : q ≤ longCount h) :
     (∑ j ∈ Finset.Ico m q,
         (q : ℝ) / unresolvedMass h q * rankedExcessNat h j) =
@@ -114,7 +114,7 @@ theorem sum_rankedOmega_Ico {T m q : ℕ} {h : StepSchedule T}
 theorem ranked_tail_condition_of_minimizing
     {T m q : ℕ} {alpha : ℝ} {h : StepSchedule T}
     (hh : IsNonnegativeSchedule h)
-    (hq0 : 0 < q) (hm : 1 ≤ m) (hmq : m ≤ q)
+    (hq0 : 0 < q) (hm : 1 ≤ m) (_hmq : m ≤ q)
     (hmin : rankScore alpha h q ≤ rankScore alpha h m) :
     (q : ℝ) * (Real.rpow ((q : ℝ) / m) alpha - 1) ≤
       (q : ℝ) / unresolvedMass h q *
