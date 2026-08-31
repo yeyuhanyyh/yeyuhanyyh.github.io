@@ -48,25 +48,23 @@ lemma blockQ_mul_blockP {x u : ℝ} (hx : 0 < x) (hu : 0 < u) :
 
 lemma blockQ_div_blockP {x u : ℝ} (hx : 0 < x) (hu : 0 < u) :
     blockQ x u / blockP x u = u / (1 + x * u) := by
-  have hp := blockP_pos hx hu
-  rw [blockQ, div_div]
-  rw [← sq]
-  rw [blockP_sq hx.le hu.le]
+  have hp : blockP x u ≠ 0 := ne_of_gt (blockP_pos hx hu)
+  rw [blockQ, div_div, ← sq, blockP_sq hx.le hu.le]
   field_simp
-  ring
 
 /-- Exact local factorization from the manuscript. -/
 lemma exact_local_factorization
     {x u y v : ℝ} (hx : 0 < x) (hu : 0 < u) (hy : 0 < y) (hv : 0 < v) :
     chiInv x u y v = blockP x u / blockP y v * kernelU x u y v := by
-  have hpy : 0 < blockP y v := blockP_pos hy hv
+  have hpy : blockP y v ≠ 0 := ne_of_gt (blockP_pos hy hv)
   rw [kernelU]
+  symm
   calc
     blockP x u / blockP y v *
         (blockQ x u * blockP y v + blockP x u * blockQ y v)
         = blockP x u * blockQ x u +
             blockP x u ^ 2 * (blockQ y v / blockP y v) := by
-              field_simp [ne_of_gt hpy]
+              field_simp [hpy]
               ring
     _ = x * u + x * (1 + x * u) * (v / (1 + y * v)) := by
           rw [blockP_mul_blockQ hx hu, blockP_sq hx.le hu.le,
@@ -75,20 +73,24 @@ lemma exact_local_factorization
           rw [chiInv]
           ring
 
-/-- A list form of the telescoping product of consecutive ratios. -/
-lemma list_ratio_telescope
-    {a : ℝ} {l : List ℝ} {z : ℝ}
-    (ha : a ≠ 0) (hz : z ≠ 0) (hl : ∀ x ∈ l, x ≠ 0) :
-    (List.zipWith (· / ·) (a :: l) (l ++ [z])).prod = a / z := by
+/-- A recursively written product of consecutive ratios. -/
+def ratioChain : ℝ → List ℝ → ℝ → ℝ
+  | a, [], z => a / z
+  | a, b :: l, z => (a / b) * ratioChain b l z
+
+/-- Consecutive ratios telescope exactly. -/
+lemma ratioChain_eq_div
+    {a z : ℝ} {l : List ℝ}
+    (ha : a ≠ 0) (hz : z ≠ 0) (hl : ∀ b ∈ l, b ≠ 0) :
+    ratioChain a l z = a / z := by
   induction l generalizing a with
-  | nil => simp
+  | nil => rfl
   | cons b l ih =>
       have hb : b ≠ 0 := hl b (by simp)
-      have hlt : ∀ x ∈ l, x ≠ 0 := by
-        intro x hx
-        exact hl x (by simp [hx])
-      simp only [List.zipWith_cons_cons, List.prod_cons]
-      rw [ih hb hz hlt]
+      have hlt : ∀ c ∈ l, c ≠ 0 := by
+        intro c hc
+        exact hl c (by simp [hc])
+      rw [ratioChain, ih hb hz hlt]
       field_simp
 
 end
