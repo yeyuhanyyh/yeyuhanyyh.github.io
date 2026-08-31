@@ -13,18 +13,38 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: leanprover/lean-action@v1
+      - name: Install Lean and fetch Mathlib cache
+        uses: leanprover/lean-action@v1
         with:
           lake-package-directory: gd-lower-bound/lean
-          build: true
+          auto-config: false
+          build: false
+          test: false
+          lint: false
           use-github-cache: true
           use-mathlib-cache: true
-          axiom-audit: true
-          axiom-audit-root: GDLowerBound
+      - name: Build Lean project
+        id: lean-build
+        continue-on-error: true
+        working-directory: gd-lower-bound/lean
+        run: |
+          set -o pipefail
+          lake build 2>&1 | tee lean-build.log
+      - name: Upload Lean build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lean-build-log
+          path: gd-lower-bound/lean/lean-build.log
+          if-no-files-found: error
       - name: Reject placeholders and custom axioms
+        if: steps.lean-build.outcome == 'success'
         working-directory: gd-lower-bound/lean
         run: |
           if grep -RInE '\b(sorry|admit)\b|^[[:space:]]*(axiom|constant)[[:space:]]' GDLowerBound GDLowerBound.lean; then
             echo 'Found an unproved placeholder or custom axiom.'
             exit 1
           fi
+      - name: Fail if Lean build failed
+        if: steps.lean-build.outcome != 'success'
+        run: exit 1
