@@ -16,6 +16,17 @@ lemma le_exp_of_log_le {u v : ℝ} (hu : 0 < u) (hlog : Real.log u ≤ v) :
   rw [← Real.exp_log hu]
   exact Real.exp_le_exp.mpr hlog
 
+/-- Positivity of the left list in a pointwise positive `Forall₂` relation. -/
+lemma list_prod_nonneg_of_forall₂
+    {u v : List ℝ}
+    (h : List.Forall₂ (fun x y => 0 < x ∧ Real.log x ≤ y) u v) :
+    0 ≤ u.prod := by
+  induction h with
+  | nil => simp
+  | @cons x y xs ys hxy hrest ih =>
+      simp only [List.prod_cons]
+      exact mul_nonneg hxy.1.le ih
+
 /-- Pointwise logarithmic bounds multiply to an exponential sum bound. -/
 theorem list_prod_le_exp_sum
     {u v : List ℝ}
@@ -26,12 +37,7 @@ theorem list_prod_le_exp_sum
   | @cons x y xs ys hxy hrest ih =>
       rcases hxy with ⟨hx, hlog⟩
       have hxe : x ≤ Real.exp y := le_exp_of_log_le hx hlog
-      have hprod : 0 ≤ xs.prod := by
-        induction hrest with
-        | nil => simp
-        | @cons a b as bs hab htail ihtail =>
-            simp only [List.prod_cons]
-            exact mul_nonneg hab.1.le ihtail
+      have hprod : 0 ≤ xs.prod := list_prod_nonneg_of_forall₂ hrest
       calc
         (x :: xs).prod = x * xs.prod := rfl
         _ ≤ Real.exp y * Real.exp ys.sum :=
