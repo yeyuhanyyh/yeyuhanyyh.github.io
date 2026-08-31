@@ -37,7 +37,9 @@ lemma hasDerivAt_phi {w x : ℝ} (hw : 0 < w) (hx : 0 < x) :
     field_simp [hx.ne', hsum]
     ring
   rw [hcoef] at hraw
-  simpa [phi] using hraw
+  change HasDerivAt (fun y : ℝ => (Real.log y - Real.log (w + y)) / 2)
+      (w / (2 * x * (w + x))) x
+  exact hraw
 
 lemma deriv_phi {w x : ℝ} (hw : 0 < w) (hx : 0 < x) :
     deriv (phi w) x = w / (2 * x * (w + x)) :=
