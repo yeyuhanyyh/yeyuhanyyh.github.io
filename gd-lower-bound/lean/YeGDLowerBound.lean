@@ -2,6 +2,7 @@ import GDLowerBound.Geometry.FunctionalAttainment
 import GDLowerBound.FunctionalReduction
 import GDLowerBound.RankProfile
 import GDLowerBound.KernelFactorization
+import YeGDLowerBound.Definitions
 
 /-!
 # Yuhan Ye's improved lower bound for predetermined gradient descent
