@@ -1,0 +1,20 @@
+name: Export GD Lean source
+
+on:
+  push:
+    branches: [lean-gd-lower-bound-formalization]
+    paths:
+      - '.github/workflows/gd-lower-bound-source-export.yml'
+  workflow_dispatch:
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/upload-artifact@v4
+        with:
+          name: gd-lower-bound-lean-source
+          path: gd-lower-bound/lean
+          include-hidden-files: true
+          if-no-files-found: error
