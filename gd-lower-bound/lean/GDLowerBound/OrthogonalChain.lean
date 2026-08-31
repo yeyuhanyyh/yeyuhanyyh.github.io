@@ -146,19 +146,31 @@ lemma blockResidual_eq (i : Fin m) (u : ℝ) :
       (d.ell i.castSucc / d.H i.castSucc) •
         ((d.H i.castSucc - u) • d.e i.castSucc +
           (u * d.gamma i) • d.e i.succ) := by
+  have hH : d.H i.castSucc ≠ 0 := ne_of_gt (d.H_pos i.castSucc)
+  have hell :
+      d.ell i.castSucc =
+        (d.ell i.castSucc / d.H i.castSucc) * d.H i.castSucc := by
+    field_simp [hH]
   simp only [blockResidual, blockPoint, anchor, grad_castSucc]
+  rw [hell]
   module
 
 lemma inner_grad_self_residual (i : Fin m) (u : ℝ) :
     inner ℝ (d.grad i.castSucc) (d.blockResidual i u) =
       d.ell i.castSucc ^ 2 / d.H i.castSucc ^ 2 *
         (d.H i.castSucc - u * (1 + d.gamma i ^ 2)) := by
+  have hne : i.castSucc ≠ i.succ := by
+    intro h
+    have hv := congrArg Fin.val h
+    omega
+  have hH : d.H i.castSucc ≠ 0 := ne_of_gt (d.H_pos i.castSucc)
   rw [d.blockResidual_eq]
   simp only [grad_castSucc, real_inner_smul_left, real_inner_smul_right,
     inner_sub_left, inner_add_right]
   rw [d.inner_e i.castSucc i.castSucc, d.inner_e i.castSucc i.succ,
     d.inner_e i.succ i.castSucc, d.inner_e i.succ i.succ]
-  simp
+  simp [hne, hne.symm]
+  field_simp [hH]
   ring
 
 end ChainData
