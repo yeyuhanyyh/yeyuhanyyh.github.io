@@ -95,6 +95,47 @@ lemma norm_proj_sub_sq_le_inner (x y : E) :
   rw [inner_self_eq_norm_sq_to_K] at hsum
   exact sub_nonneg.mp hsum
 
+/-- A point of the hull satisfying the projection variational inequality is the chosen projection. -/
+lemma proj_eq_of_variational {x p : E} (hp : p ∈ K.carrier)
+    (hvar : ∀ y ∈ K.carrier, inner ℝ (x - p) (y - p) ≤ 0) :
+    K.proj x = p := by
+  have h1 := K.proj_variational x p hp
+  have h2 := hvar (K.proj x) (K.proj_mem x)
+  have hsq : ‖K.proj x - p‖ ^ 2 ≤ 0 := by
+    rw [← inner_self_eq_norm_sq_to_K]
+    rw [inner_sub_left, inner_sub_right, inner_sub_left]
+    rw [inner_sub_left, inner_sub_right, inner_sub_left] at h1 h2
+    rw [real_inner_comm (K.proj x) x, real_inner_comm p x] at h1
+    rw [real_inner_comm x (K.proj x), real_inner_comm x p] at h2
+    linarith
+  have : ‖K.proj x - p‖ = 0 := by nlinarith [norm_nonneg (K.proj x - p)]
+  exact sub_eq_zero.mp (norm_eq_zero.mp this)
+
+/-- It suffices to check the variational inequality on the listed vertices. -/
+lemma proj_eq_of_vertex_inequalities {x p : E} (hp : p ∈ K.carrier)
+    (hvertices : ∀ g ∈ K.vertices, inner ℝ (x - p) (g - p) ≤ 0) :
+    K.proj x = p := by
+  let C : Set E := {g | inner ℝ (x - p) (g - p) ≤ 0}
+  have hCconvex : Convex ℝ C := by
+    intro a ha b hb u v hu hv huv
+    change inner ℝ (x - p) (u • a + v • b - p) ≤ 0
+    change inner ℝ (x - p) (a - p) ≤ 0 at ha
+    change inner ℝ (x - p) (b - p) ≤ 0 at hb
+    rw [show u • a + v • b - p = u • (a - p) + v • (b - p) by
+      rw [smul_sub, smul_sub, add_sub, sub_eq_add_neg]
+      module]
+    rw [inner_add_right, real_inner_smul_right, real_inner_smul_right]
+    exact add_nonpos (mul_nonpos_of_nonneg_of_nonpos hu ha)
+      (mul_nonpos_of_nonneg_of_nonpos hv hb)
+  have hsub : K.carrier ⊆ C := by
+    apply convexHull_min
+    · intro g hg
+      exact hvertices g hg
+    · exact hCconvex
+  apply K.proj_eq_of_variational hp
+  intro y hy
+  exact hsub hy
+
 /-- Projection onto a finite convex hull is nonexpansive. -/
 lemma norm_proj_sub_le (x y : E) : ‖K.proj x - K.proj y‖ ≤ ‖x - y‖ := by
   by_cases hxy : K.proj x = K.proj y
