@@ -80,7 +80,9 @@ lemma one_le_nat_mul_log_ratio {q : ℕ} (hq : 2 ≤ q) :
   have hmul := mul_le_mul_of_nonneg_left hlog hqR.le
   have hqinv : (q : ℝ) * (1 / q) = 1 := by
     field_simp [ne_of_gt hqR]
-  simpa [hqinv] using hmul
+  calc
+    (1 : ℝ) = (q : ℝ) * (1 / q) := hqinv.symm
+    _ ≤ (q : ℝ) * Real.log (1 + 1 / (q - 1 : ℕ)) := hmul
 
 /-- The bottom reference weight is at least `α`. -/
 lemma alpha_le_bottom_reference
@@ -94,15 +96,19 @@ lemma alpha_le_bottom_reference
   let L := Real.log ((q : ℝ) / (q - 1 : ℕ))
   have hexp : α * L + 1 ≤ Real.exp (α * L) := Real.add_one_le_exp _
   have hlog : (1 : ℝ) ≤ q * L := one_le_nat_mul_log_ratio hq
-  have hfirst0 := mul_le_mul_of_nonneg_left hlog hα
   have hfirst : α ≤ (q : ℝ) * (α * L) := by
-    convert hfirst0 using 1 <;> ring
+    calc
+      α = α * 1 := by ring
+      _ ≤ α * ((q : ℝ) * L) := mul_le_mul_of_nonneg_left hlog hα
+      _ = (q : ℝ) * (α * L) := by ring
   have hsecond0 : α * L ≤ Real.exp (α * L) - 1 := by linarith
   have hsecond := mul_le_mul_of_nonneg_left hsecond0 hqR.le
   calc
     α ≤ (q : ℝ) * (α * L) := hfirst
     _ ≤ (q : ℝ) * (Real.exp (α * L) - 1) := hsecond
-    _ = (q : ℝ) * (Real.exp (L * α) - 1) := by rw [mul_comm L α]
+    _ = (q : ℝ) * (Real.exp (Real.log ((q : ℝ) / (q - 1 : ℕ)) * α) - 1) := by
+      simp only [L]
+      rw [mul_comm α]
 
 /-- A generic finite telescoping identity. -/
 lemma sum_range_sub_telescope (b : ℕ → ℝ) (m k : ℕ) :
