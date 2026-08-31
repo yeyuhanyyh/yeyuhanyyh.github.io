@@ -24,6 +24,17 @@ jobs:
           export PATH="$HOME/.elan/bin:$PATH"
           lake update 2>&1 | tee lean-setup.log
           lake exe cache get 2>&1 | tee -a lean-setup.log
+      - name: Export reusable Lean runtime
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lean-runtime-v4.32.1
+          path: |
+            /home/runner/.elan/toolchains/leanprover--lean4---v4.32.1
+            gd-lower-bound/lean/.lake/packages
+            gd-lower-bound/lean/lake-manifest.json
+          compression-level: 0
+          if-no-files-found: error
       - name: Build Lean project
         working-directory: gd-lower-bound/lean
         run: |
