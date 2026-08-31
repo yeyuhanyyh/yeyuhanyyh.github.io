@@ -19,24 +19,23 @@ def phi (w x : ℝ) : ℝ := (Real.log x - Real.log (w + x)) / 2
 lemma hasDerivAt_phi {w x : ℝ} (hw : 0 < w) (hx : 0 < x) :
     HasDerivAt (phi w) (w / (2 * x * (w + x))) x := by
   have hsum : w + x ≠ 0 := ne_of_gt (add_pos hw hx)
-  have hadd0 := (hasDerivAt_const x w).add (hasDerivAt_id x)
-  have hadd : HasDerivAt (fun y : ℝ => w + y) 1 x := by
-    convert hadd0 using 1
-    · funext y
-      rfl
-    · norm_num
+  have hadd : HasDerivAt (fun y : ℝ => w + y) 1 x :=
+    (hasDerivAt_id x).const_add w
   have hlogx := Real.hasDerivAt_log hx.ne'
   have hlogsum := (Real.hasDerivAt_log hsum).comp x hadd
-  have hraw := (hlogx.sub hlogsum).div_const 2
-  have hfun :
-      (fun y : ℝ => ((Real.log - Real.log ∘ HAdd.hAdd w) y) / 2) = phi w := by
-    funext y
-    rfl
-  have hcoef : (x⁻¹ - (w + x)⁻¹ * 1) / 2 = w / (2 * x * (w + x)) := by
+  have hsub : HasDerivAt
+      (fun y : ℝ => Real.log y - Real.log (w + y))
+      (x⁻¹ - (w + x)⁻¹) x := by
+    exact hlogx.sub hlogsum
+  have hraw : HasDerivAt
+      (fun y : ℝ => (Real.log y - Real.log (w + y)) / 2)
+      ((x⁻¹ - (w + x)⁻¹) / 2) x :=
+    hsub.div_const 2
+  have hcoef : (x⁻¹ - (w + x)⁻¹) / 2 = w / (2 * x * (w + x)) := by
     field_simp [hx.ne', hsum]
     ring
-  rw [hfun, hcoef] at hraw
-  exact hraw
+  rw [hcoef] at hraw
+  simpa only [phi] using hraw
 
 lemma deriv_phi {w x : ℝ} (hw : 0 < w) (hx : 0 < x) :
     deriv (phi w) x = w / (2 * x * (w + x)) :=
