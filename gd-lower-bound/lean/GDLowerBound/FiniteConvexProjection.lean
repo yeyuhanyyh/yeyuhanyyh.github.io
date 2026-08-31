@@ -84,6 +84,8 @@ lemma proj_eq_of_variational {x p : E} (hp : p ∈ K.carrier)
     rw [← hid]
     linarith
   rw [inner_self_eq_norm_sq_to_K] at hinner
+  have hsquare : ‖K.proj x - p‖ ^ 2 = 0 :=
+    le_antisymm hinner (sq_nonneg _)
   have hnorm : ‖K.proj x - p‖ = 0 := by
     nlinarith [norm_nonneg (K.proj x - p)]
   exact sub_eq_zero.mp (norm_eq_zero.mp hnorm)
@@ -123,24 +125,25 @@ lemma proj_zero : K.proj 0 = 0 := by
 lemma norm_proj_sub_sq_le_inner (x y : E) :
     ‖K.proj x - K.proj y‖ ^ 2
       ≤ inner ℝ (K.proj x - K.proj y) (x - y) := by
-  have hx := K.proj_variational x (K.proj y) (K.proj_mem y)
-  have hy := K.proj_variational y (K.proj x) (K.proj_mem x)
-  have hid :
-      inner ℝ (x - K.proj x) (K.proj y - K.proj x) +
-          inner ℝ (y - K.proj y) (K.proj x - K.proj y)
-        = inner ℝ (K.proj x - K.proj y) (K.proj x - K.proj y) -
-          inner ℝ (K.proj x - K.proj y) (x - y) := by
-    simp only [inner_sub_left, inner_sub_right]
-    rw [real_inner_comm x (K.proj y), real_inner_comm y (K.proj x),
-      real_inner_comm (K.proj y) (K.proj x),
-      real_inner_comm (K.proj x) y]
-    ring
-  have hfirm :
-      inner ℝ (K.proj x - K.proj y) (K.proj x - K.proj y)
-        ≤ inner ℝ (K.proj x - K.proj y) (x - y) := by
-    rw [← sub_nonpos, ← hid]
+  let d := K.proj x - K.proj y
+  have hx0 := K.proj_variational x (K.proj y) (K.proj_mem y)
+  have hy0 := K.proj_variational y (K.proj x) (K.proj_mem x)
+  have hx : 0 ≤ inner ℝ d (x - K.proj x) := by
+    have : inner ℝ (x - K.proj x) (-d) ≤ 0 := by simpa [d] using hx0
+    rw [real_inner_comm, inner_neg_left] at this
     linarith
-  simpa [inner_self_eq_norm_sq_to_K] using hfirm
+  have hy : 0 ≤ inner ℝ d (K.proj y - y) := by
+    have : inner ℝ (y - K.proj y) d ≤ 0 := by simpa [d] using hy0
+    rw [real_inner_comm] at this
+    have hneg : K.proj y - y = -(y - K.proj y) := by module
+    rw [hneg, inner_neg_right]
+    linarith
+  have hdecomp : x - y = (x - K.proj x) + d + (K.proj y - y) := by
+    simp [d]
+    module
+  rw [hdecomp, inner_add_right, inner_add_right]
+  rw [show inner ℝ d d = ‖d‖ ^ 2 by simp [inner_self_eq_norm_sq_to_K]]
+  linarith
 
 /-- Projection onto a finite convex hull is nonexpansive. -/
 lemma norm_proj_sub_le (x y : E) : ‖K.proj x - K.proj y‖ ≤ ‖x - y‖ := by
@@ -169,11 +172,10 @@ lemma affineValue_le_envelope {g : E} (hg : g ∈ K.carrier) (x : E) :
       affineValue g x - affineValue (K.proj x) x
         = inner ℝ (x - K.proj x) (g - K.proj x)
           - (1 / 2 : ℝ) * ‖g - K.proj x‖ ^ 2 := by
-    simp only [affineValue]
-    rw [real_inner_comm g x, real_inner_comm (K.proj x) x]
-    rw [inner_sub_left, inner_sub_right, inner_sub_left]
-    rw [inner_self_eq_norm_sq_to_K]
+    simp only [affineValue, inner_sub_left, inner_sub_right]
     rw [norm_sub_sq_real]
+    rw [real_inner_comm x g, real_inner_comm x (K.proj x),
+      real_inner_comm (K.proj x) g]
     ring
   rw [envelope, ← sub_nonpos, hid]
   nlinarith [sq_nonneg ‖g - K.proj x‖]
@@ -189,7 +191,7 @@ lemma envelope_zero : K.envelope 0 = 0 := by
 lemma envelope_eq_norm_sub_dist (x : E) :
     K.envelope x = (1 / 2 : ℝ) * ‖x‖ ^ 2 - (1 / 2 : ℝ) * ‖x - K.proj x‖ ^ 2 := by
   simp only [envelope, affineValue]
-  rw [norm_sub_sq_real]
+  rw [norm_sub_sq_real, real_inner_comm x (K.proj x)]
   ring
 
 /-- The projection, hence the gradient once differentiability is established, is one-Lipschitz. -/
