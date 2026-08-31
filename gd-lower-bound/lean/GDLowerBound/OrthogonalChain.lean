@@ -25,7 +25,7 @@ namespace ChainData
 
 variable {m : ℕ} (d : ChainData m)
 
-abbrev Space := EuclideanSpace ℝ (Fin (m + 1))
+abbrev Space (_d : ChainData m) := EuclideanSpace ℝ (Fin (m + 1))
 
 /-- Standard orthonormal coordinate vector. -/
 def e (i : Fin (m + 1)) : d.Space := EuclideanSpace.single i 1
@@ -48,8 +48,10 @@ def H (i : Fin (m + 1)) : ℝ :=
 
 lemma H_pos (i : Fin (m + 1)) : 0 < d.H i := by
   by_cases h : i.1 < m
-  · simp [H, h, d.U_pos ⟨i.1, h⟩, d.y_pos ⟨i.1, h⟩]
-  · simp [H, h, d.terminal_pos]
+  · rw [H, dif_pos h]
+    exact add_pos (d.U_pos ⟨i.1, h⟩) (d.y_pos ⟨i.1, h⟩)
+  · rw [H, dif_neg h]
+    exact d.terminal_pos
 
 /-- The local contraction factor `χ_i`. -/
 def chi (i : Fin m) : ℝ :=
@@ -57,8 +59,10 @@ def chi (i : Fin m) : ℝ :=
     (d.U i * (d.H i.castSucc + d.H i.succ))
 
 lemma chi_pos (i : Fin m) : 0 < d.chi i := by
-  unfold chi
-  positivity
+  rw [chi]
+  exact div_pos
+    (mul_pos (d.y_pos i) (d.H_pos i.succ))
+    (mul_pos (d.U_pos i) (add_pos (d.H_pos i.castSucc) (d.H_pos i.succ)))
 
 /-- Square-root contraction factor. -/
 def gamma (i : Fin m) : ℝ := Real.sqrt (d.chi i)
@@ -78,16 +82,17 @@ def ell (i : Fin (m + 1)) : ℝ := ∏ j ∈ Finset.range i.1, d.gammaNat j
 @[simp] lemma ell_zero : d.ell ⟨0, Nat.zero_lt_succ m⟩ = 1 := by simp [ell]
 
 lemma ell_succ (i : Fin m) : d.ell i.succ = d.ell i.castSucc * d.gamma i := by
-  rw [ell, ell, Finset.prod_range_succ]
+  change (∏ j ∈ Finset.range (i.1 + 1), d.gammaNat j) =
+    (∏ j ∈ Finset.range i.1, d.gammaNat j) * d.gamma i
+  rw [Finset.prod_range_succ]
   simp [gammaNat, i.isLt]
 
 lemma ell_pos (i : Fin (m + 1)) : 0 < d.ell i := by
   unfold ell
   apply Finset.prod_pos
   intro j hj
-  have hjm : j < m := by
-    have hji : j < i.1 := Finset.mem_range.mp hj
-    omega
+  have hji : j < i.1 := Finset.mem_range.mp hj
+  have hjm : j < m := lt_of_lt_of_le hji (Nat.le_of_lt_succ i.isLt)
   simp [gammaNat, hjm, d.gamma_pos ⟨j, hjm⟩]
 
 /-- Orthogonal anchor `X_i=ℓ_i e_i`. -/
@@ -143,16 +148,14 @@ lemma blockResidual_eq (i : Fin m) (u : ℝ) :
           (u * d.gamma i) • d.e i.succ) := by
   simp only [blockResidual, blockPoint, anchor, grad_castSucc]
   module
-  ring
 
 lemma inner_grad_self_residual (i : Fin m) (u : ℝ) :
     inner ℝ (d.grad i.castSucc) (d.blockResidual i u) =
       d.ell i.castSucc ^ 2 / d.H i.castSucc ^ 2 *
         (d.H i.castSucc - u * (1 + d.gamma i ^ 2)) := by
   rw [d.blockResidual_eq]
-  simp only [grad_castSucc, inner_smul_left, inner_smul_right, map_div₀,
-    map_ofNat, map_one, starRingEnd_apply, star_trivial, inner_sub_left,
-    inner_add_right, real_inner_smul_left, real_inner_smul_right]
+  simp only [grad_castSucc, real_inner_smul_left, real_inner_smul_right,
+    inner_sub_left, inner_add_right]
   rw [d.inner_e i.castSucc i.castSucc, d.inner_e i.castSucc i.succ,
     d.inner_e i.succ i.castSucc, d.inner_e i.succ i.succ]
   simp
