@@ -28,14 +28,12 @@ lemma convex_envelope : ConvexOn ℝ Set.univ K.envelope := by
   have hid :
       K.envelope (a • x + b • y)
         = a * affineValue p x + b * affineValue p y := by
-    simp only [envelope, p, affineValue, inner_add_right, real_inner_smul_right,
-      norm_smul]
-    rw [abs_of_nonneg ha, abs_of_nonneg hb]
+    simp only [envelope, p, affineValue, inner_add_right, real_inner_smul_right]
     nlinarith [hab]
   rw [hid]
-  have hx' := K.affineValue_le_envelope hp x
-  have hy' := K.affineValue_le_envelope hp y
-  nlinarith
+  have hx' := mul_le_mul_of_nonneg_left (K.affineValue_le_envelope hp x) ha
+  have hy' := mul_le_mul_of_nonneg_left (K.affineValue_le_envelope hp y) hb
+  simpa [smul_eq_mul] using add_le_add hx' hy'
 
 /-- Quadratic first-order error estimate for the support envelope. -/
 lemma envelope_first_order_error (x h : E) :
@@ -88,7 +86,7 @@ lemma hasGradientAt_envelope (x : E) : HasGradientAt K.envelope (K.proj x) x := 
   · have hsub : Tendsto (fun y : E => y - x) (𝓝 x) (𝓝 0) := by
       simpa using (tendsto_id.sub tendsto_const_nhds :
         Tendsto (fun y : E => y - x) (𝓝 x) (𝓝 (x - x)))
-    exact (tendsto_norm_zero.comp hsub)
+    exact tendsto_norm_zero.comp hsub
 
 lemma differentiable_envelope : Differentiable ℝ K.envelope :=
   fun x => (K.hasGradientAt_envelope x).differentiableAt
