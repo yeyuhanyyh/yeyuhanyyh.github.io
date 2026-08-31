@@ -1,5 +1,6 @@
 import GDLowerBound.Smoke
 import GDLowerBound.FiniteConvexProjection
+import GDLowerBound.SupportEnvelopeSmooth
 import GDLowerBound.RankProfile
 import GDLowerBound.KernelFactorization
 import GDLowerBound.OrthogonalChain
