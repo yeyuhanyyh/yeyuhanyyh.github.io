@@ -1,7 +1,7 @@
 import GDLowerBound.Geometry.FunctionalAttainment
 import GDLowerBound.FunctionalReduction
-import GDLowerBound.RankProfile
-import GDLowerBound.KernelFactorization
+import YeGDLowerBound.RankProfile
+import YeGDLowerBound.KernelFactorization
 import YeGDLowerBound.Definitions
 import YeGDLowerBound.MinRank
 
