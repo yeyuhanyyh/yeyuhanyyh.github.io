@@ -17,5 +17,6 @@ import YeGDLowerBound.ProductAlgebra
 
 This library extends the pinned Ma--Chen end-to-end hard-instance formalization.
 All new sequence, envelope, matching, integral, and numerical arguments are
-proved in the `YeGDLowerBound` modules imported below.
+proved in the `YeGDLowerBound` modules imported below.  The root module is kept
+as the build target so every imported theorem is checked together.
 -/
