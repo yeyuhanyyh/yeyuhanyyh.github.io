@@ -13,9 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Restore Lean and Mathlib package cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.elan
+            gd-lower-bound/lean/.lake/packages
+          key: gd-lower-bound-lean-v4.32.2-mathlib-v4.32.2-v1
       - name: Install elan
         run: |
-          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+          if [ ! -x "$HOME/.elan/bin/elan" ]; then
+            curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+          fi
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
       - name: Update dependencies and fetch Mathlib cache
         id: setup
