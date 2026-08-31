@@ -1,0 +1,28 @@
+name: GD lower-bound Lean formalization
+
+on:
+  push:
+    branches: [lean-gd-lower-bound-formalization]
+    paths:
+      - 'gd-lower-bound/lean/**'
+      - '.github/workflows/gd-lower-bound-lean.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: gd-lower-bound/lean
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          build: true
+          use-github-cache: true
+      - name: Reject placeholders and custom axioms
+        run: |
+          if grep -RInE '\b(sorry|admit)\b|^[[:space:]]*(axiom|constant)[[:space:]]' GDLowerBound GDLowerBound.lean; then
+            echo 'Found an unproved placeholder or custom axiom.'
+            exit 1
+          fi
