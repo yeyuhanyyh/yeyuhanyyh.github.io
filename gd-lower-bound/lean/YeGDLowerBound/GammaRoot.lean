@@ -29,7 +29,7 @@ lemma optA_strictMono {w : ℝ} (hw : 0 < w) :
 lemma rootEq_continuousAt {lam w z tau : ℝ}
     (hw : 0 < w) (hz : 0 < z) (ht : 0 < tau) :
     ContinuousAt (rootEq lam w z) tau := by
-  have htwo : (2 * tau : ℝ) ≠ 0 := by positivity
+  have htwo : (2 * tau : ℝ) ≠ 0 := by nlinarith
   have hsum : optA w tau + optA z tau ≠ 0 :=
     ne_of_gt (add_pos (optA_pos hw ht) (optA_pos hz ht))
   have hden1 : ContinuousAt (fun t : ℝ => 2 * t) tau :=
@@ -50,8 +50,8 @@ lemma rootEq_continuousOn {lam w z : ℝ} (hw : 0 < w) (hz : 0 < z) :
 lemma rootEq_strictAnti {lam w z : ℝ} (hw : 0 < w) (hz : 0 < z) :
     StrictAntiOn (rootEq lam w z) (Set.Ioi 0) := by
   intro a ha b hb hab
-  have h2a : 0 < 2 * a := by positivity
-  have h2b : 0 < 2 * b := by positivity
+  have h2a : 0 < 2 * a := by nlinarith
+  have h2b : 0 < 2 * b := by nlinarith
   have hfirst : 1 / (2 * b) < 1 / (2 * a) := by
     rw [div_lt_div_iff₀ h2b h2a]
     nlinarith
@@ -77,12 +77,13 @@ def rootHi (lam w : ℝ) : ℝ := 2 / lam + 16 / (lam ^ 2 * w)
 
 lemma rootLo_pos {lam : ℝ} (hlam : 0 < lam) : 0 < rootLo lam := by
   unfold rootLo
-  positivity
+  exact one_div_pos.mpr (mul_pos (by norm_num) hlam)
 
 lemma rootHi_pos {lam w : ℝ} (hlam : 0 < lam) (hw : 0 < w) :
     0 < rootHi lam w := by
   unfold rootHi
-  positivity
+  exact add_pos (div_pos (by norm_num) hlam)
+    (div_pos (by norm_num) (mul_pos (sq_pos_of_pos hlam) hw))
 
 lemma sqrt_mul_le_optA {w tau : ℝ} (hw : 0 < w) (ht : 0 < tau) :
     Real.sqrt (w * tau) ≤ optA w tau := by
@@ -108,22 +109,31 @@ lemma rootEq_rootLo_pos {lam w z : ℝ}
   have hfirst : 1 / (2 * rootLo lam) = lam := by
     unfold rootLo
     field_simp [hlam.ne']
+  have hrecip : 0 < 1 / (optA w (rootLo lam) + optA z (rootLo lam)) :=
+    one_div_pos.mpr hsum
   unfold rootEq
   rw [hfirst]
-  positivity
+  linarith
 
 lemma four_div_le_sqrt_at_rootHi {lam w : ℝ}
     (hlam : 0 < lam) (hw : 0 < w) :
     4 / lam ≤ Real.sqrt (w * rootHi lam w) := by
   have hhi := rootHi_pos hlam hw
-  have hleft : 0 ≤ 4 / lam := by positivity
+  have hleft : 0 ≤ 4 / lam := (div_pos (by norm_num) hlam).le
   have hright : 0 ≤ w * rootHi lam w := mul_nonneg hw.le hhi.le
   rw [Real.le_sqrt hleft hright]
-  unfold rootHi
-  have hw0 := hw.ne'
-  have hl0 := hlam.ne'
-  field_simp [hw0, hl0]
-  nlinarith [mul_pos hw hlam]
+  have hsquare : (4 / lam) ^ 2 = 16 / lam ^ 2 := by
+    field_simp [hlam.ne']
+    ring
+  rw [hsquare]
+  have heq :
+      w * rootHi lam w = 2 * w / lam + 16 / lam ^ 2 := by
+    unfold rootHi
+    field_simp [hlam.ne', hw.ne']
+    ring
+  rw [heq]
+  have hnonneg : 0 ≤ 2 * w / lam := (div_pos (mul_pos (by norm_num) hw) hlam).le
+  linarith
 
 lemma rootEq_rootHi_neg {lam w z : ℝ}
     (hlam : 0 < lam) (hw : 0 < w) (hz : 0 < z) :
@@ -134,17 +144,21 @@ lemma rootEq_rootHi_neg {lam w z : ℝ}
     (four_div_le_sqrt_at_rootHi hlam hw).trans (sqrt_mul_le_optA hw hhi)
   have hAz : 0 < optA z hi := optA_pos hz hhi
   have hsum : 0 < optA w hi + optA z hi := add_pos (optA_pos hw hhi) hAz
+  have hterm : 0 < 16 / (lam ^ 2 * w) :=
+    div_pos (by norm_num) (mul_pos (sq_pos_of_pos hlam) hw)
   have hhiLower : 2 / lam < hi := by
     unfold hi rootHi
-    positivity
+    linarith
   have hmulLower := mul_lt_mul_of_pos_left hhiLower hlam
+  have hbase : lam * (2 / lam) = 2 := by field_simp [hlam.ne']
+  rw [hbase] at hmulLower
   have hfirst : 1 / (2 * hi) < lam / 4 := by
     rw [div_lt_div_iff₀ (mul_pos (by norm_num) hhi) (by norm_num : (0 : ℝ) < 4)]
     nlinarith
   have hAwMul := mul_le_mul_of_nonneg_left hAw hlam.le
+  have hAwEq : lam * (4 / lam) = 4 := by field_simp [hlam.ne']
+  rw [hAwEq] at hAwMul
   have hfour : 4 ≤ lam * (optA w hi + optA z hi) := by
-    have hAwEq : lam * (4 / lam) = 4 := by field_simp [hlam.ne']
-    rw [hAwEq] at hAwMul
     nlinarith [mul_pos hlam hAz]
   have hsecond : 1 / (optA w hi + optA z hi) ≤ lam / 4 := by
     rw [div_le_div_iff₀ hsum (by norm_num : (0 : ℝ) < 4)]
@@ -161,9 +175,14 @@ theorem exists_unique_rootEq {lam w z : ℝ}
   let hi := rootHi lam w
   have hlo : 0 < lo := rootLo_pos hlam
   have hhi : 0 < hi := rootHi_pos hlam hw
+  have hterm : 0 < 16 / (lam ^ 2 * w) :=
+    div_pos (by norm_num) (mul_pos (sq_pos_of_pos hlam) hw)
   have hlohi : lo ≤ hi := by
     unfold lo hi rootLo rootHi
-    positivity
+    have hhalf : 1 / (2 * lam) ≤ 2 / lam := by
+      rw [div_le_div_iff₀ (mul_pos (by norm_num) hlam) hlam]
+      nlinarith
+    linarith
   have hcont : ContinuousOn (rootEq lam w z) (Set.Icc lo hi) :=
     (rootEq_continuousOn hw hz).mono fun tau ht => lt_of_lt_of_le hlo ht.1
   have hlow := rootEq_rootLo_pos hlam hw hz
