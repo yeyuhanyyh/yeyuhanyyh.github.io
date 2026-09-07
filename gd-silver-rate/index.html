@@ -87,6 +87,7 @@
     .rate-figure-scroll { overflow-x: auto; padding-bottom: .25rem; }
     .rate-figure-canvas { min-width: 940px; }
     .rate-figure img { display: block; width: 100%; height: auto; background: var(--paper); }
+    .rate-figure object { display: block; width: 100%; height: auto; aspect-ratio: 1400 / 570; background: var(--paper); }
     figcaption { margin: .55rem auto 0; max-width: 920px; color: var(--muted); font-size: .9rem; line-height: 1.5; }
     .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
     .citation-block { overflow-x: auto; padding: 1rem 1.15rem; border: 1px solid #ddd3c8; border-radius: 6px; background: #faf7f1; font-size: .9rem; line-height: 1.45; white-space: pre; }
@@ -122,7 +123,7 @@
 <main>
 <article>
   <h1>The Silver Rate Is Tight</h1>
-  <p class="deck">The silver exponents are optimal for both non-anytime and anytime gradient descent.</p>
+  <p class="deck">The silver exponents are optimal for gradient descent with predetermined nonnegative stepsizes, in both the non-anytime and anytime settings.</p>
   <p class="byline"><a href="https://yeyuhanyyh.github.io/">Yuhan Ye</a> · based on discussions with Kaizhao Liu · <time datetime="2026-09-07T17:50:00-04:00">September 7, 2026, 17:50 (GMT-4)</time></p>
 
   <p class="lede">
@@ -164,7 +165,9 @@
   <figure class="rate-figure" id="figure-progress">
     <div class="rate-figure-scroll" tabindex="0" role="region" aria-label="Lower and upper bounds for non-anytime and anytime gradient descent" aria-describedby="caption-progress">
       <div class="rate-figure-canvas">
-        <img src="assets/non-anytime-progress.svg" width="1400" height="570" alt="Two aligned exponent tracks show lower and upper bounds for non-anytime and anytime gradient descent. The new polynomial-exponent lower bounds meet the known silver upper bounds.">
+        <object data="assets/non-anytime-progress.svg" type="image/svg+xml" width="1400" height="570" aria-label="Lower and upper bounds for non-anytime and anytime gradient descent. Author names link to the corresponding papers or blog posts.">
+          <img src="assets/non-anytime-progress.svg" width="1400" height="570" alt="Two aligned exponent tracks show lower and upper bounds for non-anytime and anytime gradient descent. The new polynomial-exponent lower bounds meet the known silver upper bounds.">
+        </object>
       </div>
     </div>
     <figcaption id="caption-progress">
@@ -1433,7 +1436,8 @@
     \(x_{i+1}\) as the remaining amplitude passes from \(x_i\) to \(x_{i+1}\).
     I shared this intuition with ChatGPT-6 Astra. Through several rounds of substantive interaction and detailed calculations by ChatGPT-6 Astra Ultra,
     we designed a smooth convex hard function whose local gradient rotates along a circular arc and whose gap coefficient approaches \(1\).
-    Combining this construction with the global argument gave the present result.
+    Combining this construction with a refinement of
+    <a href="https://arxiv.org/html/2609.04032v2#S3">Jung et al.'s recursive analysis</a> gave the present result.
     An arXiv preprint will follow soon, with a more intuitive explanation of the hard-function construction and an account of how our intuition guided the interactions with AI.
   </p>
 </article>

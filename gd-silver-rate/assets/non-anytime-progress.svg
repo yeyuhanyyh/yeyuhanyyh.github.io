@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="570" viewBox="0 0 1400 570" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="570" viewBox="0 0 1400 570" role="group" aria-labelledby="title desc">
   <title id="title">Lower and upper bound exponents for non-anytime and anytime gradient descent</title>
-  <desc id="desc">Two aligned exponent tracks summarize recent progress. On the non-anytime track, the new lower-bound exponent reaches the silver exponent p sil, where the silver-schedule upper-bound segment begins. On the anytime track, the new lower-bound exponent reaches p any, where the best known anytime upper-bound segment begins. Open orange endpoints indicate agreement of polynomial exponents without asserting an exact endpoint lower bound.</desc>
+  <desc id="desc">Two aligned exponent tracks summarize recent progress. On the non-anytime track, the new lower-bound exponent reaches the silver exponent p sil, where the silver-schedule upper-bound segment begins. On the anytime track, the new lower-bound exponent reaches p any, where the best known anytime upper-bound segment begins. Open purple endpoints indicate agreement of polynomial exponents without asserting an exact endpoint lower bound. Author names link to the corresponding papers or blog posts.</desc>
 
   <defs>
     <style>
@@ -70,6 +70,9 @@
         font-weight: 700;
         text-anchor: middle;
       }
+      a { cursor: pointer; }
+      a:hover .name, a:focus-visible .name { text-decoration: underline; }
+      a:focus-visible { outline: 2px solid #7b3f1d; outline-offset: 3px; }
       .name.lower-a,
       .name.lower-b,
       .name.lower-c,
@@ -121,14 +124,38 @@
   <line class="segment upper-b" x1="1220" y1="205" x2="1340" y2="205"/>
   <circle cx="953.9" cy="205" r="9" fill="#fffdf8" stroke="#6f3f8f" stroke-width="5"/>
 
-  <text class="name lower-a" x="145" y="172"><tspan x="145">Nemirovsky &amp; Yudin</tspan><tspan x="145" dy="24">(1983)</tspan></text>
-  <text class="name lower-b" x="273.3" y="139"><tspan x="273.3">Ma &amp; Chen</tspan><tspan x="273.3" dy="24">(2026)</tspan></text>
-  <text class="name lower-c" x="404.7" y="172"><tspan x="404.7">Tsai</tspan><tspan x="404.7" dy="24">(2026)</tspan></text>
-  <text class="name lower-d" x="550.6" y="139"><tspan x="550.6">Ye &amp; Liu</tspan><tspan x="550.6" dy="24">(2026)</tspan></text>
-  <text class="name lower-e" x="688.8" y="172"><tspan x="688.8">Jung et al.</tspan><tspan x="688.8" dy="24">(2026)</tspan></text>
-  <text class="name work" x="866.4" y="166">This post</text>
-  <text class="name upper-a" x="1086.9" y="172"><tspan x="1086.9">Altschuler &amp; Parrilo</tspan><tspan x="1086.9" dy="24">(2024)</tspan></text>
-  <text class="name upper-b" x="1285" y="172"><tspan x="1285">Levitin &amp; Polyak</tspan><tspan x="1285" dy="24">(1966)</tspan></text>
+  <a href="https://www2.isye.gatech.edu/~nemirovs/Nemirovskii_Yudin_1983.pdf" target="_blank" rel="noopener noreferrer" aria-label="Nemirovsky and Yudin, Problem Complexity and Method Efficiency in Optimization, 1983">
+    <title>Nemirovsky and Yudin (1983) — book</title>
+    <text class="name lower-a" x="145" y="172"><tspan x="145">Nemirovsky &amp; Yudin</tspan><tspan x="145" dy="24">(1983)</tspan></text>
+  </a>
+  <a href="https://arxiv.org/abs/2608.10418" target="_blank" rel="noopener noreferrer" aria-label="Ma and Chen, non-anytime lower-bound paper, 2026">
+    <title>Ma and Chen (2026) — paper</title>
+    <text class="name lower-b" x="273.3" y="139"><tspan x="273.3">Ma &amp; Chen</tspan><tspan x="273.3" dy="24">(2026)</tspan></text>
+  </a>
+  <a href="https://chungentsai.github.io/gd-lower-bounds.html" target="_blank" rel="noopener noreferrer" aria-label="Tsai, non-anytime lower-bound blog, 2026">
+    <title>Tsai (2026) — blog</title>
+    <text class="name lower-c" x="404.7" y="172"><tspan x="404.7">Tsai</tspan><tspan x="404.7" dy="24">(2026)</tspan></text>
+  </a>
+  <a href="https://yeyuhanyyh.github.io/gd-lower-bound/" target="_blank" rel="noopener noreferrer" aria-label="Ye and Liu, non-anytime lower-bound blog, 2026">
+    <title>Ye and Liu (2026) — non-anytime blog</title>
+    <text class="name lower-d" x="550.6" y="139"><tspan x="550.6">Ye &amp; Liu</tspan><tspan x="550.6" dy="24">(2026)</tspan></text>
+  </a>
+  <a href="https://arxiv.org/abs/2609.04032" target="_blank" rel="noopener noreferrer" aria-label="Jung et al., Stronger Lower Bounds for (Non-)Anytime Acceleration of Gradient Descent, 2026">
+    <title>Jung et al. (2026) — paper</title>
+    <text class="name lower-e" x="688.8" y="172"><tspan x="688.8">Jung et al.</tspan><tspan x="688.8" dy="24">(2026)</tspan></text>
+  </a>
+  <a href="../#theorem-main" target="_top" aria-label="This post, Theorem 1: non-anytime lower bound">
+    <title>This post — Theorem 1</title>
+    <text class="name work" x="866.4" y="166">This post</text>
+  </a>
+  <a href="https://link.springer.com/article/10.1007/s10107-024-02164-2" target="_blank" rel="noopener noreferrer" aria-label="Altschuler and Parrilo, Acceleration by Stepsize Hedging: Silver Stepsize Schedule for Smooth Convex Optimization">
+    <title>Altschuler and Parrilo — silver stepsize paper</title>
+    <text class="name upper-a" x="1086.9" y="172"><tspan x="1086.9">Altschuler &amp; Parrilo</tspan><tspan x="1086.9" dy="24">(2024)</tspan></text>
+  </a>
+  <a href="https://doi.org/10.1016/0041-5553(66)90114-5" target="_blank" rel="noopener noreferrer" aria-label="Levitin and Polyak, Constrained Minimization Methods, 1966">
+    <title>Levitin and Polyak (1966) — paper</title>
+    <text class="name upper-b" x="1285" y="172"><tspan x="1285">Levitin &amp; Polyak</tspan><tspan x="1285" dy="24">(1966)</tspan></text>
+  </a>
   <text class="row-label" x="720" y="251">Non-anytime</text>
 
   <text class="side-label" x="65" y="288">Lower bound</text>
@@ -146,13 +173,34 @@
   <line class="segment upper-b" x1="1220" y1="346" x2="1340" y2="346"/>
   <circle cx="1102.85" cy="346" r="9" fill="#fffdf8" stroke="#6f3f8f" stroke-width="5"/>
 
-  <text class="name lower-a" x="145" y="374"><tspan x="145">Nemirovsky &amp; Yudin</tspan><tspan x="145" dy="24">(1983)</tspan></text>
-  <text class="name lower-b" x="566.7" y="374"><tspan x="566.7">Tsai et al.</tspan><tspan x="566.7" dy="24">(2026)</tspan></text>
-  <text class="name lower-d" x="938.7" y="374"><tspan x="938.7">Ye &amp; Liu</tspan><tspan x="938.7" dy="24">(2026)</tspan></text>
-  <text class="name lower-e" x="1012" y="309"><tspan x="1012">Jung et al.</tspan><tspan x="1012" dy="24">(2026)</tspan></text>
-  <text class="name work" x="1071.4" y="280">This post</text>
-  <text class="name upper-a" x="1161.4" y="309"><tspan x="1161.4">Zhang et al.</tspan><tspan x="1161.4" dy="24">(2025)</tspan></text>
-  <text class="name upper-b" x="1285" y="374"><tspan x="1285">Levitin &amp; Polyak</tspan><tspan x="1285" dy="24">(1966)</tspan></text>
+  <a href="https://www2.isye.gatech.edu/~nemirovs/Nemirovskii_Yudin_1983.pdf" target="_blank" rel="noopener noreferrer" aria-label="Nemirovsky and Yudin, Problem Complexity and Method Efficiency in Optimization, 1983">
+    <title>Nemirovsky and Yudin (1983) — book</title>
+    <text class="name lower-a" x="145" y="374"><tspan x="145">Nemirovsky &amp; Yudin</tspan><tspan x="145" dy="24">(1983)</tspan></text>
+  </a>
+  <a href="https://arxiv.org/html/2607.02053v1#S1.Thmtheorem1" target="_blank" rel="noopener noreferrer" aria-label="Tsai et al., anytime lower-bound paper, 2026">
+    <title>Tsai et al. (2026) — anytime paper</title>
+    <text class="name lower-b" x="566.7" y="374"><tspan x="566.7">Tsai et al.</tspan><tspan x="566.7" dy="24">(2026)</tspan></text>
+  </a>
+  <a href="https://yeyuhanyyh.github.io/gd-anytime-lower-bound/" target="_blank" rel="noopener noreferrer" aria-label="Ye and Liu, anytime lower-bound blog, 2026">
+    <title>Ye and Liu (2026) — anytime blog</title>
+    <text class="name lower-d" x="938.7" y="374"><tspan x="938.7">Ye &amp; Liu</tspan><tspan x="938.7" dy="24">(2026)</tspan></text>
+  </a>
+  <a href="https://arxiv.org/abs/2609.04032" target="_blank" rel="noopener noreferrer" aria-label="Jung et al., Stronger Lower Bounds for (Non-)Anytime Acceleration of Gradient Descent, 2026">
+    <title>Jung et al. (2026) — paper</title>
+    <text class="name lower-e" x="1012" y="309"><tspan x="1012">Jung et al.</tspan><tspan x="1012" dy="24">(2026)</tspan></text>
+  </a>
+  <a href="../#theorem-anytime" target="_top" aria-label="This post, Theorem 2: anytime lower bound">
+    <title>This post — Theorem 2</title>
+    <text class="name work" x="1071.4" y="280">This post</text>
+  </a>
+  <a href="https://proceedings.mlr.press/v291/zhang25a.html" target="_blank" rel="noopener noreferrer" aria-label="Zhang et al., Anytime Acceleration of Gradient Descent, 2025">
+    <title>Zhang et al. (2025) — anytime upper-bound paper</title>
+    <text class="name upper-a" x="1161.4" y="309"><tspan x="1161.4">Zhang et al.</tspan><tspan x="1161.4" dy="24">(2025)</tspan></text>
+  </a>
+  <a href="https://doi.org/10.1016/0041-5553(66)90114-5" target="_blank" rel="noopener noreferrer" aria-label="Levitin and Polyak, Constrained Minimization Methods, 1966">
+    <title>Levitin and Polyak (1966) — paper</title>
+    <text class="name upper-b" x="1285" y="374"><tspan x="1285">Levitin &amp; Polyak</tspan><tspan x="1285" dy="24">(1966)</tspan></text>
+  </a>
 
   <!-- Anytime exponent labels. -->
   <line class="guide" x1="240" y1="352" x2="240" y2="444"/>
