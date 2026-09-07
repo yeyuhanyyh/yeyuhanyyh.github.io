@@ -129,7 +129,7 @@
 
   <p class="lede">
     Silver stepsizes accelerate gradient descent beyond the classical \(O(1/n)\) rate using stepsizes alone.
-    In this post, I show that no predetermined nonnegative stepsize schedule can improve on the silver polynomial convergence exponent.
+    In this post, we show that no predetermined nonnegative stepsize schedule can improve on the silver polynomial convergence exponent.
     This result was developed through nontrivial interactions with ChatGPT 6 Astra Ultra (see <a href="#ai-disclosure">AI Disclosure</a>).
     An arXiv preprint with a more intuitive explanation will follow soon.
   </p>
@@ -151,8 +151,8 @@
     Recent lower bounds have moved rapidly toward the silver exponent.
     <a href="https://arxiv.org/abs/2608.10418">Ma and Chen</a> obtained \(\Omega(n^{-1.932})\),
     <a href="https://chungentsai.github.io/gd-lower-bounds.html">Tsai</a> improved the exponent to \(1.7321\),
-    and in <a href="https://yeyuhanyyh.github.io/gd-lower-bound/">my first blog post</a>,
-    I presented the \(\Omega(n^{-1.6342})\) result that Kaizhao Liu and I obtained in
+    and in <a href="https://yeyuhanyyh.github.io/gd-lower-bound/">Yuhan's first blog post</a>,
+    he presented the \(\Omega(n^{-1.6342})\) result from
     <a href="https://arxiv.org/abs/2609.02855">our accompanying paper</a>.
     <a href="https://arxiv.org/abs/2609.04032">Jung et al.</a> then introduced a new checkpoint construction
     and reached \(\Omega(n^{-\log_2(1+\sqrt3)})=\Omega(n^{-1.4500})\).
@@ -1428,7 +1428,7 @@
 }</code></pre>
 
   <p class="fine-print" id="ai-disclosure">
-    <strong>AI Disclosure.</strong> I carefully read
+    <strong>AI Disclosure.</strong> I (Yuhan Ye) carefully read
     <a href="https://arxiv.org/abs/2609.04032">Jung et al.'s paper</a>
     and traced the difference between their exponent \(\log_2(1+\sqrt3)\) and the silver exponent \(\log_2(1+\sqrt2)\)
     to the factor \(2\) in their local transfer estimate. Their local Huber component has a fixed gradient direction.
