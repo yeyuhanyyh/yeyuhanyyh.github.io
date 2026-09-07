@@ -1,0 +1,1444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Silver Rate Is Tight | Yuhan Ye</title>
+  <meta name="description" content="The silver exponents are optimal for predetermined nonnegative stepsize schedules in both non-anytime and anytime smooth convex optimization.">
+  <link rel="canonical" href="https://yeyuhanyyh.github.io/gd-silver-rate/">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="The Silver Rate Is Tight">
+  <meta property="og:description" content="Matching polynomial-exponent lower bounds for non-anytime and anytime gradient descent.">
+  <meta property="og:url" content="https://yeyuhanyyh.github.io/gd-silver-rate/">
+  <meta property="og:image" content="https://yeyuhanyyh.github.io/gd-silver-rate/assets/social-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="627">
+  <meta property="og:image:alt" content="Lower and upper bounds for non-anytime and anytime gradient descent, meeting at the silver exponents.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Silver Rate Is Tight">
+  <meta name="twitter:description" content="Matching polynomial-exponent lower bounds for non-anytime and anytime gradient descent.">
+  <meta name="twitter:image" content="https://yeyuhanyyh.github.io/gd-silver-rate/assets/social-cover.png">
+  <meta name="twitter:image:alt" content="Lower and upper bounds for non-anytime and anytime gradient descent, meeting at the silver exponents.">
+  <meta property="article:published_time" content="2026-09-07T17:50:00-04:00">
+  <meta property="article:modified_time" content="2026-09-07T17:50:00-04:00">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --paper: #fffdf8;
+      --ink: #282724;
+      --muted: #756f68;
+      --accent: #7b3f1d;
+      --accent-soft: #f4e9df;
+      --heading: #3d4934;
+      --rule: #d8d0c5;
+      --box: #f8f4ec;
+      --green-soft: #edf3e8;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Open Sans", system-ui, sans-serif;
+      font-size: 17px;
+      line-height: 1.78;
+    }
+    main { max-width: 920px; margin: 0 auto; padding: 52px 28px 88px; }
+    [id] { scroll-margin-top: 2rem; }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    a:hover { color: #a14d20; }
+    h1, h2, h3, h4 { color: var(--heading); line-height: 1.25; }
+    h1 { margin: 0 0 .45rem; font-family: Georgia, serif; font-size: clamp(2.3rem, 7vw, 4.25rem); font-weight: 600; letter-spacing: -.035em; }
+    h2 { margin: 3.2rem 0 1rem; font-family: Georgia, serif; font-size: 1.9rem; font-weight: 600; }
+    h3 { display: flex; align-items: center; gap: .8rem; margin: 2.9rem 0 1rem; font-family: Georgia, serif; font-size: 1.42rem; font-weight: 600; }
+    h3::after { content: ""; height: 1px; flex: 1; background: var(--rule); }
+    h4 { margin: 1.9rem 0 .55rem; font-size: 1.04rem; }
+    p { margin: .9rem 0; }
+    .post-nav { display: flex; flex-wrap: wrap; gap: .35rem .65rem; margin: 0 0 1.35rem; color: var(--muted); font-size: .92rem; }
+    .post-nav span { color: #b2aaa1; }
+    .deck { max-width: 780px; margin: 0 0 1rem; color: #51594b; font-family: Georgia, serif; font-size: 1.27rem; line-height: 1.5; }
+    .byline { margin: 0 0 2.1rem; color: var(--muted); font-size: .96rem; }
+    .lede { font-size: 1.07rem; }
+    .theme-emphasis { margin: 1.55rem 0; color: var(--accent); font-size: 1.08rem; font-weight: 600; }
+    .theorem { margin: 1.4rem 0; padding: 1.1rem 1.3rem; border-left: 4px solid #8f5b33; border-radius: 0 5px 5px 0; background: var(--box); }
+    .theorem p:first-child { margin-top: 0; }
+    .theorem p:last-child { margin-bottom: 0; }
+    .theorem-label { color: inherit; text-decoration: none; }
+    .statement { color: #34332f; }
+    .roadmap { margin: 1.55rem 0; padding: 1rem 1.25rem; border: 1px solid #d7cbbc; border-radius: 6px; background: #fbf7f0; }
+    .roadmap ol { margin: .55rem 0 .2rem; padding-left: 1.35rem; }
+    details.proof { margin: 1.25rem 0; border: 1px solid #d9d0c6; border-radius: 6px; background: #fffefa; }
+    details.proof > summary { cursor: pointer; padding: .82rem 1rem; color: var(--accent); font-weight: 600; }
+    details.proof[open] > summary { border-bottom: 1px solid #e3dbd1; }
+    .proof-body { padding: .25rem 1.05rem 1.05rem; }
+    .proof-body::after { content: "\25A1"; display: block; text-align: right; font-size: 1.05rem; }
+    .display-equation { margin: 1rem 0; overflow: hidden; }
+    .eqref { white-space: nowrap; font-weight: inherit; }
+    mjx-container[display="true"] { width: 100% !important; min-width: 0 !important; max-width: 100%; overflow-x: auto; overflow-y: hidden; padding: .15rem 0; }
+    code { padding: .08em .3em; border-radius: 3px; background: #f2ede6; }
+    blockquote { margin: 1.2rem 0; padding: .1rem 1rem; border-left: 3px solid #bea58e; color: #534e49; }
+    .note { margin: 1.35rem 0; padding: .9rem 1.05rem; border-radius: 6px; background: var(--green-soft); }
+    .rate-figure { width: min(1120px, calc(100vw - 32px)); margin: 2rem 50% 2rem; transform: translateX(-50%); }
+    .rate-figure-scroll { overflow-x: auto; padding-bottom: .25rem; }
+    .rate-figure-canvas { min-width: 940px; }
+    .rate-figure img { display: block; width: 100%; height: auto; background: var(--paper); }
+    figcaption { margin: .55rem auto 0; max-width: 920px; color: var(--muted); font-size: .9rem; line-height: 1.5; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    .citation-block { overflow-x: auto; padding: 1rem 1.15rem; border: 1px solid #ddd3c8; border-radius: 6px; background: #faf7f1; font-size: .9rem; line-height: 1.45; white-space: pre; }
+    .citation-block code { padding: 0; background: transparent; }
+    .fine-print { color: var(--muted); font-size: .9rem; }
+    ul, ol { padding-left: 1.45rem; }
+    @media (max-width: 640px) {
+      body { font-size: 16px; }
+      main { padding: 32px 19px 64px; }
+      h2 { font-size: 1.65rem; }
+      h3 { font-size: 1.25rem; }
+      .theorem { padding: .9rem 1rem; }
+      .rate-figure { width: calc(100vw - 20px); }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    @media print {
+      body { background: #fff; }
+      main { max-width: none; padding: 0; }
+      details.proof > summary { display: none; }
+      details.proof:not([open]) > .proof-body { display: block; }
+      .post-nav { display: none; }
+    }
+  </style>
+  <script>
+    window.MathJax = {
+      tex: { tags: 'ams', inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<main>
+<article>
+  <h1>The Silver Rate Is Tight</h1>
+  <p class="deck">The silver exponents are optimal for both non-anytime and anytime gradient descent.</p>
+  <p class="byline"><a href="https://yeyuhanyyh.github.io/">Yuhan Ye</a> · based on discussions with Kaizhao Liu · <time datetime="2026-09-07T17:50:00-04:00">September 7, 2026, 17:50 (GMT-4)</time></p>
+
+  <p class="lede">
+    Silver stepsizes accelerate gradient descent beyond the classical \(O(1/n)\) rate using stepsizes alone.
+    In this post, I show that no predetermined nonnegative stepsize schedule can improve on the silver polynomial convergence exponent.
+    This result was developed through nontrivial interactions with ChatGPT 6 Astra Ultra (see <a href="#ai-disclosure">AI Disclosure</a>).
+    An arXiv preprint with a more intuitive explanation will follow soon.
+  </p>
+
+  <h2 id="introduction">Introduction</h2>
+
+  <p>
+    Let
+    \[
+      p_{\mathrm{sil}}:=\log_2(1+\sqrt2)=1.271553303\ldots .
+    \]
+    The <a href="https://link.springer.com/article/10.1007/s10107-024-02164-2">silver stepsize schedule</a>
+    achieves the non-anytime rate \(O(n^{-p_{\mathrm{sil}}})\) for gradient descent on smooth convex functions.
+    By composing stepsize schedules, <a href="https://arxiv.org/abs/2410.16249">Grimmer et al.</a> achieve the same exponent with improved constants.
+    A natural question is whether another predetermined schedule can achieve a still larger polynomial exponent.
+  </p>
+
+  <p>
+    Recent lower bounds have moved rapidly toward the silver exponent.
+    <a href="https://arxiv.org/abs/2608.10418">Ma and Chen</a> obtained \(\Omega(n^{-1.932})\),
+    <a href="https://chungentsai.github.io/gd-lower-bounds.html">Tsai</a> improved the exponent to \(1.7321\),
+    and in <a href="https://yeyuhanyyh.github.io/gd-lower-bound/">my first blog post</a>,
+    I presented the \(\Omega(n^{-1.6342})\) result that Kaizhao Liu and I obtained in
+    <a href="https://arxiv.org/abs/2609.02855">our accompanying paper</a>.
+    <a href="https://arxiv.org/abs/2609.04032">Jung et al.</a> then introduced a new checkpoint construction
+    and reached \(\Omega(n^{-\log_2(1+\sqrt3)})=\Omega(n^{-1.4500})\).
+  </p>
+
+  <p>
+    <span class="theme-emphasis">The new lower bound reaches \(n^{-p_{\mathrm{sil}}-o(1)}\), closing the remaining gap in the polynomial exponent.</span>
+    The same construction also closes the anytime gap at the level of polynomial exponents.
+  </p>
+
+  <figure class="rate-figure" id="figure-progress">
+    <div class="rate-figure-scroll" tabindex="0" role="region" aria-label="Lower and upper bounds for non-anytime and anytime gradient descent" aria-describedby="caption-progress">
+      <div class="rate-figure-canvas">
+        <img src="assets/non-anytime-progress.svg" width="1400" height="570" alt="Two aligned exponent tracks show lower and upper bounds for non-anytime and anytime gradient descent. The new polynomial-exponent lower bounds meet the known silver upper bounds.">
+      </div>
+    </div>
+    <figcaption id="caption-progress">
+      <strong>Figure 1.</strong> Lower and upper bounds on the optimal polynomial convergence exponents for non-anytime and anytime gradient descent.
+    </figcaption>
+  </figure>
+
+  <h2 id="problem-setup">Problem Setup and Main Results</h2>
+
+  <p>
+    For a predetermined schedule \(h=(h_1,\ldots,h_n)\in[0,\infty)^n\), gradient descent generates
+    \(x_t=x_{t-1}-h_t\nabla F(x_{t-1})\). After scaling the smoothness constant to one, define
+    \[
+      \mathcal R_n(h)
+      :=\sup_{F,x_0}
+      \frac{F(x_n)-F(x_*)}{\lVert x_0-x_*\rVert^2},
+    \]
+    where the supremum ranges over finite-dimensional convex \(1\)-smooth functions with a minimizer \(x_*\), and over initial points \(x_0\ne x_*\).
+    Let \(r_n^*:=\inf_{h\in[0,\infty)^n}\mathcal R_n(h)\).
+  </p>
+
+  <div class="theorem" id="theorem-main">
+    <p><strong><a href="#theorem-main" class="theorem-label">Theorem 1.</a></strong>
+      <em class="statement">There is an absolute constant \(C>0\) such that, for every sufficiently large \(n\),</em>
+    </p>
+    <div class="display-equation" id="eq-main-quantitative">
+      \[
+        \boxed{
+        r_n^*\ge
+        n^{-\left(p_{\mathrm{sil}}+C\sqrt{\frac{\log\log n}{\log n}}\right)}.}
+        \tag{1}
+      \]
+    </div>
+  </div>
+
+  <p>
+    Together with the silver-schedule upper bound of
+    <a href="https://link.springer.com/article/10.1007/s10107-024-02164-2">Altschuler and Parrilo</a>,
+    this determines \(p_{\mathrm{sil}}\) as the optimal polynomial convergence exponent.
+  </p>
+
+  <p>
+    For an infinite nonnegative schedule \(H=(h_t)_{t\ge1}\), write \(H_n=(h_1,\ldots,h_n)\), and set
+    \(p_{\mathrm{any}}:=2p_{\mathrm{sil}}/(1+p_{\mathrm{sil}})=1.119545204\ldots\).
+  </p>
+
+  <div class="theorem" id="theorem-anytime">
+    <p><strong><a href="#theorem-anytime" class="theorem-label">Theorem 2.</a></strong>
+      <em class="statement">There is an absolute constant \(C>0\) such that every infinite nonnegative schedule
+      has infinitely many horizons \(n\) for which</em>
+    </p>
+    <div class="display-equation" id="eq-main-anytime">
+      \[
+        \boxed{
+        \mathcal R_n(H_n)\ge
+        n^{-\left(p_{\mathrm{any}}+C\sqrt{\frac{\log\log n}{\log n}}\right)}.}
+        \tag{2}
+      \]
+    </div>
+  </div>
+
+  <p>
+    In particular, no anytime schedule has a rate \(O(n^{-q})\) for any \(q&gt;p_{\mathrm{any}}\).
+    This matches the polynomial exponent in the
+    <a href="https://proceedings.mlr.press/v291/zhang25a.html">anytime upper bound of Zhang et al.</a>
+    Hence \(p_{\mathrm{any}}\) is the optimal anytime polynomial convergence exponent.
+  </p>
+
+  <h2 id="hard-function-bound">A Sharper Hard-Function Bound</h2>
+
+  <p>
+    We choose checkpoints \(1\le t_1&lt;\cdots&lt;t_k\le n\), set \(t_0:=0\) and \(t_{k+1}:=n+1\), and write
+    \[
+      b_i:=h_{t_i}\quad(1\le i\le k),
+      \qquad
+      s_i:=\sum_{j=t_{i-1}+1}^{t_i-1}h_j\quad(1\le i\le k+1).
+    \]
+    Thus, for \(i\le k\), \(s_i\) is the sum of the steps strictly between checkpoints \(t_{i-1}\) and \(t_i\), while \(s_{k+1}\) is the sum after the last checkpoint.
+    Fix \(\epsilon,\gamma>0\), and set \(c:=\sqrt{1+2\gamma+\epsilon^2}\).
+  </p>
+
+  <div class="theorem" id="theorem-transfer">
+    <p><strong><a href="#theorem-transfer" class="theorem-label">Theorem 3.</a></strong>
+      <em class="statement">There are finite constants \(a=a(\epsilon,\gamma)\) and \(B_0=B_0(\epsilon)\) such that, whenever every selected checkpoint satisfies \(b_i\ge B_0\),</em>
+    </p>
+    <div class="display-equation" id="eq-transfer">
+      \[
+        \boxed{
+        \mathcal R_n(h)\ge
+        \frac{1}{4(1+s_{k+1})}
+        \prod_{i=1}^k
+        \left[\frac{b_i}{c(a+s_i)+\epsilon b_i}\right]^2.}
+        \tag{3}
+      \]
+    </div>
+    <p><em class="statement">For \(k=0\), the product is empty and \(s_{k+1}=\sum_{t=1}^nh_t\).</em></p>
+  </div>
+
+  <p>
+    We use a chain of local hard functions, as in
+    <a href="https://arxiv.org/abs/2609.04032">Jung et al.</a>
+    The \(i\)-th component uses only the adjacent coordinates \((x_i,x_{i+1})\). It receives the remaining amplitude in \(x_i\),
+    and the checkpoint step \(b_i=h_{t_i}\) transfers that amplitude into \(x_{i+1}\), where the next component takes over.
+    In their construction, the active Huber component remains affine during the gap and contributes a gradient in a fixed direction.
+    In our construction, the projected gradient instead rotates along a circular arc, producing a bent iterate path.
+    This lowers the coefficient paid for each gap from \(2\) to a value arbitrarily close to \(1\).
+  </p>
+
+  <p>
+    The price of reducing the gap coefficient to \(c\), which can be made arbitrarily close to one, is the additional \(\epsilon b_i\) term.
+    We cannot simply discard this term, so the global argument must account for it exactly.
+  </p>
+
+  <p>
+    More precisely, during each gap the projected gradient takes values on a circular arc with endpoints \((c,0)\) and
+    \((\epsilon,-1)\), reaching the latter just before the checkpoint. Choosing these directions backward from the checkpoint produces a valid gradient-descent trajectory for the actual gap steps.
+    The steps during which the direction turns have bounded total stepsize. All remaining gap steps use the horizontal direction \((c,0)\). A checkpoint of size \(b\) therefore transfers an incoming amplitude \(D\) to
+    \[
+      D\,\frac{b}{c(a+s)+\epsilon b}.
+    \]
+    A Moreau envelope realizes these prescribed gradients, and the old two-coordinate component remains inactive after the transfer. Chaining the local components gives <a class="eqref" href="#eq-transfer">(3)</a>.
+  </p>
+
+  <details class="proof" id="proof-transfer">
+    <summary>Full proof of Theorem 3</summary>
+    <div class="proof-body">
+      <p>
+        If \(k=0\), the one-dimensional Huber function gives
+        \(\mathcal R_n(h)\ge1/[4(1+\sum_t h_t)]\), which is the stated formula. We henceforth assume \(k\ge1\).
+      </p>
+      <h4>1. A curved set of possible gradients</h4>
+
+      <p>Set</p>
+      \[
+        R:=\sqrt{\epsilon^2+(1+\gamma)^2},\qquad
+        p(q):=\sqrt{R^2-(q+\gamma)^2},\qquad
+        v(q):=(p(q),-q),\quad 0\le q\le1.
+      \]
+      <p>
+        The vectors \(v(q)\) form a circular arc centered at \((0,\gamma)\), with endpoints
+        \(v(0)=(c,0)\) and \(v(1)=(\epsilon,-1)\). Along the arc,
+        \(\epsilon\le p(q)\le c\) and \(q/p(q)\le1/\epsilon\).
+        Let
+      </p>
+      \[
+        K:=\operatorname{conv}\bigl(\{0\}\cup\{v(q):0\le q\le1\}\bigr).
+      \]
+      <p>
+        If \(\sigma_K\) is the support function of \(K\), then its Moreau envelope satisfies
+        \(\nabla\operatorname{env}_1\sigma_K(r)=\Pi_K(r)\). Indeed, the projection condition
+        \(\langle r-v,w-v\rangle\le0\) for all \(w\in K\) is exactly the optimality condition
+        \(v\in\partial\sigma_K(r-v)\). Since projection is nonexpansive, the envelope is convex and \(1\)-smooth.
+      </p>
+
+      <h4>2. Choosing the gradients backward</h4>
+
+      <p>
+        Consider one gap with nonnegative steps \(h_1,\ldots,h_m\) and total size
+        \(S:=\sum_{j=1}^m h_j\). Start backward from
+        \(r_m=(\epsilon,-1)\), with projected gradient \(v_m=(\epsilon,-1)\).
+        Suppose \(r_j=(u,-y)\), put \(h=h_j\), and define \(\Delta:=y+\gamma-h\gamma\).
+        If \(\Delta\le u\gamma/c\), choose \(v_{j-1}=(c,0)\). Otherwise set
+      </p>
+      \[
+        D:=\sqrt{u^2+\Delta^2},\qquad
+        p:=\frac{Ru}{D},\qquad
+        q:=\frac{R\Delta}{D}-\gamma,\qquad
+        v_{j-1}:=(p,-q).
+      \]
+      <p>In either case, let \(r_{j-1}:=r_j+h_jv_{j-1}\). We claim that</p>
+      <div class="display-equation" id="eq-projection-trajectory">
+        \[
+          v_j=\Pi_K(r_j),\qquad 0\le j\le m.
+          \tag{4}
+        \]
+      </div>
+      <p>
+        The recursion preserves \(u\ge\epsilon\), \(y\ge1\), and \(y/u\le1/\epsilon\). Indeed, after a backward step,
+        the new ratio is a weighted average of \(y/u\) and \(q/p\), both at most \(1/\epsilon\).
+        In the second case, these inequalities imply \(0&lt;q\le1\), and direct substitution gives
+      </p>
+      \[
+        r_{j-1}-v_{j-1}
+        =\left(\frac DR+h-1\right)\bigl(v_{j-1}-(0,\gamma)\bigr).
+      \]
+      <p>
+        The coefficient is nonnegative. This is immediate for \(h\ge1\), while for \(h\le1\),
+        \(D\ge R-h\gamma\). The second factor is the outward normal to the circle and supports all of \(K\),
+        so the projection condition holds. When the chosen direction is horizontal, writing
+        \(\mu:=u/c+h-1\), the condition for this case gives \(0\le y\le\gamma\mu\), and
+        \(r_{j-1}-(c,0)=(c\mu,-y)\) lies in the normal cone of \(K\) at \((c,0)\).
+        Once a horizontal direction is chosen, all earlier gradients can remain \((c,0)\).
+        This proves <a class="eqref" href="#eq-projection-trajectory">(4)</a>.
+      </p>
+
+      <h4>3. Bounding the total stepsize spent turning</h4>
+
+      <p>
+        During a curved backward step, let \(\sigma:=(y+\gamma)/u\). If \(\sigma_h\) and \(\sigma_\ell\)
+        are its values before and after that step, then
+      </p>
+      \[
+        \sigma_\ell=\sigma_h-\frac{h\gamma}{u},\qquad
+        \frac{u_{\rm new}}{u_{\rm old}}
+        =1+\frac R\gamma\frac{\sigma_h-\sigma_\ell}{\sqrt{1+\sigma_\ell^2}}.
+      \]
+      <p>
+        For \(A(\sigma):=\sigma+\sqrt{1+\sigma^2}\), convexity and Bernoulli's inequality imply
+      </p>
+      \[
+        \frac{u_{\rm new}}{u_{\rm old}}
+        \le\left[\frac{A(\sigma_h)}{A(\sigma_\ell)}\right]^{R/\gamma}.
+      \]
+      <p>
+        These ratios telescope. Initially \(\sigma=(1+\gamma)/\epsilon\), and at the other end of the curved part
+        \(\sigma>\gamma/c\). Thus
+        \(u_{\rm end}\le\epsilon[A((1+\gamma)/\epsilon)/A(\gamma/c)]^{R/\gamma}\).
+        On the other hand, every curved gradient has first component at least \(\epsilon\), so
+        \(u_{\rm end}\ge\epsilon(1+H_{\rm turn})\). Hence
+      </p>
+      <div class="display-equation" id="eq-turning-budget">
+        \[
+          H_{\rm turn}\le
+          H:=\left[\frac{c(1+\gamma+R)}{\epsilon(\gamma+R)}\right]^{R/\gamma}-1.
+          \tag{5}
+        \]
+      </div>
+      <p>
+        Write \(P:=\sum_jh_jp_{j-1}\) and \(Q:=\sum_jh_jq_{j-1}\). Horizontal steps do not contribute to \(Q\),
+        and curved steps contribute at most their stepsize. Therefore
+        \(P\le cS\), \(Q\le H\), and \(r_0=(\epsilon+P,-1-Q)\). Define
+      </p>
+      \[
+        C_0:=\epsilon+\epsilon^{-1}+H/\epsilon,
+      \]
+      <p>so that \(\epsilon+P+(1+Q)/\epsilon\le cS+C_0\).</p>
+
+      <h4>4. Scaling the local function</h4>
+
+      <p>
+        Let the local checkpoint have size \(b\ge1+\epsilon^{-2}\), choose any offset
+        \(C_{\rm off}\ge C_0\), and set
+      </p>
+      \[
+        \rho:=\frac1{cS+\epsilon b+C_{\rm off}},\qquad
+        z_\circ:=(1,0)-\rho r_0.
+      \]
+      <p>
+        Let \(\mathcal V\) be the finite set of gradients used above, including \((c,0)\), and define
+      </p>
+      \[
+        \phi(z):=\max\{0,\rho\langle v,z-z_\circ\rangle:v\in\mathcal V\},
+        \qquad f:=\operatorname{env}_1\phi.
+      \]
+      <p>
+        The projection conditions remain valid after the unused arc directions are removed, so
+        \(\nabla f(z_\circ+\rho r_j)=\rho v_j\). The bound above also shows that every affine piece of \(\phi\)
+        is nonpositive on \(\{z_1\le0,z_2\ge0\}\), and hence \(f=0\) there.
+      </p>
+      <p>
+        The normalized gap starts at \((1,0)\). Just before the checkpoint its gradient is
+        \(\rho(\epsilon,-1)\). Just after the checkpoint its position is
+      </p>
+      \[
+        (U,Y+\rho b),\qquad U:=1-\rho(P+\epsilon b)\ge0,\qquad Y:=\rho Q.
+      \]
+      <p>
+        For every used direction \(v=(p,-q)\),
+        \(\langle v,(U,Y)-z_\circ\rangle=\rho((1-b)\epsilon p+q)\le0\),
+        where we used \(q/p\le1/\epsilon\) and \(b\ge1+\epsilon^{-2}\).
+        Increasing the second coordinate only decreases this inner product. Thus the old component is zero forever after the checkpoint,
+        while the output passed to the next component has size
+      </p>
+      <div class="display-equation" id="eq-local-transfer">
+        \[
+          G(S,b)=\rho b=\frac{b}{cS+\epsilon b+C_{\rm off}}.
+          \tag{6}
+        \]
+      </div>
+
+      <h4>5. Chaining the local components</h4>
+
+      <p>Take</p>
+      \[
+        B_0:=2(1+\epsilon^{-2}),\qquad
+        a\ge\max\{2,2C_0/c,2B_0\}.
+      \]
+      <p>
+        For the \(i\)-th gap, apply the local construction to steps \(h_t/2\), checkpoint \(b_i/2\), and offset
+        \(C_{\rm off}=ca/2\). This is admissible by the preceding choice of \(a,B_0\), and
+        <a class="eqref" href="#eq-local-transfer">(6)</a> becomes exactly
+      </p>
+      \[
+        G_i=\frac{b_i}{c(s_i+a)+\epsilon b_i}.
+      \]
+      <p>
+        Let \(f_i\) be the local two-coordinate function and \(Y_i\) its normalized activation level. Set
+      </p>
+      \[
+        D_1:=1,\quad \ell_1:=0,\qquad
+        D_{i+1}:=D_iG_i,\quad \ell_{i+1}:=D_iY_i,
+      \]
+      <p>and define the scaled component</p>
+      \[
+        \Phi_i(x):=D_i^2 f_i\!\left(
+        \frac{x_i-\ell_i}{D_i},\frac{x_{i+1}}{D_i}\right).
+      \]
+      <p>For \(\delta:=D_{k+1}/(1+s_{k+1})\), let</p>
+      \[
+        H_\delta(z):=
+        \begin{cases}
+          0, & z\le0,\\
+          z^2/2, & 0\le z\le\delta,\\
+          \delta z-\delta^2/2, & z\ge\delta,
+        \end{cases}
+      \]
+      <p>and take</p>
+      \[
+        F(x):=\frac12\sum_{i=1}^k\Phi_i(x)
+        +\frac12H_\delta(x_{k+1}-\ell_{k+1}).
+      \]
+      <p>
+        Earlier components stay inactive, so only the current component is active along the prescribed trajectory.
+        Every coordinate belongs to at most two \(1\)-smooth components, so the factor \(1/2\) makes \(F\) convex and \(1\)-smooth.
+        All terms are nonnegative and vanish at the origin, hence \(F(0)=\min F=0\).
+      </p>
+      <p>
+        Starting from \(x_0=e_1\), induction over the components shows that the checkpoint output of block \(i\) is precisely the input
+        of block \(i+1\). Earlier blocks remain zero. The final Huber term stays in its affine region through the last gap and leaves value
+        \(D_{k+1}^2/[4(1+s_{k+1})]\). Since \(D_{k+1}=\prod_iG_i\) and \(\lVert x_0-x_*\rVert=1\),
+        this is exactly <a class="eqref" href="#eq-transfer">(3)</a>.
+      </p>
+    </div>
+  </details>
+
+  <h2 id="saturated-cost">A Cost Function for Checkpoint Selection</h2>
+
+  <p>
+    Fix the constants in Theorem 3 with \(0&lt;\epsilon&lt;1\), take \(\lambda\ge a\), and write
+    \(d:=\epsilon/c\) and \(\chi:=c-\epsilon=c(1-d)\). For a checkpoint set \(T\), define
+  </p>
+  <div class="display-equation" id="eq-saturated-cost">
+    \[
+      \Psi_\lambda(T;h)
+      :=(\lambda+s_{k+1})
+      \prod_{i=1}^k\left(\epsilon+\frac{c(a+s_i)}{b_i}\right),
+      \quad
+      V_\lambda(h):=\min_T\Psi_\lambda(T;h),
+      \quad
+      U_n(\lambda):=\sup_{h\in[0,\infty)^n}V_\lambda(h).
+      \tag{7}
+    \]
+  </div>
+  <p class="fine-print">A set selecting a zero step as a checkpoint is assigned infinite cost.</p>
+  <p>
+    Even as \(b_i\to\infty\), its factor approaches \(\epsilon\), rather than zero. We need to account for this positive limit in the recursive argument.
+    The next lemma connects the cost directly to the optimization error.
+  </p>
+
+  <div class="theorem" id="lemma-cost-to-error">
+    <p><strong><a href="#lemma-cost-to-error" class="theorem-label">Lemma 4.</a></strong>
+      <em class="statement">For every \(h\in[0,\infty)^n\) and \(\lambda\ge a\),</em>
+    </p>
+    <div class="display-equation" id="eq-cost-to-error">
+      \[
+        \boxed{\mathcal R_n(h)\ge\frac{\lambda-1}{V_\lambda(h)^2}.}
+        \tag{8}
+      \]
+    </div>
+  </div>
+
+  <details class="proof" id="proof-cost-to-error">
+    <summary>Full proof</summary>
+    <div class="proof-body">
+      <p>
+        Suppose a step \(b\) is added to a checkpoint set. Let \(\ell\) be the sum of the unselected steps between the preceding checkpoint and \(b\),
+        or before \(b\) if it is the first checkpoint. Let \(r\) be the sum of the unselected steps strictly between \(b\) and the next checkpoint,
+        or after \(b\) if there is no later checkpoint.
+        Set \(y=a+r+db'\) if the next selected checkpoint is \(b'\), and \(y=\lambda+r\) if there is no later checkpoint.
+        Adding \(b\) multiplies the cost by
+      </p>
+      \[
+        I(\ell,y;b)=\frac{c(a+\ell+db)y}{b(\ell+b+y)}.
+      \]
+      <p>
+        Both \(\partial_\ell\log I\) and \(\partial_y\log I\) are positive. Hence, if \(b\le a/2\),
+        \(I(\ell,y;b)\ge I(0,a;b)\ge4/3\). Deleting such a checkpoint strictly lowers the cost.
+        An optimal set therefore uses only \(b_i>a/2\ge B_0\), so Theorem 3 applies.
+      </p>
+      <p>For an optimal \(T\), Theorem 3 and the definition of \(\Psi_\lambda\) give</p>
+      \[
+        \mathcal R_n(h)
+        \ge\frac{(\lambda+s_{k+1})^2}
+        {4(1+s_{k+1})V_\lambda(h)^2}.
+      \]
+      <p>
+        Finally, \((\lambda+s)^2-4(\lambda-1)(1+s)=(s-\lambda+2)^2\ge0\), which proves the lemma.
+      </p>
+    </div>
+  </details>
+
+  <h3 id="tight-checkpoint-sets">Tight checkpoint sets</h3>
+
+  <p>
+    Call \(T\) <em>tight</em> if \(\Psi_\lambda(T;h)=V_\lambda(h)\).
+    The insertion factor above is increasing in both adjacent gaps. Selecting more checkpoints shortens these gaps,
+    so adding another checkpoint multiplies the cost by a factor no larger than before. This gives the following log-submodularity inequality.
+  </p>
+
+  <div class="theorem" id="lemma-log-submodular">
+    <p><strong><a href="#lemma-log-submodular" class="theorem-label">Lemma 5.</a></strong>
+      <em class="statement">For every positive schedule,</em>
+    </p>
+    <div class="display-equation" id="eq-log-submodular">
+      \[
+        \Psi_\lambda(A;h)\Psi_\lambda(B;h)
+        \ge\Psi_\lambda(A\cap B;h)\Psi_\lambda(A\cup B;h).
+        \tag{9}
+      \]
+    </div>
+    <p><em class="statement">The inequality is strict when \(A\) and \(B\) are disjoint and nonempty.</em></p>
+  </div>
+
+  <p>
+    Thus tight sets are closed under unions and intersections, and two nonempty tight sets cannot be disjoint.
+    A compactness argument then shows that a maximizing schedule exists.
+  </p>
+
+  <div class="theorem" id="lemma-extremal-schedule">
+    <p><strong><a href="#lemma-extremal-schedule" class="theorem-label">Lemma 6.</a></strong>
+      <em class="statement">For every \(n\ge1\) and \(\lambda\ge a\), \(U_n(\lambda)\) is finite, strictly exceeds
+      \(U_{n-1}(\lambda)\), and is attained by a positive finite schedule. At every maximizing schedule, both the empty set and at least one nonempty checkpoint set are tight.</em>
+    </p>
+  </div>
+
+  <details class="proof" id="proof-extremal-schedule">
+    <summary>Full proof of Lemmas 5 and 6</summary>
+    <div class="proof-body">
+      <p>
+        For Lemma 5, add the elements of \(B\setminus A\), one at a time, to each of the sets \(A\cap B\) and \(A\).
+        At each insertion, the adjacent gaps for the second set are no larger, so the factor multiplying its cost is no larger.
+        Multiplication gives <a class="eqref" href="#eq-log-submodular">(9)</a>. If \(A,B\) are nonempty and disjoint,
+        at least one adjacent gap shrinks strictly.
+      </p>
+      <p>
+        For Lemma 6, induct on \(n\), starting from \(U_0(\lambda)=\lambda\). If \(M:=\max_t h_t\le a\), the empty set gives
+        \(V_\lambda(h)\le\lambda+na\). If \(M>a\), selecting the first position attaining \(M\) and optimizing its suffix gives
+        \(V_\lambda(h)\le(\epsilon+cn)U_{n-1}(\lambda)\). Thus \(U_n(\lambda)&lt;\infty\).
+      </p>
+      <p>
+        Appending a sufficiently small positive step to a maximizing \((n-1)\)-step schedule strictly raises every cost that omits it,
+        while every cost selecting it diverges as that step tends to zero. Hence \(U_n>U_{n-1}\).
+        A maximizing sequence cannot have a coordinate tend to infinity, since selecting the first such coordinate bounds the limsup of its cost by
+        \(\epsilon U_{n-1}&lt;U_n\). Nor can a coordinate tend to zero, because deleting it leaves at most \(n-1\) steps.
+        The maximizing sequence therefore lies in a compact subset of \((0,\infty)^n\), and continuity gives an optimizer.
+      </p>
+      <p>
+        If the empty set were not tight, all tight sets would be nonempty and, by Lemma 5, would share a checkpoint.
+        Slightly decreasing that shared step raises every tight cost while preserving the slack of all other sets, contradicting maximality.
+        If the empty set were the only tight set, slightly increasing any step gives the same contradiction. Therefore both an empty and a nonempty tight set exist.
+      </p>
+    </div>
+  </details>
+
+  <h2 id="cost-preserving-move">Moving Part of Each Checkpoint into Its Gap</h2>
+
+  <p>
+    Each checkpoint factor in <a class="eqref" href="#eq-saturated-cost">(7)</a> contains an additive \(\epsilon\).
+    We remove this term by moving part of each selected step into the preceding gap, while preserving the cost of every checkpoint subset.
+  </p>
+
+  <p>
+    We first define an auxiliary cost. Fix gaps \(g_1,\ldots,g_k\ge0\), checkpoint sizes
+    \(B_1,\ldots,B_k\ge0\), and \(\Lambda\ge a\). For a nonempty set
+    \(S=\{i_1&lt;\cdots&lt;i_m\}\subseteq[k]\), with \(i_0:=0\), let
+  </p>
+  \[
+    L_j(S):=\sum_{r=i_{j-1}+1}^{i_j}g_r
+      +\sum_{r=i_{j-1}+1}^{i_j-1}B_r,
+    \qquad
+    Y(S):=\Lambda+\sum_{r>i_m}(g_r+B_r).
+  \]
+  <p>Define</p>
+  <div class="display-equation" id="eq-pure-cost">
+    \[
+      \Phi_\Lambda(S;g,B)
+      :=Y(S)\prod_{j=1}^m\frac{\chi(a+L_j(S))}{B_{i_j}},
+      \qquad
+      \Phi_\Lambda(\varnothing;g,B)
+      :=\Lambda+\sum_{i=1}^k(g_i+B_i).
+      \tag{10}
+    \]
+  </div>
+  <p class="fine-print">If \(B_i=0\), a subset containing \(i\) is assigned infinite cost.</p>
+
+  <p>
+    Now take a maximizing schedule from Lemma 6 and any nonempty tight set \(T\), with checkpoint sizes \(b_i\) and gaps \(s_i\).
+    We move the fraction \(d\) of every selected step into the gap immediately before it by setting
+  </p>
+  <div class="display-equation" id="eq-cost-move">
+    \[
+      \boxed{
+      B_i:=(1-d)b_i,\qquad
+      g_i:=s_i+db_i,\qquad
+      \Lambda:=\lambda+s_{k+1},\qquad
+      \chi:=c-\epsilon.}
+      \tag{11}
+    \]
+  </div>
+
+  <div class="theorem" id="proposition-cost-preservation">
+    <p><strong><a href="#proposition-cost-preservation" class="theorem-label">Proposition 7.</a></strong>
+      <em class="statement">For every \(S\subseteq[k]\),</em>
+    </p>
+    <div class="display-equation" id="eq-cost-preservation">
+      \[
+        \boxed{\Phi_\Lambda(S;g,B)=\Psi_\lambda(\{t_i:i\in S\};h).}
+        \tag{12}
+      \]
+    </div>
+  </div>
+
+  <details class="proof" id="proof-cost-preservation">
+    <summary>Full proof</summary>
+    <div class="proof-body">
+      <p>
+        If checkpoint \(i\) is skipped, its contribution to the next gap is unchanged because
+        \(g_i+B_i=s_i+b_i\). Suppose instead that \(i_j\) is selected after \(i_{j-1}\),
+        and let \(\widetilde s_j\) be the corresponding gap in the original schedule. The transformed gap is
+        \(L_j(S)=\widetilde s_j+db_{i_j}\). Hence
+      </p>
+      \[
+        \frac{\chi(a+L_j(S))}{B_{i_j}}
+        =\frac{c(1-d)(a+\widetilde s_j+db_{i_j})}{(1-d)b_{i_j}}
+        =\frac{c(a+\widetilde s_j)}{b_{i_j}}+\epsilon.
+      \]
+      <p>
+        The final factor is also unchanged, so the two costs are equal.
+      </p>
+    </div>
+  </details>
+
+  <p>
+    Because the empty set and \(T\) are both tight, the empty set minimizes \(\Phi_\Lambda\).
+    We also obtain identities for the smaller problems inside the gaps. If \(h^{(i)}\) is the schedule in gap \(i\) and
+    \(S\) is any checkpoint set inside that gap, direct factorization gives
+  </p>
+  \[
+    \frac{\Psi_\lambda(T\cup S;h)}{\Psi_\lambda(T;h)}
+    =\frac{\Psi_{a+db_i}(S;h^{(i)})}{a+s_i+db_i}.
+  \]
+  <p>
+    The left side is at least one, while the empty set in the gap attains equality.
+    For the final gap, the corresponding factorization is
+  </p>
+  \[
+    \frac{\Psi_\lambda(T\cup S;h)}{\Psi_\lambda(T;h)}
+    =\frac{\Psi_\lambda(S;h^{(k+1)})}{\lambda+s_{k+1}}.
+  \]
+  <p>The same reasoning now gives</p>
+  <div class="display-equation" id="eq-gap-identities">
+    \[
+      \boxed{
+      V_{a+db_i}(h^{(i)})=a+s_i+db_i,\qquad
+      V_\lambda(h^{(k+1)})=\lambda+s_{k+1}.}
+      \tag{13}
+    \]
+  </div>
+
+  <h2 id="weighted-splitting">The Weighted Splitting Lemma</h2>
+
+  <p>
+    We now prove a recursive bound for \(\Phi_\Lambda\). The extra term involving the checkpoint sizes will cancel
+    the contribution of \(db_i\) from the parameter \(a+db_i\) in <a class="eqref" href="#eq-gap-identities">(13)</a>.
+  </p>
+
+  <div class="theorem" id="lemma-weighted-splitting">
+    <p><strong><a href="#lemma-weighted-splitting" class="theorem-label">Lemma 8.</a></strong>
+      <em class="statement">Fix \(\nu\in[1/2,1)\) and \(\kappa\ge0\). Suppose that for every
+      \(x,y\ge a\) and \(B>0\), the relations</em>
+    </p>
+    \[
+      w=x+y+B-a,\qquad wB=\chi xy,
+    \]
+    <p><em class="statement">imply</em></p>
+    <div class="display-equation" id="eq-scalar-hypothesis">
+      \[
+        \boxed{w^\nu+\kappa B^\nu\le x^\nu+y^\nu.}
+        \tag{14}
+      \]
+    </div>
+    <p><em class="statement">If the empty set minimizes \(\Phi_\Lambda\) and
+      \(W:=\Phi_\Lambda(\varnothing;g,B)\), then</em></p>
+    <div class="display-equation" id="eq-weighted-splitting">
+      \[
+        \boxed{W^\nu+\kappa\sum_{i=1}^kB_i^\nu
+        \le\Lambda^\nu+\sum_{i=1}^k(a+g_i)^\nu.}
+        \tag{15}
+      \]
+    </div>
+  </div>
+
+  <p>
+    A tight singleton gives exactly the two relations preceding <a class="eqref" href="#eq-scalar-hypothesis">(14)</a>.
+    The main step is to show that a maximizing choice of checkpoint sizes has a tight singleton.
+  </p>
+
+  <details class="proof" id="proof-weighted-splitting">
+    <summary>Full proof</summary>
+    <div class="proof-body">
+      <p>We proceed by induction on \(k\). The case \(k=0\) is immediate. Keep the gaps fixed and maximize</p>
+      \[
+        J(B):=W^\nu+\kappa\sum_{i=1}^kB_i^\nu
+      \]
+      <p>over all \(B_i\ge0\) for which the empty set is optimal.</p>
+
+      <h4>The maximum is attained</h4>
+      <p>
+        The singleton constraint for checkpoint \(i\) has the form \(WB_i\le\chi x_i y_i\),
+        where \(W\ge y_i\) and \(x_i\) depends only on earlier variables. Therefore \(B_i\le\chi x_i\),
+        which successively bounds all checkpoint sizes. After multiplying each subset constraint by the product of its selected
+        \(B_i\)'s, the feasible set is described by continuous polynomial inequalities. It is closed and bounded, so \(J\) attains a maximum.
+      </p>
+
+      <h4>Zero checkpoint sizes</h4>
+      <p>
+        If some \(B_i=0\), delete it and merge the adjacent gaps. The induction hypothesis applies, using
+        \((a+g_i+g_{i+1})^\nu\le(a+g_i)^\nu+(a+g_{i+1})^\nu\).
+        For the last checkpoint, absorb its gap into \(\Lambda\) and use
+        \((\Lambda+g_k)^\nu\le\Lambda^\nu+(a+g_k)^\nu\).
+        It remains to treat an interior maximizer with every \(B_i>0\).
+      </p>
+
+      <h4>A minimal tight set is a singleton</h4>
+      <p>
+        At least one nonempty subset is tight. Otherwise, slightly increasing any \(B_i\) raises \(J\) while preserving all constraints.
+        The cost \(\Phi_\Lambda\) has the same strict log-submodularity property as \(\Psi\), since its insertion ratio
+        \(\chi(a+\ell)y/[B(\ell+B+y)]\) is strictly increasing in \(\ell,y\).
+        Hence an inclusion-minimal nonempty tight set \(T_0\) lies inside every nonempty tight set.
+      </p>
+      <p>
+        Suppose \(T_0\) contains two unequal sizes \(u&lt;v\), and put \(r=v/u>1\). Define
+      </p>
+      \[
+        A_*:=\frac{v(W+u)}{u(W+v)},\qquad
+        D_*:=\frac{W^{\nu-1}+\kappa u^{\nu-1}}
+        {W^{\nu-1}+\kappa v^{\nu-1}}.
+      \]
+      <p>Since \(W>u+v\) and \(\nu\ge1/2\),</p>
+      \[
+        A_*>\frac{r(r+2)}{2r+1}\ge\sqrt r\ge r^{1-\nu}\ge D_*\ge1.
+      \]
+      <p>
+        Choose \(\theta\in(D_*,A_*)\) and perturb \(u\mapsto u-t\), \(v\mapsto v+\theta t\).
+        For every nonempty tight set, the derivative of its cost minus the empty-set cost is
+        \(W(1/u-\theta/v)-(\theta-1)>0\), because \(\theta&lt;A_*\). The derivative of \(J\) is
+      </p>
+      \[
+        \nu\bigl[(\theta-1)W^{\nu-1}
+        +\kappa(\theta v^{\nu-1}-u^{\nu-1})\bigr]>0,
+      \]
+      <p>
+        because \(\theta>D_*\). All other constraints remain strict for sufficiently small \(t\), contradicting maximality.
+      </p>
+      <p>
+        If the two sizes are equal to \(b\), perturb them to
+        \(b-t\) and \(b+t+t^2/(2b)\). Their product decreases by \(t^2/2+O(t^3)\), whereas
+        \(W\) grows only by \(t^2/(2b)\). Every nonempty tight constraint gains slack with leading term
+        \((W-b)t^2/(2b^2)>0\), while \(J\) increases by
+      </p>
+      \[
+        \frac{\nu t^2}{2b}\bigl[W^{\nu-1}+\kappa(2\nu-1)b^{\nu-1}\bigr]+O(t^3)>0.
+      \]
+      <p>This is again a contradiction. Therefore \(T_0=\{r\}\) for some \(r\).</p>
+
+      <h4>Split at the tight singleton</h4>
+      <p>Let</p>
+      \[
+        x:=a+\sum_{i\le r}g_i+\sum_{i&lt;r}B_i,
+        \qquad
+        y:=\Lambda+\sum_{i>r}(g_i+B_i).
+      \]
+      <p>
+        Tightness gives \(W=x+y+B_r-a\) and \(WB_r=\chi xy\).
+        Define the costs on either side of \(r\) by
+      </p>
+      \[
+        \Phi_L(S_L):=\Phi_{a+g_r}(S_L;g_{1:r-1},B_{1:r-1}),
+        \qquad
+        \Phi_R(S_R):=\Phi_\Lambda(S_R;g_{r+1:k},B_{r+1:k}),
+      \]
+      <p>
+        where the variables to the right of \(r\) are reindexed starting from one. For
+        \(S_L\subseteq\{1,\ldots,r-1\}\) and
+        \(S_R\subseteq\{r+1,\ldots,k\}\), we have
+      </p>
+      \[
+        \Phi_\Lambda(S_L\cup\{r\}\cup S_R;g,B)
+        =\frac{\chi}{B_r}\Phi_L(S_L)\Phi_R(S_R).
+      \]
+      <p>
+        In particular,
+      </p>
+      \[
+        \Phi_\Lambda(S_L\cup\{r\};g,B)
+        =\frac{\chi y}{B_r}\,\Phi_L(S_L),
+        \qquad
+        \Phi_\Lambda(\{r\}\cup S_R;g,B)
+        =\frac{\chi x}{B_r}\,\Phi_R(S_R).
+      \]
+      <p>
+        Since the empty set minimizes \(\Phi_\Lambda\) and \(\{r\}\) is tight, the empty set is also optimal in both smaller problems.
+        The induction hypothesis gives
+      </p>
+      \[
+        x^\nu+\kappa\sum_{i&lt;r}B_i^\nu\le\sum_{i\le r}(a+g_i)^\nu,
+      \]
+      \[
+        y^\nu+\kappa\sum_{i>r}B_i^\nu
+        \le\Lambda^\nu+\sum_{i>r}(a+g_i)^\nu.
+      \]
+      <p>
+        Adding these inequalities to the scalar hypothesis
+        \(W^\nu+\kappa B_r^\nu\le x^\nu+y^\nu\) proves
+        <a class="eqref" href="#eq-weighted-splitting">(15)</a>.
+      </p>
+    </div>
+  </details>
+
+  <h2 id="exact-cancellation">Exact Cancellation</h2>
+
+  <p class="theme-emphasis">
+    We choose the coefficient in Lemma 8 so that its checkpoint term cancels the contribution of \(db_i\) from each gap.
+  </p>
+
+  <p>Set</p>
+  <div class="display-equation" id="eq-kappa-choice">
+    \[
+      \boxed{\kappa:=\left(\frac{d}{1-d}\right)^\nu
+      =\left(\frac{\epsilon}{c-\epsilon}\right)^\nu.}
+      \tag{16}
+    \]
+  </div>
+
+  <div class="theorem" id="theorem-recursion">
+    <p><strong><a href="#theorem-recursion" class="theorem-label">Theorem 9.</a></strong>
+      <em class="statement">If the scalar hypothesis <a class="eqref" href="#eq-scalar-hypothesis">(14)</a> holds with
+      <a class="eqref" href="#eq-kappa-choice">(16)</a>, then for every \(n\ge0\) and \(\lambda\ge a\),</em>
+    </p>
+    <div class="display-equation" id="eq-global-recursion">
+      \[
+        \boxed{U_n(\lambda)^\nu\le a^\nu n+\lambda^\nu.}
+        \tag{17}
+      \]
+    </div>
+  </div>
+
+  <details class="proof" id="proof-global-recursion">
+    <summary>Full proof</summary>
+    <div class="proof-body">
+      <p>
+        We proceed by induction on \(n\). At a maximizing \(n\)-step schedule, write \(W=U_n(\lambda)\) and choose a nonempty tight set.
+        Applying <a class="eqref" href="#eq-cost-move">(11)</a> and Lemma 8 gives
+      </p>
+      \[
+        W^\nu+\kappa\sum_i[(1-d)b_i]^\nu
+        \le(\lambda+s_{k+1})^\nu+\sum_i(a+s_i+db_i)^\nu.
+      \]
+      <p>
+        Let \(m_i\) be the number of steps in gap \(i\), including \(m_{k+1}\) for the final gap.
+        Since \(k\) steps were selected, \(\sum_i m_i=n-k\). The identities
+        <a class="eqref" href="#eq-gap-identities">(13)</a> and the induction hypothesis give
+      </p>
+      <p class="fine-print">Each \(m_i&lt;n\), and the parameter \(a+db_i\) is at least \(a\), so the induction hypothesis applies.</p>
+      \[
+        (a+s_i+db_i)^\nu\le a^\nu m_i+(a+db_i)^\nu,
+        \qquad
+        (\lambda+s_{k+1})^\nu\le a^\nu m_{k+1}+\lambda^\nu.
+      \]
+      <p>Using \((a+db_i)^\nu\le a^\nu+d^\nu b_i^\nu\), we obtain</p>
+      \[
+        W^\nu+\kappa(1-d)^\nu\sum_i b_i^\nu
+        \le a^\nu n+\lambda^\nu+d^\nu\sum_i b_i^\nu.
+      \]
+      <p>
+        By <a class="eqref" href="#eq-kappa-choice">(16)</a>, \(\kappa(1-d)^\nu=d^\nu\).
+        The checkpoint terms cancel exactly, leaving <a class="eqref" href="#eq-global-recursion">(17)</a>.
+      </p>
+    </div>
+  </details>
+
+  <p>
+    Let \(p=1/\nu\) and take \(\lambda=an^p\). Combining
+    <a class="eqref" href="#eq-global-recursion">(17)</a> with Lemma 4 yields
+  </p>
+  <div class="display-equation" id="eq-p-lower-bound">
+    \[
+      \boxed{\mathcal R_n(h)\ge\frac{1}{2^{2p+1}a}\,n^{-p}.}
+      \tag{18}
+    \]
+  </div>
+  <p>It remains only to determine how close \(p\) can be taken to the silver exponent.</p>
+
+  <h2 id="silver-inequality">Why the Silver Ratio Appears</h2>
+
+  <p class="theme-emphasis">
+    After moving part of each selected step into its gap and cancelling the resulting terms, it remains to prove a one-variable inequality.
+  </p>
+
+  <p>Let \(\rho:=1+\sqrt2\), so that \(p_{\mathrm{sil}}=\log_2\rho\). The basic inequality is</p>
+  <div class="display-equation" id="eq-silver-inequality">
+    \[
+      \boxed{
+      z^{p_{\mathrm{sil}}}+(1-z)^{p_{\mathrm{sil}}}
+      +[z(1-z)]^{p_{\mathrm{sil}}}\le1,\qquad 0\le z\le1.}
+      \tag{19}
+    \]
+  </div>
+  <p>
+    At the balanced split \(z=1/2\), equality in <a class="eqref" href="#eq-silver-inequality">(19)</a> is
+    \[
+      \frac2\rho+\frac1{\rho^2}=1,
+    \]
+    which is exactly \(\rho^2=2\rho+1\). This identity, which also appears in the recursive silver schedule,
+    determines the exponent in our lower bound.
+  </p>
+
+  <details class="proof" id="proof-silver-inequality">
+    <summary>Proof of the silver inequality</summary>
+    <div class="proof-body">
+      <p>
+        Put \(\alpha:=p_{\mathrm{sil}}-1\). On \(z\in(0,1/2)\), the derivative of the left side of
+        <a class="eqref" href="#eq-silver-inequality">(19)</a> has the same sign as
+      </p>
+      \[
+        \phi(z):=(1-z)^{-\alpha}-z^{-\alpha}+1-2z.
+      \]
+      <p>Moreover,</p>
+      \[
+        \phi''(z)=\alpha(\alpha+1)
+        \bigl[(1-z)^{-\alpha-2}-z^{-\alpha-2}\bigr]&lt;0.
+      \]
+      <p>
+        We have \(\phi(0+)=-\infty\), \(\phi'(0+)=+\infty\), \(\phi(1/2)=0\), and
+        \(\phi'(1/2)=\alpha2^{\alpha+2}-2&lt;(1/3)2^{7/3}-2&lt;0\). Hence \(\phi'\) crosses zero once,
+        and \(\phi\) first rises and then falls. Since \(\phi\) is positive just to the left of \(1/2\),
+        it crosses zero exactly once. The function in <a class="eqref" href="#eq-silver-inequality">(19)</a>
+        therefore first decreases and then increases on \([0,1/2]\). Its maximum occurs at \(0\) or \(1/2\),
+        where its value is one. Symmetry completes the proof.
+      </p>
+    </div>
+  </details>
+
+  <h3 id="robust-silver-inequality">Allowing for \(\epsilon>0\)</h3>
+
+  <p>
+    The local hard function requires \(\epsilon>0\), so we need a slightly stronger inequality.
+    For \(p\in[p_{\mathrm{sil}},3/2]\) and \(0&lt;\chi\le2\), define
+    \(G_{p,\chi}(z):=z^p+(1-z)^p+\chi[z(1-z)]^p\). The silver inequality implies
+  </p>
+  <div class="display-equation" id="eq-silver-slack">
+    \[
+      G_{p,\chi}(z)
+      \le1-\bigl[p-p_{\mathrm{sil}}-(\chi-1)_+\bigr]z(1-z).
+      \tag{20}
+    \]
+  </div>
+  <p>
+    Indeed, \(-\partial_pG_{p,1}(z)\ge z(1-z)[z^{p-1}+(1-z)^{p-1}]\ge z(1-z)\),
+    while replacing the coefficient \(1\) by \(\chi\) increases the expression by at most \((\chi-1)_+z(1-z)\).
+  </p>
+
+  <div class="theorem" id="lemma-scalar-condition">
+    <p><strong><a href="#lemma-scalar-condition" class="theorem-label">Lemma 10.</a></strong>
+      <em class="statement">Let \(p\in[p_{\mathrm{sil}},3/2]\), \(\nu=1/p\), \(0&lt;\chi\le2\), and
+      \(\tau:=\epsilon^{1/p}\le1/10\). If</em>
+    </p>
+    <div class="display-equation" id="eq-scalar-sufficient">
+      \[
+        \boxed{p-p_{\mathrm{sil}}\ge(\chi-1)_++6\epsilon^{1/p},}
+        \tag{21}
+      \]
+    </div>
+    <p><em class="statement">then the scalar hypothesis <a class="eqref" href="#eq-scalar-hypothesis">(14)</a>
+      holds for \(\kappa=(\epsilon/\chi)^{1/p}\).</em></p>
+  </div>
+
+  <details class="proof" id="proof-scalar-condition">
+    <summary>Full proof</summary>
+    <div class="proof-body">
+      <p>
+        Suppose \(w=x+y+B-a\) and \(wB=\chi xy\). Put \(u=x/w\) and \(v=y/w\).
+        Since \(x,y\ge a\) and \(B>0\), we have \(0&lt;u,v&lt;1\). Moreover,
+      </p>
+      \[
+        u+v+\chi uv=1+\frac aw\ge1.
+      \]
+      <p>
+        After dividing <a class="eqref" href="#eq-scalar-hypothesis">(14)</a> by \(w^\nu\),
+        the desired inequality becomes
+      </p>
+      <div class="display-equation" id="eq-normalized-scalar-target">
+        \[
+          u^{1/p}+v^{1/p}-\tau(uv)^{1/p}\ge1.
+          \tag{22}
+        \]
+      </div>
+      <p>
+        Assume otherwise and set \(X=u^{1/p}\), \(Y=v^{1/p}\). Then
+        \(Y&lt;(1-X)/(1-\tau X)=:A\). Since \(0\le A\le1\), the mean value theorem gives
+      </p>
+      \[
+        \bigl[A^p-(1-X)^p\bigr](1+\chi X^p)
+        \le\frac{p\tau(1+\chi)}{1-\tau}X(1-X)
+        \le6\tau X(1-X).
+      \]
+      <p>
+        Consequently,
+      </p>
+      \[
+        u+v+\chi uv
+        &lt;X^p+A^p+\chi X^pA^p
+        \le G_{p,\chi}(X)+6\tau X(1-X)\le1,
+      \]
+      <p>
+        where the last inequality follows from <a class="eqref" href="#eq-silver-slack">(20)</a> and
+        <a class="eqref" href="#eq-scalar-sufficient">(21)</a>. This contradicts \(u+v+\chi uv\ge1\).
+      </p>
+    </div>
+  </details>
+
+  <h2 id="completing-proof">Completing the Proof</h2>
+
+  <p>Fix \(0&lt;\eta\le1/10\), and choose</p>
+  <div class="display-equation" id="eq-parameter-choice">
+    \[
+      p:=p_{\mathrm{sil}}+\eta,\qquad
+      \gamma:=\frac\eta4,\qquad
+      \epsilon:=\left(\frac\eta{16}\right)^p,\qquad
+      c:=\sqrt{1+2\gamma+\epsilon^2},\qquad
+      \chi:=c-\epsilon.
+      \tag{23}
+    \]
+  </div>
+  <p>
+    Then \(c\le1+\eta/3\), \(\chi\le2\), and \(\epsilon^{1/p}=\eta/16\). Hence
+    \[
+      (\chi-1)_++6\epsilon^{1/p}
+      \le\frac\eta3+\frac{3\eta}{8}
+      =\frac{17\eta}{24}&lt;\eta=p-p_{\mathrm{sil}}.
+    \]
+    Lemma 10 verifies <a class="eqref" href="#eq-scalar-hypothesis">(14)</a>. Theorem 9 and
+    <a class="eqref" href="#eq-p-lower-bound">(18)</a> then give a polynomial lower bound
+    with exponent \(p_{\mathrm{sil}}+\eta\).
+    For \(\eta>1/10\), apply the same conclusion with \(\eta'=1/10\).
+  </p>
+
+  <h3 id="quantitative-loss">The subpolynomial loss</h3>
+
+  <p>
+    The constant \(a\) grows as \(\eta\to0\), and we now bound its growth. In the construction above, take
+  </p>
+  \[
+    R=\sqrt{\epsilon^2+(1+\gamma)^2},\quad
+    H=\left[\frac{c(1+\gamma+R)}{\epsilon(\gamma+R)}\right]^{R/\gamma}-1,\quad
+    C_0=\epsilon+\epsilon^{-1}+H/\epsilon,\quad
+    B_0=2(1+\epsilon^{-2}),
+  \]
+  <p>and choose</p>
+  \[
+    a:=\max\{2,2C_0/c,2B_0\}.
+  \]
+  <p>
+    Under <a class="eqref" href="#eq-parameter-choice">(23)</a>, the exponent \(R/\gamma\) is \(O(1/\eta)\),
+    while the logarithm of the base in the definition of \(H\) is \(O(\log(1/\eta))\). Therefore
+  </p>
+  \[
+    \log a=O\!\left(\eta^{-1}\log(1/\eta)\right).
+  \]
+  <p>Substituting this in <a class="eqref" href="#eq-p-lower-bound">(18)</a> gives</p>
+  \[
+    \mathcal R_n(h)\ge n^{-p_{\mathrm{sil}}}
+    \exp\!\left\{-\eta\log n-O\!\left(\eta^{-1}\log(1/\eta)\right)\right\}.
+  \]
+  <p>
+    Taking \(\eta=\sqrt{\log\log n/\log n}\) proves
+    Theorem 1.
+    Here the hard function and its parameters may depend on the finite horizon \(n\), as allowed in the non-anytime worst case.
+  </p>
+
+  <h3 id="matching-upper-bound">Matching the silver upper bound</h3>
+
+  <p>
+    For \(n_k=2^k-1\), the silver schedule satisfies
+  </p>
+  \[
+    \mathcal R_{n_k}(h^{\mathrm{sil}})
+    \le\frac1{1+\sqrt{4\rho^{2k}-3}}
+    =O(n_k^{-p_{\mathrm{sil}}}).
+  \]
+  <p>
+    For an arbitrary horizon \(n\), take
+    \(m=2^{\lfloor\log_2(n+1)\rfloor}-1\le n\), run the \(m\)-step silver schedule, and append
+    \(n-m\) zero steps. Since \(m=\Theta(n)\), this gives \(r_n^*\le C_2n^{-p_{\mathrm{sil}}}\).
+    Together with Theorem 1, this shows that
+    \(r_n^*=n^{-p_{\mathrm{sil}}+o(1)}\) and
+    \(\lim_{n\to\infty}-\log r_n^*/\log n=p_{\mathrm{sil}}\).
+  </p>
+
+  <h2 id="anytime-lower-bound">The Anytime Lower Bound</h2>
+
+  <p>
+    We now prove Theorem 2. Fix any \(p&gt;p_{\mathrm{sil}}\), put \(\nu:=1/p\), and choose
+    \(a,c,\epsilon\) as in the proof of Theorem 1. Also set \(d:=\epsilon/c\).
+    We first bound the total stepsize at times when the last step is the largest so far.
+    This follows the argument of
+    <a href="https://arxiv.org/html/2609.04032v2#S4">Jung et al.</a> at record times, but the additional \(\epsilon\) in our cost requires a different counting estimate.
+  </p>
+
+  <p>
+    For an infinite schedule \(H=(h_t)_{t\ge1}\), write
+    \[
+      S_n:=\sum_{t=1}^n h_t,\qquad
+      M_n:=\max_{1\le t\le n}h_t,\qquad
+      r_n:=\mathcal R_n(H_n).
+    \]
+    We call \(n\) a <em>record time</em> if \(h_n=M_n\).
+  </p>
+
+  <div class="theorem" id="lemma-record-time-sum">
+    <p><strong><a href="#lemma-record-time-sum" class="theorem-label">Lemma 11.</a></strong>
+      <em class="statement">For every fixed \(p&gt;p_{\mathrm{sil}}\), there are constants
+      \(C_p&lt;\infty\) and \(r_{0,p}&gt;0\) such that every record time \(n\) with
+      \(M_n\ge B_0\) and \(r_n\le r_{0,p}\) satisfies</em>
+    </p>
+    <div class="display-equation" id="eq-record-time-sum">
+      \[
+        \boxed{S_n\le C_p nM_n^{1-\nu}.}
+      \]
+    </div>
+  </div>
+
+  <details class="proof" id="proof-record-time-sum">
+    <summary>Full proof of Lemma 11</summary>
+    <div class="proof-body">
+      <p>
+        Fix such a record time and abbreviate \(M:=M_n=h_n\), \(R:=r_n\),
+        \(\xi:=H_{n-1}\), and \(\Lambda:=a+dM\). Let \(V:=V_\Lambda(\xi)\).
+        The deletion argument in the proof of Lemma 4 shows that a set attaining \(V\)
+        selects only steps larger than \(a/2\ge B_0\). Add the final step \(M\) to this set.
+        Since
+        \[
+          c(a+s)+\epsilon M=c(\Lambda+s),
+        \]
+        Theorem 3 therefore gives
+        \[
+          R\ge\frac{M^2}{4c^2V^2},\qquad
+          V\ge\frac{M}{2c\sqrt R}.
+        \]
+        By decreasing \(r_{0,p}\) if necessary, we may therefore assume \(V\ge2dM\).
+      </p>
+
+      <p>
+        We next count the entries of \(\xi\) above a threshold. For \(0&lt;u\le M\), let
+        \(N_\xi(u):=|\{t&lt;n:h_t&gt;u\}|=k\), list these entries in chronological order as
+        \(b_1,\ldots,b_k\), and let \(\xi^{(0)},\ldots,\xi^{(k)}\) be the intervening blocks,
+        of lengths \(m_0,\ldots,m_k\). Thus
+        \(\sum_{j=0}^k(m_j+1)=n\).
+      </p>
+
+      <p>
+        Choose an optimal checkpoint set inside each block and also select \(b_1,\ldots,b_k\).
+        The cost of this checkpoint set gives
+        \[
+          V_{a+dM}(\xi)
+          \le V_{a+dM}(\xi^{(k)})
+          \prod_{i=1}^k
+          \frac{c}{b_i}V_{a+db_i}(\xi^{(i-1)}).
+        \]
+        Indeed, multiplying the terminal factor \(a+s+db_i\) of the preceding block by
+        \(c/b_i\) produces \(\epsilon+c(a+s)/b_i\), the factor associated with \(b_i\).
+        We use \(b_1,\ldots,b_k\) only to factor the cost in this way. These steps need not
+        satisfy \(b_i\ge B_0\), which is required when applying Theorem 3.
+      </p>
+
+      <p>
+        Theorem 9 and \(V_\mu\le U_{m_j}(\mu)\) give
+        \[
+          \frac{c}{b_i}V_{a+db_i}(\xi^{(i-1)})
+          \le
+          \epsilon\left(
+            1+\frac{a^\nu(m_{i-1}+1)}{d^\nu b_i^\nu}
+          \right)^{1/\nu},
+        \]
+        while
+        \[
+          V_{a+dM}(\xi^{(k)})
+          \le dM\left(
+            1+\frac{a^\nu(m_k+1)}{d^\nu M^\nu}
+          \right)^{1/\nu}.
+        \]
+        Here we used \((a+db)^\nu\le a^\nu+d^\nu b^\nu\) and \(cd=\epsilon\).
+        Since every \(b_i&gt;u\), \(M\ge u\), and \(1+z\le e^z\), it follows that
+        \[
+          \frac{V}{dM}
+          \le\epsilon^k
+          \exp\!\left\{
+            \frac{a^\nu}{\nu d^\nu}\,n u^{-\nu}
+          \right\}.
+        \]
+      </p>
+
+      <p>
+        Combining this with \(V/(dM)\ge2\) and taking logarithms yields
+        \[
+          N_\xi(u)
+          \le
+          \frac{a^\nu}{\nu d^\nu\log(1/\epsilon)}
+          \,n u^{-\nu}.
+        \]
+        Integrating the counting function and using \(0&lt;\nu&lt;1\) gives
+        \[
+          \sum_{t=1}^{n-1}h_t
+          =\int_0^M N_\xi(u)\,du
+          \le C_p nM^{1-\nu}.
+        \]
+      </p>
+
+      <p>
+        It remains to include the final step \(M\). Combining the lower bound on \(V\) with
+        \(V\le U_{n-1}(a+dM)\) gives
+        \[
+          (2c\sqrt R)^{-\nu}M^\nu
+          \le a^\nu(n-1)+(a+dM)^\nu
+          \le a^\nu n+d^\nu M^\nu.
+        \]
+        For sufficiently small \(r_{0,p}\), the last term is absorbed into the left-hand side,
+        and hence \(M^\nu\le C_p n\). Therefore \(M\le C_p nM^{1-\nu}\), which completes the proof.
+      </p>
+    </div>
+  </details>
+
+  <h3 id="proof-anytime-main">Completing the proof of Theorem 2</h3>
+
+  <p>
+    First fix \(p&gt;p_{\mathrm{sil}}\), put \(\delta:=p-p_{\mathrm{sil}}\), and set
+    \[
+      \beta(p):=\frac{2p}{1+p}=\frac{2}{1+\nu}.
+    \]
+    Selecting no checkpoints in Theorem 3 gives
+    \(r_n\ge1/[4(1+S_n)]\). If the infinite schedule is bounded, then \(S_n=O(n)\),
+    which is already stronger than the conclusion of Theorem 2. We therefore assume that the
+    schedule is unbounded and consider its arbitrarily large strict record times.
+  </p>
+
+  <p>
+    At a record time to which Lemma 11 applies, selecting only the final step in Theorem 3 gives
+    \[
+      r_n\ge\frac14
+      \left[
+        \frac{M_n}{c(a+S_{n-1})+\epsilon M_n}
+      \right]^2.
+    \]
+    For small \(r_n\), the term containing \(\epsilon M_n\) can be moved to the left.
+    Since \(S_n\ge M_n\ge B_0\), we have
+    \(a+S_{n-1}\le(1+a/B_0)S_n\), and therefore
+    \[
+      M_n\le C_p S_n\sqrt{r_n}.
+    \]
+    Selecting no checkpoints also gives \(S_n\ge1/(8r_n)\) for all sufficiently large record times.
+  </p>
+
+  <p>
+    Substituting this into Lemma 11 gives
+    \[
+      S_n\le C_p n(S_n\sqrt{r_n})^{1-\nu},\qquad
+      S_n^\nu\le C_p n r_n^{(1-\nu)/2}.
+    \]
+    Using \(S_n\ge1/(8r_n)\) once more yields
+    \[
+      1\le C_p n r_n^{(1+\nu)/2}.
+    \]
+    Hence
+    \[
+      r_n\ge c_p n^{-\beta(p)}.
+    \]
+  </p>
+
+  <p>
+    We now track the dependence on \(\delta\). The parameter estimates in the proof of Theorem 1
+    and the proof of Lemma 11 give
+    \[
+      -\log c_p=O\!\left(\delta^{-1}\log(1/\delta)\right),\qquad
+      \log(1/r_{0,p})=O\!\left(\delta^{-1}\log(1/\delta)\right),\qquad
+      \log B_0=O\!\left(\log(1/\delta)\right),
+    \]
+    Moreover, \(\beta(p)=p_{\mathrm{any}}+O(\delta)\).
+  </p>
+
+  <p>
+    At each sufficiently large strict record time \(n\), take
+    \[
+      \delta=\sqrt{\frac{\log\log n}{\log n}},
+      \qquad p=p_{\mathrm{sil}}+\delta.
+    \]
+    These parameters may vary with \(n\), since \(\mathcal R_n(H_n)\) takes a separate supremum
+    over hard functions at each horizon. If \(M_n&lt;B_0(\delta)\), then
+    \(S_n\le nB_0(\delta)\), and the bound obtained by selecting no checkpoints is stronger than the desired estimate.
+    The same is true if \(r_n&gt;r_{0,p}\).
+    In every other case, the preceding argument gives
+    \[
+      r_n\ge n^{-p_{\mathrm{any}}}
+      \exp\!\left\{-C\left(
+        \delta\log n+\delta^{-1}\log(1/\delta)
+      \right)\right\}.
+    \]
+    With the displayed choice of \(\delta\), the exponent on the right is
+    \(O(\sqrt{\log n\,\log\log n})\). Since an unbounded schedule has infinitely many strict
+    record times, this proves Theorem 2.
+  </p>
+
+  <h2 id="concluding-remarks">Concluding Remarks</h2>
+
+  <p>
+    Our proof builds on the checkpoint construction of
+    <a href="https://arxiv.org/abs/2609.04032">Jung et al.</a> and reduces the local transfer coefficient to a value arbitrarily close to one.
+    We handle the additional term \(\epsilon b_i\) by moving part of each checkpoint into the preceding gap.
+    The weighted splitting lemma introduces a term that cancels the resulting contribution from these gaps.
+    The silver inequality <a class="eqref" href="#eq-silver-inequality">(19)</a> then determines the convergence exponent.
+  </p>
+
+  <p>
+    The silver rate is therefore tight at the level of polynomial exponents. The proof does not establish
+    \(\Omega(n^{-p_{\mathrm{sil}}})\). At \(p=p_{\mathrm{sil}}\), the balanced split in
+    <a class="eqref" href="#eq-silver-inequality">(19)</a> is an equality, leaving no fixed slack for \(\epsilon>0\).
+    Removing the subpolynomial loss remains open.
+  </p>
+
+  <p>
+    Theorem 2 likewise determines the optimal anytime polynomial exponent, but it does not prove the endpoint statement
+    \(\limsup_{n\to\infty}n^{p_{\mathrm{any}}}\mathcal R_n(H_n)&gt;0\).
+  </p>
+
+  <nav class="post-nav" aria-label="Earlier posts">
+    <a href="https://yeyuhanyyh.github.io/gd-lower-bound/">Previous non-anytime blog</a><span aria-hidden="true">·</span>
+    <a href="https://yeyuhanyyh.github.io/gd-anytime-lower-bound/">Previous anytime blog</a>
+  </nav>
+
+  <h3 id="bibliographic-information">Bibliographic Information</h3>
+
+  <pre class="citation-block"><code>@misc{ye2026silver,
+  author = {Yuhan Ye},
+  title  = {The Silver Rate Is Tight},
+  year   = {2026},
+  note   = {Blog post},
+  url    = {https://yeyuhanyyh.github.io/gd-silver-rate/}
+}</code></pre>
+
+  <p class="fine-print" id="ai-disclosure">
+    <strong>AI Disclosure.</strong> I carefully read
+    <a href="https://arxiv.org/abs/2609.04032">Jung et al.'s paper</a>
+    and traced the difference between their exponent \(\log_2(1+\sqrt3)\) and the silver exponent \(\log_2(1+\sqrt2)\)
+    to the factor \(2\) in their local transfer estimate. Their local Huber component has a fixed gradient direction.
+    It changes both adjacent coordinates, so both changes reduce the margin that keeps the component active.
+    I wondered whether we could reduce this loss by bending the local trajectory, gradually turning the descent direction toward
+    \(x_{i+1}\) as the remaining amplitude passes from \(x_i\) to \(x_{i+1}\).
+    I shared this intuition with ChatGPT-6 Astra. Through several rounds of substantive interaction and detailed calculations by ChatGPT-6 Astra Ultra,
+    we designed a smooth convex hard function whose local gradient rotates along a circular arc and whose gap coefficient approaches \(1\).
+    Combining this construction with the global argument gave the present result.
+    An arXiv preprint will follow soon, with a more intuitive explanation of the hard-function construction and an account of how our intuition guided the interactions with AI.
+  </p>
+</article>
+</main>
+
+<script src="https://cdn.counter.dev/script.js" data-id="c0ec236a-81f6-4058-b026-cc4ed3513157" data-utcoffset="-4"></script>
+</body>
+</html>
