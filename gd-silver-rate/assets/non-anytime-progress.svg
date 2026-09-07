@@ -14,6 +14,10 @@
         font-size: 18px;
         font-style: normal;
       }
+      .subscript {
+        font-size: 70%;
+        font-style: normal;
+      }
       .rate-work {
         font-weight: 700;
         fill: #6f3f8f;
@@ -100,8 +104,8 @@
   <text class="rate" x="502.7" y="112" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.7321</tspan></text>
   <text class="rate" x="598.5" y="62" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.6342</tspan></text>
   <text class="rate" x="779" y="112" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.4500</tspan></text>
-  <text class="rate rate-work" x="953.9" y="55" text-anchor="middle">n<tspan class="exponent" dy="-14">−pₛᵢₗ</tspan></text>
-  <text class="parameter" x="953.9" y="96" text-anchor="middle">pₛᵢₗ = log₂(1+√2) ≈ 1.271553</text>
+  <text class="rate rate-work" x="953.9" y="55" text-anchor="middle">n<tspan class="exponent" dy="-14">−p<tspan class="subscript" dy="4">sil</tspan></tspan></text>
+  <text class="parameter" x="953.9" y="96" text-anchor="middle">p<tspan class="subscript" dy="4">sil</tspan><tspan dy="-4"> = log₂(1+√2) ≈ 1.271553</tspan></text>
   <text class="rate" x="1220" y="112" text-anchor="middle">n<tspan class="exponent" dy="-14">−1</tspan></text>
 
   <line class="guide" x1="240" y1="123" x2="240" y2="199"/>
@@ -214,7 +218,7 @@
   <text class="rate" x="893.3" y="474" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.3334</tspan></text>
   <text class="rate" x="984" y="514" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.2408</tspan></text>
   <text class="rate" x="1040.01" y="474" text-anchor="middle">n<tspan class="exponent" dy="-14">−1.1837</tspan></text>
-  <text class="rate rate-work" x="1102.85" y="514" text-anchor="middle">n<tspan class="exponent" dy="-14">−pₐₙᵧ</tspan></text>
+  <text class="rate rate-work" x="1102.85" y="514" text-anchor="middle">n<tspan class="exponent" dy="-14">−p<tspan class="subscript" dy="4">any</tspan></tspan></text>
   <text class="rate" x="1220" y="474" text-anchor="middle">n<tspan class="exponent" dy="-14">−1</tspan></text>
-  <text class="parameter" x="1102.85" y="548" text-anchor="middle">pₐₙᵧ = 2pₛᵢₗ/(1+pₛᵢₗ) ≈ 1.119545</text>
+  <text class="parameter" x="1102.85" y="548" text-anchor="middle">p<tspan class="subscript" dy="4">any</tspan><tspan dy="-4"> = 2p</tspan><tspan class="subscript" dy="4">sil</tspan><tspan dy="-4">/(1+p</tspan><tspan class="subscript" dy="4">sil</tspan><tspan dy="-4">) ≈ 1.119545</tspan></text>
 </svg>
