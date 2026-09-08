@@ -1428,14 +1428,14 @@
 }</code></pre>
 
   <p class="fine-print" id="ai-disclosure">
-    <strong>AI Disclosure.</strong> I (Yuhan Ye) carefully read
+    <strong>AI Disclosure.</strong> We carefully read
     <a href="https://arxiv.org/abs/2609.04032">Jung et al.'s paper</a>
     and traced the difference between their exponent \(\log_2(1+\sqrt3)\) and the silver exponent \(\log_2(1+\sqrt2)\)
     to the factor \(2\) in their local transfer estimate. Their local Huber component has a fixed gradient direction.
     It changes both adjacent coordinates, so both changes reduce the margin that keeps the component active.
-    I wondered whether we could reduce this loss by bending the local trajectory, gradually turning the descent direction toward
+    We wondered whether we could reduce this loss by bending the local trajectory, gradually turning the descent direction toward
     \(x_{i+1}\) as the remaining amplitude passes from \(x_i\) to \(x_{i+1}\).
-    I shared this intuition with ChatGPT-6 Astra. Through several rounds of substantive interaction and detailed calculations by ChatGPT-6 Astra Ultra,
+    We shared this intuition with ChatGPT-6 Astra. Through several rounds of substantive interaction and detailed calculations by ChatGPT-6 Astra Ultra,
     we designed a smooth convex hard function whose local gradient rotates along a circular arc and whose gap coefficient approaches \(1\).
     Combining this construction with a refinement of
     <a href="https://arxiv.org/html/2609.04032v2#S3">Jung et al.'s recursive analysis</a> gave the present result.
