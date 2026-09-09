@@ -152,9 +152,9 @@
     <title>This post — Theorem 1</title>
     <text class="name work" x="866.4" y="166">This post</text>
   </a>
-  <a href="https://link.springer.com/article/10.1007/s10107-024-02164-2" target="_blank" rel="noopener noreferrer" aria-label="Altschuler and Parrilo, Acceleration by Stepsize Hedging: Silver Stepsize Schedule for Smooth Convex Optimization">
-    <title>Altschuler and Parrilo — silver stepsize paper</title>
-    <text class="name upper-a" x="1086.9" y="172"><tspan x="1086.9">Altschuler &amp; Parrilo</tspan><tspan x="1086.9" dy="24">(2024)</tspan></text>
+  <a href="https://arxiv.org/abs/2309.16530" target="_blank" rel="noopener noreferrer" aria-label="Altschuler and Parrilo, silver stepsize upper bound, first posted in 2023">
+    <title>Altschuler and Parrilo — silver stepsize upper bound (2023 preprint)</title>
+    <text class="name upper-a" x="1086.9" y="172"><tspan x="1086.9">Altschuler &amp; Parrilo</tspan><tspan x="1086.9" dy="24">(2023)</tspan></text>
   </a>
   <a href="https://doi.org/10.1016/0041-5553(66)90114-5" target="_blank" rel="noopener noreferrer" aria-label="Levitin and Polyak, Constrained Minimization Methods, 1966">
     <title>Levitin and Polyak (1966) — paper</title>

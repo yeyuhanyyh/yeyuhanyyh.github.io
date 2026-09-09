@@ -141,19 +141,22 @@
     \[
       p_{\mathrm{sil}}:=\log_2(1+\sqrt2)=1.271553303\ldots .
     \]
-    The <a href="https://link.springer.com/article/10.1007/s10107-024-02164-2">silver stepsize schedule</a>
-    achieves the non-anytime rate \(O(n^{-p_{\mathrm{sil}}})\) for gradient descent on smooth convex functions.
-    By composing stepsize schedules, <a href="https://arxiv.org/abs/2410.16249">Grimmer et al.</a> achieve the same exponent with improved constants.
-    A natural question is whether another predetermined schedule can achieve a still larger polynomial exponent.
+    <a href="https://arxiv.org/abs/2309.16530">Altschuler and Parrilo (2023)</a>
+    first proved the non-anytime rate \(O(n^{-p_{\mathrm{sil}}})\) for gradient descent on smooth convex functions using their silver stepsize schedule.
+    They also conjectured that this rate is optimal up to constant factors.
+    Building on their recursive gluing technique, <a href="https://arxiv.org/abs/2410.16249">Grimmer, Shu, and Wang</a>
+    subsequently developed compositions of stepsize schedules that achieve the same exponent with improved constants.
+    For a broader introduction to stepsize-based acceleration, see
+    <a href="https://arxiv.org/abs/2605.31386">Altschuler and Parrilo's recent survey</a>.
   </p>
 
   <p>
     Recent lower bounds have moved rapidly toward the silver exponent.
     <a href="https://arxiv.org/abs/2608.10418">Ma and Chen</a> obtained \(\Omega(n^{-1.932})\),
     <a href="https://chungentsai.github.io/gd-lower-bounds.html">Tsai</a> improved the exponent to \(1.7321\),
-    and in <a href="https://yeyuhanyyh.github.io/gd-lower-bound/">Yuhan's first blog post</a>,
-    he presented the \(\Omega(n^{-1.6342})\) result from
-    <a href="https://arxiv.org/abs/2609.02855">our accompanying paper</a>.
+    and in <a href="https://yeyuhanyyh.github.io/gd-lower-bound/">our previous blog post</a>,
+    we presented the \(\Omega(n^{-1.6342})\) result from
+    <a href="https://arxiv.org/abs/2609.02855">our earlier paper</a>.
     <a href="https://arxiv.org/abs/2609.04032">Jung et al.</a> then introduced a new checkpoint construction
     and reached \(\Omega(n^{-\log_2(1+\sqrt3)})=\Omega(n^{-1.4500})\).
   </p>
@@ -290,6 +293,8 @@
       D\,\frac{b}{c(a+s)+\epsilon b}.
     \]
     A Moreau envelope realizes these prescribed gradients, and the old two-coordinate component remains inactive after the transfer. Chaining the local components gives <a class="eqref" href="#eq-transfer">(3)</a>.
+    The use of a Moreau envelope to realize prescribed gradients also appears in
+    <a href="https://arxiv.org/html/2608.10418v1#S4">Ma and Chen's hard-function construction</a>.
   </p>
 
   <details class="proof" id="proof-transfer">
@@ -505,6 +510,12 @@
   </details>
 
   <h2 id="saturated-cost">A Cost Function for Checkpoint Selection</h2>
+
+  <p>
+    We adapt the <a href="https://arxiv.org/html/2609.04032v2#S3">checkpoint-cost framework</a>
+    and <a href="https://arxiv.org/html/2609.04032v2#A3">tight-set analysis</a> of Jung, Cho, and Yun
+    to the modified factors below.
+  </p>
 
   <p>
     Fix the constants in Theorem 3 with \(0&lt;\epsilon&lt;1\), take \(\lambda\ge a\), and write
@@ -739,6 +750,11 @@
   </div>
 
   <h2 id="weighted-splitting">The Weighted Splitting Lemma</h2>
+
+  <p>
+    The following lemma adapts the <a href="https://arxiv.org/html/2609.04032v2#A3.SS6">singleton-splitting argument of Jung et al.</a>
+    by adding a weighted term.
+  </p>
 
   <p>
     We now prove a recursive bound for \(\Phi_\Lambda\). The extra term involving the checkpoint sizes will cancel
@@ -1162,13 +1178,18 @@
   <h3 id="matching-upper-bound">Matching the silver upper bound</h3>
 
   <p>
-    For \(n_k=2^k-1\), the silver schedule satisfies
+    For \(n_k=2^k-1\), <a href="https://arxiv.org/html/2309.16530v1#S1.SS1">Altschuler and Parrilo's Theorem 1.1</a>
+    gives the following bound for the silver schedule, with \(\rho=1+\sqrt2\):
   </p>
   \[
     \mathcal R_{n_k}(h^{\mathrm{sil}})
     \le\frac1{1+\sqrt{4\rho^{2k}-3}}
     =O(n_k^{-p_{\mathrm{sil}}}).
   \]
+  <p>
+    <a href="https://arxiv.org/html/2410.08890v1#S5.SS1">Wang et al.</a> later determined the exact worst-case objective-gap bound
+    for this schedule, improving the constant without changing the exponent.
+  </p>
   <p>
     For an arbitrary horizon \(n\), take
     \(m=2^{\lfloor\log_2(n+1)\rfloor}-1\le n\), run the \(m\)-step silver schedule, and append
@@ -1184,8 +1205,9 @@
     We now prove Theorem 2. Fix any \(p&gt;p_{\mathrm{sil}}\), put \(\nu:=1/p\), and choose
     \(a,c,\epsilon\) as in the proof of Theorem 1. Also set \(d:=\epsilon/c\).
     We first bound the total stepsize at times when the last step is the largest so far.
-    This follows the argument of
-    <a href="https://arxiv.org/html/2609.04032v2#S4">Jung et al.</a> at record times, but the additional \(\epsilon\) in our cost requires a different counting estimate.
+    We follow the record-time approach of
+    <a href="https://arxiv.org/html/2607.02053v1#S4.SS1">Tsai et al.</a> and
+    <a href="https://arxiv.org/html/2609.04032v2#S4">Jung et al.</a>, but the additional \(\epsilon\) in our cost requires a different counting estimate.
   </p>
 
   <p>
