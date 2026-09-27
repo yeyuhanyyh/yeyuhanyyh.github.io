@@ -66,7 +66,10 @@
 
 .paper-title {
   color: #7b3f1d;
-  font-weight: 600;
+  font-weight: bold;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
 }
 
 .author-self {
@@ -111,8 +114,13 @@ p {
   line-height: 1.35;
 }
 
+.pub-list li p:first-child {
+  margin-bottom: 2px;
+  line-height: 1.25;
+}
+
 .pub-list li {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .author-order-marker {
@@ -268,32 +276,32 @@ p {
 <div id="publications-chronological" class="publication-view" role="tabpanel">
   <ul class="pub-list">
     <li id="paper-silver-rate-strongly-convex">
-      <p><span class="paper-title">Silver Rate Is (Almost) Optimal for Gradient Descent: The Strongly Convex Case</span></p>
-      <p><em><a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a>, <span class="author-self">Yuhan Ye</span></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026. [<a href="https://arxiv.org/abs/2609.26873">arxiv</a>]</p>
+      <p><a class="paper-title" href="https://arxiv.org/abs/2609.26873">Silver Rate Is (Almost) Optimal for Gradient Descent: The Strongly Convex Case</a></p>
+      <p><em><a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a>, <span class="author-self">Yuhan Ye</span></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026.</p>
     </li>
     <li id="paper-silver-rate">
-      <p><span class="paper-title">Silver Rate Is (Almost) Optimal for Gradient Descent</span></p>
-      <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026. [<a href="https://arxiv.org/abs/2609.09152">arxiv</a>] [<a href="gd-silver-rate/">blog</a>]</p>
+      <p><a class="paper-title" href="https://arxiv.org/abs/2609.09152">Silver Rate Is (Almost) Optimal for Gradient Descent</a></p>
+      <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026. [<a href="gd-silver-rate/">blog</a>]</p>
     </li>
     <li id="paper-gd-lower-bounds">
-      <p><span class="paper-title">Improved Gradient Descent Lower Bounds Beyond Nesterov</span></p>
-      <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank">Kaizhao Liu</a></em>. arXiv preprint, 2026. [<a href="https://arxiv.org/abs/2609.02855">arxiv</a>]</p>
+      <p><a class="paper-title" href="https://arxiv.org/abs/2609.02855">Improved Gradient Descent Lower Bounds Beyond Nesterov</a></p>
+      <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank">Kaizhao Liu</a></em>. arXiv preprint, 2026.</p>
     </li>
     <li id="paper-milp-compression">
-      <p><span class="paper-title">The Geometry of Linear Program Compression: An Exact Characterization and Learning Algorithm</span></p>
-      <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-omar" href="https://omarben.com/" target="_blank">Omar Bennouna</a></em>. NeurIPS 2026. [<a href="https://arxiv.org/abs/2605.25635">arxiv</a>]</p>
+      <p><a class="paper-title" href="https://arxiv.org/abs/2605.25635">The Geometry of Linear Program Compression: An Exact Characterization and Learning Algorithm</a></p>
+      <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-omar" href="https://omarben.com/" target="_blank">Omar Bennouna</a></em>. NeurIPS 2026.</p>
     </li>
     <li id="paper-stationarity">
-      <p><span class="paper-title">Parameterized Complexity of Stationarity Testing for Piecewise-Affine Functions and Shallow CNN Losses</span></p>
-      <p><em><span class="author-self">Yuhan Ye</span></em>. NeurIPS 2026. [<a href="https://arxiv.org/abs/2605.10219">arxiv</a>]</p>
+      <p><a class="paper-title" href="https://arxiv.org/abs/2605.10219">Parameterized Complexity of Stationarity Testing for Piecewise-Affine Functions and Shallow CNN Losses</a></p>
+      <p><em><span class="author-self">Yuhan Ye</span></em>. NeurIPS 2026.</p>
     </li>
     <li id="paper-decision-sufficient">
-      <p><span class="paper-title">Learning Decision-Sufficient Representations for Linear Optimization</span></p>
-      <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-saurabh" href="https://cee.mit.edu/people_individual/saurabh-amin/" target="_blank">Saurabh Amin</a>, <a class="coauthor-link coauthor-asu" href="https://asu.mit.edu/" target="_blank">Asuman Özdağlar</a></em>. COLT 2026. [<a href="https://arxiv.org/abs/2603.18551">arxiv</a>] [<a href="https://proceedings.mlr.press/v336/ye26a.html">conference</a>] [<a href="https://yeyuhanyyh.github.io/COLT_2026_slides.pdf">slides</a>] &middot; STOC 2026 workshop: Machine Learning for Algorithms. [<a href="https://www.mit.edu/~vakilian/stoc26-workshop.html">workshop</a>] [<a href="https://www.mit.edu/~vakilian/stoc-malg-26/stoc26-ozdaglar.pdf">slides</a>]</p>
+      <p><a class="paper-title" href="https://arxiv.org/abs/2603.18551">Learning Decision-Sufficient Representations for Linear Optimization</a></p>
+      <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-saurabh" href="https://cee.mit.edu/people_individual/saurabh-amin/" target="_blank">Saurabh Amin</a>, <a class="coauthor-link coauthor-asu" href="https://asu.mit.edu/" target="_blank">Asuman Özdağlar</a></em>. <a href="https://proceedings.mlr.press/v336/ye26a.html">COLT 2026</a>. [<a href="https://yeyuhanyyh.github.io/COLT_2026_slides.pdf">slides</a>] &middot; <a href="https://www.mit.edu/~vakilian/stoc26-workshop.html">STOC 2026 workshop: Machine Learning for Algorithms</a>. [<a href="https://www.mit.edu/~vakilian/stoc-malg-26/stoc26-ozdaglar.pdf">slides</a>]</p>
     </li>
     <li id="paper-dc-sampling">
-      <p><span class="paper-title">An Online Adaptive Sampling Algorithm for Stochastic Difference-of-convex Optimization with Time-varying Distributions</span></p>
-      <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-ying" href="https://sites.google.com/site/optyingcui/" target="_blank">Ying Cui</a>, <a class="coauthor-link coauthor-jingyi" href="https://scholar.google.com/scholar?q=%22Jingyi+Wang%22+%22Cosmin+G.+Petra%22" target="_blank">Jingyi Wang</a></em>. ICML 2025, <strong>oral</strong>. [<a href="https://yeyuhanyyh.github.io/Online_Sampling_DC.pdf">pdf</a>] [<a href="https://icml.cc/virtual/2025/oral/47225">conference</a>] [<a href="https://yeyuhanyyh.github.io/ICML_2025_oral_poster.pdf">poster</a>]</p>
+      <p><a class="paper-title" href="https://yeyuhanyyh.github.io/Online_Sampling_DC.pdf">An Online Adaptive Sampling Algorithm for Stochastic Difference-of-convex Optimization with Time-varying Distributions</a></p>
+      <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-ying" href="https://sites.google.com/site/optyingcui/" target="_blank">Ying Cui</a>, <a class="coauthor-link coauthor-jingyi" href="https://scholar.google.com/scholar?q=%22Jingyi+Wang%22+%22Cosmin+G.+Petra%22" target="_blank">Jingyi Wang</a></em>. <a href="https://icml.cc/virtual/2025/oral/47225">ICML 2025</a>, <strong>oral</strong>. [<a href="https://yeyuhanyyh.github.io/ICML_2025_oral_poster.pdf">poster</a>]</p>
     </li>
   </ul>
 </div>
@@ -302,24 +310,24 @@ p {
     <h3>1. Theoretical analysis and efficient algorithms for optimization</h3>
     <ul class="pub-list topic-list">
       <li>
-        <p><span class="paper-title">Silver Rate Is (Almost) Optimal for Gradient Descent: The Strongly Convex Case</span></p>
-        <p><em><a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a>, <span class="author-self">Yuhan Ye</span></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026. [<a href="https://arxiv.org/abs/2609.26873">arxiv</a>]</p>
+        <p><a class="paper-title" href="https://arxiv.org/abs/2609.26873">Silver Rate Is (Almost) Optimal for Gradient Descent: The Strongly Convex Case</a></p>
+        <p><em><a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a>, <span class="author-self">Yuhan Ye</span></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026.</p>
       </li>
       <li>
-        <p><span class="paper-title">Silver Rate Is (Almost) Optimal for Gradient Descent</span></p>
-        <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026. [<a href="https://arxiv.org/abs/2609.09152">arxiv</a>] [<a href="gd-silver-rate/">blog</a>]</p>
+        <p><a class="paper-title" href="https://arxiv.org/abs/2609.09152">Silver Rate Is (Almost) Optimal for Gradient Descent</a></p>
+        <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026. [<a href="gd-silver-rate/">blog</a>]</p>
       </li>
       <li>
-        <p><span class="paper-title">Improved Gradient Descent Lower Bounds Beyond Nesterov</span></p>
-        <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank">Kaizhao Liu</a></em>. arXiv preprint, 2026. [<a href="https://arxiv.org/abs/2609.02855">arxiv</a>]</p>
+        <p><a class="paper-title" href="https://arxiv.org/abs/2609.02855">Improved Gradient Descent Lower Bounds Beyond Nesterov</a></p>
+        <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank">Kaizhao Liu</a></em>. arXiv preprint, 2026.</p>
       </li>
       <li>
-        <p><span class="paper-title">An Online Adaptive Sampling Algorithm for Stochastic Difference-of-convex Optimization with Time-varying Distributions</span></p>
-        <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-ying" href="https://sites.google.com/site/optyingcui/" target="_blank">Ying Cui</a>, <a class="coauthor-link coauthor-jingyi" href="https://scholar.google.com/scholar?q=%22Jingyi+Wang%22+%22Cosmin+G.+Petra%22" target="_blank">Jingyi Wang</a></em>. ICML 2025, <strong>oral</strong>. [<a href="https://yeyuhanyyh.github.io/Online_Sampling_DC.pdf">pdf</a>] [<a href="https://icml.cc/virtual/2025/oral/47225">conference</a>] [<a href="https://yeyuhanyyh.github.io/ICML_2025_oral_poster.pdf">poster</a>]</p>
+        <p><a class="paper-title" href="https://yeyuhanyyh.github.io/Online_Sampling_DC.pdf">An Online Adaptive Sampling Algorithm for Stochastic Difference-of-convex Optimization with Time-varying Distributions</a></p>
+        <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-ying" href="https://sites.google.com/site/optyingcui/" target="_blank">Ying Cui</a>, <a class="coauthor-link coauthor-jingyi" href="https://scholar.google.com/scholar?q=%22Jingyi+Wang%22+%22Cosmin+G.+Petra%22" target="_blank">Jingyi Wang</a></em>. <a href="https://icml.cc/virtual/2025/oral/47225">ICML 2025</a>, <strong>oral</strong>. [<a href="https://yeyuhanyyh.github.io/ICML_2025_oral_poster.pdf">poster</a>]</p>
       </li>
       <li>
-        <p><span class="paper-title">Parameterized Complexity of Stationarity Testing for Piecewise-Affine Functions and Shallow CNN Losses</span></p>
-        <p><em><span class="author-self">Yuhan Ye</span></em>. NeurIPS 2026. [<a href="https://arxiv.org/abs/2605.10219">arxiv</a>]</p>
+        <p><a class="paper-title" href="https://arxiv.org/abs/2605.10219">Parameterized Complexity of Stationarity Testing for Piecewise-Affine Functions and Shallow CNN Losses</a></p>
+        <p><em><span class="author-self">Yuhan Ye</span></em>. NeurIPS 2026.</p>
       </li>
     </ul>
   </div>
@@ -327,12 +335,12 @@ p {
     <h3>2. Information design for optimization</h3>
     <ul class="pub-list topic-list">
       <li>
-        <p><span class="paper-title">Learning Decision-Sufficient Representations for Linear Optimization</span></p>
-        <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-saurabh" href="https://cee.mit.edu/people_individual/saurabh-amin/" target="_blank">Saurabh Amin</a>, <a class="coauthor-link coauthor-asu" href="https://asu.mit.edu/" target="_blank">Asuman Özdağlar</a></em>. COLT 2026. [<a href="https://arxiv.org/abs/2603.18551">arxiv</a>] [<a href="https://proceedings.mlr.press/v336/ye26a.html">conference</a>] [<a href="https://yeyuhanyyh.github.io/COLT_2026_slides.pdf">slides</a>] &middot; STOC 2026 workshop: Machine Learning for Algorithms. [<a href="https://www.mit.edu/~vakilian/stoc26-workshop.html">workshop</a>] [<a href="https://www.mit.edu/~vakilian/stoc-malg-26/stoc26-ozdaglar.pdf">slides</a>]</p>
+        <p><a class="paper-title" href="https://arxiv.org/abs/2603.18551">Learning Decision-Sufficient Representations for Linear Optimization</a></p>
+        <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-saurabh" href="https://cee.mit.edu/people_individual/saurabh-amin/" target="_blank">Saurabh Amin</a>, <a class="coauthor-link coauthor-asu" href="https://asu.mit.edu/" target="_blank">Asuman Özdağlar</a></em>. <a href="https://proceedings.mlr.press/v336/ye26a.html">COLT 2026</a>. [<a href="https://yeyuhanyyh.github.io/COLT_2026_slides.pdf">slides</a>] &middot; <a href="https://www.mit.edu/~vakilian/stoc26-workshop.html">STOC 2026 workshop: Machine Learning for Algorithms</a>. [<a href="https://www.mit.edu/~vakilian/stoc-malg-26/stoc26-ozdaglar.pdf">slides</a>]</p>
       </li>
       <li>
-        <p><span class="paper-title">The Geometry of Linear Program Compression: An Exact Characterization and Learning Algorithm</span></p>
-        <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-omar" href="https://omarben.com/" target="_blank">Omar Bennouna</a></em>. NeurIPS 2026. [<a href="https://arxiv.org/abs/2605.25635">arxiv</a>]</p>
+        <p><a class="paper-title" href="https://arxiv.org/abs/2605.25635">The Geometry of Linear Program Compression: An Exact Characterization and Learning Algorithm</a></p>
+        <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-omar" href="https://omarben.com/" target="_blank">Omar Bennouna</a></em>. NeurIPS 2026.</p>
       </li>
     </ul>
   </div>
