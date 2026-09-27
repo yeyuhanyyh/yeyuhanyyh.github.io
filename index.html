@@ -4,55 +4,42 @@
 <head>
 <meta name="generator" content="jemdoc, see http://jemdoc.jaboc.net/" />
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Yuhan Ye 叶宇涵</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=EB+Garamond&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
 
 
 <style>
   body {
   margin: 0;
   padding: 0;
-  font-family: 'EB Garamond', serif;
-  font-size: 20px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 16px;
   background-image: url('paper-texture-clean.png?v=20260823-clean');
   background-repeat: no-repeat;
   background-size: cover;              /* 背景充满屏幕 */
   background-attachment: scroll;       /* 背景滚动 */
   background-position: center center;  /* 居中对齐 */
   color: #2e2b27;
-  line-height: 1;
+  line-height: 1.35;
 }
   #layout-content {
-    max-width: 1380px;
+    box-sizing: border-box;
+    width: calc(100% - 16px);
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.68);
-    padding: 60px 50px;
+    padding: 20px 16px 28px;
     box-shadow: 0 0 12px rgba(0,0,0,0.1);
     border-top: 1px solid #3d4934; /* 深绿色细线分隔 */
     border-bottom: 1px solid #3d4934;
   }
 
-h1 {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-weight: 700;
-  font-size: 2.2em;
-  color: #7b3f1d;
-  text-align: center;
-  border-bottom: 3px solid #7b3f1d;
-  padding-bottom: 10px;
-  margin-bottom: 30px;
-  transition: all 0.3s ease;
-}
-
   h2 {
-    font-size: 26px;
+    font-size: 24px;
+    line-height: 1.2;
     color: #3d4934;
     border-bottom: 1px solid #3d4934; /* 与小标题颜色一致的分隔线 */
-    margin-top: 40px;
-    margin-bottom: 15px;
+    margin: 20px 0 12px;
+    padding-bottom: 3px;
   }
 
   a {
@@ -112,26 +99,20 @@ h1 {
 }
 
   p, li {
-    font-size: 21px;
+    font-size: inherit;
   }
 
-.research-interest {
-  white-space: nowrap;
-}
-
-@media (max-width: 1180px) {
-  .research-interest {
-    white-space: normal;
-  }
+p {
+  margin: 0 0 16px;
 }
 
 .pub-list li p {
-  margin: 0.15em 0;
+  margin: 0;
   line-height: 1.35;
 }
 
 .pub-list li {
-  margin-bottom: 0.5em;
+  margin-bottom: 12px;
 }
 
 .author-order-marker {
@@ -142,39 +123,30 @@ h1 {
 }
 
 .author-order-note {
-  margin: 0 0 0.8em;
-  font-size: 18px;
+  margin: 0 0 8px;
+  font-size: 16px;
   line-height: 1.3;
 }
 
 .topic-section h3 {
   color: #3d4934;
-  font-size: 22px;
-  margin-bottom: 0.35em;
-}
-
-.topic-list li {
-  margin-bottom: 0.5em;
+  font-size: 19px;
+  margin: 16px 0 7px;
 }
 
 .pub-tabs {
   display: flex;
-  gap: 8px;
-  margin: -0.1em 0 0.8em;
+  gap: 16px;
+  margin: 0 0 7px;
 }
 
 .pub-tab {
-  border: 1px solid rgba(123, 63, 29, 0.55);
-  background: rgba(255, 255, 255, 0.35);
   color: #7b3f1d;
-  cursor: pointer;
-  font-family: 'EB Garamond', serif;
-  font-size: 19px;
-  padding: 5px 12px;
+  font-size: 16px;
+  text-decoration: underline;
 }
 
 .pub-tab.active {
-  background: rgba(123, 63, 29, 0.12);
   font-weight: bold;
 }
 
@@ -182,22 +154,47 @@ h1 {
   display: none;
 }
 
-.imgtable img {
-  border: none;
-  border-radius: 8px;
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2); /* 阴影也稍微淡一点 */
-  background: rgba(255, 245, 235, 0.3); /* 柔和背景衬托 */
-  transform: rotate(-1deg);
+.profile {
+  display: grid;
+  grid-template-columns: 201.6px minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
 }
 
-.imgtable h2 {
-  font-size: 30px;
-  line-height: 1.05;
-  margin-top: 0;
-  margin-bottom: 10px;
+.portrait {
+  position: relative;
+  width: 201.6px;
+  height: 184px;
+  overflow: hidden;
+}
+
+/* Crop the original landscape photograph around the head and shoulders. */
+.portrait img {
+  position: absolute;
+  width: 190%;
+  max-width: none;
+  height: auto;
+  left: 50%;
+  top: -37%;
+  transform: translateX(-51.5%);
+  border: none;
+}
+
+.profile h1 {
+  color: #3d4934;
+  font-size: 28px;
+  line-height: 1.1;
+  border-bottom: 1px solid #3d4934;
+  margin: 0 0 9px;
+  padding-bottom: 4px;
+}
+
+.profile p:last-child {
+  margin-bottom: 0;
 }
 
   ul {
+    margin: 8px 0 0;
     padding-left: 20px;
   }
 
@@ -205,26 +202,58 @@ h1 {
     text-align: center;
     font-size: 13px;
     color: #777;
-    margin-top: 60px;
+    margin-top: 30px;
     font-style: italic;
   }
+
+@media (max-width: 640px) {
+  body {
+    font-size: 16px;
+  }
+
+  #layout-content {
+    width: 100%;
+    padding: 18px 16px 24px;
+  }
+
+  .profile {
+    display: flow-root;
+  }
+
+  .portrait {
+    float: right;
+    width: 144px;
+    height: 132px;
+    margin: 0 0 8px 16px;
+  }
+
+  .profile h1 {
+    font-size: 26px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  .topic-section h3 {
+    font-size: 18px;
+  }
+}
 </style>
 
 </head>
 <body>
 <div id="layout-content">
-  <table class="imgtable" style="width:100%;">
-    <tr>
-      <td style="width: 400px;">
-        <img src="ME.jpg" alt="me" align="left" width="400" />
-      </td>
-      <td align="left" style="vertical-align: top; padding-left: 20px;">
-        <h2>Yuhan Ye</h2>
+  <div class="profile">
+      <div class="portrait">
+        <img src="ME.jpg" alt="me" />
+      </div>
+      <div class="bio">
+        <h1>Yuhan Ye</h1>
         <p>I am a PhD student at the <a href="https://ccse.mit.edu/" target="_blank"><strong>MIT Center for Computational Science and Engineering (CCSE)</strong></a>, where I fortunately work with Professors <a class="coauthor-link coauthor-asu" href="https://asu.mit.edu/" target="_blank"><strong>Asu Özdağlar</strong></a> and <a class="coauthor-link coauthor-saurabh" href="https://cee.mit.edu/people_individual/saurabh-amin/" target="_blank"><strong>Saurabh Amin</strong></a>. I was selected as a 2026–2027 MIT Schwarzman College of Computing PhD Fellow.</p>
         <p>Before joining MIT, I earned a B.S. in <strong>applied and computational mathematics</strong> from Peking University in 2025.</p>
-      </td>
-    </tr>
-  </table>
+      </div>
+  </div>
 
   <h2>Research</h2>
 <p class="research-interest">My research focuses on algorithm design and theoretical analysis in <strong>optimization</strong>, <strong>learning</strong>, and <strong>EconCS</strong>.</p>
@@ -232,8 +261,8 @@ h1 {
 
 <h2 id="publications">Publications</h2>
 <div class="pub-tabs" role="tablist" aria-label="Publication views">
-  <button class="pub-tab active" type="button" role="tab" aria-selected="true" aria-controls="publications-chronological" data-publication-view="chronological">Chronological</button>
-  <button class="pub-tab" type="button" role="tab" aria-selected="false" aria-controls="publications-topic" data-publication-view="topic">By Topic</button>
+  <a class="pub-tab active" href="#publications-chronological" role="tab" aria-selected="true" aria-controls="publications-chronological" data-publication-view="chronological">Chronological</a>
+  <a class="pub-tab" href="#publications-topic" role="tab" aria-selected="false" aria-controls="publications-topic" data-publication-view="topic">By Topic</a>
 </div>
 <p class="author-order-note">† Authors listed in random order.</p>
 <div id="publications-chronological" class="publication-view" role="tabpanel">
@@ -340,16 +369,17 @@ h1 {
     var showTopic = view === 'topic';
     document.getElementById('publications-chronological').hidden = showTopic;
     document.getElementById('publications-topic').hidden = !showTopic;
-    document.querySelectorAll('[data-publication-view]').forEach(function(button) {
-      var active = button.getAttribute('data-publication-view') === view;
-      button.classList.toggle('active', active);
-      button.setAttribute('aria-selected', active ? 'true' : 'false');
+    document.querySelectorAll('[data-publication-view]').forEach(function(link) {
+      var active = link.getAttribute('data-publication-view') === view;
+      link.classList.toggle('active', active);
+      link.setAttribute('aria-selected', active ? 'true' : 'false');
     });
   }
 
-  document.querySelectorAll('[data-publication-view]').forEach(function(button) {
-    button.addEventListener('click', function() {
-      setPublicationView(button.getAttribute('data-publication-view'));
+  document.querySelectorAll('[data-publication-view]').forEach(function(link) {
+    link.addEventListener('click', function(event) {
+      event.preventDefault();
+      setPublicationView(link.getAttribute('data-publication-view'));
     });
   });
 </script>
