@@ -21,7 +21,7 @@
   <meta name="twitter:image" content="https://yeyuhanyyh.github.io/gd-silver-rate/assets/social-cover-progress.png">
   <meta name="twitter:image:alt" content="Progress on lower and upper bounds for non-anytime and anytime gradient descent. Purple segments mark this post's matching polynomial exponents.">
   <meta property="article:published_time" content="2026-09-07T17:50:00-04:00">
-  <meta property="article:modified_time" content="2026-09-07T17:50:00-04:00">
+  <meta property="article:modified_time" content="2026-10-06T03:14:38-04:00">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400;1,600&amp;display=swap" rel="stylesheet">
@@ -63,7 +63,8 @@
     .post-nav { display: flex; flex-wrap: wrap; gap: .35rem .65rem; margin: 0 0 1.35rem; color: var(--muted); font-size: .92rem; }
     .post-nav span { color: #b2aaa1; }
     .deck { max-width: 780px; margin: 0 0 1rem; color: #51594b; font-family: Georgia, serif; font-size: 1.27rem; line-height: 1.5; }
-    .byline { margin: 0 0 2.1rem; color: var(--muted); font-size: .96rem; }
+    .byline { margin: 0 0 1rem; color: var(--muted); font-size: .96rem; }
+    .exposition-note { max-width: 780px; margin: 0 0 1.8rem; color: var(--muted); font-size: .92rem; line-height: 1.6; }
     .lede { font-size: 1.07rem; }
     .theme-emphasis { margin: 1.55rem 0; color: var(--accent); font-size: 1.08rem; font-weight: 600; }
     .theorem { margin: 1.4rem 0; padding: 1.1rem 1.3rem; border-left: 4px solid #8f5b33; border-radius: 0 5px 5px 0; background: var(--box); }
@@ -127,11 +128,13 @@
   <p class="deck">The silver exponents are optimal for gradient descent with predetermined nonnegative stepsizes, in both the non-anytime and anytime settings.</p>
   <p class="byline"><a href="https://yeyuhanyyh.github.io/">Yuhan Ye</a> and <a href="https://drzfct.github.io/">Kaizhao Liu</a> · <time datetime="2026-09-07T17:50:00-04:00">September 7, 2026, 17:50 (GMT-4)</time></p>
 
+  <p class="exposition-note">We&rsquo;re still working to simplify the proofs and explain the intuition as clearly as possible. We&rsquo;ll update this post as the exposition improves.</p>
+
   <p class="lede">
     Silver stepsizes accelerate gradient descent beyond the classical \(O(1/n)\) rate using stepsizes alone.
     In this post, we show that no predetermined nonnegative stepsize schedule can improve on the silver polynomial convergence exponent.
     This result was developed through nontrivial interactions with ChatGPT 6 Astra Ultra (see <a href="#ai-disclosure">AI Disclosure</a>).
-    An arXiv preprint with a more intuitive explanation will follow soon.
+    Our <a href="https://arxiv.org/abs/2609.09152">arXiv preprint</a> is now available.
   </p>
 
   <h2 id="introduction">Introduction</h2>
@@ -1461,7 +1464,7 @@
     we designed a smooth convex hard function whose local gradient rotates along a circular arc and whose gap coefficient approaches \(1\).
     Combining this construction with a refinement of
     <a href="https://arxiv.org/html/2609.04032v2#S3">Jung et al.'s recursive analysis</a> gave the present result.
-    An arXiv preprint will follow soon, with a more intuitive explanation of the hard-function construction and an account of how our intuition guided the interactions with AI.
+    The paper is available as an <a href="https://arxiv.org/abs/2609.09152">arXiv preprint</a>.
   </p>
 </article>
 </main>

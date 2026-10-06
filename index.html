@@ -123,6 +123,66 @@ p {
   margin-bottom: 16px;
 }
 
+.silver-paper-group {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) minmax(200px, 270px);
+  gap: 20px;
+  align-items: stretch;
+  max-width: 1050px;
+  margin: 8px 0 16px;
+}
+
+.silver-paper-list {
+  min-width: 0;
+  margin: 0;
+}
+
+.silver-paper-list li:last-child {
+  margin-bottom: 0;
+}
+
+.silver-exposition-note {
+  display: grid;
+  grid-template-columns: 18px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  color: #5c6257;
+  font-size: 15px;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.silver-exposition-note p {
+  margin: 0;
+}
+
+.silver-group-brace {
+  width: 18px;
+  height: 100%;
+  min-height: 80px;
+  color: #89907f;
+}
+
+.silver-paper-group + .pub-list {
+  margin-top: 0;
+}
+
+@media (max-width: 1000px) {
+  .silver-paper-group {
+    display: block;
+  }
+
+  .silver-exposition-note {
+    display: block;
+    margin: 9px 0 0 20px;
+    font-size: 14px;
+  }
+
+  .silver-group-brace {
+    display: none;
+  }
+}
+
 .author-order-marker {
   margin-left: 0.15em;
   font-size: 0.75em;
@@ -280,7 +340,8 @@ p {
 </div>
 <p class="author-order-note">† Authors listed in random order.</p>
 <div id="publications-chronological" class="publication-view" role="tabpanel">
-  <ul class="pub-list">
+  <div class="silver-paper-group" aria-describedby="silver-exposition-chronological">
+  <ul class="pub-list silver-paper-list">
     <li id="paper-silver-rate-strongly-convex">
       <p><a class="paper-title" href="https://arxiv.org/abs/2609.26873">Silver Rate Is (Almost) Optimal for Gradient Descent: The Strongly Convex Case</a></p>
       <p><em><a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a>, <span class="author-self">Yuhan Ye</span></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026.</p>
@@ -289,6 +350,13 @@ p {
       <p><a class="paper-title" href="https://arxiv.org/abs/2609.09152">Silver Rate Is (Almost) Optimal for Gradient Descent</a></p>
       <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026. [<a href="gd-silver-rate/">blog</a>]</p>
     </li>
+  </ul>
+  <aside id="silver-exposition-chronological" class="silver-exposition-note">
+    <svg class="silver-group-brace" viewBox="0 0 20 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M2 1 C13 1 13 8 13 18 L13 38 C13 46 16 49 19 50 C16 51 13 54 13 62 L13 82 C13 92 13 99 2 99" fill="none" stroke="currentColor" stroke-width="1.3" vector-effect="non-scaling-stroke" /></svg>
+    <p>We&rsquo;re still working to simplify the proofs and explain the intuition as clearly as possible.</p>
+  </aside>
+  </div>
+  <ul class="pub-list">
     <li id="paper-gd-lower-bounds">
       <p><a class="paper-title" href="https://arxiv.org/abs/2609.02855">Improved Gradient Descent Lower Bounds Beyond Nesterov</a></p>
       <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank">Kaizhao Liu</a></em>. arXiv preprint, 2026.</p>
@@ -314,7 +382,8 @@ p {
 <div id="publications-topic" class="publication-view" role="tabpanel" hidden>
   <div class="topic-section">
     <h3>1. Theoretical analysis and efficient algorithms for optimization</h3>
-    <ul class="pub-list topic-list">
+    <div class="silver-paper-group" aria-describedby="silver-exposition-topic">
+    <ul class="pub-list topic-list silver-paper-list">
       <li>
         <p><a class="paper-title" href="https://arxiv.org/abs/2609.26873">Silver Rate Is (Almost) Optimal for Gradient Descent: The Strongly Convex Case</a></p>
         <p><em><a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a>, <span class="author-self">Yuhan Ye</span></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026.</p>
@@ -323,6 +392,13 @@ p {
         <p><a class="paper-title" href="https://arxiv.org/abs/2609.09152">Silver Rate Is (Almost) Optimal for Gradient Descent</a></p>
         <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank" rel="noopener noreferrer">Kaizhao Liu</a></em><sup class="author-order-marker" title="Authors listed in random order">†</sup>. arXiv preprint, 2026. [<a href="gd-silver-rate/">blog</a>]</p>
       </li>
+    </ul>
+    <aside id="silver-exposition-topic" class="silver-exposition-note">
+      <svg class="silver-group-brace" viewBox="0 0 20 100" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M2 1 C13 1 13 8 13 18 L13 38 C13 46 16 49 19 50 C16 51 13 54 13 62 L13 82 C13 92 13 99 2 99" fill="none" stroke="currentColor" stroke-width="1.3" vector-effect="non-scaling-stroke" /></svg>
+      <p>We&rsquo;re still working to simplify the proofs and explain the intuition as clearly as possible.</p>
+    </aside>
+    </div>
+    <ul class="pub-list topic-list">
       <li>
         <p><a class="paper-title" href="https://arxiv.org/abs/2609.02855">Improved Gradient Descent Lower Bounds Beyond Nesterov</a></p>
         <p><em><span class="author-self">Yuhan Ye</span>, <a class="coauthor-link coauthor-kaizhao" href="https://drzfct.github.io/" target="_blank">Kaizhao Liu</a></em>. arXiv preprint, 2026.</p>
