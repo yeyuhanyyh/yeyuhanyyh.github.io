@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A sharp lower bound for gradient descent on smooth strongly convex functions · Yuhan Ye</title>
+<style>
+body { color:#2e2b27; background:#faf9f6; font:18px/1.55 Georgia,serif; margin:0; }
+main { max-width:39rem; padding:clamp(1.2rem,5vw,4rem); margin:1.5rem auto; }
+h1 { font-size:clamp(1.65rem,4vw,2.2rem); line-height:1.18; color:#3d4934; }
+h2 { font-size:1.35rem; margin-top:1.8rem; }
+a { color:#7b3f1d; text-underline-offset:.14em; } nav { font-size:1rem; }
+</style></head><body><main>
+<h1>A sharp lower bound for gradient descent on smooth strongly convex functions</h1>
+<p>For smooth strongly convex objectives, Kaizhao Liu and I proved a lower bound for GD with predetermined nonnegative stepsizes. The exponent of κ in that bound was 1/<i>p</i><sub>sil</sub> − <i>o</i>(1), where <i>p</i><sub>sil</sub> = log<sub>2</sub>(1 + √2). This working draft extends <a href="https://arxiv.org/abs/2609.26873">our previous paper</a>. It removes the <i>o</i>(1) term from the exponent and drops the nonnegativity assumption on the stepsizes.</p>
+<nav aria-label="Manuscript links"><a href="full-manuscript.pdf">Full manuscript (PDF)</a></nav>
+<h2 id="prompt">How the proof developed</h2>
+<p>I asked GPT-6.2 to revisit our construction in light of <a href="https://arxiv.org/abs/2611.30100">Jeong and Hong’s smooth convex lower bound</a>. For negative steps, I suggested an idea inspired by resisting oracles. Nemirovsky and Yudin (1979) used this idea in their classical lower bound, and <a href="https://arxiv.org/pdf/1606.01424#page=17">Drori later used it to prove the exact lower bound attained by the optimized gradient method (OGM)</a>. Could a large gradient in a direction hidden from the earlier iterates make a negative step carry GD far from the minimizer?</p>
+<p>A second question led more directly to the proof. Could GD stay on one coordinate through a stretch of short positive steps and negative steps, then switch at a sufficiently large positive step? The draft does this on a quadratic coordinate.</p>
+<p>GPT-6.2 helped develop the argument and write the new material, shown in blue. I welcome comments on the proof. See also the <a href="https://github.com/yeyuhanyyh/strongly-convex-silver-lower-bound">raw materials from the earlier AI-assisted draft</a>.</p>
+</main></body></html>
